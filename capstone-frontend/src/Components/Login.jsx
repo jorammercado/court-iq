@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../Providers/UserProvider";
 import { useNavigate } from "react-router-dom";
-import { signInWithGoogle, logOut } from "../Services/Firebase"
-import "./login.css"
+import { signInWithGoogle, logOut } from "../Services/FireBase"
+import "./Login.css"
 import "animate.css"
 
 export const Login = ({currentUser, setCurrentUser}) => {
