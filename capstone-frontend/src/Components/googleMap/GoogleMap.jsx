@@ -19,8 +19,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 40.7,
-  lng: -74.644,
+  lat: 40.7306,
+  lng: -73.935,
 };
 
 
@@ -126,7 +126,7 @@ const MapComponent = ({ currentUser, setCurrentUser }) => {
   return (
     <div className="googleMaps-container">
       <div className="title">
-        <h1>Search by category or type in your query</h1>
+        <h1>Search by button(s) or type in your query</h1>
         <h3 className="test">{places.length > 0 ? `Found Establishments: ${places.length}` : null}</h3>
         <section className="googleMaps-form-container">
           <Form handleSubmit={handleSubmit} inputRef={inputRef} />

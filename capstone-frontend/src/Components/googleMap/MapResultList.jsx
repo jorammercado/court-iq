@@ -1,16 +1,12 @@
 import React from "react";
-import Table from "react-bootstrap/Table"
-import Place from "../../Components/Place"
+import Table from "react-bootstrap/Table";
+import Place from "../../Components/Place";
 import { useState, useMemo } from "react";
 import Pagination from "../../utils/Pagination";
-import { Button } from "bootstrap";
 
-const MapResultList = ( props) => {
-  const {places,handleSortPlaces}=props
-  console.log(props)
-  
-  //const [items, setItems] = useState(places)
-  // console.log(places)
+const MapResultList = (props) => {
+  const { places } = props
+
   let PageSize = 3
   const [currentPageV2, setCurrentPageV2] = useState(1)
   const currentTableData = useMemo(() => {
@@ -18,39 +14,6 @@ const MapResultList = ( props) => {
     const lastPageIndex = firstPageIndex + PageSize
     return places.slice(firstPageIndex, lastPageIndex)
   }, [currentPageV2, places])
-  const [placesOrder, setPlacesOrder] = useState(false);
-
-  const changePlaceOrder = () => {
-    if (placesOrder === false) {
-      setPlacesOrder(true)
-      const newPlacesOrder = places.sort((a, b) => {
-        if (Number(a.rating) < Number(b.rating))
-          return -1
-        else if (Number(a.rating) > Number(b.rating))
-          return 1
-        else
-          return 0
-      })
-      handleSortPlaces(newPlacesOrder)
-    }
-    else {
-      setPlacesOrder(false)
-      const newPlacesOrder = places.sort((b, a) => {
-        if (Number(a.rating) > Number(b.rating))
-          return -1
-        else if (Number(a.rating) < Number(b.rating))
-          return 1
-        else
-          return 0
-      })
-      handleSortPlaces(newPlacesOrder)
-    }
-  }
-
-  const handleSortPlacesFunc = event => {
-    event.preventDefault()
-    changePlaceOrder()
-  }
 
   return (
     <div>
@@ -65,9 +28,7 @@ const MapResultList = ( props) => {
                 Address:
               </th>
               <th >
-                <button className="btn btn-secondary btn-sm" onClick={handleSortPlacesFunc}>
-                  {` \u21f3`}Rating
-                </button>
+                Rating:
               </th>
               <th >
                 Currenty Open:

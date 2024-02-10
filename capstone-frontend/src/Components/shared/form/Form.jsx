@@ -12,30 +12,31 @@ import "./Form.css"
 
 const Form = ({ handleSubmit, inputRef }) => {
   const [searchButtons, setSearchButtons] = useState(["place holder"
-])
+  ])
 
   let PageSize = 5
-    const [currentPageV2, setCurrentPageV2] = useState(1)
-    const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPageV2 - 1) * PageSize
-        const lastPageIndex = firstPageIndex + PageSize
-        return searchButtons.slice(firstPageIndex, lastPageIndex)
-    }, [currentPageV2, searchButtons])
+  const [currentPageV2, setCurrentPageV2] = useState(1)
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPageV2 - 1) * PageSize
+    const lastPageIndex = firstPageIndex + PageSize
+    return searchButtons.slice(firstPageIndex, lastPageIndex)
+  }, [currentPageV2, searchButtons])
 
   return (
     <div className="top">
       <form onSubmit={handleSubmit}>
         <FormControlGroup buttonList={currentTableData} handleClick={handleSubmit} />
         <Pagination
-                    className="pagination-bar"
-                    currentPage={currentPageV2}
-                    totalCount={searchButtons.length}
-                    pageSize={PageSize}
-                    onPageChange={page => setCurrentPageV2(page)}
-                />
+          className="pagination-bar"
+          currentPage={currentPageV2}
+          totalCount={searchButtons.length}
+          pageSize={PageSize}
+          onPageChange={page => setCurrentPageV2(page)}
+        />
         <br />
-        <label> </label>
-        <input ref={inputRef} className="input" />
+        <label>
+          <input ref={inputRef} className="input" name="input" />
+        </label>
         <button className="btn btn-dark btn-md fixed" type="submit">Search</button>
       </form>
     </div>
