@@ -99,7 +99,7 @@ const MapComponent = ({ currentUser, setCurrentUser }) => {
         <section className="googleMaps-form-container">
           <Form handleSubmit={handleSubmit} inputRef={inputRef} />
           {places.length ? <h2>Nearby Places:</h2> : null}
-          <MapResultList places={places} handleSortPlaces={handleSortPlaces} />
+          <MapResultList places={places} />
         </section>
       </div>
 
