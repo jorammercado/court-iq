@@ -3,7 +3,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import { auth } from "../Services/FireBase";
 
-
 export const UserContext = createContext(null);
 
 export const UserProvider = (props) => {

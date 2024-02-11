@@ -2,7 +2,7 @@ import React from "react";
 import FormControlGroup from "./FormControlGroup";
 import Pagination from "../../../utils/Pagination"
 import { useState, useMemo } from "react";
-import "./Form.css"
+import "./Form.css";
 /* 
  `inputRef` prop is for extending search functionality in the future
   GoogleMaps API interacts dirrectly with DOM elements in many cases
@@ -11,16 +11,15 @@ import "./Form.css"
 
 
 const Form = ({ handleSubmit, inputRef }) => {
-  const [searchButtons, setSearchButtons] = useState(["place holder"
-  ])
+  const [searchButtons, setSearchButtons] = useState(["place holder"]);
 
-  let PageSize = 5
-  const [currentPageV2, setCurrentPageV2] = useState(1)
+  let PageSize = 5;
+  const [currentPageV2, setCurrentPageV2] = useState(1);
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPageV2 - 1) * PageSize
-    const lastPageIndex = firstPageIndex + PageSize
-    return searchButtons.slice(firstPageIndex, lastPageIndex)
-  }, [currentPageV2, searchButtons])
+    const firstPageIndex = (currentPageV2 - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return searchButtons.slice(firstPageIndex, lastPageIndex);
+  }, [currentPageV2, searchButtons]);
 
   return (
     <div className="top">
@@ -44,6 +43,3 @@ const Form = ({ handleSubmit, inputRef }) => {
 };
 
 export default Form;
-
-
-

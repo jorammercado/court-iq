@@ -3,10 +3,10 @@ const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 export const getGoogleMapsData = async (requestBody) => {
-    try {
-      const res = await axios.post(`${VITE_BASE_URL}/googleMaps`, requestBody);
-      return res;
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  try {
+    const res = await axios.post(`${VITE_BASE_URL}/googleMaps`, requestBody);
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};

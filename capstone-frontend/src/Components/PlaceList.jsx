@@ -5,8 +5,6 @@ import { useState, useMemo } from "react";
 import Pagination from "../utils/Pagination";
 
 const PlaceList = ({ currentUser, currentUserPlaces }) => {
-    //const [items, setItems] = useState(places)
-    // console.log(places)
     let PageSize = 3
     const [currentPageV2, setCurrentPageV2] = useState(1)
     const currentTableData = useMemo(() => {

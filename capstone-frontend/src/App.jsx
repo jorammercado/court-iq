@@ -5,11 +5,11 @@ import { LoggedInPage } from "./Pages/LoggedInPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MemoGoogleMap } from "./Components/googleMap/GoogleMap.jsx"
 import { useState } from "react";
-import ProtectedRoute from "./Components/ProtectedRoute"
-import PublicRoute from "./Components/PublicRoute"
-import NavBar from "./Components/NavBar"
+import ProtectedRoute from "./Components/ProtectedRoute";
+import PublicRoute from "./Components/PublicRoute";
+import NavBar from "./Components/NavBar";
 
-import FourOFour from "./Pages/FourOFour"
+import FourOFour from "./Pages/FourOFour";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -82,15 +82,12 @@ function App() {
                 }
               />
 
-
           </Routes>
         </Router>
-
       </UserProvider>
-
 
     </div>
   );
-}
+};
 
 export default App;

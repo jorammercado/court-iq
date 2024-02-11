@@ -29,40 +29,8 @@ const MapComponent = ({ currentUser, setCurrentUser }) => {
   const [mapCenter, setMapCenter] = useState(center);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [places, setPlaces] = useState([]);
-  const [placesOrder, setPlacesOrder] = useState(false);
-  const [libraries, setLibraries] = useState(["places", 'geometry', 'drawing'])
+  const [libraries, setLibraries] = useState(["places", 'geometry', 'drawing']);
 
-  const changePlaceOrder = () => {
-    if (placesOrder === false) {
-      setPlacesOrder(true)
-      const newPlacesOrder = places.sort((a, b) => {
-        if (Number(a.rating) < Number(b.rating))
-          return -1
-        else if (Number(a.rating) > Number(b.rating))
-          return 1
-        else
-          return 0
-      })
-      setPlaces(newPlacesOrder)
-    }
-    else {
-      setPlacesOrder(false)
-      const newPlacesOrder = places.sort((b, a) => {
-        if (Number(a.rating) > Number(b.rating))
-          return -1
-        else if (Number(a.rating) < Number(b.rating))
-          return 1
-        else
-          return 0
-      })
-      setPlaces(newPlacesOrder)
-    }
-  }
-
-  const handleSortPlaces = event => {
-    event.preventDefault()
-    changePlaceOrder()
-  }
 
   // Hook used to track dom state directly - removing the state from React 
   //  selected here so we can extend the input to google API
@@ -99,7 +67,7 @@ const MapComponent = ({ currentUser, setCurrentUser }) => {
 
       updateMapPositions(res.data.results);
     } catch (err) {
-      alert("your query does not match any within the search radius")
+      alert("your query does not match any within the search radius");
       console.error(err);
     }
   };
@@ -179,11 +147,5 @@ const MapComponent = ({ currentUser, setCurrentUser }) => {
 };
 
 
-
-
-
-
-
 // prevents unneeded rerenders if the rest of the app changes - don't want to have this map refresh a ton
-
 export const MemoGoogleMap = React.memo(MapComponent);

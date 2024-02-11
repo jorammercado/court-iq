@@ -1,7 +1,7 @@
-import React from 'react'
-import classnames from 'classnames'
-import { usePagination, DOTS } from '../hooks/usePagination'
- import './Pagination.css'
+import React from 'react';
+import classnames from 'classnames';
+import { usePagination, DOTS } from '../hooks/usePagination';
+import './Pagination.css';
 const Pagination = props => {
     const {
         onPageChange,
@@ -10,29 +10,29 @@ const Pagination = props => {
         currentPage,
         pageSize,
         className
-    } = props
+    } = props;
 
     const paginationRange = usePagination({
         currentPage,
         totalCount,
         siblingCount,
         pageSize
-    })
+    });
 
     // If there are less than 2 times in pagination range we shall not render the component
     if (currentPage === 0 || paginationRange.length < 2) {
-        return null
+        return null;
     }
 
     const onNext = () => {
         onPageChange(currentPage + 1)
-    }
+    };
 
     const onPrevious = () => {
-        onPageChange(currentPage - 1)
-    }
+        onPageChange(currentPage - 1);
+    };
 
-    let lastPage = paginationRange[paginationRange.length - 1]
+    let lastPage = paginationRange[paginationRange.length - 1];
     return (
         <ul
             className={classnames('pagination-container', { [className]: className })}
@@ -46,7 +46,7 @@ const Pagination = props => {
             >
                 <div className="arrow left" />
             </li>
-            {paginationRange.map((pageNumber,index) => {
+            {paginationRange.map((pageNumber, index) => {
 
                 // If the pageItem is a DOT, render the DOTS unicode character
                 if (pageNumber === DOTS) {
@@ -75,7 +75,7 @@ const Pagination = props => {
                 <div className="arrow right" />
             </li>
         </ul>
-    )
-}
+    );
+};
 
-export default Pagination
+export default Pagination;

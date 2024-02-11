@@ -1,8 +1,7 @@
 
-import React from "react"
+import React from "react";
 
 export default function Place({ place }) {
-    //console.log(place)
     return (
         <tr>
             <td>{place.name}</td>
@@ -15,5 +14,5 @@ export default function Place({ place }) {
                 style={{ height: "20px" }}
             /></td>
         </tr>
-    )
-}
+    );
+};

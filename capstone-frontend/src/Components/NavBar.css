@@ -7,7 +7,7 @@
     left: 0;
     height: 85px;
     font-size: 30px;
-    
+
 }
 
 .navbar a {
@@ -20,8 +20,8 @@
     font-size: larger;
 }
 
-.inner{
-    justify-content:space-evenly;
+.inner {
+    justify-content: space-evenly;
 }
 
 .navbar a:hover {

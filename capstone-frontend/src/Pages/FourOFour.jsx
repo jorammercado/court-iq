@@ -1,4 +1,4 @@
-import "./FourOFour.css"
+import "./FourOFour.css";
 
 export default function FourOFour() {
 
@@ -8,5 +8,5 @@ export default function FourOFour() {
                 Sorry, no page found
             </div>
         </div>
-    )
-}
+    );
+};

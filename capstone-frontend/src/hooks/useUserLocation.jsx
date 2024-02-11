@@ -8,8 +8,8 @@ export const useUserLocation = () => {
 		if (!navigator.geolocation) {
 			setError('Geolocation is not supported by your browser');
 			return;
-	} 
-	
+		}
+
 
 		navigator.geolocation.getCurrentPosition(
 			async (position) => {
@@ -24,6 +24,6 @@ export const useUserLocation = () => {
 			}
 		);
 	}, []);
-	
+
 	return { location, error };
 };

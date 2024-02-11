@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import "./NavBar.css"
+import { Link } from "react-router-dom";
+import "./NavBar.css";
 
 export default function NavBar() {
     return (
@@ -11,7 +11,6 @@ export default function NavBar() {
 
                         <Link to="/maps"> Maps </Link>
 
-
                     </div>
                     <span className="navbar-text">
                         Capstone
@@ -19,6 +18,6 @@ export default function NavBar() {
                 </div>
             </nav>
         </div>
-    )
-}
+    );
+};
 
