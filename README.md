@@ -1,6 +1,6 @@
 
 # Capstone
-unknown
+Frontend git repo for X, need backend server to run this application, link provided below.
 
 Contents
 ========
@@ -30,14 +30,15 @@ Contents
 ```shell
 Login
 │
-│
 ├─ User
 │   │
 │   ├── Account Item 2
 │   ├── Account Item 3
 │   └── Account Item 4       
-│            
-│
+│       
+├── Primary B 
+├── Primary C
+├── Primary D     
 └── maps 
 ```
 
