@@ -102,6 +102,7 @@ function App() {
                     element={SignUp}
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
+                    
                   />
                 }
               />

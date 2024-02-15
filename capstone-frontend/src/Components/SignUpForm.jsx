@@ -1,6 +1,6 @@
 
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
@@ -13,19 +13,32 @@ import {
     LoginButton2
 } from '../styles/loginElements';
 import "./SignUpForm.css"
+import { UserContext } from "../Providers/UserProvider";
+
+
 const API = import.meta.env.VITE_BASE_URL
 
 export default function SignUpForm({ setCurrentUser }) {
-    const [user, setUser] = useState({
-        user_id: 0,
-        firstname: "",
-        lastname: "",
-        username: "",
-        email: "",
-        password: "",
-        registration_date: ""
-    })
-    const navigate = useNavigate()
+
+    const user = useContext(UserContext);
+    const navigate = useNavigate();
+    // useEffect(() => {
+    //   if (user) {
+    //     setCurrentUser(user);
+    //     navigate("/loggedInPage");
+    //   }
+    // }, [user, navigate]);
+    // const [user, setUser] = useState({
+    //     user_id: 0,
+    //     firstname: "",
+    //     lastname: "",
+    //     username: "",
+    //     email: "",
+    //     password: "",
+    //     registration_date: "",
+    //     displayname: "",
+    //     photourl: ""
+    // })
 
     const addUser = () => {
         fetch(`${API}/users`, {
@@ -47,7 +60,7 @@ export default function SignUpForm({ setCurrentUser }) {
                     alert(`User ${data.username} succesfully created`)
                     setUser(data)
                     setCurrentUser(data)
-                    navigate(`/users/${data.user_id}/profile`)
+                    navigate(`/loggedInPage`)
                 }
             })
             .catch((error) => {
@@ -88,6 +101,32 @@ export default function SignUpForm({ setCurrentUser }) {
                                 type="text"
                                 placeholder="username"
                                 value={user.username}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="displayname">
+                            <Form.Control
+                                className="useLoginStyle"
+                                required
+                                name="displayname"
+                                type="text"
+                                placeholder="displayname"
+                                value={user.displayname}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="photourl">
+                            <Form.Control
+                                className="useLoginStyle"
+                                required
+                                name="photourl"
+                                type="text"
+                                placeholder="photourl"
+                                value={user.photourl}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
