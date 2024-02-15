@@ -22,6 +22,7 @@ import { useState } from "react";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
+import SignUp from "./Pages/SignUp.jsx";
 
 import FourOFour from "./Pages/FourOFour";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -95,7 +96,15 @@ function App() {
                       />
                     }
                   />
-
+<Route path="/signup"
+                element={
+                  <PublicRoute
+                    element={SignUp}
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
                   {/* public route - page not found */}
                   <Route
                     path="*"
