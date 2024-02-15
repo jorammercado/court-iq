@@ -50,7 +50,7 @@ export default function NavBar({ currentUser, setCurrentUser }) {
         },
     ]);
 
-    const [userItems , setUserItems] = React.useState([
+    const [userItems, setUserItems] = React.useState([
         { icon: Blank, label: 'User' },
         { icon: Overflow, label: 'Account item2' },
         { icon: Overflow, label: 'Account item3' },
@@ -61,7 +61,7 @@ export default function NavBar({ currentUser, setCurrentUser }) {
 
     function handleMainItemSelect(item) {
         setMainItems((prev) => setItemActive(prev, item));
-        if(item.label==="Maps")
+        if (item.label === "Maps")
             navigate('/maps');
     }
 
@@ -71,31 +71,33 @@ export default function NavBar({ currentUser, setCurrentUser }) {
         navigate('/loggedInPage');
     }
     return (
-        <React.Fragment>
-            {isNavVisible && (
-                <Layer>
-                    <div
-                        className={css({
-                            boxSizing: 'border-box',
-                            width: '100vw',
-                            position: 'fixed',
-                            top: '0',
-                            left: '0',
-                        })}
-                    >
-                        <AppNavBar
-                            title="Capstone"
-                            mainItems={mainItems}
-                            userItems={userItems}
-                            onMainItemSelect={handleMainItemSelect}
-                            onUserItemSelect={(item) => handleUserItemSelect(item)}
-                            username={currentUser ? currentUser.displayName : "User"}
-                            usernameSubtitle="Pursuit Fellow"
-                            userImgUrl={currentUser ? currentUser.photoURL : ""}
-                        />
-                    </div>
-                </Layer>
-            )}
-        </React.Fragment>
+        <div className="navbar__updated">
+            <React.Fragment>
+                {isNavVisible && (
+                    <Layer>
+                        <div
+                            className={css({
+                                boxSizing: 'border-box',
+                                width: '100vw',
+                                position: 'fixed',
+                                top: '0',
+                                left: '0',
+                            })}
+                        >
+                            <AppNavBar
+                                title="Capstone"
+                                mainItems={mainItems}
+                                userItems={userItems}
+                                onMainItemSelect={handleMainItemSelect}
+                                onUserItemSelect={(item) => handleUserItemSelect(item)}
+                                username={currentUser ? currentUser.displayName : "User"}
+                                usernameSubtitle="Pursuit Fellow"
+                                userImgUrl={currentUser ? currentUser.photoURL : ""}
+                            />
+                        </div>
+                    </Layer>
+                )}
+            </React.Fragment>
+        </div>
     );
 };
