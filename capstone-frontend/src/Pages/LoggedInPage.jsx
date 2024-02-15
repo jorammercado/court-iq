@@ -41,8 +41,8 @@ export const LoggedInPage = ({ currentUser,
       <div className="logged-in">
         {!clearMessage ?
           <div className="animate__animated animate__fadeInDown">
-            <h1> YOU ARE NOW LOGGED IN : </h1>
-            <h1>Welcome {user.displayName} !</h1>
+            <h1> Log In Success!  </h1>
+            <h2>Welcome {user.displayName} </h2>
             <div className="image">
               <img src={user.photoURL}
                 style={imgStyle}
@@ -50,9 +50,9 @@ export const LoggedInPage = ({ currentUser,
                 alt="its the users head"
               ></img>
             </div>
-            <div className="email">
+            <h3 className="email">
               Email: {user.email}
-            </div>
+            </h3>
             <br></br>
             <button className="btn btn-dark btn-lg" onClick={handleLogout}>
               Log Out

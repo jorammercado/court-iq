@@ -6,7 +6,7 @@
 }
 
 .logged-in{
-    margin-top: 30px;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,5 +19,5 @@
 }
 
 .user-image{
-    border-radius: 20px;
+    border-radius: 120px;
 }
