@@ -1,10 +1,15 @@
 import { Login } from '../Components/Login';
 
-export const LoginPage = ({ currentUser, setCurrentUser }) => {
+export const LoginPage = ({ currentUser,
+    setCurrentUser,
+    photoURL,
+    setPhotoURL }) => {
     return (
         <div>
             <Login currentUser={currentUser}
-                setCurrentUser={setCurrentUser} />
+                setCurrentUser={setCurrentUser}
+                photoURL={photoURL}
+                setPhotoURL={setPhotoURL} />
         </div>
     );
 };

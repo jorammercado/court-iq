@@ -14,7 +14,7 @@ import {
     NavItem,
 } from 'baseui/app-nav-bar';
 
-export default function NavBar({ currentUser, setCurrentUser }) {
+export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
     const [css] = useStyletron();
     const navigate = useNavigate();
 
@@ -92,7 +92,7 @@ export default function NavBar({ currentUser, setCurrentUser }) {
                                 onUserItemSelect={(item) => handleUserItemSelect(item)}
                                 username={currentUser ? currentUser.displayName : "User"}
                                 usernameSubtitle="Pursuit Fellow"
-                                userImgUrl={currentUser ? currentUser.photoURL : ""}
+                                userImgUrl={currentUser ? photoURL : ""}
                             />
                         </div>
                     </Layer>

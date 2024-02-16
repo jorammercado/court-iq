@@ -10,7 +10,8 @@ import "animate.css";
 export const LoggedInPage = ({ currentUser,
   setCurrentUser,
   currentUserPlaces,
-  setCurrentUserPlaces }) => {
+  setCurrentUserPlaces,
+  photoURL }) => {
   const [clearMessage, setClearMessage] = useState(false);
 
   const imgStyle = {
@@ -44,7 +45,7 @@ export const LoggedInPage = ({ currentUser,
             <h1> Log In Success!  </h1>
             <h2>Welcome {user.displayName} </h2>
             <div className="image">
-              <img src={user.photoURL}
+              <img src={photoURL}
                 style={imgStyle}
                 className="user-image"
                 alt="its the users head"

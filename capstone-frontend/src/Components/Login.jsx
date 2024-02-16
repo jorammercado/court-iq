@@ -1,15 +1,20 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle, logOut, signInWithFacebook } from "../Services/FireBase";
 import "./Login.css";
 import "animate.css";
 
-export const Login = ({ currentUser, setCurrentUser }) => {
+export const Login = ({ currentUser, 
+  setCurrentUser,
+  photoURL,
+  setPhotoURL
+ }) => {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (user) {
+      setPhotoURL(user.photoURL);
       setCurrentUser(user);
       navigate("/loggedInPage");
     }

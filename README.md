@@ -1,6 +1,6 @@
 
 # Capstone
-Frontend git repo for X, need backend server to run this application, link provided below.
+Frontend git repo for capstone project, need backend server to run this application, links provided below.
 
 Contents
 ========
