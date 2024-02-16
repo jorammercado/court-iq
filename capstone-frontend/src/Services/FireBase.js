@@ -27,10 +27,17 @@ auth.useDeviceLanguage();
 const googleAuth = new GoogleAuthProvider();
 const facebookAuth = new FacebookAuthProvider();
 
-export const signInWithFacebook = () => {
+export const signInWithFacebook = (setPhotoURL) => {
   try {
     //the signInWithPopUp() method accepts ANY provider we create. This is all our authentication logic
     signInWithPopup(auth, facebookAuth).then((res) => {
+      const credential = FacebookAuthProvider.credentialFromResult(res);
+      const accessToken = credential.accessToken;
+      fetch(`https://graph.facebook.com/${res.user.providerData[0].uid}/picture?type=large&access_token=${accessToken}`)
+      .then((response)=>response.blob())
+      .then((blob)=>{
+        setPhotoURL(URL.createObjectURL(blob));
+      })
       console.log(res);
     });
   } catch (err) {

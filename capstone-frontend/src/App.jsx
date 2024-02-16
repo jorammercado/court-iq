@@ -27,61 +27,60 @@ import SignUp from "./Pages/SignUp.jsx";
 import FourOFour from "./Pages/FourOFour";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import { Scenario as AppNavBarGetUniqueIdentifier } from './app-nav-bar-get-unique-identifier.scenario';
-// import { Scenario as AppNavBarIconOverrides } from './app-nav-bar-icon-overrides.scenario';
-// import { Scenario as AppNavBarIsMainItemActive } from './app-nav-bar-is-main-item-active.scenario';
-// import { Scenario as AppNavBarMapItemToNode } from './app-nav-bar-map-item-to-node.scenario';
-// import { Scenario as AppNavBarOverrides } from './app-nav-bar-overrides.scenario';
-// import { Scenario as AppNavBarTitleNode } from './app-nav-bar-title-node.scenario';
-// import { Scenario as AppNavBarDefault } from './app-nav-bar.scenario';
-
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [photoURL, setPhotoURL] = useState(null);
   const [currentUserPlaces, setCurrentUserPlaces] = useState(null);
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
         {/* <Centered> */}
-        
-          <div className="App">
-            <header className="App-header"></header>
-            <UserProvider>
-              <Router>
 
-                <div>
-                  <NavBar currentUser={currentUser}
-                    setCurrentUser={setCurrentUser} />
-                </div>
+        <div className="App">
+          <header className="App-header"></header>
+          <UserProvider>
+            <Router>
 
-                <Routes>
+              <div>
+                <NavBar currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                  photoURL={photoURL}
+                  setPhotoURL={setPhotoURL} />
+              </div>
 
-                  {/* public route login */}
-                  <Route path="/"
-                    element={
-                      <PublicRoute
-                        element={LoginPage}
-                        currentUser={currentUser}
-                        setCurrentUser={setCurrentUser}
-                        currentUserPlaces={currentUser} Places
-                        setCurrentUserPlaces={setCurrentUserPlaces}
-                      />
-                    }
-                  />
+              <Routes>
 
-                  {/* private route - home screen of specific user */}
-                  <Route
-                    path="/loggedInPage"
-                    element={
-                      <ProtectedRoute
-                        element={LoggedInPage}
-                        currentUser={currentUser}
-                        setCurrentUser={setCurrentUser}
-                        currentUserPlaces={currentUser} Places
-                        setCurrentUserPlaces={setCurrentUserPlaces}
-                      />
-                    }
-                  />
+                {/* public route login */}
+                <Route path="/"
+                  element={
+                    <PublicRoute
+                      element={LoginPage}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                      photoURL={photoURL}
+                      setPhotoURL={setPhotoURL}
+                      currentUserPlaces={currentUser}
+                      setCurrentUserPlaces={setCurrentUserPlaces}
+                    />
+                  }
+                />
+
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/loggedInPage"
+                  element={
+                    <ProtectedRoute
+                      element={LoggedInPage}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                      currentUserPlaces={currentUser}
+                      photoURL={photoURL}
+                      setPhotoURL={setPhotoURL}
+                      setCurrentUserPlaces={setCurrentUserPlaces}
+                    />
+                  }
+                />
 
                   {/* private route - home screen of specific user */}
                   <Route
@@ -118,11 +117,11 @@ function App() {
                     }
                   />
 
-                </Routes>
-              </Router>
-            </UserProvider>
+              </Routes>
+            </Router>
+          </UserProvider>
 
-          </div>
+        </div>
         {/* </Centered> */}
       </BaseProvider>
     </StyletronProvider>
