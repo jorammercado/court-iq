@@ -26,6 +26,7 @@ export const Login = ({ currentUser,
         <div className="login">
           <button className="btn btn-dark btn-lg animate__animated animate__rotateIn" onClick={signInWithGoogle}>Sign in With google</button>
           <button className="btn btn-dark btn-lg animate__animated animate__rotateIn" onClick={signInWithFacebook}>Sign in With facebook</button>
+          <button className="btn btn-dark btn-lg animate__animated animate__rotateIn" onClick={()=> {navigate("/signup")}}>Sign up!</button>
         </div>
       </section>
 
