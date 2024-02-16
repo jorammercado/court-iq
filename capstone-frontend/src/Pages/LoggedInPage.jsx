@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../Providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../Services/FireBase";
-import { Button, KIND } from "baseui/button";
 import { useState } from "react";
 import "./LoggedInPage.css";
 import "animate.css";
@@ -56,13 +55,12 @@ export const LoggedInPage = ({ currentUser,
               Email: {user.email}
             </h3>
             <br></br>
-            
-            <Button className="buttons_v1" kind={KIND.secondary}  onClick={handleLogout}>
+            <button className="btn btn-dark btn-lg" onClick={handleLogout}>
               Log Out
-            </Button>
-            <Button className="buttons_v1" kind={KIND.secondary} onClick={handleOk}>
+            </button>
+            <button className="btn btn-dark btn-lg" onClick={handleOk}>
               Browse Site
-            </Button>
+            </button>
           </div> : null}
       </div>
     );
