@@ -82,40 +82,41 @@ function App() {
                   }
                 />
 
-                  {/* private route - home screen of specific user */}
-                  <Route
-                    path="/maps"
-                    element={
-                      <ProtectedRoute
-                        element={MemoGoogleMap}
-                        currentUser={currentUser}
-                        setCurrentUser={setCurrentUser}
-                        currentUserPlaces={currentUser} Places
-                        setCurrentUserPlaces={setCurrentUserPlaces}
-                      />
-                    }
-                  />
-<Route path="/signup"
-                element={
-                  <PublicRoute
-                    element={SignUp}
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                    
-                  />
-                }
-              />
-                  {/* public route - page not found */}
-                  <Route
-                    path="*"
-                    element={
-                      <PublicRoute
-                        element={FourOFour}
-                        currentUser={currentUser}
-                        setCurrentUser={setCurrentUser}
-                      />
-                    }
-                  />
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/maps"
+                  element={
+                    <ProtectedRoute
+                      element={MemoGoogleMap}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                      currentUserPlaces={currentUser} Places
+                      setCurrentUserPlaces={setCurrentUserPlaces}
+                    />
+                  }
+                />
+                <Route path="/signup"
+                  element={
+                    <PublicRoute
+                      element={SignUp}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                      photoURL={photoURL}
+                      setPhotoURL={setPhotoURL}
+                    />
+                  }
+                />
+                {/* public route - page not found */}
+                <Route
+                  path="*"
+                  element={
+                    <PublicRoute
+                      element={FourOFour}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
 
               </Routes>
             </Router>
