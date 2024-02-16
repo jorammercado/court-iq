@@ -20,7 +20,7 @@ const API = import.meta.env.VITE_BASE_URL
 
 export default function SignUpForm({ setCurrentUser }) {
 
-    const user = useContext(UserContext);
+    //const user = useContext(UserContext);
     const navigate = useNavigate();
     // useEffect(() => {
     //   if (user) {
@@ -28,17 +28,17 @@ export default function SignUpForm({ setCurrentUser }) {
     //     navigate("/loggedInPage");
     //   }
     // }, [user, navigate]);
-    // const [user, setUser] = useState({
-    //     user_id: 0,
-    //     firstname: "",
-    //     lastname: "",
-    //     username: "",
-    //     email: "",
-    //     password: "",
-    //     registration_date: "",
-    //     displayname: "",
-    //     photourl: ""
-    // })
+    const [user, setUser] = useState({
+        user_id: 0,
+        firstname: "",
+        lastname: "",
+        username: "",
+        email: "",
+        password: "",
+        registration_date: "",
+        displayname: "",
+        photourl: ""
+    })
 
     const addUser = () => {
         fetch(`${API}/users`, {
