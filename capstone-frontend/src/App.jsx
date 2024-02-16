@@ -1,6 +1,6 @@
 import { Client as Styletron } from "styletron-engine-monolithic";
 import { Provider as StyletronProvider } from "styletron-react";
-import { LightTheme, BaseProvider, styled } from "baseui";
+import { LightTheme, BaseProvider, styled, DarkTheme, ThemeProvider } from "baseui";
 import { StatefulInput } from "baseui/input";
 
 const engine = new Styletron();
@@ -34,7 +34,7 @@ function App() {
   const [currentUserPlaces, setCurrentUserPlaces] = useState(null);
   return (
     <StyletronProvider value={engine}>
-      <BaseProvider theme={LightTheme}>
+      <BaseProvider theme={DarkTheme}>
         {/* <Centered> */}
 
         <div className="App">
