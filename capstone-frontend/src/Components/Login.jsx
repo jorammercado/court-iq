@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ButtonDock } from "baseui/button-dock";
 import { Button, KIND } from "baseui/button";
 import { styled } from 'baseui';
+import { styled as styled2 } from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, FacebookAuthProvider } from "firebase/auth";
 import {
@@ -16,17 +17,23 @@ import {
 import "./Login.css";
 import "animate.css";
 
-const StyledTest = styled('div', {
+const Wrapper = styled2.div`
+    @media only screen and (max-width : 399px) {
+        width: 10%
+    }
+`
+
+const StyledButtons = styled('div', {
   position: 'flex',
   width: '375px',
-  height: '667px',
+  padding: '20px',
   border: '1px solid #ECECEC',
   borderRadius: '12px',
-  backgroundColor: '#ECECEC',
+  backgroundColor: '#585858',
   overflow: 'auto',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+
 });
 
 export const Login = ({ currentUser,
@@ -70,31 +77,37 @@ export const Login = ({ currentUser,
       <section className="login__wrapper">
         <div className="animate__animated animate__fadeInUp">
           <div className="contain__buttons">
-            <StyledTest>
-              <ButtonDock className="login-button"
-                primaryAction={[
-                  <FacebookLoginButton onClick={handleSignInWithFacebook} kind={KIND.primary} key="second" className="animate__animated animate__fadeInUp login-button">
-                  </FacebookLoginButton>,
 
-                  <GoogleLoginButton onClick={signInWithGoogle} kind={KIND.primary} key="first" className="animate__animated animate__fadeInUp login-button">
-                  </GoogleLoginButton>,
+            <div style={{ display: 'flex', flexWrap: 'wrap' }} >
+              <Wrapper>
+                <StyledButtons>
 
-                  <Button onClick={() => { navigate("/signup") }} kind={KIND.secondary} key="third"
-                    className="animate__animated animate__fadeInUp login-button">
+                <div className="login__button">
+                    <GoogleLoginButton onClick={signInWithGoogle} className="animate__animated animate__fadeInUp">
+                    </GoogleLoginButton>
+                  </div>
+
+                  <div className="login__button">
+                    <FacebookLoginButton onClick={handleSignInWithFacebook} className="animate__animated animate__fadeInUp">
+                    </FacebookLoginButton>
+                  </div>
+
+                  <button onClick={() => { navigate("/signup") }}
+                    className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
+                    Log in with Email
+                  </button>
+
+                  <button onClick={() => { navigate("/signup") }}
+                    className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
                     Sign Up!
-                  </Button>
-                ]}
-              />
-            </StyledTest>
+                  </button>
 
+                </StyledButtons>
+              </Wrapper>
+            </div>
           </div>
         </div>
-
-
-
-
       </section>
-
     </div>
   );
 };
