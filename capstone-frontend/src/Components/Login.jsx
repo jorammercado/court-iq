@@ -92,12 +92,12 @@ export const Login = ({ currentUser,
                     </FacebookLoginButton>
                   </div>
 
-                  <button onClick={() => { navigate("/signup") }}
+                  <button onClick={() => {  }}
                     className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
                     Log in with Email
                   </button>
 
-                  <button onClick={() => { navigate("/signup") }}
+                  <button onClick={() => {  }}
                     className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
                     Sign Up!
                   </button>
