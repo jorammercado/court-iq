@@ -1,23 +1,23 @@
-.not-logged-in{
+.not-logged-in {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.logged-in{
+.logged-in {
     margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-}
 
-.email{
-    margin-top: 20px;
-    font-size: 30px;
-}
+    .email {
+        margin-top: 20px;
+        font-size: 30px;
+    }
 
-.user-image{
-    border-radius: 150px;
+    .user-image {
+        border-radius: 150px;
+    }
 }

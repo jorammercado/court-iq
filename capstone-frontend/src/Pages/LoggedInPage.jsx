@@ -3,7 +3,7 @@ import { UserContext } from "../Providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../Services/FireBase";
 import { useState } from "react";
-import "./LoggedInPage.css";
+import "./LoggedInPage.scss";
 import "animate.css";
 
 
