@@ -14,7 +14,7 @@ import {
   auth,
   facebookAuth
 } from "../Services/FireBase";
-import "./Login.css";
+import "./Login.scss";
 import "animate.css";
 
 const Wrapper = styled2.div`
