@@ -2,7 +2,7 @@ import React from "react";
 import FormControlGroup from "./FormControlGroup";
 import Pagination from "../../../utils/Pagination"
 import { useState, useMemo } from "react";
-import "./Form.css";
+import "./Form.scss";
 /* 
  `inputRef` prop is for extending search functionality in the future
   GoogleMaps API interacts dirrectly with DOM elements in many cases
