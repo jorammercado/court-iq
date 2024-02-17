@@ -5,7 +5,7 @@ import { GoogleMap, LoadScript, Marker, useLoadScript } from "@react-google-maps
 import { useUserLocation } from "../../hooks/useUserLocation";
 import { getUserLocation } from "../../utils/locationUtils";
 import { getGoogleMapsData } from "../../utils/apiUtils";
-import "./googleMap.css";
+import "./googleMap.scss";
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const searchDistance = 20500;
