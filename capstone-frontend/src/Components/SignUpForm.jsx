@@ -12,7 +12,7 @@ import {
     LoginLabel,
     LoginButton2
 } from '../styles/loginElements';
-import "./SignUpForm.css"
+import "./SignUpForm.scss"
 import { UserContext } from "../Providers/UserProvider";
 
 
