@@ -1,4 +1,4 @@
-import "./FourOFour.css";
+import "./FourOFour.scss";
 
 export default function FourOFour() {
 
