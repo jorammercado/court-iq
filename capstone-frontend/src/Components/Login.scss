@@ -1,0 +1,17 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .login__button {
+    margin-top: -1px;
+    margin-bottom: -1px;
+  }
+
+  .btn {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+}
