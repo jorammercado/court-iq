@@ -12,7 +12,7 @@ const Centered = styled("div", {
   height: "100%",
 });
 
-import "./App.css";
+import "./App.scss";
 import { LoginPage } from "./Pages/LoginPage.jsx";
 import { UserProvider } from "./Providers/UserProvider";
 import { LoggedInPage } from "./Pages/LoggedInPage";
