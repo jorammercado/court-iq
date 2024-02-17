@@ -1,5 +1,5 @@
 
-import "./NavBar.css";
+import "./NavBar.scss";
 import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import { useStyletron } from 'baseui';
