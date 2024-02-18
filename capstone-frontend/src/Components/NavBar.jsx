@@ -20,16 +20,16 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
 
     const [mainItems, setMainItems] = React.useState([
         { icon: Upload, label: 'Maps' },
-        { icon: Upload, label: 'Primary B' },
+        { icon: Upload, label: 'Test' },
         {
             icon: ChevronDown,
-            label: 'Primary C',
+            label: 'Charts',
             navExitIcon: Delete,
             children: [
-                { icon: Upload, label: 'Secondary A' },
-                { icon: Upload, label: 'Secondary B' },
-                { icon: Upload, label: 'Secondary C' },
-                { icon: Upload, label: 'Secondary D' },
+                { icon: Upload, label: 'test pie chart 1' },
+                { icon: Upload, label: 'test line chart 2' },
+                { icon: Upload, label: 'conley' },
+                { icon: Upload, label: 'test chart 4' },
             ],
         },
         {
@@ -63,6 +63,12 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         setMainItems((prev) => setItemActive(prev, item));
         if (item.label === "Maps")
             navigate('/maps');
+        if (item.label === "test pie chart 1")
+            navigate('/chart');
+        if (item.label === "test line chart 2")
+            navigate('/chartLine');
+        if (item.label === "conley")
+            navigate('/conley_example');
     }
 
     function handleUserItemSelect(item) {
