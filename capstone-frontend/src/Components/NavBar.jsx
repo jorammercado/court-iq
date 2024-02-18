@@ -5,7 +5,20 @@ import * as React from 'react';
 import { useStyletron } from 'baseui';
 import { Button } from 'baseui/button';
 import { Layer } from 'baseui/layer';
-import { ChevronDown, Delete, Overflow, Upload, Blank } from 'baseui/icon';
+import {
+    ChevronDown,
+    Delete,
+    Overflow,
+    Upload,
+    Blank,
+    Search,
+    TriangleRight,
+    CheckIndeterminate,
+    ChevronLeft,
+    ArrowRight,
+    ChevronRightSmall,
+    ChevronRight
+} from 'baseui/icon';
 import { StyledLink } from "baseui/link";
 import {
     AppNavBar,
@@ -19,30 +32,54 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
     const navigate = useNavigate();
 
     const [mainItems, setMainItems] = React.useState([
-        { icon: Upload, label: 'Maps' },
-        { icon: Upload, label: 'Test' },
+        { icon: Search, label: 'Search' },
         {
             icon: ChevronDown,
-            label: 'Charts',
-            navExitIcon: Delete,
+            label: 'Players',
+            navExitIcon: ChevronLeft,
             children: [
-                { icon: Upload, label: 'test pie chart 1' },
-                { icon: Upload, label: 'test line chart 2' },
-                { icon: Upload, label: 'conley' },
-                { icon: Upload, label: 'test chart 4' },
+                { icon: CheckIndeterminate, label: 'Players' },
+                { icon: CheckIndeterminate, label: 'Favorites' },
+                { icon: CheckIndeterminate, label: 'Recently Searched' },
+                { icon: CheckIndeterminate, label: 'conley_example' }
             ],
         },
         {
             icon: ChevronDown,
-            label: 'Primary D',
-            navExitIcon: Delete,
+            label: 'Teams',
+            navExitIcon: ChevronLeft,
+            children: [
+                { icon: CheckIndeterminate, label: 'Standings' },
+                { icon: CheckIndeterminate, label: 'Schedule' },
+                { icon: CheckIndeterminate, label: 'Stats' }
+            ],
+        },
+        {
+            icon: ChevronDown,
+            label: 'Maps',
+            navExitIcon: ChevronLeft,
+            children: [
+                { icon: CheckIndeterminate, label: 'Bars' },
+                { icon: CheckIndeterminate, label: 'Stadiums' },
+                { icon: CheckIndeterminate, label: 'Restaurants' }
+            ],
+        },
+        {
+            icon: ChevronDown,
+            label: 'Prop Predictor',
+            navExitIcon: ChevronLeft,
             children: [
                 {
                     icon: ChevronDown,
                     label: 'Secondary E',
+                    navExitIcon: ChevronLeft,
                     children: [
-                        { icon: Upload, label: 'Tertiary A' },
-                        { icon: Upload, label: 'Tertiary B' },
+                        {
+                            icon: CheckIndeterminate,
+                            label: 'Tertiary A',
+                            navExitIcon: ChevronLeft,
+                        },
+                        { icon: CheckIndeterminate, label: 'Tertiary B' },
                     ],
                 },
                 { icon: Upload, label: 'Secondary F' },
@@ -51,10 +88,10 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
     ]);
 
     const [userItems, setUserItems] = React.useState([
-        { icon: Blank, label: 'User' },
-        { icon: Overflow, label: 'Account item2' },
-        { icon: Overflow, label: 'Account item3' },
-        { icon: Overflow, label: 'Account item4' },
+        { icon: ChevronRight, label: 'User' },
+        { icon: ChevronRight, label: 'Account item2' },
+        { icon: ChevronRight, label: 'Account item3' },
+        { icon: ChevronRight, label: 'Account item4' },
     ]);
 
     const [isNavVisible, setIsNavVisible] = React.useState(true);
@@ -63,8 +100,8 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         setMainItems((prev) => setItemActive(prev, item));
         if (item.label === "Maps")
             navigate('/maps');
-        if (item.label === "test pie chart 1")
-            navigate('/chart');
+        if (item.label === "conley_example")
+            navigate('/conley_example');
         if (item.label === "test line chart 2")
             navigate('/chartLine');
         if (item.label === "conley")
@@ -91,7 +128,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                             })}
                         >
                             <AppNavBar
-                                title="Capstone"
+                                title="Hoop Stats"
                                 mainItems={mainItems}
                                 userItems={userItems}
                                 onMainItemSelect={handleMainItemSelect}
