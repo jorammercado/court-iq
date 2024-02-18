@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from "react";
 import PlayerExample from '../Components/PlayerExample';
 import { Data2 } from '../utils/Data2';
+import Example from '../Components/PlayerStatsTable';
 
 import "./MyChartPage.scss"
 
@@ -125,9 +126,13 @@ const PlayerExamplePage = () => {
     return (
 
         <div className="piechart">
+           
             <PlayerExample data={data} options={options} legend={legend} />
-        </div>
+            <Example data={data} />
 
+          
+        </div>
+    
     );
 }
 
