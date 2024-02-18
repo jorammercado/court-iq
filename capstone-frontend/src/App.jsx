@@ -24,6 +24,13 @@ import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
 import SignUp from "./Pages/SignUp.jsx";
 
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+Chart.register(CategoryScale);
+import MyChartPage from "./Pages/MyChartPage.jsx";
+import InterpolationLineChart from "./Pages/InterpolationLineChart.jsx";
+import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
+
 import FourOFour from "./Pages/FourOFour";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -95,6 +102,43 @@ function App() {
                     />
                   }
                 />
+
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/chart"
+                  element={
+                    <ProtectedRoute
+                      element={MyChartPage}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/chartLine"
+                  element={
+                    <ProtectedRoute
+                      element={InterpolationLineChart}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/conley_example"
+                  element={
+                    <ProtectedRoute
+                      element={PlayerExamplePage}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
                 <Route path="/signup"
                   element={
                     <PublicRoute
