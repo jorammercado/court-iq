@@ -30,6 +30,8 @@ Chart.register(CategoryScale);
 import MyChartPage from "./Pages/MyChartPage.jsx";
 import InterpolationLineChart from "./Pages/InterpolationLineChart.jsx";
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
+import TeamStandings from "./Pages/TeamStandings.jsx";
+import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
 
 import FourOFour from "./Pages/FourOFour";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -133,6 +135,30 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={PlayerExamplePage}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/teamstandingsV2"
+                  element={
+                    <ProtectedRoute
+                      element={TeamStandingsV2}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                {/* private route - home screen of specific user */}
+                <Route
+                  path="/teamstandings"
+                  element={
+                    <ProtectedRoute
+                      element={TeamStandings}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />

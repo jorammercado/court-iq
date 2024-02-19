@@ -4,7 +4,7 @@ import PlayerExample from '../Components/PlayerExample';
 import { Data2 } from '../utils/Data2';
 import Example from '../Components/PlayerStatsTable';
 
-import "./MyChartPage.scss"
+import "./PlayerExamplePage.scss"
 
 
 
@@ -59,7 +59,7 @@ const PlayerExamplePage = () => {
                     0.4,
                     0.5,
                     0.4
-                  ],
+                ],
                 fill: false,
                 backgroundColor: "rgba(251, 133, 0,0.2)",
                 borderColor: "rgba(251, 133, 0,1)"
@@ -87,7 +87,7 @@ const PlayerExamplePage = () => {
                     1.8,
                     2,
                     2.3
-                  ],
+                ],
                 fill: true,
                 backgroundColor: "rgba(255, 183, 3,0.2)",
                 borderColor: "rgba(255, 183, 3,1)"
@@ -125,14 +125,15 @@ const PlayerExamplePage = () => {
 
     return (
 
-        <div className="piechart">
-           
-            <PlayerExample data={data} options={options} legend={legend} />
-            <Example data={data} />
+        <div className="playerexamplepage">
 
-          
+            <PlayerExample data={data} options={options} legend={legend} />
+            <div className="baseTable">
+                <Example data={data} />
+            </div>
+
         </div>
-    
+
     );
 }
 

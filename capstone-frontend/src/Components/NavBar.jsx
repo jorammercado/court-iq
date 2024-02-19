@@ -50,6 +50,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navExitIcon: ChevronLeft,
             children: [
                 { icon: CheckIndeterminate, label: 'Standings' },
+                { icon: CheckIndeterminate, label: 'StandingsV2' },
                 { icon: CheckIndeterminate, label: 'Schedule' },
                 { icon: CheckIndeterminate, label: 'Stats' }
             ],
@@ -106,6 +107,10 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navigate('/chartLine');
         if (item.label === "conley")
             navigate('/conley_example');
+        if (item.label === "Standings")
+            navigate('/teamstandings');
+        if (item.label === "StandingsV2")
+            navigate('/teamstandingsV2');
     }
 
     function handleUserItemSelect(item) {
