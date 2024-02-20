@@ -1,8 +1,14 @@
 import { Client as Styletron } from "styletron-engine-monolithic";
 import { Provider as StyletronProvider } from "styletron-react";
-import { LightTheme, BaseProvider, styled, DarkTheme, ThemeProvider } from "baseui";
+import {
+  LightTheme,
+  BaseProvider,
+  styled,
+  DarkTheme,
+  ThemeProvider,
+} from "baseui";
 import { StatefulInput } from "baseui/input";
-
+import GamesSchedule from "./Pages/GamesSchedule.jsx";
 const engine = new Styletron();
 
 const Centered = styled("div", {
@@ -17,7 +23,7 @@ import { LoginPage } from "./Pages/LoginPage.jsx";
 import { UserProvider } from "./Providers/UserProvider";
 import { LoggedInPage } from "./Pages/LoggedInPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { MemoGoogleMap } from "./Components/googleMap/GoogleMap.jsx"
+import { MemoGoogleMap } from "./Components/googleMap/GoogleMap.jsx";
 import { useState } from "react";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
@@ -34,8 +40,7 @@ import TeamStandings from "./Pages/TeamStandings.jsx";
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
 
 import FourOFour from "./Pages/FourOFour";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -50,18 +55,19 @@ function App() {
           <header className="App-header"></header>
           <UserProvider>
             <Router>
-
               <div>
-                <NavBar currentUser={currentUser}
+                <NavBar
+                  currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
                   photoURL={photoURL}
-                  setPhotoURL={setPhotoURL} />
+                  setPhotoURL={setPhotoURL}
+                />
               </div>
 
               <Routes>
-
                 {/* public route login */}
-                <Route path="/"
+                <Route
+                  path="/"
                   element={
                     <PublicRoute
                       element={LoginPage}
@@ -99,7 +105,8 @@ function App() {
                       element={MemoGoogleMap}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-                      currentUserPlaces={currentUser} Places
+                      currentUserPlaces={currentUser}
+                      Places
                       setCurrentUserPlaces={setCurrentUserPlaces}
                     />
                   }
@@ -165,7 +172,19 @@ function App() {
                   }
                 />
 
-                <Route path="/signup"
+                <Route
+                  path="/GamesSchedule"
+                  element={
+                    <ProtectedRoute
+                      element={GamesSchedule}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                <Route
+                  path="/signup"
                   element={
                     <PublicRoute
                       element={SignUp}
@@ -187,16 +206,14 @@ function App() {
                     />
                   }
                 />
-
               </Routes>
             </Router>
           </UserProvider>
-
         </div>
         {/* </Centered> */}
       </BaseProvider>
     </StyletronProvider>
   );
-};
+}
 
 export default App;
