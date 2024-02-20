@@ -92,6 +92,7 @@ const TeamStandingsV2 = () => {
     //     const lastPageIndex = firstPageIndex + PageSize
     //     return teams.slice(firstPageIndex, lastPageIndex)
     // }, [currentPageV2, teams])
+    
     const teams = []
     for (let i = 0; i < data.length; i++) {
         const temp = []
@@ -113,7 +114,7 @@ const TeamStandingsV2 = () => {
         foo: 10,
         bar: 'banana',
         url: 'https://example.com/b',
-        largeNumber: 1000000,
+        largeNumber: 8,
         avatarSrc:
             'https://media.api-sports.io/basketball/teams/149.png',
         name: 'User Name',
@@ -128,13 +129,13 @@ const TeamStandingsV2 = () => {
     for (let i = 0; i < teams.length; i++) {
         DATA.push({
             foo: 10,
-            bar: 'banana',
-            url: 'https://example.com/b',
-            largeNumber: 1000000,
+            bar: 'bananasss',
+            url: 'https://www.cnn.com',
+            largeNumber: teams[i][0],
             avatarSrc: teams[i][2],
             name: teams[i][3],
             title: teams[i][8],
-            list: ['One', 'Two', 'Three'],
+            list: ['One', 'Two', 'Three', "H"],
         })
     }
 
@@ -283,23 +284,23 @@ const TeamStandingsV2 = () => {
                     )}
                 </TableBuilderColumn>
 
-                <TableBuilderColumn header="Number positive">
+                <TableBuilderColumn header="Position">
                     {(row) => (
                         <NumberCell value={row.largeNumber} delta={0.51} />
                     )}
                 </TableBuilderColumn>
 
-                <TableBuilderColumn header="Number negative">
+                <TableBuilderColumn header="Games Lost">
                     {(row) => (
                         <NumberCell value={row.largeNumber} delta={-0.51} />
                     )}
                 </TableBuilderColumn>
 
-                <TableBuilderColumn header="Tags">
+                <TableBuilderColumn header="Games Lost %">
                     {(row) => <TagsCell tags={row.list} />}
                 </TableBuilderColumn>
 
-                <TableBuilderColumn header="Buttons">
+                <TableBuilderColumn header="Games Won">
                     {(row) => <ButtonsCell labels={row.list} />}
                 </TableBuilderColumn>
             </TableBuilder>
