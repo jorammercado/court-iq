@@ -1,7 +1,7 @@
 import { React, useEffect, useState, useMemo } from "react";
 import Pagination from "../utils/Pagination";
 import axios from "axios";
-
+import { Table } from "baseui/table-semantic";
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;
 const VITE_X_RAPIDAPI_URL_GAMES = import.meta.env.VITE_X_RAPIDAPI_URL_GAMES;
@@ -32,34 +32,22 @@ const GamesSchedule = () => {
     };
     getData();
   }, []);
-
+  const COLUMNS = ['date',"TIME", "STATUS SHORT", "STATUS LONG", "SCORES"];
+  const overrides = {};
   return (
     <div>
-      <div className="title">{""}</div>
-      <section className="table table-responsive table-top">
-        <table className="table table-hover table-responsive  table-dark caption-top ">
-          <thead>
-            <tr className="position">
-              <th>Date</th>
-              <th>Time</th>
-              <th>Status Short</th>
-              <th>Status Long</th>
-              <th>scores</th>
-            </tr>
-          </thead>
-          <tbody>
-            {games.map((game, index) => (
-              <tr key={index}>
-                <td>{game.date}</td>
-                <td>{game.time}</td>
-                <td>{game.status.short}</td>
-                <td>{game.status.long}</td>
-                <td>{game.scores.home.quarter_1}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      <h1>Game Schedules</h1>
+      <Table
+        overrides={overrides}
+        columns={COLUMNS}
+        data={games.map((game) => [
+            game.date,
+          game.time,
+          game.status.short,
+          game.status.long,
+          game.scores.home.quarter_1,
+        ])}
+      />
     </div>
   );
 };
