@@ -32,6 +32,7 @@ import InterpolationLineChart from "./Pages/InterpolationLineChart.jsx";
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
+import PlayerStats from "./Components/PlayerStatsE.jsx";
 
 import FourOFour from "./Pages/FourOFour";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -134,7 +135,7 @@ function App() {
                   path="/conley_example"
                   element={
                     <ProtectedRoute
-                      element={PlayerExamplePage}
+                      element={PlayerStats}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
