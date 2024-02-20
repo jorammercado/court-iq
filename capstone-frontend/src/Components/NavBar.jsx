@@ -52,7 +52,8 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                 { icon: CheckIndeterminate, label: 'Standings' },
                 { icon: CheckIndeterminate, label: 'StandingsV2' },
                 { icon: CheckIndeterminate, label: 'Schedule' },
-                { icon: CheckIndeterminate, label: 'Stats' }
+                { icon: CheckIndeterminate, label: 'Stats' },
+                { icon: CheckIndeterminate, label: 'Games' }
             ],
         },
         {
@@ -111,6 +112,8 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navigate('/teamstandings');
         if (item.label === "StandingsV2")
             navigate('/teamstandingsV2');
+        if(item.label === "Games")
+        navigate('/GamesSchedule')
     }
 
     function handleUserItemSelect(item) {
