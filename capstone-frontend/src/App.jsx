@@ -29,6 +29,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
 import SignUp from "./Pages/SignUp.jsx";
+import Home from "./Pages/Home.jsx";
 
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
@@ -69,6 +70,21 @@ function App() {
                 {/* public route login */}
                 <Route
                   path="/"
+                  element={
+                    <PublicRoute
+                      element={Home}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                      photoURL={photoURL}
+                      setPhotoURL={setPhotoURL}
+                      currentUserPlaces={currentUser}
+                      setCurrentUserPlaces={setCurrentUserPlaces}
+                    />
+                  }
+                />
+
+                <Route
+                  path="/login"
                   element={
                     <PublicRoute
                       element={LoginPage}
@@ -196,6 +212,7 @@ function App() {
                     />
                   }
                 />
+
                 {/* public route - page not found */}
                 <Route
                   path="*"

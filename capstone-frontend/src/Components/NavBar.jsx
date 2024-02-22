@@ -112,8 +112,8 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navigate('/teamstandings');
         if (item.label === "StandingsV2")
             navigate('/teamstandingsV2');
-        if(item.label === "Games")
-        navigate('/GamesSchedule')
+        if (item.label === "Games")
+            navigate('/GamesSchedule');
     }
 
     function handleUserItemSelect(item) {
@@ -136,14 +136,14 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                             })}
                         >
                             <AppNavBar
-                                title="Hoop Stats"
+                                title="Court IQ"
                                 mainItems={mainItems}
                                 userItems={userItems}
                                 onMainItemSelect={handleMainItemSelect}
                                 onUserItemSelect={(item) => handleUserItemSelect(item)}
                                 username={currentUser ? currentUser.displayName : "User"}
                                 usernameSubtitle="Pursuit Fellow"
-                                userImgUrl={currentUser ? photoURL : ""}
+                                userImgUrl={!/[<>]/.test(photoURL) ? photoURL : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"}
                             />
                         </div>
                     </Layer>
