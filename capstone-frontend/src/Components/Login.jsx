@@ -9,6 +9,7 @@ import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-butto
 import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, FacebookAuthProvider } from "firebase/auth";
 import {
   signInWithGoogle,
+  signInAnon,
   logOut,
   signInWithFacebook,
   auth,
@@ -27,8 +28,10 @@ const StyledButtons = styled('div', {
   position: 'flex',
   width: '375px',
   padding: '20px',
+  paddingLeft: "10px",
+  paddingRight: "10px",
   border: '1px solid #ECECEC',
-  borderRadius: '12px',
+  borderRadius: '4px',
   backgroundColor: '#585858',
   overflow: 'auto',
   display: 'flex',
@@ -82,7 +85,7 @@ export const Login = ({ currentUser,
               <Wrapper>
                 <StyledButtons>
 
-                <div className="login__button">
+                  <div className="login__button">
                     <GoogleLoginButton onClick={signInWithGoogle} className="animate__animated animate__fadeInUp">
                     </GoogleLoginButton>
                   </div>
@@ -92,11 +95,16 @@ export const Login = ({ currentUser,
                     </FacebookLoginButton>
                   </div>
 
-                  <button onClick={() => { navigate("/signup") }}
+                  <button onClick={signInAnon}
                     className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
-                    Sign Up!
+                    Continue as Guest
                   </button>
 
+                  <button onClick={() => { navigate("/") }}
+                    className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
+                    Home
+                  </button>
+                  
                 </StyledButtons>
               </Wrapper>
             </div>
