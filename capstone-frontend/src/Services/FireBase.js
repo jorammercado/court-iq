@@ -24,21 +24,24 @@ export const auth = getAuth(app);
 auth.useDeviceLanguage();
 
 const googleAuth = new GoogleAuthProvider();
-export const facebookAuth = new FacebookAuthProvider();
+const facebookAuth = new FacebookAuthProvider();
 
 export const signInWithFacebook = () => {
   try {
-    //the signInWithPopUp() method accepts ANY provider we create. This is all our authentication logic
     signInWithPopup(auth, facebookAuth).then((res) => {
+      // Signed in.
+
       // const credential = FacebookAuthProvider.credentialFromResult(res);
       // const accessToken = credential.accessToken;
       // fetch(`https://graph.facebook.com/${res.user.providerData[0].uid}/picture?type=large&access_token=${accessToken}`)
       //   .then((response) => response.blob())
       //   .then((blob) => {
-      //     URL.createObjectURL(blob);
+      //     console.log(URL.createObjectURL(blob))
+      //     setPhotoURL(URL.createObjectURL(blob));
       //   })
-      console.log(res);
-    });
+    }).catch((err) => {
+      console.error(err);
+    })
   } catch (err) {
     console.error(err);
   }
@@ -47,7 +50,7 @@ export const signInWithFacebook = () => {
 export const signInAnon = () => {
   signInAnonymously(auth)
     .then(() => {
-      // Signed in..
+      // Signed in.
     })
     .catch((error) => {
       console.error(error)
@@ -57,7 +60,7 @@ export const signInAnon = () => {
 export const signInWithGoogle = () => {
   try {
     signInWithPopup(auth, googleAuth).then((res) => {
-      // signed in success
+      // Signed in.
     });
   } catch (err) {
     console.error(err);
