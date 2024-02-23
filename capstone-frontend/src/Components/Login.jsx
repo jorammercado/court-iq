@@ -6,14 +6,11 @@ import { Button, KIND } from "baseui/button";
 import { styled } from 'baseui';
 import { styled as styled2 } from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
-import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, FacebookAuthProvider } from "firebase/auth";
+
 import {
   signInWithGoogle,
   signInAnon,
-  logOut,
-  signInWithFacebook,
-  auth,
-  facebookAuth
+  signInWithFacebook
 } from "../Services/FireBase";
 import "./Login.scss";
 import "animate.css";
@@ -54,26 +51,6 @@ export const Login = ({ currentUser,
     }
   }, [user, navigate]);
 
-  const handleSignInWithFacebook = () => {
-    try {
-      //the signInWithPopUp() method accepts ANY provider we create. This is all our authentication logic
-      signInWithPopup(auth, facebookAuth).then((result) => {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        // fetch facebook graph api to get user actual profile picture
-        fetch(`https://graph.facebook.com/${result.user.providerData[0].uid}/picture?type=large&access_token=${accessToken}`)
-          .then((response) => response.blob())
-          .then((blob) => {
-            setPhotoURL(URL.createObjectURL(blob));
-          })
-      }).catch((err) => {
-        console.log(err);
-      })
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     <div className="login">
@@ -91,7 +68,7 @@ export const Login = ({ currentUser,
                   </div>
 
                   <div className="login__button">
-                    <FacebookLoginButton onClick={handleSignInWithFacebook} className="animate__animated animate__fadeInUp">
+                    <FacebookLoginButton onClick={signInWithFacebook} className="animate__animated animate__fadeInUp">
                     </FacebookLoginButton>
                   </div>
 

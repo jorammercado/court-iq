@@ -5,6 +5,7 @@ import { Avatar } from "baseui/avatar";
 import { createAvatar } from '@dicebear/core';
 import { adventurer } from '@dicebear/collection';
 import { auth } from "../Services/FireBase";
+import { FacebookAuthProvider } from "firebase/auth";
 
 export const UserContext = createContext(null);
 
@@ -27,6 +28,16 @@ export const UserProvider = (props) => {
           displayName = "guest"
         if (photoURL === null)
           photoURL = svg
+        // if (/facebook/.test(photoURL)) {
+        //   console.log(auth)
+        //   const credential = FacebookAuthProvider.credentialFromResult(res);
+        //   const accessToken = credential.accessToken;
+        //   fetch(`https://graph.facebook.com/${auth.currentUser.uid}/picture?type=large&access_token=${auth.currentUser.accessToken}`)
+        //     .then((response) => response.blob())
+        //     .then((blob) => {
+        //       photoURL = URL.createObjectURL(blob)
+        //     })
+        // }
         setUser({ email, displayName, photoURL, uid });
       } else {
         setUser(null);
