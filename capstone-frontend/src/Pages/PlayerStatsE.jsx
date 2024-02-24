@@ -16,7 +16,7 @@ const PlayerStatsComponent = () => {
             try {
                 const response = await axios.request({
                     method: 'GET',
-                    url: `${VITE_X_RAPIDAPI_URL2}/players`,
+                    url: `${VITE_X_RAPIDAPI_URL2}`,
                     params: {
                         team: teamId,
                         season: season
