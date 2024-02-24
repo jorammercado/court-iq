@@ -5,13 +5,14 @@ import PlayerExample from '../Components/PlayerExample';
 import Example from '../Components/PlayerStatsTable';
 import "./PlayerExamplePage.scss";
 
-const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
-const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
-const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_X_RAPIDAPI_KEY2 = process.env.REACT_APP_X_RAPIDAPI_KEY2;
+const VITE_X_RAPIDAPI_HOST2 = process.env.REACT_APP_X_RAPIDAPI_HOST2;
+const VITE_X_RAPIDAPI_URL3 = process.env.REACT_APP_X_RAPIDAPI_URL3;
 
 const PlayerExamplePage = () => {
     const [data, setData] = useState(null);
-    const [userId, setUserId] = useState(null); // State to store userId obtained from the previous page
+    const [playerId, setPlayerId] = useState(null);
+    const [selectedSeason, setSelectedSeason] = useState('2020'); // Default season
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,14 +20,14 @@ const PlayerExamplePage = () => {
                 method: 'GET',
                 url: VITE_X_RAPIDAPI_URL3,
                 params: {
-                    id: userId, // Use userId obtained from the previous page
-                    season: '2023'
+                    id: playerId, // Use playerId state
+                    season: selectedSeason
                 },
                 headers: {
-                    'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
-                    'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
+                  'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
+                  'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
                 }
-            };
+              };
 
             try {
                 const response = await axios.request(options);
@@ -37,15 +38,17 @@ const PlayerExamplePage = () => {
             }
         };
 
-        fetchData();
-    }, [userId]); // Fetch data whenever userId changes
+        if (playerId) {
+            fetchData();
+        }
+    }, [playerId, selectedSeason]); // Fetch data whenever playerId or selectedSeason changes
 
-    // Extract userId from the URL parameters when the component mounts
+    // Extract playerId from the URL parameters when the component mounts
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        const userIdFromParams = params.get('userId');
-        if (userIdFromParams) {
-            setUserId(userIdFromParams);
+        const playerIdFromParams = params.get('userId');
+        if (playerIdFromParams) {
+            setPlayerId(playerIdFromParams);
         }
     }, []);
 
