@@ -3,12 +3,14 @@ import { useState } from "react";
 import PlayerExample from '../Components/PlayerExample';
 import { Data2 } from '../utils/Data2';
 import Example from '../Components/PlayerStatsTable';
+import {useParams} from "react-router-dom"
 
 import "./PlayerExamplePage.scss"
 
 
 
 const PlayerExamplePage = () => {
+    const {playerid} = useParams()
     const [data, setChartData] = useState({
         labels: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
         datasets: [
@@ -94,7 +96,7 @@ const PlayerExamplePage = () => {
             }
         ]
     });
-
+    
     const legend = {
         display: true,
         position: "bottom",
@@ -103,7 +105,7 @@ const PlayerExamplePage = () => {
             fontSize: 14
         }
     };
-
+    
     const options = {
         responsive: true,
         title: {
@@ -112,34 +114,31 @@ const PlayerExamplePage = () => {
         },
         scales: {
             //   yAxes: [
-            //     {
-            //       ticks: {
-            //         suggestedMin: 0,
-            //         suggestedMax: 100
-            //       }
-            //     }
-            //   ]
-        }
-    };
+                //     {
+                    //       ticks: {
+                        //         suggestedMin: 0,
+                        //         suggestedMax: 100
+                        //       }
+                        //     }
+                        //   ]
+                    }
+                };
+                
+                
+                console.log(playerid)
+                console.log('TEST ID TEST ID')
+                return (
+                    
+                    <div className="playerexamplepage">
 
-
-    return (
-
-        <div className="playerexamplepage">
-
-            <PlayerExample data={data} options={options} legend={legend} />
+            <PlayerExample playerid = {playerid} data={data} options={options} legend={legend} />
             <div className="baseTable">
-                <Example data={data} />
+            
             </div>
 
         </div>
 
-    );
+);
 }
 
 export default PlayerExamplePage;
-
-
-
-
-

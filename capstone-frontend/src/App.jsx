@@ -165,7 +165,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/player/${player.id}"
+                  path="/player/:playerid"
                   element={
                     <ProtectedRoute
                       element={PlayerExamplePage}
