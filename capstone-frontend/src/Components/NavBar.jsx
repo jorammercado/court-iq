@@ -38,7 +38,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             label: 'Players',
             navExitIcon: ChevronLeft,
             children: [
-                { icon: CheckIndeterminate, label: 'Players' },
+                { icon: CheckIndeterminate, label: 'Rosters' },
                 { icon: CheckIndeterminate, label: 'Favorites' },
                 { icon: CheckIndeterminate, label: 'Recently Searched' },
                 { icon: CheckIndeterminate, label: 'conley_example' }
@@ -102,7 +102,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         setMainItems((prev) => setItemActive(prev, item));
         if (item.label === "Maps")
             navigate('/maps');
-        if (item.label === "conley_example")
+        if (item.label === "Rosters")
             navigate('/conley_example');
         if (item.label === "test line chart 2")
             navigate('/chartLine');
