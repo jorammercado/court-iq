@@ -164,6 +164,16 @@ function App() {
                     />
                   }
                 />
+                <Route
+                  path="/player/${player.id}"
+                  element={
+                    <ProtectedRoute
+                      element={PlayerExamplePage}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
 
                 {/* private route - home screen of specific user */}
                 <Route
