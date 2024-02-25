@@ -8,15 +8,15 @@ const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
 const PlayerStatsComponent = () => {
     const [playerStats, setPlayerStats] = useState(null);
-    const [teamId, setTeamId] = useState('1'); // Default team ID
-    const [season, setSeason] = useState('2023'); // Default season
+    const [teamId, setTeamId] = useState('1'); 
+    const [season, setSeason] = useState('2023'); 
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
             try {
                 const response = await axios.request({
                     method: 'GET',
-                    url: `${VITE_X_RAPIDAPI_URL2}`,
+                    url: VITE_X_RAPIDAPI_URL2,
                     params: {
                         team: teamId,
                         season: season
@@ -84,7 +84,7 @@ const PlayerStatsComponent = () => {
             <div>
                 <label htmlFor="seasonSelect">Select Season:</label>
                 <select id="seasonSelect" value={season} onChange={handleSeasonChange}>
-                    <option value="2020">2021</option> 
+                    <option value="2020">2020</option> 
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>

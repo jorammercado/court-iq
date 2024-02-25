@@ -32,6 +32,7 @@ const TeamStandings = () => {
         const getData = async () => {
             try {
                 const response = await axios.request(options);
+                console.log(response.data.response)
                 setTeams(response.data.response[0])
                 setSeason(response.data.response[0][0].league.season)
                 setStage(response.data.response[0][0].stage)
