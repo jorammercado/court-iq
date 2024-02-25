@@ -42,17 +42,49 @@ function PlayerExample({ legend, options, playerid }) {
         let totalPoints = 0;
         let totalGames = 0;
         playerStats.forEach(stat => {
-            // If points is null or undefined, treat it as 0
             const points = stat.points || 0;
             totalPoints += parseInt(points);
             totalGames++;
         });
     
-        // Avoid division by zero
         if (totalGames === 0) return 0;
     
         const averagePointsPerGame = totalPoints / totalGames;
         return averagePointsPerGame.toFixed(2);
+    };
+
+    const calculateAverageReboundsPerGame = () => {
+        if (!playerStats) return null;
+    
+        let totalRebounds = 0;
+        let totalGames = 0;
+        playerStats.forEach(stat => {
+            const rebounds = stat.totReb || 0; // Assuming totReb represents total rebounds
+            totalRebounds += parseInt(rebounds);
+            totalGames++;
+        });
+    
+        if (totalGames === 0) return 0;
+    
+        const averageReboundsPerGame = totalRebounds / totalGames;
+        return averageReboundsPerGame.toFixed(2);
+    };
+
+    const calculateAverageAssistsPerGame = () => {
+        if (!playerStats) return null;
+    
+        let totalAssists = 0;
+        let totalGames = 0;
+        playerStats.forEach(stat => {
+            const assists = stat.assists || 0;
+            totalAssists += parseInt(assists);
+            totalGames++;
+        });
+    
+        if (totalGames === 0) return 0;
+    
+        const averageAssistsPerGame = totalAssists / totalGames;
+        return averageAssistsPerGame.toFixed(2);
     };
 
     const handleSeasonChange = (event) => {
@@ -69,14 +101,14 @@ function PlayerExample({ legend, options, playerid }) {
                         <option value="2022">2020</option>
                         <option value="2022">2021</option>
                         <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        
+                        <option value="2023">Current</option>
                     </select>
                 </div>
                 {playerStats && (
                     <>
-                        {/* <Line data={playerStats.data} legend={legend} options={options} /> */}
                         <p>Average Points Per Game: {calculateAveragePointsPerGame()}</p>
+                        <p>Average Rebounds Per Game: {calculateAverageReboundsPerGame()}</p>
+                        <p>Average Assists Per Game: {calculateAverageAssistsPerGame()}</p>
                     </>
                 )}
             </div>
