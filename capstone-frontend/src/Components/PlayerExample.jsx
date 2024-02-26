@@ -59,6 +59,7 @@ function PlayerExample({ playerid }) {
     return totalAssists;
   };
 
+  
   const calculateTotalPointsForSeason = (playerStats) => {
     if (!playerStats) return 0;
 
