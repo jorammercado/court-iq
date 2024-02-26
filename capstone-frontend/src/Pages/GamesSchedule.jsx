@@ -32,22 +32,32 @@ const GamesSchedule = () => {
     };
     getData();
   }, []);
-  const COLUMNS = ['date',"TIME", "STATUS SHORT", "STATUS LONG", "SCORES"];
+
+
+
+  const COLUMNS = ["Date", "Time",  'League',"Season", "Scores" , "Country",];
   const overrides = {};
+
+
+  
   return (
     <div>
       <h1>Game Schedules</h1>
-      <Table
-        overrides={overrides}
-        columns={COLUMNS}
-        data={games.map((game) => [
+      <div style={{ height: "400px", overflow: "auto" }}>
+        <Table
+          overrides={overrides}
+          columns={COLUMNS}
+          data={games.map((game) => [
             game.date,
-          game.time,
-          game.status.short,
-          game.status.long,
-          game.scores.home.quarter_1,
-        ])}
-      />
+            game.time,
+            game.league.name,
+            game.league.season,
+            game.scores.home.quarter_1,
+            game.country.name,
+
+          ])}
+        />
+      </div>
     </div>
   );
 };
