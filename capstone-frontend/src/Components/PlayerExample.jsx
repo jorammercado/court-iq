@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import axios from 'axios';
+import MyGraph from "./MyChart";
+// import { StackedAreaChartBasicDemo } from "./StackedAreaChartBasicDemo";
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 
 function PlayerExample({ legend, options, playerid }) {
-    const [playerStats, setPlayerStats] = useState(null);
+    const [playerStats, setPlayerStats] = useState([]);
+    const [points, setPoints] = useState([]);
+    const [assist, setAssist] = useState([]);
+    const [rebounds, setRebounds] = useState([]);
+    const [threePoints, setThreePoints] = useState([]);
+    const [plusMinus, setPlusMinus] = useState([]);
+    const [minutes, setMinutes] = useState([]);
     const [selectedSeason, setSelectedSeason] = useState('2023'); // Initial season
 
     useEffect(() => {
@@ -16,7 +24,7 @@ function PlayerExample({ legend, options, playerid }) {
                 url: VITE_X_RAPIDAPI_URL3,
                 params: {
                     id: playerid,
-                    season: selectedSeason 
+                    season: selectedSeason
                 },
                 headers: {
                     'X-RapidAPI-Key': `${VITE_X_RAPIDAPI_KEY2}`,
@@ -27,7 +35,20 @@ function PlayerExample({ legend, options, playerid }) {
             try {
                 const response = await axios(requestOptions);
                 setPlayerStats(response.data.response);
+                setPoints(response.data.response.map(e => e.points))
+                setAssist(response.data.response.map(e => e.assists))
+                setRebounds(response.data.response.map(e => e.defReb + e.offReb))
+                setThreePoints(response.data.response.map(e => e.tpm))
+                setPlusMinus(response.data.response.map(e => e.plusMinus))
+                setMinutes(response.data.response.map(e => e.min))
+                console.log(playerStats)
                 console.log(response.data.response)
+                console.log(points)
+                console.log(assist)
+                console.log(rebounds)
+                console.log(threePoints)
+                console.log(plusMinus)
+                console.log(minutes)
             } catch (error) {
                 console.error('Error fetching player statistics:', error);
             }
@@ -38,7 +59,7 @@ function PlayerExample({ legend, options, playerid }) {
 
     const calculateAveragePointsPerGame = () => {
         if (!playerStats) return null;
-    
+
         let totalPoints = 0;
         let totalGames = 0;
         playerStats.forEach(stat => {
@@ -46,16 +67,16 @@ function PlayerExample({ legend, options, playerid }) {
             totalPoints += parseInt(points);
             totalGames++;
         });
-    
+
         if (totalGames === 0) return 0;
-    
+
         const averagePointsPerGame = totalPoints / totalGames;
         return averagePointsPerGame.toFixed(2);
     };
 
     const calculateAverageReboundsPerGame = () => {
         if (!playerStats) return null;
-    
+
         let totalRebounds = 0;
         let totalGames = 0;
         playerStats.forEach(stat => {
@@ -63,16 +84,16 @@ function PlayerExample({ legend, options, playerid }) {
             totalRebounds += parseInt(rebounds);
             totalGames++;
         });
-    
+
         if (totalGames === 0) return 0;
-    
+
         const averageReboundsPerGame = totalRebounds / totalGames;
         return averageReboundsPerGame.toFixed(2);
     };
 
     const calculateAverageAssistsPerGame = () => {
         if (!playerStats) return null;
-    
+
         let totalAssists = 0;
         let totalGames = 0;
         playerStats.forEach(stat => {
@@ -80,9 +101,9 @@ function PlayerExample({ legend, options, playerid }) {
             totalAssists += parseInt(assists);
             totalGames++;
         });
-    
+
         if (totalGames === 0) return 0;
-    
+
         const averageAssistsPerGame = totalAssists / totalGames;
         return averageAssistsPerGame.toFixed(2);
     };
@@ -95,7 +116,7 @@ function PlayerExample({ legend, options, playerid }) {
         <div>
             <div className="chart-container" style={{ minWidth: "700px" }}>
                 <div style={{ textAlign: "center", marginBottom: '10px' }}>
-                    
+
                     <label htmlFor="season">Select Season:</label>
                     <select id="season" value={selectedSeason} onChange={handleSeasonChange}>
                         <option value="2022">2020</option>
@@ -112,6 +133,15 @@ function PlayerExample({ legend, options, playerid }) {
                     </>
                 )}
             </div>
+            <MyGraph
+                // playerStats={playerStats}
+                // points={points}
+                // assist={assist}
+                // rebounds={rebounds}
+                // threePoints={threePoints}
+                // plusMinus={plusMinus}
+                // minutes={minutes}
+            />
         </div>
     );
 }
