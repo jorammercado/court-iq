@@ -11,11 +11,12 @@ const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 function PlayerExample({ legend, options, playerid }) {
     const [playerStats, setPlayerStats] = useState([]);
     const [points, setPoints] = useState([]);
-    const [assist, setAssist] = useState([]);
+    const [assists, setAssists] = useState([]);
     const [rebounds, setRebounds] = useState([]);
     const [threePoints, setThreePoints] = useState([]);
     const [plusMinus, setPlusMinus] = useState([]);
     const [minutes, setMinutes] = useState([]);
+    const [blocks, setBlocks] = useState([]);
     const [selectedSeason, setSelectedSeason] = useState("2023"); // Initial season
 
     useEffect(() => {
@@ -37,11 +38,13 @@ function PlayerExample({ legend, options, playerid }) {
                 const response = await axios(requestOptions);
                 setPlayerStats(response.data.response);
                 setPoints(response.data.response.map((e) => e.points));
-                setAssist(response.data.response.map((e) => e.assists));
+                setAssists(response.data.response.map((e) => e.assists));
                 setRebounds(response.data.response.map((e) => e.defReb + e.offReb));
                 setThreePoints(response.data.response.map((e) => e.tpm));
                 setPlusMinus(response.data.response.map((e) => e.plusMinus));
                 setMinutes(response.data.response.map((e) => e.min));
+                setBlocks(response.data.response.map((e) => e.blocks));
+                console.log(response.data.response)
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
@@ -179,15 +182,20 @@ function PlayerExample({ legend, options, playerid }) {
                         </>
                     )}
                 </div>
-                <MyGraph
-                // playerStats={playerStats}
-                // points={points}
-                // assist={assist}
-                // rebounds={rebounds}
-                // threePoints={threePoints}
-                // plusMinus={plusMinus}
-                // minutes={minutes}
-                />
+                {points.length>0 ?
+                    <MyGraph
+                        playerStats={playerStats}
+                        points={points}
+                        assists={assists}
+                        rebounds={rebounds}
+                        threePoints={threePoints}
+                        plusMinus={plusMinus}
+                        minutes={minutes}
+                        blocks={blocks}
+                    />
+                    :
+                    "Loading"
+                }
             </div>
             <div className="chart-container" style={{ minWidth: "700px" }}>
                 {playerStats && playerStats.length > 0 && (

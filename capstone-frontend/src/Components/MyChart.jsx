@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-const MyGraph = () => {
+const MyGraph = ({ playerStats, points, assists,
+    rebounds, threePoints, plusMinus, minutes, blocks }) => {
+    console.log(playerStats, points, assists, blocks,
+        rebounds, threePoints, plusMinus, minutes)
     const graphRef = useRef(null);
 
     useEffect(() => {
@@ -21,59 +24,75 @@ const MyGraph = () => {
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
 
-            // Define the data
-            const data = [
-                {
-                    x: 1,
-                    points: 38,
-                    rebounds: 19,
-                    assists: 9,
-                    blocks: 4,
-                    threePoints: 3,
-                    plusMinus: 2,
-                    minutes: 5
-                },
-                {
-                    x: 2,
-                    points: 16,
-                    rebounds: 14,
-                    assists: 96,
-                    blocks: 40,
-                    threePoints: 7,
-                    plusMinus: 9,
-                    minutes: 10
-                },
-                {
-                    x: 3,
-                    points: 64,
-                    rebounds: 96,
-                    assists: 64,
-                    blocks: 40,
-                    threePoints: 23,
-                    plusMinus: 1,
-                    minutes: 8
-                },
-                {
-                    x: 4,
-                    points: 32,
-                    rebounds: 48,
-                    assists: 64,
-                    blocks: 40,
-                    threePoints: 2,
-                    plusMinus: 20,
-                    minutes: 11
-                },
-                {
-                    x: 5,
-                    points: 12,
-                    rebounds: 18,
-                    assists: 14,
-                    blocks: 10,
-                    threePoints: 2,
-                    plusMinus: 4,
-                    minutes: 13
-                },
-            ];
+            // test/dummy data, keep it for now
+            // const data = [
+            //     {
+            //         x: 1,
+            //         points: 38,
+            //         rebounds: 19,
+            //         assists: 9,
+            //         blocks: 4,
+            //         threePoints: 3,
+            //         plusMinus: 2,
+            //         minutes: 5
+            //     },
+            //     {
+            //         x: 2,
+            //         points: 16,
+            //         rebounds: 14,
+            //         assists: 96,
+            //         blocks: 40,
+            //         threePoints: 7,
+            //         plusMinus: 9,
+            //         minutes: 10
+            //     },
+            //     {
+            //         x: 3,
+            //         points: 64,
+            //         rebounds: 96,
+            //         assists: 64,
+            //         blocks: 40,
+            //         threePoints: 23,
+            //         plusMinus: 1,
+            //         minutes: 8
+            //     },
+            //     {
+            //         x: 4,
+            //         points: 32,
+            //         rebounds: 48,
+            //         assists: 64,
+            //         blocks: 40,
+            //         threePoints: 2,
+            //         plusMinus: 20,
+            //         minutes: 11
+            //     },
+            //     {
+            //         x: 5,
+            //         points: 12,
+            //         rebounds: 18,
+            //         assists: 14,
+            //         blocks: 10,
+            //         threePoints: 2,
+            //         plusMinus: 4,
+            //         minutes: 13
+            //     },
+            // ];
+
+            const data = []
+            if (points.length > 0) {
+                for (let i = 0; i < points.length; i++) {
+                    data.push({
+                        x: i + 1,
+                        points: points[i],
+                        rebounds: rebounds[i],
+                        assists: assists[i],
+                        blocks: blocks[i],
+                        threePoints: threePoints[i],
+                        plusMinus: Number(plusMinus[i]),
+                        minutes: Number(minutes[i])
+                    })
+                }
+            }
 
             //////////
             // GENERAL //
