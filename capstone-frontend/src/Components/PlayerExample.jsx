@@ -3,6 +3,7 @@ import { Table } from "baseui/table-semantic";
 import Spin from "./SpinLoad";
 import axios from "axios";
 import MyGraph from "./MyChart";
+import "./PlayerExample.scss"
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -182,19 +183,21 @@ function PlayerExample({ legend, options, playerid }) {
                         </>
                     )}
                 </div>
-                {points.length>0 ?
-                    <MyGraph
-                        playerStats={playerStats}
-                        points={points}
-                        assists={assists}
-                        rebounds={rebounds}
-                        threePoints={threePoints}
-                        plusMinus={plusMinus}
-                        minutes={minutes}
-                        blocks={blocks}
-                    />
+                {points.length > 0 ?
+                    <div className="graph">
+                        <MyGraph
+                            playerStats={playerStats}
+                            points={points}
+                            assists={assists}
+                            rebounds={rebounds}
+                            threePoints={threePoints}
+                            plusMinus={plusMinus}
+                            minutes={minutes}
+                            blocks={blocks}
+                        />
+                    </div>
                     :
-                    <Spin/>
+                    <Spin />
                 }
             </div>
             <div className="chart-container" style={{ minWidth: "700px" }}>

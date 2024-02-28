@@ -9,7 +9,7 @@ const MyGraph = ({ playerStats, points, assists,
 
     useEffect(() => {
         // set the dimensions and margins of the graph
-        var margin = { top: 60, right: 90, bottom: 50, left: 50 },
+        var margin = { top: 60, right: 115, bottom: 50, left: 50 },
             width = 760 - margin.left - margin.right,
             height = 375 - margin.top - margin.bottom;
 
@@ -23,60 +23,6 @@ const MyGraph = ({ playerStats, points, assists,
                 .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-
-            // test/dummy data, keep it for now
-            // const data = [
-            //     {
-            //         x: 1,
-            //         points: 38,
-            //         rebounds: 19,
-            //         assists: 9,
-            //         blocks: 4,
-            //         threePoints: 3,
-            //         plusMinus: 2,
-            //         minutes: 5
-            //     },
-            //     {
-            //         x: 2,
-            //         points: 16,
-            //         rebounds: 14,
-            //         assists: 96,
-            //         blocks: 40,
-            //         threePoints: 7,
-            //         plusMinus: 9,
-            //         minutes: 10
-            //     },
-            //     {
-            //         x: 3,
-            //         points: 64,
-            //         rebounds: 96,
-            //         assists: 64,
-            //         blocks: 40,
-            //         threePoints: 23,
-            //         plusMinus: 1,
-            //         minutes: 8
-            //     },
-            //     {
-            //         x: 4,
-            //         points: 32,
-            //         rebounds: 48,
-            //         assists: 64,
-            //         blocks: 40,
-            //         threePoints: 2,
-            //         plusMinus: 20,
-            //         minutes: 11
-            //     },
-            //     {
-            //         x: 5,
-            //         points: 12,
-            //         rebounds: 18,
-            //         assists: 14,
-            //         blocks: 10,
-            //         threePoints: 2,
-            //         plusMinus: 4,
-            //         minutes: 13
-            //     },
-            // ];
 
             const data = []
             if (points.length > 0) {
@@ -104,7 +50,15 @@ const MyGraph = ({ playerStats, points, assists,
             // Color palette
             var color = d3.scaleOrdinal()
                 .domain(keys)
-                .range(d3.schemeSet2);
+                .range([
+                    "#BBDEFB", 
+                    "#90CAF9", 
+                    "#64B5F6", 
+                    "#42A5F5",
+                    "#2196F3",
+                    "#1E88E5",
+                    "#1565C0",
+                  ].reverse());
 
             // Store visibility status of each group
             var visible = {
@@ -146,7 +100,8 @@ const MyGraph = ({ playerStats, points, assists,
 
             // Add Y axis
             var y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d3.max(keys, key => d[key]))])
+                .domain([d3.min(data, d => d3.min(keys, key => d[key])),
+                d3.max(data, d => d3.max(keys, key => d[key]))])
                 .range([height, 0]);
             svg.append("g")
                 .call(d3.axisLeft(y).ticks(5));
@@ -192,7 +147,7 @@ const MyGraph = ({ playerStats, points, assists,
                     .attr("class", key + "Point")
                     .attr("cx", function (d) { return x(d.x); })
                     .attr("cy", function (d) { return y(d[key]); })
-                    .attr("r", 5)
+                    .attr("r", 2)
                     .style("fill", color(key))
                     .style("opacity", visible[key] ? 1 : 0);
             });
