@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "baseui/table-semantic";
-import { Line } from "react-chartjs-2";
+import Spin from "./SpinLoad";
 import axios from "axios";
 import MyGraph from "./MyChart";
 
@@ -194,7 +194,7 @@ function PlayerExample({ legend, options, playerid }) {
                         blocks={blocks}
                     />
                     :
-                    "Loading"
+                    <Spin/>
                 }
             </div>
             <div className="chart-container" style={{ minWidth: "700px" }}>
