@@ -38,10 +38,10 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             label: 'Players',
             navExitIcon: ChevronLeft,
             children: [
-                { icon: CheckIndeterminate, label: 'Rosters' },
-                { icon: CheckIndeterminate, label: 'Favorites' },
-                { icon: CheckIndeterminate, label: 'Recently Searched' },
-                { icon: CheckIndeterminate, label: 'conley_example' }
+                { icon: Blank, label: 'Rosters' },
+                { icon: Blank, label: 'Favorites' },
+                { icon: Blank, label: 'Recently Searched' },
+                { icon: Blank, label: 'conley_example' }
             ],
         },
         {
@@ -49,51 +49,22 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             label: 'Teams',
             navExitIcon: ChevronLeft,
             children: [
-                { icon: CheckIndeterminate, label: 'Standings' },
-                { icon: CheckIndeterminate, label: 'StandingsV2' },
-                { icon: CheckIndeterminate, label: 'Schedule' },
-                { icon: CheckIndeterminate, label: 'Stats' },
-                { icon: CheckIndeterminate, label: 'Games' }
+                { icon: Blank, label: 'Standings' },
+                { icon: Blank, label: 'StandingsV2' },
+                { icon: Blank, label: 'Schedule' },
+                { icon: Blank, label: 'Stats' },
+                { icon: Blank, label: 'Games' }
             ],
         },
         {
-            icon: ChevronDown,
-            label: 'Maps',
-            navExitIcon: ChevronLeft,
-            children: [
-                { icon: CheckIndeterminate, label: 'Bars' },
-                { icon: CheckIndeterminate, label: 'Stadiums' },
-                { icon: CheckIndeterminate, label: 'Restaurants' }
-            ],
-        },
-        {
-            icon: ChevronDown,
+            icon: Blank,
             label: 'Prop Predictor',
-            navExitIcon: ChevronLeft,
-            children: [
-                {
-                    icon: ChevronDown,
-                    label: 'Secondary E',
-                    navExitIcon: ChevronLeft,
-                    children: [
-                        {
-                            icon: CheckIndeterminate,
-                            label: 'Tertiary A',
-                            navExitIcon: ChevronLeft,
-                        },
-                        { icon: CheckIndeterminate, label: 'Tertiary B' },
-                    ],
-                },
-                { icon: Upload, label: 'Secondary F' },
-            ],
         },
     ]);
 
     const [userItems, setUserItems] = React.useState([
-        { icon: ChevronRight, label: 'User' },
-        { icon: ChevronRight, label: 'Account item2' },
-        { icon: ChevronRight, label: 'Account item3' },
-        { icon: ChevronRight, label: 'Account item4' },
+        { icon: Blank, label: 'Home' },
+        { icon: Blank, label: 'User' }
     ]);
 
     const [isNavVisible, setIsNavVisible] = React.useState(true);
@@ -119,7 +90,10 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
     function handleUserItemSelect(item) {
         setUserItems((prev) => setItemActive(prev, item));
         setMainItems((prev) => setItemActive(prev, item));
+        if (item.label === "User")
         navigate('/loggedInPage');
+        if (item.label === "Home")
+        navigate('/');
     }
     return (
         <div className="navbar__updated">
@@ -143,7 +117,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                                 onUserItemSelect={(item) => handleUserItemSelect(item)}
                                 username={currentUser ? currentUser.displayName : "User"}
                                 usernameSubtitle="Pursuit Fellow"
-                                userImgUrl={!/[<>]/.test(photoURL) ? photoURL : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"}
+                                userImgUrl={!/[<>]/.test(photoURL)&&currentUser ? photoURL : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"}
                             />
                         </div>
                     </Layer>

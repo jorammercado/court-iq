@@ -10,22 +10,11 @@ function Home() {
 
     return (
         <div className="home">
-            <div className="home-title">
-                Court IQ
-            </div>
-            <div className="sub-title">
-                Uncover the Game's Secrets: Dive into Dynamic Basketball Data Visualization with Court IQ.
-                <br></br>
-                Explore Engaging Visual Graphs to Analyze Players, Teams, and Seasons like Never Before.
 
-            </div>
-            <div className="button">
-                <Button className="animate__animated animate__fadeInUp"
-                    onClick={() => navigate("/login")}
-                    kind={KIND.secondary}
-                >
-                    Login
-                </Button>
+            <div className="sub-title">
+               Elevate Your Game with CoutIQ: Where Analytics Meet Action
+
+
             </div>
         </div>
     )

@@ -71,8 +71,7 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <PublicRoute
-                      element={Home}
+                    <Home
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                       photoURL={photoURL}
@@ -118,8 +117,7 @@ function App() {
                 <Route
                   path="/maps"
                   element={
-                    <PublicRoute
-                      element={MemoGoogleMap}
+                    <MemoGoogleMap
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                       currentUserPlaces={currentUser}
@@ -133,8 +131,7 @@ function App() {
                 <Route
                   path="/chart"
                   element={
-                    <PublicRoute
-                      element={MyChartPage}
+                    <MyChartPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -145,8 +142,7 @@ function App() {
                 <Route
                   path="/chartLine"
                   element={
-                    <PublicRoute
-                      element={InterpolationLineChart}
+                    <InterpolationLineChart
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -157,8 +153,7 @@ function App() {
                 <Route
                   path="/conley_example"
                   element={
-                    <PublicRoute
-                      element={PlayerStats}
+                    <PlayerStats
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -167,8 +162,7 @@ function App() {
                 <Route
                   path="/player/:playerid"
                   element={
-                    <PublicRoute
-                      element={PlayerExamplePage}
+                    <PlayerExamplePage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -179,8 +173,7 @@ function App() {
                 <Route
                   path="/teamstandingsV2"
                   element={
-                    <PublicRoute
-                      element={TeamStandingsV2}
+                    <TeamStandingsV2
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -191,8 +184,7 @@ function App() {
                 <Route
                   path="/teamstandings"
                   element={
-                    <PublicRoute
-                      element={TeamStandings}
+                    <TeamStandings
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -202,8 +194,7 @@ function App() {
                 <Route
                   path="/GamesSchedule"
                   element={
-                    <PublicRoute
-                      element={GamesSchedule}
+                    <GamesSchedule
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -213,8 +204,7 @@ function App() {
                 <Route
                   path="/signup"
                   element={
-                    <PublicRoute
-                      element={SignUp}
+                    <SignUp
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                       photoURL={photoURL}
@@ -227,8 +217,7 @@ function App() {
                 <Route
                   path="*"
                   element={
-                    <PublicRoute
-                      element={FourOFour}
+                    <FourOFour
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
