@@ -18,7 +18,7 @@ const PublicRoute = ({ element: Component,
       setPhotoURL={setPhotoURL}
       currentUserPlaces={currentUserPlaces}
       setCurrentUserPlaces={setCurrentUserPlaces} /> :
-    <Navigate to={`/users/${currentUser.id}/profile`} />
+    <Navigate to={`/loggedInPage`} />
 }
 
 export default PublicRoute

@@ -19,7 +19,7 @@ const ProtectedRoute = ({ element: Component,
       currentUserPlaces={currentUserPlaces}
       setCurrentUserPlaces={setCurrentUserPlaces}
     /> :
-    <Navigate to="/" />
+    <Navigate to="/login" />
 }
 
 export default ProtectedRoute

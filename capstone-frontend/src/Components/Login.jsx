@@ -77,10 +77,7 @@ export const Login = ({ currentUser,
                     Continue as Guest
                   </button>
 
-                  <button onClick={() => { navigate("/") }}
-                    className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
-                    Home
-                  </button>
+
                   
                 </StyledButtons>
               </Wrapper>
