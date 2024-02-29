@@ -118,7 +118,7 @@ function App() {
                 <Route
                   path="/maps"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={MemoGoogleMap}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -133,7 +133,7 @@ function App() {
                 <Route
                   path="/chart"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={MyChartPage}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -145,7 +145,7 @@ function App() {
                 <Route
                   path="/chartLine"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={InterpolationLineChart}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -157,7 +157,7 @@ function App() {
                 <Route
                   path="/conley_example"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={PlayerStats}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -167,7 +167,7 @@ function App() {
                 <Route
                   path="/player/:playerid"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={PlayerExamplePage}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -179,7 +179,7 @@ function App() {
                 <Route
                   path="/teamstandingsV2"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={TeamStandingsV2}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -191,7 +191,7 @@ function App() {
                 <Route
                   path="/teamstandings"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={TeamStandings}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
@@ -202,7 +202,7 @@ function App() {
                 <Route
                   path="/GamesSchedule"
                   element={
-                    <ProtectedRoute
+                    <PublicRoute
                       element={GamesSchedule}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
