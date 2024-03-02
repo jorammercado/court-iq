@@ -9,7 +9,8 @@ const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 
-function PlayerExample({ legend, options, playerid }) {
+function PlayerExample({ data, playerid }) {
+    console.log(data)
     const [playerStats, setPlayerStats] = useState([]);
     const [points, setPoints] = useState([]);
     const [assists, setAssists] = useState([]);
