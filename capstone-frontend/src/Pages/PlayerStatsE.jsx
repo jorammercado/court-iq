@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -8,8 +8,8 @@ const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
 const PlayerStatsComponent = () => {
     const [playerStats, setPlayerStats] = useState(null);
-    const [teamId, setTeamId] = useState('1'); 
-    const [season, setSeason] = useState('2023'); 
+    const [teamId, setTeamId] = useState('1');
+    const [season, setSeason] = useState('2023');
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -84,11 +84,11 @@ const PlayerStatsComponent = () => {
             <div>
                 <label htmlFor="seasonSelect">Select Season:</label>
                 <select id="seasonSelect" value={season} onChange={handleSeasonChange}>
-                    <option value="2020">2020</option> 
+                    <option value="2020">2020</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
-                   
+
                 </select>
             </div>
             {playerStats ? (
@@ -97,7 +97,7 @@ const PlayerStatsComponent = () => {
                     <ul>
                         {playerStats.response.map((player, index) => (
                             <li key={index}>
-                                <Link to={`/player/${player.id}`}>{player.firstname} {player.lastname}</Link>
+                                <Link to={`/player/${player.id}`} state={player} >{player.firstname} {player.lastname}</Link>
                             </li>
                         ))}
                     </ul>
