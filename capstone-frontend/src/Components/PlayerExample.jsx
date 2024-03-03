@@ -23,7 +23,8 @@ function PlayerExample({ data, playerid }) {
     })
     useEffect(() => {
         const player = `${data.firstname.toLowerCase()}` +` ${data.lastname.toLowerCase()}`
-        fetch(`${VITE_BASE_URL}/playerimages/${player.replace(/["]/g, "'")}`)
+        console.log(player)
+        fetch(`${VITE_BASE_URL}/playerimages/${player}`)
             .then(response => response.json())
             .then(playerImage => {    
                 console.log("TEST RESPONSE 1=", playerImage, "TEST ADDRESS=", VITE_BASE_URL)
