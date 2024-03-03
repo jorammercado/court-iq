@@ -3,8 +3,6 @@ import * as d3 from 'd3';
 
 const MyGraph = ({ playerStats, points, assists,
     rebounds, threePoints, plusMinus, minutes, blocks }) => {
-    console.log(playerStats, points, assists, blocks,
-        rebounds, threePoints, plusMinus, minutes)
     const graphRef = useRef(null);
 
     useEffect(() => {

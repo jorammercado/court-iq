@@ -3,3 +3,27 @@
     justify-content: center;
     align-items: center;
 }
+
+
+.sub__heading{
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    background-color: #ED751C;
+    color:#ED751C;
+    height: 400px;
+    margin-bottom: 300px;
+    padding-bottom: 300px;
+}
+
+.divider{
+    margin-top: 300px;
+}
+
+.head__shot{
+    margin-top:150px;
+    margin-left:100px;
+    justify-content: left;
+}
