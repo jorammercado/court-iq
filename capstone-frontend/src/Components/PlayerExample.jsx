@@ -26,6 +26,7 @@ function PlayerExample({ data, playerid }) {
         fetch(`${VITE_BASE_URL}/playerimages/${player.replace(/["]/g, "'")}`)
             .then(response => response.json())
             .then(playerImage => {    
+                console.log("TEST RESPONSE 1=", playerImage, "TEST ADDRESS=", VITE_BASE_URL)
                 setPlayerImage(playerImage)
             })
             .catch(() => navigate("/not-found"))
