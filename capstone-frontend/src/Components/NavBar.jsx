@@ -85,6 +85,8 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navigate('/teamstandingsV2');
         if (item.label === "Games")
             navigate('/GamesSchedule');
+        if(item.label === "Search")
+        navigate('/Search');
     }
 
     function handleUserItemSelect(item) {

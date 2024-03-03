@@ -12,7 +12,7 @@ const VITE_X_RAPIDAPI_URL3 = process.env.REACT_APP_X_RAPIDAPI_URL3;
 const PlayerExamplePage = () => {
     const [data, setData] = useState(null);
     const [playerId, setPlayerId] = useState(null);
-    const [selectedSeason, setSelectedSeason] = useState('2020'); // Default season
+    const [selectedSeason, setSelectedSeason] = useState('2023'); // Default season
 
     useEffect(() => {
         const fetchData = async () => {

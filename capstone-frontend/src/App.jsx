@@ -40,6 +40,7 @@ import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
 import PlayerStats from "./Components/PlayerStatsE.jsx";
+import SearchPage from "./Pages/SearchPage.jsx";
 
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -168,8 +169,15 @@ function App() {
                     />
                   }
                 />
+                <Route
+                  path="/Search"
+                  element={
+                    <SearchPage
+                     
+                    />
+                  }
+                />
 
-                {/* private route - home screen of specific user */}
                 <Route
                   path="/teamstandingsV2"
                   element={
