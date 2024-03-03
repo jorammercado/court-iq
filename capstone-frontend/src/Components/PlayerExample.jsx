@@ -3,14 +3,34 @@ import { Table } from "baseui/table-semantic";
 import Spin from "./SpinLoad";
 import axios from "axios";
 import MyGraph from "./MyChart";
+import { useNavigate } from "react-router-dom"
 import "./PlayerExample.scss"
+import { Block } from "baseui/block";
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PlayerExample({ data, playerid }) {
-    console.log(data)
+    let navigate = useNavigate()
+    console.log("DATA=", data)
+    const [playerImage, setPlayerImage] = useState({
+        player_id: 0,
+        player: "",
+        birth_date: "",
+        image_url: ""
+    })
+    useEffect(() => {
+        const player = `${data.firstname.toLowerCase()}` +` ${data.lastname.toLowerCase()}`
+        fetch(`${VITE_BASE_URL}/playerimages/${player.replace(/["]/g, "'")}`)
+            .then(response => response.json())
+            .then(playerImage => {    
+                setPlayerImage(playerImage)
+            })
+            .catch(() => navigate("/not-found"))
+    }, [data, navigate])
+
     const [playerStats, setPlayerStats] = useState([]);
     const [points, setPoints] = useState([]);
     const [assists, setAssists] = useState([]);
@@ -46,7 +66,6 @@ function PlayerExample({ data, playerid }) {
                 setPlusMinus(response.data.response.map((e) => e.plusMinus));
                 setMinutes(response.data.response.map((e) => e.min));
                 setBlocks(response.data.response.map((e) => e.blocks));
-                console.log(response.data.response)
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
@@ -157,7 +176,22 @@ function PlayerExample({ data, playerid }) {
 
     return (
         <div>
-            <div>
+            <div className="sub__heading">
+                <div className="head__shot">
+                    <img
+                        src={`${playerImage.image_url?playerImage.image_url:'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'}`}
+                        alt={`Head Shot`}
+                        style={{ height: "250px" }}
+                    />
+                </div>
+                <div className="info">
+
+                </div>
+                <div className="team__logo">
+
+                </div>
+            </div>
+            <div className="divider">
                 <div className="chart-container" style={{ minWidth: "700px" }}>
                     <div style={{ textAlign: "center", marginBottom: "10px" }}>
                         <label htmlFor="season">Select Season:</label>
