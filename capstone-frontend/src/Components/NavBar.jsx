@@ -39,6 +39,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navExitIcon: ChevronLeft,
             children: [
                 { icon: Blank, label: 'Rosters' },
+                { icon: Blank, label: 'RostersV2' },
                 { icon: Blank, label: 'Favorites' },
                 { icon: Blank, label: 'Recently Searched' },
                 { icon: Blank, label: 'conley_example' }
@@ -50,7 +51,6 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navExitIcon: ChevronLeft,
             children: [
                 { icon: Blank, label: 'Standings' },
-                { icon: Blank, label: 'StandingsV2' },
                 { icon: Blank, label: 'Schedule' },
                 { icon: Blank, label: 'Stats' },
                 { icon: Blank, label: 'Games' }
@@ -80,22 +80,25 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         if (item.label === "conley")
             navigate('/conley_example');
         if (item.label === "Standings")
-            navigate('/teamstandings');
-        if (item.label === "StandingsV2")
             navigate('/teamstandingsV2');
         if (item.label === "Games")
             navigate('/GamesSchedule');
+
+        if (item.label === "RostersV2")
+            navigate('/player_stats_table');
+
         if(item.label === "Search")
         navigate('/Search');
+
     }
 
     function handleUserItemSelect(item) {
         setUserItems((prev) => setItemActive(prev, item));
         setMainItems((prev) => setItemActive(prev, item));
         if (item.label === "User")
-        navigate('/loggedInPage');
+            navigate('/loggedInPage');
         if (item.label === "Home")
-        navigate('/');
+            navigate('/');
     }
     return (
         <div className="navbar__updated">
@@ -119,7 +122,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                                 onUserItemSelect={(item) => handleUserItemSelect(item)}
                                 username={currentUser ? currentUser.displayName : "User"}
                                 usernameSubtitle="Pursuit Fellow"
-                                userImgUrl={!/[<>]/.test(photoURL)&&currentUser ? photoURL : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"}
+                                userImgUrl={!/[<>]/.test(photoURL) && currentUser ? photoURL : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"}
                             />
                         </div>
                     </Layer>
