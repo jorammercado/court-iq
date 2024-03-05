@@ -14,7 +14,8 @@ import { Button, KIND, SIZE } from 'baseui/button';
 import { Tag } from 'baseui/tag';
 import { useStyletron } from 'baseui';
 import { ArrowUp, ArrowDown } from 'baseui/icon';
-import "./TeamStandings.scss"
+import Spin from '../Components/SpinLoad';
+import "./TeamStandingsV2.scss"
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;
@@ -40,11 +41,21 @@ const TeamStandingsV2 = () => {
     const [season, setSeason] = useState("")
     const [stage, setStage] = useState("")
     const [logo, setLogo] = useState("")
+    const [westernConference, setWesternConference] = useState([])
+    const [easternConference, setEasternConference] = useState([])
+    //console.log(data)
+    console.log(westernConference)
+    console.log(easternConference)
+    console.log(season)
+    console.log(stage)
+    console.log(logo)
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await axios.request(options);
                 setData(response.data.response[0])
+                setEasternConference(response.data.response[0].filter(e => e.group.name === "Eastern Conference"))
+                setWesternConference(response.data.response[0].filter(e => e.group.name === "Western Conference"))
                 setSeason(response.data.response[0][0].league.season)
                 setStage(response.data.response[0][0].stage)
                 setLogo(response.data.response[0][0].league.logo)
@@ -58,86 +69,58 @@ const TeamStandingsV2 = () => {
     if (data == null || data === undefined || data.length === 0 || !data)
         return (
             <div className="v2__standings">
-                <div className="titlev2">
-                </div>
-
                 <div>
                     <section >
-                        <table className="table table-topV2 cation-top">
-                            <caption><img
-                                src={logo}
-                                alt={`NBA Logo`}
-                                style={{ height: "30px", backgroundColor: "#faf7f2" }}
-                            /> &nbsp; {stage} {season.replace("\n", "")} </caption>
-
+                        <table className="logo__caption">
+                            <caption>
+                                <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">{/* Made NBA logo a link */}
+                                    <img
+                                        src={logo}
+                                        alt={`NBA Logo`}
+                                        style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }} // Added cursor pointer
+                                    />
+                                </Link>
+                                &nbsp; {stage} {season.replace("\n", "")}
+                            </caption>
                         </table>
                     </section>
                     <div className="max__width">
-                        <Table
-                            columns={["Position", "\u2605", "Logo", "Team", "Games Loss", "Games Loss %",
-                                "Games Won", "Games Won %", "Group", "Points Aganist", "Points For"]}
-                            data={[
-                                [], [], [], [], [], [], [], [], [], []
-                            ]}
-                        />
+                        <Spin></Spin>
                     </div>
                 </div>
             </div>
         );
 
-    // let PageSize = 10
-    // const [currentPageV2, setCurrentPageV2] = useState(1)
-    // const currentTableData = useMemo(() => {
-    //     const firstPageIndex = (currentPageV2 - 1) * PageSize
-    //     const lastPageIndex = firstPageIndex + PageSize
-    //     return teams.slice(firstPageIndex, lastPageIndex)
-    // }, [currentPageV2, teams])
-    
-    const teams = []
-    for (let i = 0; i < data.length; i++) {
-        const temp = []
-        temp.push(data[i].position)
-        temp.push("")
-        temp.push(data[i].team.logo)
-        temp.push(data[i].team.name)
-        temp.push(data[i].games.lose.total)
-        temp.push(data[i].games.lose.percentage)
-        temp.push(data[i].games.win.total)
-        temp.push(data[i].games.win.percentage)
-        temp.push(data[i].group.name)
-        temp.push(data[i].points.against)
-        temp.push(data[i].points.for)
-        teams.push(temp)
-    }
+    const teamsWestern = westernConference.map(team => {
+        return {
+            position: team.position,
+            avatarSrc: team.team.logo,
+            name: team.team.name,
+            title: team.group.name,
+            gamesLost: team.games.lose.total,
+            gamesLostPercentage: team.games.lose.percentage,
+            gamesWon: team.games.win.total,
+            gamesWonPercentage: team.games.win.percentage,
+            pointsAgainst: team.points.against,
+            pointsFor: team.points.for,
+        };
+    });
 
-    const ROW = {
-        foo: 10,
-        bar: 'banana',
-        url: 'https://example.com/b',
-        largeNumber: 8,
-        avatarSrc:
-            'https://media.api-sports.io/basketball/teams/149.png',
-        name: 'User Name',
-        title: 'Job Title',
-        list: ['One', 'Two', 'Three'],
-    };
-
-
-
-    // const DATA = Array.from(new Array(20)).fill(ROW);
-    const DATA = []
-    for (let i = 0; i < teams.length; i++) {
-        DATA.push({
-            foo: 10,
-            bar: 'bananasss',
-            url: 'https://www.cnn.com',
-            largeNumber: teams[i][0],
-            avatarSrc: teams[i][2],
-            name: teams[i][3],
-            title: teams[i][8],
-            list: ['One', 'Two', 'Three', "H"],
-        })
-    }
+    const DATA = teamsWestern.map((team, index) => {
+        return {
+            id: index,
+            position: team.position,
+            avatarSrc: team.avatarSrc,
+            name: team.name,
+            title: team.title,
+            gamesLost: team.gamesLost,
+            gamesLostPercentage: team.gamesLostPercentage,
+            gamesWon: team.gamesWon,
+            gamesWonPercentage: team.gamesWonPercentage,
+            pointsAgainst: team.pointsAgainst,
+            pointsFor: team.pointsFor,
+        };
+    });
 
     function AvatarCell({
         src,
@@ -179,96 +162,61 @@ const TeamStandingsV2 = () => {
     function NumberCell({
         value,
         delta,
+        isPercentage = false,
     }) {
         const [css, theme] = useStyletron();
-        const positive = delta >= 0;
+        let arrowIcon = null;
+        let textColor = 'inherit';
+
+        if (isPercentage) {
+            const positive = delta > 0;
+            const arrowColor = positive ? 'green' : 'red';
+            textColor = delta === 0 ? 'inherit' : arrowColor;
+            arrowIcon = delta === 0.5 ? null : positive ? <ArrowUp /> : <ArrowDown />;
+        }
+
         return (
             <div className={css({ display: 'flex', alignItems: 'center' })}>
                 <span
-                    className={css({ ...theme.typography.MonoParagraphSmall })}
-                >
-                    {new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                    }).format(value)}
-                </span>
-                <div
                     className={css({
-                        alignItems: 'center',
-                        display: 'flex',
-                        paddingLeft: theme.sizing.scale300,
-                        color: positive
-                            ? theme.colors.contentPositive
-                            : theme.colors.contentNegative,
+                        ...theme.typography.MonoParagraphSmall,
+                        color: textColor,
                     })}
                 >
-                    {positive ? <ArrowUp /> : <ArrowDown />}
-                    <span
+                    {value}
+                </span>
+                {arrowIcon && (
+                    <div
                         className={css({
-                            ...theme.typography.MonoLabelSmall,
-                            paddingLeft: '2px',
+                            alignItems: 'center',
+                            display: 'flex',
+                            paddingLeft: theme.sizing.scale300,
+                            color: textColor,
                         })}
                     >
-                        {delta}%
-                    </span>
-                </div>
+                        {arrowIcon}
+                    </div>
+                )}
             </div>
         );
     }
-
-    function TagsCell({ tags }) {
-        const [css] = useStyletron();
-        return (
-            <div className={css({ display: 'flex', alignItems: 'center' })}>
-                {tags.map((tag) => {
-                    return (
-                        <Tag key={tag} closeable={false}>
-                            {tag}
-                        </Tag>
-                    );
-                })}
-            </div>
-        );
-    }
-
-    function ButtonsCell({ labels }) {
-        const [css, theme] = useStyletron();
-        return (
-            <div className={css({ display: 'flex', alignItems: 'center' })}>
-                {labels.map((label, index) => {
-                    return (
-                        <Button
-                            kind={KIND.secondary}
-                            size={SIZE.compact}
-                            overrides={{
-                                BaseButton: {
-                                    style: {
-                                        marginLeft: index > 0 ? theme.sizing.scale300 : 0,
-                                    },
-                                },
-                            }}
-                            key={label}
-                        >
-                            {label}
-                        </Button>
-                    );
-                })}
-            </div>
-        );
-    }
-
 
     return (
-        <div>
+        <div className="table__contain">
             <section >
-                <table className="table table-topV2 cation-top">
-                    <caption><img
-                        src={logo}
-                        alt={`NBA Logo`}
-                        style={{ height: "30px", backgroundColor: "#faf7f2" }}
-                    /> &nbsp; {stage} {season.replace("\n", "")} </caption>
+                <table className="table__header">
+                    <caption><Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">{/* Made NBA logo a link */}
+                        <img
+                            src={logo}
+                            alt={`NBA Logo`}
+                            style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }} // Added cursor pointer
+                        />
+                    </Link>
+                        &nbsp; {stage} {season.replace("\n", "")} </caption>
+                        
 
                 </table>
+                <div className="team__title">WEST</div>
             </section>
             <TableBuilder
                 overrides={{ Root: { style: { maxHeight: '300px' } } }}
@@ -286,68 +234,48 @@ const TeamStandingsV2 = () => {
 
                 <TableBuilderColumn header="Position">
                     {(row) => (
-                        <NumberCell value={row.largeNumber} delta={0.51} />
+                        <NumberCell value={row.position} delta={0.51} />
                     )}
                 </TableBuilderColumn>
 
                 <TableBuilderColumn header="Games Lost">
                     {(row) => (
-                        <NumberCell value={row.largeNumber} delta={-0.51} />
+                        <NumberCell value={row.gamesLost} delta={-0.51} />
                     )}
                 </TableBuilderColumn>
 
                 <TableBuilderColumn header="Games Lost %">
-                    {(row) => <TagsCell tags={row.list} />}
+                    {(row) => (
+                        <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+                    )}
                 </TableBuilderColumn>
 
                 <TableBuilderColumn header="Games Won">
-                    {(row) => <ButtonsCell labels={row.list} />}
+                    {(row) => (
+                        <NumberCell value={row.gamesWon} delta={0.51} />
+                    )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won %">
+                    {(row) => (
+                        <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+                    )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Points Against">
+                    {(row) => (
+                        <NumberCell value={row.pointsAgainst} delta={0.51} />
+                    )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Points For">
+                    {(row) => (
+                        <NumberCell value={row.pointsFor} delta={0.51} />
+                    )}
                 </TableBuilderColumn>
             </TableBuilder>
         </div>
     );
-
-
-    // return (
-    //     <div className="v2__standings">
-    //         <div className="titlev2">
-    //         </div>
-
-    //         <div>
-    //             <section >
-    //                 <table className="table table-topV2 cation-top">
-    //                     <caption><img
-    //                         src={logo}
-    //                         alt={`NBA Logo`}
-    //                         style={{ height: "30px", backgroundColor: "#faf7f2" }}
-    //                     /> &nbsp; {stage} {season.replace("\n", "")} </caption>
-
-    //                 </table>
-    //             </section>
-    //             <div className="max__width">
-    //                 <Table
-    //                     columns={["Position", "\u2605", "Logo", "Team", "Games Loss", "Games Loss %",
-    //                         "Games Won", "Games Won %", "Group", "Points Aganist", "Points For"]}
-
-    //                     data={teams}
-    //                 />
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
 }
 
 export default TeamStandingsV2;
-
-
-
-{/* 
-{currentTableData.map((team, i) => {
-    return (
-        <TeamStandingCompV2
-            key={i}
-            team={team}
-        />
-    )
-})}
-</tbody> */}
