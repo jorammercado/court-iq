@@ -58,7 +58,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         },
         {
             icon: Blank,
-            label: 'Prop Predictor',
+            label: 'Custom GPT',
         },
     ]);
 
@@ -89,6 +89,10 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
 
         if(item.label === "Search")
         navigate('/Search');
+
+        if(item.label === "Custom GPT")
+        navigate('/custom_gpt');
+
 
     }
 
