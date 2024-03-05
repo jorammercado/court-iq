@@ -40,6 +40,7 @@ import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
 import PlayerStats from "./Components/PlayerStatsE.jsx";
+import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx"
 
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -195,6 +196,16 @@ function App() {
                   path="/GamesSchedule"
                   element={
                     <GamesSchedule
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                <Route
+                  path="/player_stats_table"
+                  element={
+                    <PlayerStatsTableVariation
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
