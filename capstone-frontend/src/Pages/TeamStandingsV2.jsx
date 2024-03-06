@@ -16,6 +16,7 @@ import { useStyletron } from 'baseui';
 import { ArrowUp, ArrowDown } from 'baseui/icon';
 import Spin from '../Components/SpinLoad';
 import "./TeamStandingsV2.scss"
+import "animate.css";
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;
@@ -202,7 +203,7 @@ const TeamStandingsV2 = () => {
     }
 
     return (
-        <div className="table__contain">
+        <div className="table__contain animate__animated animate__zoomIn">
             <section >
                 <table className="table__header">
                     <caption><Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">{/* Made NBA logo a link */}
