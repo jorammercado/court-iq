@@ -55,7 +55,7 @@ export const Login = ({ currentUser,
   return (
     <div className="login">
       <section className="login__wrapper">
-        <div className="animate__animated animate__fadeInUp">
+        <div className="animate__animated animate__rotateIn">
           <div className="contain__buttons">
 
             <div style={{ display: 'flex', flexWrap: 'wrap' }} >
