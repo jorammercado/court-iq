@@ -1,5 +1,4 @@
-//  this PROVIDER will be responsible for reutrning the
-//  functionality of our  FIREBASE SERVICE.
+
 import React, { useEffect, useState, createContext } from "react";
 import { Avatar } from "baseui/avatar";
 import { createAvatar } from '@dicebear/core';
@@ -14,7 +13,7 @@ const avatar = createAvatar(adventurer, {
 });
 
 const svg = avatar.toString();
-//console.log(svg)
+
 
 export const UserProvider = (props) => {
   const [user, setUser] = useState(null);

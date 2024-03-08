@@ -42,13 +42,13 @@ import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
 import PlayerStats from "./Components/PlayerStatsE.jsx";
 import CustomGPT from "./Pages/CustomGPT.jsx";
 
-import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx"
+import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx";
 
 import SearchPage from "./Pages/SearchPage.jsx";
 
-
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
+import News from "./Pages/News.jsx";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -174,14 +174,7 @@ function App() {
                     />
                   }
                 />
-                <Route
-                  path="/Search"
-                  element={
-                    <SearchPage
-
-                    />
-                  }
-                />
+                <Route path="/Search" element={<SearchPage />} />
 
                 <Route
                   path="/teamstandingsV2"
@@ -193,7 +186,7 @@ function App() {
                   }
                 />
 
-                {/* private route - home screen of specific user */}
+               
                 <Route
                   path="/teamstandings"
                   element={
@@ -208,6 +201,16 @@ function App() {
                   path="/GamesSchedule"
                   element={
                     <GamesSchedule
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                <Route
+                  path="/News"
+                  element={
+                    <News
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
