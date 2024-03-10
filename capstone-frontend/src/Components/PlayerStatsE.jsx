@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import PlayerCard from './PlayerCard';
 // Assuming these environment variables are correctly defined in your .env file
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -48,10 +49,10 @@ const PlayerStatsComponent = ( {team, season} ) => {
                     <ul>
                         {playerStats.slice(0, 18).map((player, index) => (
                             <p key={index}>
-                                <Link to={`/player/${player.player.id}`} state={player.player} >{player.player.firstname} {player.player.lastname}</Link>
-
-                                 </p>
-                            
+                                <Link to={`/player/${player.player.id}`} state={{ player: player.player }}>
+                                    <PlayerCard player={player.player} stats={player} />
+                                </Link>
+                            </p>
                         ))}
                     </ul>
                 </div>
