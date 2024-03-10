@@ -39,10 +39,9 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navExitIcon: ChevronLeft,
             children: [
                 { icon: Blank, label: 'Rosters' },
-                { icon: Blank, label: 'RostersV2' },
-                { icon: Blank, label: 'Favorites' },
                 { icon: Blank, label: 'Recently Searched' },
-                { icon: Blank, label: 'conley_example' }
+                { icon: Blank, label: 'Favorites' },
+              
             ],
         },
         {
@@ -51,9 +50,9 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navExitIcon: ChevronLeft,
             children: [
                 { icon: Blank, label: 'Standings' },
-                { icon: Blank, label: 'Schedule' },
                 { icon: Blank, label: 'Stats' },
-                { icon: Blank, label: 'Games' }
+                { icon: Blank, label: 'Schedule' }
+               
             ],
         },
         {
@@ -77,15 +76,10 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             navigate('/conley_example');
         if (item.label === "test line chart 2")
             navigate('/chartLine');
-        if (item.label === "conley")
-            navigate('/conley_example');
         if (item.label === "Standings")
             navigate('/teamstandingsV2');
-        if (item.label === "Games")
+        if (item.label === "Schedule")
             navigate('/GamesSchedule');
-
-        if (item.label === "RostersV2")
-            navigate('/player_stats_table');
 
         if(item.label === "Search")
         navigate('/Search');
