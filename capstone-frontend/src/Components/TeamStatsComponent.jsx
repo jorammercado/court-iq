@@ -23,7 +23,6 @@ const TeamStatsComponent = ({teamId,season}) => {
           try {
             const response = await axios.request(options);
             setTeamStats(response.data.response[0]);
-            console.log(response.data.response);
           } catch (error) {
             console.error(error);
           }

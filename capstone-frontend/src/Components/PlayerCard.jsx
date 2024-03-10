@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PlayerCard = ({ player, stats }) => {
-    console.log(stats)
+
     return (
         <div style={{ border: '1px solid #ccc', padding: '10px', margin: '10px', display: 'inline-block', width: '200px', textAlign: 'center' }}>
             <h4>{player.firstname} {player.lastname}</h4>
