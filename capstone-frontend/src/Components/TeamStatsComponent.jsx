@@ -3,7 +3,7 @@ import axios from 'axios';
 // Assuming environment variables are correctly set up in your .env file
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
-const VITE_X_RAPIDAPI_URL = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_X_RAPIDAPI_URL = import.meta.env.VITE_X_RAPIDAPI_URL4;
 
 const TeamStatsComponent = ({teamId,season}) => {
     const [teamStats, setTeamStats] = useState(null);
