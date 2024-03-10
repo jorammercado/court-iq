@@ -1,39 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import TeamStatsComponent from '../Components/TeamStatsComponent';
+import PlayerStatsComponent from '../Components/PlayerStatsE'
 
-const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
-const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
-const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
-
-const PlayerStatsComponent = () => {
-    const [playerStats, setPlayerStats] = useState(null);
+const TeamsPage = () => {
     const [teamId, setTeamId] = useState('1');
     const [season, setSeason] = useState('2023');
-
-    useEffect(() => {
-        const fetchPlayerStats = async () => {
-            try {
-                const response = await axios.request({
-                    method: 'GET',
-                    url: VITE_X_RAPIDAPI_URL2,
-                    params: {
-                        team: teamId,
-                        season: season
-                    },
-                    headers: {
-                        'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
-                        'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
-                    }
-                });
-                setPlayerStats(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchPlayerStats();
-    }, [teamId, season]);
 
     const handleTeamChange = (e) => {
         setTeamId(e.target.value);
@@ -42,10 +13,8 @@ const PlayerStatsComponent = () => {
     const handleSeasonChange = (e) => {
         setSeason(e.target.value);
     };
-
     return (
         <div>
-            <h2>Players</h2>
             <div>
                 <label htmlFor="teamSelect">Select Team:</label>
                 <select id="teamSelect" value={teamId} onChange={handleTeamChange}>
@@ -91,22 +60,10 @@ const PlayerStatsComponent = () => {
 
                 </select>
             </div>
-            {playerStats ? (
-                <div>
-                    <h3>Team Roster</h3>
-                    <ul>
-                        {playerStats.response.map((player, index) => (
-                            <li key={index}>
-                                <Link to={`/player/${player.id}`} state={player} >{player.firstname} {player.lastname}</Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ) : (
-                <p>Loading player stats...</p>
-            )}
+            <PlayerStatsComponent team={teamId} season={season}/>
+            <TeamStatsComponent teamId={teamId} season={season}/>
         </div>
     );
-};
+}
 
-export default PlayerStatsComponent;
+export default TeamsPage;

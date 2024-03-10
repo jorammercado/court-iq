@@ -30,6 +30,7 @@ import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
 import SignUp from "./Pages/SignUp.jsx";
 import Home from "./Pages/Home.jsx";
+import TeamsPage from "./Pages/TeamsPage.jsx"
 
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
@@ -39,7 +40,6 @@ import InterpolationLineChart from "./Pages/InterpolationLineChart.jsx";
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
-import PlayerStats from "./Components/PlayerStatsE.jsx";
 import CustomGPT from "./Pages/CustomGPT.jsx";
 
 import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx"
@@ -159,7 +159,7 @@ function App() {
                 <Route
                   path="/conley_example"
                   element={
-                    <PlayerStats
+                    <TeamsPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
