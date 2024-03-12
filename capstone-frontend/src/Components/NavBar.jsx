@@ -27,40 +27,56 @@ import {
 } from "baseui/app-nav-bar";
 
 export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
-  const [css] = useStyletron();
-  const navigate = useNavigate();
+    const [css] = useStyletron();
+    const navigate = useNavigate();
 
-  const [mainItems, setMainItems] = React.useState([
-    { icon: Search, label: "Search" },
-    {
-      icon: ChevronDown,
-      label: "Players",
-      navExitIcon: ChevronLeft,
-      children: [
-        { icon: Blank, label: "Rosters" },
-        { icon: Blank, label: "RostersV2" },
-        { icon: Blank, label: "Favorites" },
-        { icon: Blank, label: "Recently Searched" },
-        { icon: Blank, label: "conley_example" },
-      ],
-    },
-    {
-      icon: ChevronDown,
-      label: "Teams",
-      navExitIcon: ChevronLeft,
-      children: [
-        { icon: Blank, label: "Standings" },
-        { icon: Blank, label: "Schedule" },
-        { icon: Blank, label: "Stats" },
-        { icon: Blank, label: "Games" },
-        { icon: Blank, label: "News" },
-      ],
-    },
-    {
-      icon: Blank,
-      label: "Custom GPT",
-    },
-  ]);
+    const [mainItems, setMainItems] = React.useState([
+        { icon: Search, label: 'Search' },
+        {
+            icon: ChevronDown,
+            label: 'Players',
+            navExitIcon: ChevronLeft,
+            children: [
+                { icon: Blank, label: 'Rosters' },
+                { icon: Blank, label: 'Recently Searched' },
+                { icon: Blank, label: 'Favorites' } 
+            ],
+        },
+        {
+            icon: ChevronDown,
+            label: 'Teams',
+            navExitIcon: ChevronLeft,
+            children: [
+                { icon: Blank, label: 'Standings' },
+                { icon: Blank, label: 'Stats' },
+                { icon: Blank, label: 'Schedule' },
+                { icon: Blank, label: "News" }
+            ],
+        }
+    ]);
+
+    const [userItems, setUserItems] = React.useState([
+        { icon: Blank, label: 'Home' },
+        { icon: Blank, label: 'User' }
+    ]);
+
+    const [isNavVisible, setIsNavVisible] = React.useState(true);
+
+    function handleMainItemSelect(item) {
+        setMainItems((prev) => setItemActive(prev, item));
+        if (item.label === "Maps")
+            navigate('/maps');
+        if (item.label === "Rosters")
+            navigate('/conley_example');
+        if (item.label === "test line chart 2")
+            navigate('/chartLine');
+        if (item.label === "Standings")
+            navigate('/teamstandingsV2');
+        if (item.label === "Schedule")
+            navigate('/GamesSchedule');
+
+        if(item.label === "Search")
+        navigate('/Search');
 
   const [userItems, setUserItems] = React.useState([
     { icon: Blank, label: "Home" },
