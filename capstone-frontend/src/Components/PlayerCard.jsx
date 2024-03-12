@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const PlayerCard = ({ player }) => {
     return (
       <Card
-        overrides={{ Root: { style: { width: "328px", marginBottom: "20px" } } }}
+        overrides={{ Root: { style: { width: "328px", marginBottom: "20px", backgroundColor: "#EA6607" } } }}
         title={`${player.player.firstname} ${player.player.lastname}`}
       >
         <StyledThumbnail
