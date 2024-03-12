@@ -61,6 +61,7 @@ function PlayerExample({ data, playerid }) {
             try {
                 const response = await axios(requestOptions);
                 setPlayerStats(response.data.response);
+                console.log(response.data.response)
                 setPoints(response.data.response.map((e) => e.points));
                 setAssists(response.data.response.map((e) => e.assists));
                 setRebounds(response.data.response.map((e) => e.defReb + e.offReb));
