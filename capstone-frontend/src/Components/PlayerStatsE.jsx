@@ -45,9 +45,7 @@ const PlayerStatsComponent = ( {team, season} ) => {
 
     return (
         <div>
-        <h2>TEAMS PAGE</h2>
         <div className="playerCardsContainer"> {/* Updated class name */}
-            <h3>Team Roster</h3>
             {playerStats && playerStats.slice(0, 18).map((player, index) => (
                 <PlayerCard key={index} player={player} />
             ))}
