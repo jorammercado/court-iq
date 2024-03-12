@@ -40,11 +40,6 @@ const TeamStandingsV2 = () => {
   const [westernConference, setWesternConference] = useState([]);
   const [easternConference, setEasternConference] = useState([]);
 
-  console.log(westernConference);
-  console.log(easternConference);
-  console.log(season);
-  console.log(stage);
-  console.log(logo);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -70,7 +65,14 @@ const TeamStandingsV2 = () => {
     getData();
   }, []);
 
-  if (data == null || data === undefined || data.length === 0 || !data)
+  if (
+    data == null ||
+    data === undefined ||
+    data.length === 0 ||
+    !data ||
+    westernConference.length === 0 ||
+    easternConference.length === 0
+  )
     return (
       <div className="v2__standings">
         <div>
@@ -82,7 +84,6 @@ const TeamStandingsV2 = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {/* Made NBA logo a link */}
                   <img
                     src={logo}
                     alt={`NBA Logo`}
@@ -90,7 +91,7 @@ const TeamStandingsV2 = () => {
                       height: "30px",
                       backgroundColor: "#faf7f2",
                       cursor: "pointer",
-                    }} // Added cursor pointer
+                    }}
                   />
                 </Link>
                 &nbsp; {stage} {season.replace("\n", "")}
@@ -119,19 +120,18 @@ const TeamStandingsV2 = () => {
     };
   });
 
-  const DATA = teamsWestern.map((team, index) => {
+  const teamsEastern = easternConference.map((team) => {
     return {
-      id: index,
       position: team.position,
-      avatarSrc: team.avatarSrc,
-      name: team.name,
-      title: team.title,
-      gamesLost: team.gamesLost,
-      gamesLostPercentage: team.gamesLostPercentage,
-      gamesWon: team.gamesWon,
-      gamesWonPercentage: team.gamesWonPercentage,
-      pointsAgainst: team.pointsAgainst,
-      pointsFor: team.pointsFor,
+      avatarSrc: team.team.logo,
+      name: team.team.name,
+      title: team.group.name,
+      gamesLost: team.games.lose.total,
+      gamesLostPercentage: team.games.lose.percentage,
+      gamesWon: team.games.win.total,
+      gamesWonPercentage: team.games.win.percentage,
+      pointsAgainst: team.points.against,
+      pointsFor: team.points.for,
     };
   });
 
@@ -207,84 +207,75 @@ const TeamStandingsV2 = () => {
   }
 
   return (
-    <div className="table__contain animate__animated animate__zoomIn">
-      <section>
-        <table className="table__header">
-          <caption>
-            <Link
-              href="https://www.nba.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={logo}
-                alt={`NBA Logo`}
-                style={{
-                  height: "30px",
-                  backgroundColor: "#faf7f2",
-                  cursor: "pointer",
-                }}
-              />
-            </Link>
-            &nbsp; {stage} {season.replace("\n", "")}{" "}
-          </caption>
-        </table>
-        <div className="team__title">WEST</div>
-      </section>
-      <TableBuilder
-        overrides={{ Root: { style: { maxHeight: "300px" } } }}
-        data={DATA}
-      >
-        <TableBuilderColumn header="Team">
-          {(row) => (
-            <AvatarCell
-              src={row.avatarSrc}
-              title={row.name}
-              subtitle={row.title}
-            />
-          )}
-        </TableBuilderColumn>
+    <div className="v2__standings">
+      <div className="table__contain animate__animated animate__zoomIn">
+        <section>
+          <table className="table__header">
+            <caption>
+              <Link
+                href="https://www.nba.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={logo}
+                  alt={`NBA Logo`}
+                  style={{
+                    height: "30px",
+                    backgroundColor: "#faf7f2",
+                    cursor: "pointer",
+                  }}
+                />
+              </Link>
+              &nbsp; {stage} {season.replace("\n", "")}{" "}
+            </caption>
+          </table>
+          <div className="team__title">WEST</div>
+          <TableBuilder
+            overrides={{ Root: { style: { maxHeight: "300px" } } }}
+            data={teamsWestern}
+          >
+            <TableBuilderColumn header="Team">
+              {(row) => (
+                <AvatarCell
+                  src={row.avatarSrc}
+                  title={row.name}
+                  subtitle={row.title}
+                />
+              )}
+            </TableBuilderColumn>
 
-        <TableBuilderColumn header="Position">
-          {(row) => <NumberCell value={row.position} delta={0.51} />}
-        </TableBuilderColumn>
+            <TableBuilderColumn header="Position">
+              {(row) => <NumberCell value={row.position} delta={0.51} />}
+            </TableBuilderColumn>
 
-        <TableBuilderColumn header="Games Lost">
-          {(row) => <NumberCell value={row.gamesLost} delta={-0.51} />}
-        </TableBuilderColumn>
 
-        <TableBuilderColumn header="Games Lost %">
-          {(row) => (
-            <NumberCell
-              value={row.gamesLostPercentage}
-              delta={row.gamesLostPercentage - 0.5}
-              isPercentage
-            />
-          )}
-        </TableBuilderColumn>
+          </TableBuilder>
+        </section>
+        <section>
+          <div className="team__title">EAST</div>
+          <TableBuilder
+            overrides={{ Root: { style: { maxHeight: "300px" } } }}
+            data={teamsEastern}
+          >
+            <TableBuilderColumn header="Team">
+              {(row) => (
+                <AvatarCell
+                  src={row.avatarSrc}
+                  title={row.name}
+                  subtitle={row.title}
+                />
+              )}
+            </TableBuilderColumn>
 
-        <TableBuilderColumn header="Games Won">
-          {(row) => <NumberCell value={row.gamesWon} delta={0.51} />}
-        </TableBuilderColumn>
+            <TableBuilderColumn header="Position">
+              {(row) => <NumberCell value={row.position} delta={0.51} />}
+            </TableBuilderColumn>
 
-        <TableBuilderColumn header="Games Won %">
-          {(row) => (
-            <NumberCell
-              value={row.gamesWonPercentage}
-              delta={row.gamesWonPercentage - 0.5}
-              isPercentage
-            />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Points Against">
-          {(row) => <NumberCell value={row.pointsAgainst} delta={0.51} />}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Points For">
-          {(row) => <NumberCell value={row.pointsFor} delta={0.51} />}
-        </TableBuilderColumn>
-      </TableBuilder>
+          
+          </TableBuilder>
+        </section>
+      </div>
     </div>
   );
 };
