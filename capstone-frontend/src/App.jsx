@@ -38,7 +38,7 @@ Chart.register(CategoryScale);
 import MyChartPage from "./Pages/MyChartPage.jsx";
 import InterpolationLineChart from "./Pages/InterpolationLineChart.jsx";
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
-import TeamStandings from "./Pages/TeamStandings.jsx";
+
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
 import CustomGPT from "./Pages/CustomGPT.jsx";
 
@@ -193,16 +193,7 @@ function App() {
                   }
                 />
 
-                {/* private route - home screen of specific user */}
-                <Route
-                  path="/teamstandings"
-                  element={
-                    <TeamStandings
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
+                
 
                 <Route
                   path="/GamesSchedule"
