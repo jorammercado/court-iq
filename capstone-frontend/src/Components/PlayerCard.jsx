@@ -16,9 +16,9 @@ const PlayerCard = ({ player }) => {
           {`Team: ${player.team.name}`} {/* Adjust according to your data structure */}
         </StyledBody>
         <StyledAction>
-          <Link to={`/player/${player.player.id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/player/${player.player.id}`} state={player.player} >{player.player.firstname} {player.player.lastname}
             <Button overrides={{ BaseButton: { style: { width: "100%" } } }}>
-              View Details
+              View Player Details
             </Button>
           </Link>
         </StyledAction>
