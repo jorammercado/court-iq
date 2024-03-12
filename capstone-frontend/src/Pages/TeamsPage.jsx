@@ -60,8 +60,8 @@ const TeamsPage = () => {
 
                 </select>
             </div>
-            <PlayerStatsComponent team={teamId} season={season}/>
             <TeamStatsComponent teamId={teamId} season={season}/>
+            <PlayerStatsComponent team={teamId} season={season}/>
         </div>
     );
 }
