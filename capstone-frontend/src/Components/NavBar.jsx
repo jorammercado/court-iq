@@ -54,11 +54,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                 { icon: Blank, label: 'Schedule' }
                
             ],
-        },
-        {
-            icon: Blank,
-            label: 'Custom GPT',
-        },
+        }
     ]);
 
     const [userItems, setUserItems] = React.useState([
