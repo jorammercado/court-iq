@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TeamStatsComponent from '../Components/TeamStatsComponent';
 import PlayerStatsComponent from '../Components/PlayerStatsE'
+import "./TeamsPage.scss"
 
 const TeamsPage = () => {
     const [teamId, setTeamId] = useState('1');
@@ -15,6 +16,7 @@ const TeamsPage = () => {
     };
     return (
         <div>
+            <div className="Selector">
             <div>
                 <label htmlFor="teamSelect">Select Team:</label>
                 <select id="teamSelect" value={teamId} onChange={handleTeamChange}>
@@ -59,6 +61,7 @@ const TeamsPage = () => {
                     <option value="2023">2023</option>
 
                 </select>
+            </div>
             </div>
             <TeamStatsComponent teamId={teamId} season={season}/>
             <PlayerStatsComponent team={teamId} season={season}/>
