@@ -48,7 +48,7 @@ const TeamStatsComponent = ({ teamId, season }) => {
 
     return (
         <div className="TeamStatsTable">
-            <h2>TEAM STATISTICS</h2>
+            <h2>Current Season</h2>
             <TableBuilder data={teamStats}>
                 {statColumns.map(column => (
                     <TableBuilderColumn key={column.id} header={column.header}>
