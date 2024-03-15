@@ -50,7 +50,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                 { icon: Blank, label: 'Standings' },
                 { icon: Blank, label: 'Stats' },
                 { icon: Blank, label: 'Schedule' },
-                { icon: Blank, label: "News" }
+                { icon: Blank, label: "Comparate" }
             ],
         }
     ]);
@@ -72,9 +72,9 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         if (item.label === "Schedule") navigate("/GamesSchedule");
         if (item.label === "RostersV2") navigate("/player_stats_table");
         if (item.label === "Search") navigate("/Search");
-        if (item.label === "News") navigate("/News");
+        if (item.label === "Comparate") navigate("/PlayerComparation"); 
     }
-
+    
     function handleUserItemSelect(item) {
         setUserItems((prev) => setItemActive(prev, item));
         setMainItems((prev) => setItemActive(prev, item));

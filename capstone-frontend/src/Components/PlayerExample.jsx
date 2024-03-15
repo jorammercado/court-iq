@@ -41,7 +41,7 @@ function PlayerExample({ data, playerid }) {
     const [plusMinus, setPlusMinus] = useState([]);
     const [minutes, setMinutes] = useState([]);
     const [blocks, setBlocks] = useState([]);
-    const [selectedSeason, setSelectedSeason] = useState("2023"); // Initial season
+    const [selectedSeason, setSelectedSeason] = useState("2023"); 
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -262,7 +262,7 @@ function PlayerExample({ data, playerid }) {
                                     calculateTotalAssistsForSeason(playerStats),
                                     calculateTotalBlocksForSeason(playerStats),
                                     calculateTotalPointsForSeason(playerStats),
-                                    //   playerStats[0].team.name,
+                                    
                                 ],
                             ]}
                         />

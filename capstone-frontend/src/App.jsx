@@ -48,7 +48,7 @@ import SearchPage from "./Pages/SearchPage.jsx";
 
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
-import News from "./Pages/News.jsx";
+import PLayerComparation from "./Pages/PLayerComparation.jsx";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -198,9 +198,9 @@ function App() {
                 />
 
                 <Route
-                  path="/News"
+                  path="/PlayerComparation"
                   element={
-                    <News
+                    <PLayerComparation
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
