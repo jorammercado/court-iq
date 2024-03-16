@@ -65,6 +65,13 @@ function PlayerExample({ data, playerid }) {
     const [plusMinus, setPlusMinus] = useState([]);
     const [minutes, setMinutes] = useState([]);
     const [blocks, setBlocks] = useState([]);
+    const [steals, setSteals] = useState([]);
+    const [turnovers, setTurnovers] = useState([]);
+    const [fgp, setFGP] = useState([]);
+    const [tpp, setTPP] = useState([]);
+    const [ftp, setFTP] = useState([]);
+    const [dd, setDD] = useState(0);
+    const [td, setTD] = useState(0);
     const [team, setTeam] = useState([])
     const [personalData, setPersonalData] = useState({});
     const [selectedSeason, setSelectedSeason] = useState("2023");
@@ -125,6 +132,11 @@ function PlayerExample({ data, playerid }) {
                 setBlocks(response.data.response.map((e) => e.blocks));
                 setFGA(response.data.response.map((e) => e.fga));
                 setFTA(response.data.response.map((e) => e.fta));
+                setSteals(response.data.response.map((e) => e.steals));
+                setTurnovers(response.data.response.map((e) => e.turnovers));
+                setFGP(response.data.response.map((e) => e.fgp));
+                setTPP(response.data.response.map((e) => e.tpp));
+                setFTP(response.data.response.map((e) => e.ftp));
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
@@ -352,22 +364,30 @@ function PlayerExample({ data, playerid }) {
                     )}
                 </Block>
                 <Block className="chart-container" width="100%" display="flex" flexDirection="column" alignItems="center" padding="scale500">
-                    <Block width="50%" overflow="auto">
+                    <Block width="40%" overflow="auto">
+                        
                         {playerStats ? (
                             <Table
                                 overrides={overrides}
-                                columns={[
-                                    "Total Assists",
-                                    "Total Blocks",
-                                    "Total Points",
-                                    "Team",
+                                columns={["Season", "MPG", "PPG", "RPG", "APG", "SPG", "BPG", "TPG", "FG%", "3P%", "FT%", "DD", "TD"
                                 ]}
                                 data={[
                                     [
-                                        calculateTotalAssistsForSeason(playerStats),
-                                        calculateTotalBlocksForSeason(playerStats),
-                                        calculateTotalPointsForSeason(playerStats),
-                                        //   playerStats[0].team.name,
+                                        selectedSeason,
+                                        (minutes.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / minutes.length).toFixed(2),
+                                        (points.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / points.length).toFixed(2),
+                                        (rebounds.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / rebounds.length).toFixed(2),
+                                        (assists.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / assists.length).toFixed(2),
+                                        (steals.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / steals.length).toFixed(2),
+                                        (blocks.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / blocks.length).toFixed(2),
+                                        (turnovers.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / turnovers.length).toFixed(2),
+                                        (fgp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / fgp.length).toFixed(2),
+                                        (tpp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / tpp.length).toFixed(2),
+                                        (ftp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / ftp.length).toFixed(2),
+                                        dd,
+                                        td,
+                              
+                                        
                                     ],
                                 ]}
                             />
