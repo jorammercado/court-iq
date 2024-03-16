@@ -6,15 +6,39 @@ import MyGraph from "./MyChart";
 import { useNavigate } from "react-router-dom"
 import "./PlayerExample.scss"
 import { Block } from "baseui/block";
+import { Heading, HeadingLevel } from 'baseui/heading';
+import { Avatar } from "baseui/avatar";
+import { Select } from 'baseui/select';
+import {
+    LabelMedium,
+    LabelXSmall,
+    HeadingLarge,
+    HeadingMedium,
+    HeadingSmall
+} from "baseui/typography";
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PlayerExample({ data, playerid }) {
     let navigate = useNavigate()
-    console.log("DATA=", data)
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const tableWidth = windowWidth < 768 ? '100%' : '60rem';
+
+
     const [playerImage, setPlayerImage] = useState({
         player_id: 0,
         player: "",
@@ -22,17 +46,17 @@ function PlayerExample({ data, playerid }) {
         image_url: ""
     })
     useEffect(() => {
-        const player = `${data.firstname.toLowerCase()}` +` ${data.lastname.toLowerCase()}`
+        const player = `${data.firstname.toLowerCase()}` + ` ${data.lastname.toLowerCase()}`
         console.log(player)
         fetch(`${VITE_BASE_URL}/playerimages/${player}`)
             .then(response => response.json())
-            .then(playerImage => {    
-                console.log("TEST RESPONSE 1=", playerImage, "TEST ADDRESS=", VITE_BASE_URL)
+            .then(playerImage => {
                 setPlayerImage(playerImage)
             })
             .catch(() => navigate("/not-found"))
     }, [data, navigate])
 
+    const [referenceData, setReferenceData] = useState({})
     const [playerStats, setPlayerStats] = useState([]);
     const [points, setPoints] = useState([]);
     const [assists, setAssists] = useState([]);
@@ -41,7 +65,42 @@ function PlayerExample({ data, playerid }) {
     const [plusMinus, setPlusMinus] = useState([]);
     const [minutes, setMinutes] = useState([]);
     const [blocks, setBlocks] = useState([]);
-    const [selectedSeason, setSelectedSeason] = useState("2023"); 
+    const [steals, setSteals] = useState([]);
+    const [turnovers, setTurnovers] = useState([]);
+    const [fgp, setFGP] = useState([]);
+    const [tpp, setTPP] = useState([]);
+    const [ftp, setFTP] = useState([]);
+    const [dd, setDD] = useState(0);
+    const [td, setTD] = useState(0);
+    const [team, setTeam] = useState([])
+    const [personalData, setPersonalData] = useState({});
+    const [selectedSeason, setSelectedSeason] = useState("2023");
+    const [fga, setFGA] = useState([])
+    const [fta, setFTA] = useState([])
+
+    useEffect(() => {
+        const fetchPlayerStats = async () => {
+            try {
+                const response = await axios.request({
+                    method: 'GET',
+                    url: VITE_X_RAPIDAPI_URL2,
+                    params: {
+                        team: team,
+                        season: selectedSeason
+                    },
+                    headers: {
+                        'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
+                        'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
+                    }
+                });
+                setPersonalData(response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
+                console.log("Personal Data= ", response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchPlayerStats();
+    }, [team, selectedSeason]);
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -61,7 +120,9 @@ function PlayerExample({ data, playerid }) {
             try {
                 const response = await axios(requestOptions);
                 setPlayerStats(response.data.response);
-                console.log(response.data.response)
+                console.log(response.data)
+                setTeam(response.data.response[0].team.id)
+                setReferenceData(response.data.response[0])
                 setPoints(response.data.response.map((e) => e.points));
                 setAssists(response.data.response.map((e) => e.assists));
                 setRebounds(response.data.response.map((e) => e.defReb + e.offReb));
@@ -69,13 +130,19 @@ function PlayerExample({ data, playerid }) {
                 setPlusMinus(response.data.response.map((e) => e.plusMinus));
                 setMinutes(response.data.response.map((e) => e.min));
                 setBlocks(response.data.response.map((e) => e.blocks));
+                setFGA(response.data.response.map((e) => e.fga));
+                setFTA(response.data.response.map((e) => e.fta));
+                setSteals(response.data.response.map((e) => e.steals));
+                setTurnovers(response.data.response.map((e) => e.turnovers));
+                setFGP(response.data.response.map((e) => e.fgp));
+                setTPP(response.data.response.map((e) => e.tpp));
+                setFTP(response.data.response.map((e) => e.ftp));
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
         };
-
         fetchPlayerStats();
-    }, [playerid, selectedSeason]); // Update fetch when playerid or selectedSeason changes
+    }, [playerid, selectedSeason]);
 
     const calculateAveragePointsPerGame = () => {
         if (!playerStats) return null;
@@ -121,9 +188,7 @@ function PlayerExample({ data, playerid }) {
             totalAssists += parseInt(assists);
             totalGames++;
         });
-
         if (totalGames === 0) return 0;
-
         const averageAssistsPerGame = totalAssists / totalGames;
         return averageAssistsPerGame.toFixed(2);
     };
@@ -135,7 +200,6 @@ function PlayerExample({ data, playerid }) {
             (total, stat) => total + parseInt(stat.blocks || 0),
             0
         );
-
         return totalBlocks;
     };
 
@@ -146,7 +210,6 @@ function PlayerExample({ data, playerid }) {
             (total, stat) => total + parseInt(stat.assists || 0),
             0
         );
-
         return totalAssists;
     };
 
@@ -157,137 +220,200 @@ function PlayerExample({ data, playerid }) {
             (total, stat) => total + parseInt(stat.points || 0),
             0
         );
-
         return totalPoints;
+    };
+
+    const calculateTS = () => {
+        if (!playerStats) return 0;
+        const totalPoints = calculateTotalPointsForSeason(playerStats)
+
+        const ts = (totalPoints / (2 * (
+            fga.reduce((tot, curr) => tot + curr, 0) +
+            0.44 * fta.reduce((tot, curr) => tot + curr, 0)
+        ))) * 100
+
+        return ts.toFixed(2);
     };
 
     const getLastFiveGames = () => {
         if (!playerStats) return [];
+        const copyStats = [...playerStats].reverse()
 
-        const sortedStats = playerStats.sort(
-            (a, b) => new Date(b.date) - new Date(a.date)
-        );
-
-        return sortedStats.slice(0, 5);
+        return copyStats.slice(0, 5);
     };
 
     const overrides = {};
 
-    const handleSeasonChange = (event) => {
-        setSelectedSeason(event.target.value);
+    const handleSeasonChange = (params) => {
+        const { value } = params;
+        if (value.length > 0) {
+            setSelectedSeason(value[0].id);
+        }
     };
+    const seasonOptions = [
+        { label: '2020', id: '2020' },
+        { label: '2021', id: '2021' },
+        { label: '2022', id: '2022' },
+        { label: 'Current', id: '2023' },
+    ];
+    const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
+
 
     return (
         <div>
-            <div className="sub__heading">
-                <div className="head__shot">
-                    <img
-                        src={`${playerImage.image_url?playerImage.image_url:'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'}`}
-                        alt={`Head Shot`}
-                        style={{ height: "250px" }}
-                    />
-                </div>
-                <div className="info">
+            <Block width="100%" display="flex" flexDirection="column" alignItems="center">
+                <Block className="filler"></Block>
+                <Block className="sub__heading" display="flex" justifyContent="space-between" alignItems="center" width="100%" backgroundColor="#ED751C" padding="20px">
+                    <Block className="head__shot" $style={{ maxWidth: "250px", flexGrow: 1, marginLeft: "160px", marginBottom: "-6px" }}>
+                        <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "260px" }} />
+                    </Block>
+                    <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
+                        <Block width="auto" maxWidth="300px" display="flex" alignItems="center" marginBottom="20px" marginTop="-30px">
+                            <Select
+                                options={[
+                                    { id: '2020', label: '2020-2021' },
+                                    { id: '2021', label: '2021-2022' },
+                                    { id: '2022', label: '2022-2023' },
+                                    { id: '2023', label: '2023-2024' },
+                                ]}
+                                labelKey="label"
+                                valueKey="id"
+                                onChange={handleSeasonChange}
+                                value={selectedValue}
+                                placeholder="Select..."
+                                clearable={false}
+                            />
+                        </Block>
+                        <HeadingLevel>
+                            <Heading styleLevel={3}>{data.firstname} {data.lastname}</Heading>
+                            <Heading styleLevel={6}>
+                                {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
+                                {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
+                                {referenceData.team ? referenceData.team.name : ""} &nbsp;
+                                {personalData && personalData.leagues ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                {referenceData ? referenceData.pos : ""}
+                            </Heading>
+                        </HeadingLevel>
 
-                </div>
-                <div className="team__logo">
+                        <Block display="flex" justifyContent="space-around" width="60%">
+                            <LabelXSmall>PPG</LabelXSmall>
+                            <LabelXSmall>RPG</LabelXSmall>
+                            <LabelXSmall>APG</LabelXSmall>
+                            <LabelXSmall>TS%</LabelXSmall>
+                        </Block>
+                        <Block display="flex" justifyContent="space-around" width="60%">
+                            <LabelMedium>{calculateAveragePointsPerGame()}</LabelMedium>
+                            <LabelMedium>{calculateAverageReboundsPerGame()}</LabelMedium>
+                            <LabelMedium>{calculateAverageAssistsPerGame()}</LabelMedium>
+                            <LabelMedium>{calculateTS()}</LabelMedium>
+                        </Block>
+                    </Block>
+                    <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px" }}>
+                        {/* <img src={referenceData.team.logo} alt="Team Logo" style={{ height: "150px" }} /> */}
+                        <Avatar
+                            overrides={{
+                                Avatar: {
+                                    style: ({ $theme }) => ({
+                                        borderRadius: "0",
+                                        width: 'auto',
+                                        objectFit: 'contain',
+                                        height: 'auto',
+                                        width: 'auto',
+                                        maxWidth: '100%',
+                                        maxHeight: '100%',
+                                    }),
+                                },
+                                Root: {
+                                    style: ({ $theme }) => ({
+                                        borderRadius: "0",
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        overflow: 'visible',
+                                        width: '170px',
+                                        height: '170px',
+                                    }),
+                                },
+                            }}
+                            name={referenceData.team ? referenceData.team.name : ""}
+                            size="100px"
+                            src={referenceData.team ? referenceData.team.logo : ""}
+                        />
+                    </Block>
+                </Block>
+                <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
+                    <HeadingLarge color="black">Season Stats</HeadingLarge>
+                    {points.length > 0 ? (
+                        <Block className="graph" display="flex" justifyContent="center" alignItems="center" marginTop="-60px">
+                            <MyGraph
+                                playerStats={playerStats}
+                                points={points}
+                                assists={assists}
+                                rebounds={rebounds}
+                                threePoints={threePoints}
+                                plusMinus={plusMinus}
+                                minutes={minutes}
+                                blocks={blocks}
+                            />
+                        </Block>
+                    ) : (
+                        <Spin />
+                    )}
+                </Block>
+                <Block className="chart-container" width="100%" display="flex" flexDirection="column" alignItems="center" padding="scale500">
+                    <Block width="40%" overflow="auto">
+                        
+                        {playerStats ? (
+                            <Table
+                                overrides={overrides}
+                                columns={["Season", "MPG", "PPG", "RPG", "APG", "SPG", "BPG", "TPG", "FG%", "3P%", "FT%", "DD", "TD"
+                                ]}
+                                data={[
+                                    [
+                                        selectedSeason,
+                                        (minutes.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / minutes.length).toFixed(2),
+                                        (points.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / points.length).toFixed(2),
+                                        (rebounds.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / rebounds.length).toFixed(2),
+                                        (assists.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / assists.length).toFixed(2),
+                                        (steals.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / steals.length).toFixed(2),
+                                        (blocks.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / blocks.length).toFixed(2),
+                                        (turnovers.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / turnovers.length).toFixed(2),
+                                        (fgp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / fgp.length).toFixed(2),
+                                        (tpp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / tpp.length).toFixed(2),
+                                        (ftp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / ftp.length).toFixed(2),
+                                        dd,
+                                        td,
+                              
+                                        
+                                    ],
+                                ]}
+                            />
+                        ) : (
+                            <p>Loading...</p>
+                        )}
+                    </Block>
+                    <Block width="50%" overflow="auto">
+                        <Block display="flex" justifyContent="center" width="100%">
+                            <HeadingSmall color="black" marginTop="50px">Last 5 Games</HeadingSmall>
+                        </Block>
 
-                </div>
-            </div>
-            <div className="divider">
-                <div className="chart-container" style={{ minWidth: "700px" }}>
-                    <div style={{ textAlign: "center", marginBottom: "10px" }}>
-                        <label htmlFor="season">Select Season:</label>
-                        <select
-                            id="season"
-                            value={selectedSeason}
-                            onChange={handleSeasonChange}
-                        >
-                            <option value="2022">2020</option>
-                            <option value="2022">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">Current</option>
-                        </select>
-                    </div>
-                    {playerStats && (
-                        <>
-                            <p>Average Points Per Game: {calculateAveragePointsPerGame()}</p>
-                            <p>
-                                Average Rebounds Per Game: {calculateAverageReboundsPerGame()}
-                            </p>
-                            <p>
-                                Average Assists Per Game: {calculateAverageAssistsPerGame()}
-                            </p>
-                        </>
-                    )}
-                </div>
-                {points.length > 0 ?
-                    <div className="graph">
-                        <MyGraph
-                            playerStats={playerStats}
-                            points={points}
-                            assists={assists}
-                            rebounds={rebounds}
-                            threePoints={threePoints}
-                            plusMinus={plusMinus}
-                            minutes={minutes}
-                            blocks={blocks}
-                        />
-                    </div>
-                    :
-                    <Spin />
-                }
-            </div>
-            <div className="chart-container" style={{ minWidth: "700px" }}>
-                {playerStats && playerStats.length > 0 && (
-                    <div>
-                        <h1>
-                            {playerStats[0].player.firstname} {playerStats[0].player.lastname}
-                        </h1>
-                    </div>
-                )}
-                <div style={{ height: "400px", overflow: "auto", width: "60rem" }}>
-                    <h2>Current Season Stats</h2>
-                    {playerStats ? (
-                        <Table
-                            overrides={overrides}
-                            columns={[
-                                "Total Assists",
-                                "Total Blocks",
-                                "Total Points",
-                                "Team",
-                            ]}
-                            data={[
-                                [
-                                    calculateTotalAssistsForSeason(playerStats),
-                                    calculateTotalBlocksForSeason(playerStats),
-                                    calculateTotalPointsForSeason(playerStats),
-                                    
-                                ],
-                            ]}
-                        />
-                    ) : (
-                        <p>Loading...</p>
-                    )}
-                </div>
-                <div style={{ height: "400px", overflow: "auto", width: "60rem" }}>
-                    <h2>Last 5 Games Stats</h2>
-                    {playerStats ? (
-                        <Table
-                            overrides={overrides}
-                            columns={["Assists", "Blocks", "Points", "Team"]}
-                            data={getLastFiveGames().map((stat) => [
-                                stat.assists,
-                                stat.blocks,
-                                stat.points,
-                                stat.team.name,
-                            ])}
-                        />
-                    ) : (
-                        <p>Loading...</p>
-                    )}
-                </div>
-            </div>
+                        {playerStats ? (
+                            <Table
+                                overrides={overrides}
+                                columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", ]}
+                                data={getLastFiveGames().map((stat) => [
+                                    stat.assists,
+                                    stat.blocks,
+                                    stat.points,
+                                    stat.team.name,
+                                ])}
+                            />
+                        ) : (
+                            <p>Loading...</p>
+                        )}
+                    </Block>
+                </Block>
+            </Block>
         </div>
     );
 }

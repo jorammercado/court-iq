@@ -1,57 +1,61 @@
 .v2__standings {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .table__contain {
-      margin: 0 auto;
-      max-width: 80rem;
-      margin-top: 100px; 
-
-      .team__title {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 30px;
-          font-weight: bold;
-      }
-
-      section {
-          table.table__header {
-              width: 300rem;
-              border-collapse: collapse;
-              caption {
-                  font-weight: bold;
-                  font-size: 1.2rem;
-                  padding: 10px;
-                  text-align: left;
-                  background-color: #faf7f2;
-                  img {
-                      vertical-align: middle;
-                      margin-right: 5px;
-                  }
-              }
-          }
-      }
-
-      .TableBuilder {
-          width: 100%;
-          margin-top: 20px;
-
-          .TableBuilder-row {
-              border-bottom: 1px solid #ccc;
-          }
-
-          .TableBuilder-cell {
-              padding: 10px;
-              text-align: left;
-              vertical-align: middle;
-          }
-
-          .TableBuilder-header {
-              background-color: #f0f0f0;
-              font-weight: bold;
-          }
-      }
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+
+
+.table__contain {
+    margin: 0 auto;
+    max-width: 55%;
+    margin-top: 200px;
+
+    .team__title{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
+  
+    section {
+      table.table__header {
+        width: 100%;
+        border-collapse: collapse;
+        caption {
+          font-weight: bold;
+          font-size: 1.2rem;
+          padding: 10px;
+          text-align: left;
+          background-color: #faf7f2;
+          img {
+            vertical-align: middle;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  
+    .TableBuilder {
+      width: 100%;
+      margin-top: 20px;
+  
+      .TableBuilder-row {
+        border-bottom: 1px solid #ccc;
+      }
+  
+      .TableBuilder-cell {
+        padding: 10px;
+        text-align: left;
+        vertical-align: middle;
+      }
+  
+      .TableBuilder-header {
+        background-color: #f0f0f0;
+        font-weight: bold;
+      }
+    }
+  }
+  

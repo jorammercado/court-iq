@@ -6,13 +6,14 @@ const MyGraph = ({ playerStats, points, assists,
     const graphRef = useRef(null);
 
     useEffect(() => {
+        d3.select("#my_dataviz svg").remove();
         // set the dimensions and margins of the graph
         var margin = { top: 60, right: 115, bottom: 50, left: 50 },
-            width = 760 - margin.left - margin.right,
-            height = 375 - margin.top - margin.bottom;
+            width = 770 - margin.left - margin.right,
+            height = 275 - margin.top - margin.bottom;
 
         // Check if graph has already been rendered
-        if (!graphRef.current) {
+        // if (!graphRef.current) {
             // append the svg object to the body of the page
             var svg = d3.select("#my_dataviz")
                 .append("svg")
@@ -32,7 +33,6 @@ const MyGraph = ({ playerStats, points, assists,
                         assists: assists[i],
                         blocks: blocks[i],
                         threePoints: threePoints[i],
-                        plusMinus: Number(plusMinus[i]),
                         minutes: Number(minutes[i])
                     })
                 }
@@ -86,7 +86,7 @@ const MyGraph = ({ playerStats, points, assists,
                 .attr("text-anchor", "end")
                 .attr("x", width)
                 .attr("y", height + 40)
-                .text("Games");
+                .text("season game");
 
             // Add Y axis label:
             svg.append("text")
@@ -256,8 +256,8 @@ const MyGraph = ({ playerStats, points, assists,
 
             // Set the graphRef to true so it won't render again
             graphRef.current = true;
-        }
-    }, []);
+        // }
+    }, [playerStats, points, assists, rebounds, threePoints, plusMinus, minutes, blocks]);
 
     return (
         <div id="my_dataviz"></div>
