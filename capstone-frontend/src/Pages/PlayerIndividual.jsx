@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import PlayerExample from '../Components/PlayerExample';
 import Example from '../Components/PlayerStatsTable';
 import "./PlayerExamplePage.scss";
@@ -12,7 +12,7 @@ const VITE_X_RAPIDAPI_URL3 = process.env.REACT_APP_X_RAPIDAPI_URL3;
 const PlayerExamplePage = () => {
     const [data, setData] = useState(null);
     const [playerId, setPlayerId] = useState(null);
-    const [selectedSeason, setSelectedSeason] = useState('2023'); // Default season
+    const [selectedSeason, setSelectedSeason] = useState('2023'); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,7 +20,7 @@ const PlayerExamplePage = () => {
                 method: 'GET',
                 url: VITE_X_RAPIDAPI_URL3,
                 params: {
-                    id: playerId, // Use playerId state
+                    id: playerId, 
                     season: selectedSeason
                 },
                 headers: {
@@ -41,9 +41,7 @@ const PlayerExamplePage = () => {
         if (playerId) {
             fetchData();
         }
-    }, [playerId, selectedSeason]); // Fetch data whenever playerId or selectedSeason changes
-
-    // Extract playerId from the URL parameters when the component mounts
+    }, [playerId, selectedSeason]); 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const playerIdFromParams = params.get('userId');
@@ -56,11 +54,11 @@ const PlayerExamplePage = () => {
         <div className="player-example-page">
             {data ? (
                 <>
-                    {/* Render player name as a clickable link */}
+                   
                     <Link to={`/player/${data.id}`}>{data.firstname} {data.lastname}</Link>
                     <PlayerExample data={data} />
                     <div className="baseTable">
-                        {/* Additional player stats table or other components */}
+                       
                     </div>
                 </>
             ) : (
