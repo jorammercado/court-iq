@@ -20,6 +20,7 @@ import {
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PlayerExample({ data, playerid }) {
@@ -64,7 +65,35 @@ function PlayerExample({ data, playerid }) {
     const [plusMinus, setPlusMinus] = useState([]);
     const [minutes, setMinutes] = useState([]);
     const [blocks, setBlocks] = useState([]);
+    const [team, setTeam] = useState([])
+    const [personalData, setPersonalData] = useState({});
     const [selectedSeason, setSelectedSeason] = useState("2023");
+    const [fga, setFGA] = useState([])
+    const [fta, setFTA] = useState([])
+
+    useEffect(() => {
+        const fetchPlayerStats = async () => {
+            try {
+                const response = await axios.request({
+                    method: 'GET',
+                    url: VITE_X_RAPIDAPI_URL2,
+                    params: {
+                        team: team,
+                        season: selectedSeason
+                    },
+                    headers: {
+                        'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
+                        'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
+                    }
+                });
+                setPersonalData(response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
+                console.log("Personal Data= ", response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchPlayerStats();
+    }, [team, selectedSeason]);
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -85,6 +114,7 @@ function PlayerExample({ data, playerid }) {
                 const response = await axios(requestOptions);
                 setPlayerStats(response.data.response);
                 console.log(response.data)
+                setTeam(response.data.response[0].team.id)
                 setReferenceData(response.data.response[0])
                 setPoints(response.data.response.map((e) => e.points));
                 setAssists(response.data.response.map((e) => e.assists));
@@ -93,6 +123,8 @@ function PlayerExample({ data, playerid }) {
                 setPlusMinus(response.data.response.map((e) => e.plusMinus));
                 setMinutes(response.data.response.map((e) => e.min));
                 setBlocks(response.data.response.map((e) => e.blocks));
+                setFGA(response.data.response.map((e) => e.fga));
+                setFTA(response.data.response.map((e) => e.fta));
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
@@ -179,6 +211,18 @@ function PlayerExample({ data, playerid }) {
         return totalPoints;
     };
 
+    const calculateTS = () => {
+        if (!playerStats) return 0;
+        const totalPoints = calculateTotalPointsForSeason(playerStats)
+
+        const ts = (totalPoints / (2 * (
+            fga.reduce((tot, curr) => tot + curr, 0) +
+            0.44 * fta.reduce((tot, curr) => tot + curr, 0)
+        ))) * 100
+
+        return ts.toFixed(2);
+    };
+
     const getLastFiveGames = () => {
         if (!playerStats) return [];
 
@@ -233,20 +277,26 @@ function PlayerExample({ data, playerid }) {
                         </Block>
                         <HeadingLevel>
                             <Heading styleLevel={3}>{data.firstname} {data.lastname}</Heading>
-                            <Heading styleLevel={6}>{referenceData.team ? referenceData.team.name : ""} {referenceData ? referenceData.pos : ""}</Heading>
+                            <Heading styleLevel={6}>
+                                {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
+                                {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
+                                {referenceData.team ? referenceData.team.name : ""} &nbsp;
+                                {personalData && personalData.leagues ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                {referenceData ? referenceData.pos : ""}
+                            </Heading>
                         </HeadingLevel>
 
-                        <Block display="flex" justifyContent="space-around" width="50%">
+                        <Block display="flex" justifyContent="space-around" width="60%">
                             <LabelXSmall>PPG</LabelXSmall>
                             <LabelXSmall>RPG</LabelXSmall>
                             <LabelXSmall>APG</LabelXSmall>
                             <LabelXSmall>TS%</LabelXSmall>
                         </Block>
-                        <Block display="flex" justifyContent="space-around" width="50%">
+                        <Block display="flex" justifyContent="space-around" width="60%">
                             <LabelMedium>{calculateAveragePointsPerGame()}</LabelMedium>
                             <LabelMedium>{calculateAverageReboundsPerGame()}</LabelMedium>
                             <LabelMedium>{calculateAverageAssistsPerGame()}</LabelMedium>
-                            <LabelMedium>N/A</LabelMedium>
+                            <LabelMedium>{calculateTS()}</LabelMedium>
                         </Block>
                     </Block>
                     <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px" }}>
