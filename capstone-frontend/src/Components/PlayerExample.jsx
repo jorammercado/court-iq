@@ -237,12 +237,9 @@ function PlayerExample({ data, playerid }) {
 
     const getLastFiveGames = () => {
         if (!playerStats) return [];
+        const copyStats = [...playerStats].reverse()
 
-        const sortedStats = playerStats.sort(
-            (a, b) => new Date(b.date) - new Date(a.date)
-        );
-
-        return sortedStats.slice(0, 5);
+        return copyStats.slice(0, 5);
     };
 
     const overrides = {};
@@ -403,7 +400,7 @@ function PlayerExample({ data, playerid }) {
                         {playerStats ? (
                             <Table
                                 overrides={overrides}
-                                columns={["Assists", "Blocks", "Points", "Team"]}
+                                columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", ]}
                                 data={getLastFiveGames().map((stat) => [
                                     stat.assists,
                                     stat.blocks,
