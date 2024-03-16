@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import TeamStatsComponent from '../Components/TeamStatsComponent';
 import PlayerStatsComponent from '../Components/PlayerStatsE'
+import TeamScheduleComponent from '../Components/TeamScheduleComponent';
+import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
 import "./TeamsPage.scss"
 
 const TeamsPage = () => {
@@ -62,9 +64,15 @@ const TeamsPage = () => {
 
                 </select>
             </div>
+            <div className="teamLeaders">
+    <h2>Team Leaders</h2>
+    <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
+</div>
             </div>
+            <TeamScheduleComponent teamId={teamId} season={season}/>
             <TeamStatsComponent teamId={teamId} season={season}/>
             <PlayerStatsComponent team={teamId} season={season}/>
+
         </div>
     );
 }

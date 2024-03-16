@@ -15,7 +15,7 @@
     "@react-google-maps/api": "^2.19.2",
     "animate.css": "^4.1.1",
     "axios": "^1.6.7",
-    "baseui": "^0.0.0-next-805977873",
+    "baseui": "^0.0.0-next-f88694cb3",
     "bootstrap": "^5.3.2",
     "chart.js": "^4.4.1",
     "d3": "^7.8.5",
@@ -30,6 +30,7 @@
     "react-social-login-buttons": "^3.9.1",
     "sass": "^1.71.0",
     "styled-components": "^6.1.8",
+    "styletron-engine-atomic": "^1.6.2",
     "styletron-engine-monolithic": "^1.0.0",
     "styletron-react": "^6.1.1"
   },

@@ -23,9 +23,9 @@ const TeamStatsComponent = ({ teamId, season }) => {
 
             try {
                 const response = await axios.request(options);
-                // Filter out unwanted stats here by checking their keys or values
                 const filteredData = response.data.response[0];
-                const keysToRemove = ['fastBreakPoints', 'pointsInPaint', 'biggestLead', 'secondChancePoints', 'pointsOffTurnovers', 'longestRun'];
+                // Add 'plusMinus' to keysToRemove to exclude it from the table
+                const keysToRemove = ['fastBreakPoints', 'pointsInPaint', 'biggestLead', 'secondChancePoints', 'pointsOffTurnovers', 'longestRun', 'plusMinus'];
                 keysToRemove.forEach(key => delete filteredData[key]); // Remove specified keys
                 setTeamStats([filteredData]); // Wrap in array for TableBuilder
             } catch (error) {
@@ -40,7 +40,7 @@ const TeamStatsComponent = ({ teamId, season }) => {
         return <p>Loading team statistics...</p>;
     }
 
-    // Since all stats are in a single row, we prepare columns dynamically based on keys
+    // Prepare columns dynamically based on keys, excluding 'plusMinus'
     const statColumns = Object.keys(teamStats[0]).map(key => ({
         header: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the first letter
         id: key,
