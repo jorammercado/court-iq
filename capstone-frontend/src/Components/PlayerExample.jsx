@@ -47,7 +47,7 @@ function PlayerExample({ data, playerid }) {
     })
     useEffect(() => {
         const player = `${data.firstname.toLowerCase()}` + ` ${data.lastname.toLowerCase()}`
-        console.log(player)
+        // console.log(player)
         fetch(`${VITE_BASE_URL}/playerimages/${player}`)
             .then(response => response.json())
             .then(playerImage => {
@@ -70,13 +70,15 @@ function PlayerExample({ data, playerid }) {
     const [fgp, setFGP] = useState([]);
     const [tpp, setTPP] = useState([]);
     const [ftp, setFTP] = useState([]);
-    const [dd, setDD] = useState(0);
-    const [td, setTD] = useState(0);
+    const [dd, setDD] = useState("n/a");
+    const [td, setTD] = useState("n/a");
     const [team, setTeam] = useState([])
     const [personalData, setPersonalData] = useState({});
     const [selectedSeason, setSelectedSeason] = useState("2023");
     const [fga, setFGA] = useState([])
     const [fta, setFTA] = useState([])
+    const [last5Games, setLast5Games] = useState([])
+    const [last5Ids, setLast5Ids] = useState([])
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -94,7 +96,7 @@ function PlayerExample({ data, playerid }) {
                     }
                 });
                 setPersonalData(response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
-                console.log("Personal Data= ", response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
+                // console.log("Personal Data= ", response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
             } catch (error) {
                 console.error(error);
             }
@@ -137,12 +139,46 @@ function PlayerExample({ data, playerid }) {
                 setFGP(response.data.response.map((e) => e.fgp));
                 setTPP(response.data.response.map((e) => e.tpp));
                 setFTP(response.data.response.map((e) => e.ftp));
+                setLast5Ids([response.data.response[response.data.response.length - 1].game.id,
+                response.data.response[response.data.response.length - 2].game.id,
+                response.data.response[response.data.response.length - 3].game.id,
+                response.data.response[response.data.response.length - 4].game.id,
+                response.data.response[response.data.response.length - 5].game.id])
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
         };
         fetchPlayerStats();
     }, [playerid, selectedSeason]);
+
+
+    useEffect(() => {
+        const fetchLast5Games = async () => {
+            const data = []
+            for (let i = 0; i < last5Ids.length; i++) {
+                try {
+                    const response = await axios.request({
+                        method: 'GET',
+                        url: `https://${VITE_X_RAPIDAPI_HOST2}/games`,
+                        params: {
+                            id: last5Ids[i]
+                        },
+                        headers: {
+                            'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
+                            'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
+                        }
+                    });
+                    data.push(response.data.response[0]);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            setLast5Games(data);
+            console.log("LAST5=", data)
+        };
+        fetchLast5Games();
+    }, [last5Ids]);
+
 
     const calculateAveragePointsPerGame = () => {
         if (!playerStats) return null;
@@ -239,6 +275,7 @@ function PlayerExample({ data, playerid }) {
         if (!playerStats) return [];
         const copyStats = [...playerStats].reverse()
 
+        // console.log("last5=", copyStats.slice(0, 5))
         return copyStats.slice(0, 5);
     };
 
@@ -362,7 +399,7 @@ function PlayerExample({ data, playerid }) {
                 </Block>
                 <Block className="chart-container" width="100%" display="flex" flexDirection="column" alignItems="center" padding="scale500">
                     <Block width="40%" overflow="auto">
-                        
+
                         {playerStats ? (
                             <Table
                                 overrides={overrides}
@@ -383,8 +420,8 @@ function PlayerExample({ data, playerid }) {
                                         (ftp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / ftp.length).toFixed(2),
                                         dd,
                                         td,
-                              
-                                        
+
+
                                     ],
                                 ]}
                             />
@@ -394,19 +431,43 @@ function PlayerExample({ data, playerid }) {
                     </Block>
                     <Block width="50%" overflow="auto">
                         <Block display="flex" justifyContent="center" width="100%">
-                            <HeadingSmall color="black" marginTop="50px">Last 5 Games</HeadingSmall>
+                            <HeadingSmall color="black" marginTop="20px">Last 5 Games</HeadingSmall>
                         </Block>
 
                         {playerStats ? (
                             <Table
                                 overrides={overrides}
-                                columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", ]}
-                                data={getLastFiveGames().map((stat) => [
-                                    stat.assists,
-                                    stat.blocks,
-                                    stat.points,
-                                    stat.team.name,
-                                ])}
+                                columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
+                                    "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}
+                                data={getLastFiveGames().map((game, index) => {
+                                    if (last5Games.length > 0) {
+                                        return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
+                                        `${referenceData.team ? referenceData.team.name : "n/a"}`,
+                                        `${referenceData.team
+                                            ? last5Games[index].teams.home
+                                                ? referenceData.team.name === last5Games[index].teams.home.name
+                                                    ? last5Games[index].teams.visitors.name
+                                                    : last5Games[index].teams.home.name
+                                                : "n/a"
+                                            : "n/a"}`,
+                                        `${referenceData.team
+                                            ? last5Games[index].teams.home
+                                                ? referenceData.team.name === last5Games[index].teams.home.name
+                                                    ? last5Games[index].scores.home.points + "-" + last5Games[index].scores.visitors.points
+                                                    : last5Games[index].scores.visitors.points + "-" + last5Games[index].scores.home.points
+                                                : "n/a"
+                                            : "n/a"}`,
+                                        game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
+                                        game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
+                                        game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
+                                    }
+                                    else {
+                                        return ["n/a", "n/a", "n/a", "n/a", game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
+                                            game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
+                                            game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
+                                    }
+                                }, last5Games
+                                )}
                             />
                         ) : (
                             <p>Loading...</p>
