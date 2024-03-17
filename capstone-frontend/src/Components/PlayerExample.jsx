@@ -16,6 +16,19 @@ import {
     HeadingMedium,
     HeadingSmall
 } from "baseui/typography";
+import { HistogramWithAxis } from "./HistogramWithAxis";
+import { Card, StyledBody } from "baseui/card";
+import { useStyletron } from "baseui";
+import {
+  StatefulDataTable,
+  BooleanColumn,
+  CategoricalColumn,
+  CustomColumn,
+  NumericalColumn,
+  StringColumn,
+  COLUMNS,
+  NUMERICAL_FORMATS,
+} from "baseui/data-table";
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -397,81 +410,92 @@ function PlayerExample({ data, playerid }) {
                         <Spin />
                     )}
                 </Block>
-                <Block className="chart-container" width="100%" display="flex" flexDirection="column" alignItems="center" padding="scale500">
-                    <Block width="40%" overflow="auto">
-
-                        {playerStats ? (
-                            <Table
-                                overrides={overrides}
-                                columns={["Season", "MPG", "PPG", "RPG", "APG", "SPG", "BPG", "TPG", "FG%", "3P%", "FT%", "DD", "TD"
-                                ]}
-                                data={[
-                                    [
-                                        selectedSeason,
-                                        (minutes.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / minutes.length).toFixed(2),
-                                        (points.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / points.length).toFixed(2),
-                                        (rebounds.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / rebounds.length).toFixed(2),
-                                        (assists.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / assists.length).toFixed(2),
-                                        (steals.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / steals.length).toFixed(2),
-                                        (blocks.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / blocks.length).toFixed(2),
-                                        (turnovers.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / turnovers.length).toFixed(2),
-                                        (fgp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / fgp.length).toFixed(2),
-                                        (tpp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / tpp.length).toFixed(2),
-                                        (ftp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / ftp.length).toFixed(2),
-                                        dd,
-                                        td,
-
-
-                                    ],
-                                ]}
-                            />
-                        ) : (
-                            <p>Loading...</p>
-                        )}
+                <Block className="chart-container"  >
+                    <Block className="left">
+                        <HistogramWithAxis></HistogramWithAxis>
+                        <HistogramWithAxis></HistogramWithAxis>
+                        <HistogramWithAxis></HistogramWithAxis>
                     </Block>
-                    <Block width="50%" overflow="auto">
-                        <Block display="flex" justifyContent="center" width="100%">
-                            <HeadingSmall color="black" marginTop="20px">Last 5 Games</HeadingSmall>
-                        </Block>
+                    <Block className="middle">
+                        <Block width="100%" overflow="auto">
+                            {playerStats ? (
+                                <Table
+                                    overrides={overrides}
+                                    columns={["Season", "MPG", "PPG", "RPG", "APG", "SPG", "BPG", "TPG", "FG%", "3P%", "FT%", "DD", "TD"
+                                    ]}
+                                    data={[
+                                        [
+                                            selectedSeason,
+                                            (minutes.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / minutes.length).toFixed(2),
+                                            (points.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / points.length).toFixed(2),
+                                            (rebounds.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / rebounds.length).toFixed(2),
+                                            (assists.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / assists.length).toFixed(2),
+                                            (steals.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / steals.length).toFixed(2),
+                                            (blocks.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / blocks.length).toFixed(2),
+                                            (turnovers.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / turnovers.length).toFixed(2),
+                                            (fgp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / fgp.length).toFixed(2),
+                                            (tpp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / tpp.length).toFixed(2),
+                                            (ftp.map(e => Number(e)).reduce((tot, curr) => tot + curr, 0) / ftp.length).toFixed(2),
+                                            dd,
+                                            td,
 
-                        {playerStats ? (
-                            <Table
-                                overrides={overrides}
-                                columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
-                                    "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}
-                                data={getLastFiveGames().map((game, index) => {
-                                    if (last5Games.length > 0) {
-                                        return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
-                                        `${referenceData.team ? referenceData.team.name : "n/a"}`,
-                                        `${referenceData.team
-                                            ? last5Games[index].teams.home
-                                                ? referenceData.team.name === last5Games[index].teams.home.name
-                                                    ? last5Games[index].teams.visitors.name
-                                                    : last5Games[index].teams.home.name
-                                                : "n/a"
-                                            : "n/a"}`,
-                                        `${referenceData.team
-                                            ? last5Games[index].teams.home
-                                                ? referenceData.team.name === last5Games[index].teams.home.name
-                                                    ? last5Games[index].scores.home.points + "-" + last5Games[index].scores.visitors.points
-                                                    : last5Games[index].scores.visitors.points + "-" + last5Games[index].scores.home.points
-                                                : "n/a"
-                                            : "n/a"}`,
-                                        game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
-                                        game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
-                                        game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
-                                    }
-                                    else {
-                                        return ["n/a", "n/a", "n/a", "n/a", game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
+
+                                        ],
+                                    ]}
+                                />
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </Block>
+                        <Block width="100%" overflow="auto">
+                            <Block display="flex" justifyContent="center" width="100%">
+                                <HeadingSmall color="black" marginTop="20px">Last 5 Games</HeadingSmall>
+                            </Block>
+
+                            {playerStats ? (
+                                <Table
+                                    overrides={overrides}
+                                    columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
+                                        "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}
+                                    data={getLastFiveGames().map((game, index) => {
+                                        if (last5Games.length > 0) {
+                                            return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
+                                            `${referenceData.team ? referenceData.team.name : "n/a"}`,
+                                            `${referenceData.team
+                                                ? last5Games[index].teams.home
+                                                    ? referenceData.team.name === last5Games[index].teams.home.name
+                                                        ? last5Games[index].teams.visitors.name
+                                                        : last5Games[index].teams.home.name
+                                                    : "n/a"
+                                                : "n/a"}`,
+                                            `${referenceData.team
+                                                ? last5Games[index].teams.home
+                                                    ? referenceData.team.name === last5Games[index].teams.home.name
+                                                        ? last5Games[index].scores.home.points + "-" + last5Games[index].scores.visitors.points
+                                                        : last5Games[index].scores.visitors.points + "-" + last5Games[index].scores.home.points
+                                                    : "n/a"
+                                                : "n/a"}`,
+                                            game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
                                             game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
                                             game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
-                                    }
-                                }, last5Games
-                                )}
-                            />
-                        ) : (
-                            <p>Loading...</p>
-                        )}
+                                        }
+                                        else {
+                                            return ["n/a", "n/a", "n/a", "n/a", game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
+                                                game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
+                                                game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
+                                        }
+                                    }, last5Games
+                                    )}
+                                />
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </Block>
+                    </Block>
+                    <Block className="right">
+                        <HistogramWithAxis></HistogramWithAxis>
+                        <HistogramWithAxis></HistogramWithAxis>
+                        <HistogramWithAxis></HistogramWithAxis>
                     </Block>
                 </Block>
             </Block>
