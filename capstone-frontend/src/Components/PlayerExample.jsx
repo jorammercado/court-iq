@@ -88,6 +88,7 @@ function PlayerExample({ data, playerid }) {
     const [fta, setFTA] = useState([])
     const [last5Games, setLast5Games] = useState([])
     const [last5Ids, setLast5Ids] = useState([])
+    const [tpm, setTPM] = useState([]);
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -152,6 +153,7 @@ function PlayerExample({ data, playerid }) {
                 response.data.response[response.data.response.length - 3].game.id,
                 response.data.response[response.data.response.length - 4].game.id,
                 response.data.response[response.data.response.length - 5].game.id])
+                setTPM(response.data.response.map((e) => e.tpm));
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
             }
@@ -388,9 +390,9 @@ function PlayerExample({ data, playerid }) {
 
                 <Block className="chart-container"  >
                     <Block className="left">
-                        <HistogramWithAxis></HistogramWithAxis>
-                        <HistogramWithAxis></HistogramWithAxis>
-                        <HistogramWithAxis></HistogramWithAxis>
+                        <HistogramWithAxis title={`Points`} data={points}></HistogramWithAxis>
+                        <HistogramWithAxis title={`Assist`} data={assists}></HistogramWithAxis>
+                        <HistogramWithAxis title={`Rebounds`} data={rebounds}></HistogramWithAxis>
                     </Block>
                     <Block className="middle">
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
@@ -490,9 +492,9 @@ function PlayerExample({ data, playerid }) {
                         </Block>
                     </Block>
                     <Block className="right">
-                        <HistogramWithAxis></HistogramWithAxis>
-                        <HistogramWithAxis></HistogramWithAxis>
-                        <HistogramWithAxis></HistogramWithAxis>
+                        <HistogramWithAxis title={`Turnovers`} data={turnovers}></HistogramWithAxis>
+                        <HistogramWithAxis title={`Three Pointers`} data={tpm}></HistogramWithAxis>
+                        <HistogramWithAxis title={`+/-`} data={plusMinus}></HistogramWithAxis>
                     </Block>
                 </Block>
             </Block>

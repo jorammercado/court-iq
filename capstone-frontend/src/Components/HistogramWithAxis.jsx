@@ -1,6 +1,6 @@
-import { data } from "./data";
+
 import { Histogram } from "./Histogram";
 
-export const HistogramWithAxis = ({ width = 200, height = 200 }) => (
-  <Histogram width={width} height={height} data={data} />
+export const HistogramWithAxis = ({ width = 250, height = 200, title, data }) => (
+  <Histogram width={width} height={height} data={data} title={title}  />
 );
