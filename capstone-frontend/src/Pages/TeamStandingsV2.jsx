@@ -24,8 +24,7 @@ import {
   HeadingLarge,
   HeadingMedium,
   HeadingSmall,
-  HeadingXSmall,
-  HeadingXXSmall
+  HeadingXSmall
 } from "baseui/typography";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
