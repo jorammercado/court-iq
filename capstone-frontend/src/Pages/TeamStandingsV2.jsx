@@ -23,10 +23,13 @@ import {
   LabelXSmall,
   HeadingLarge,
   HeadingMedium,
-  HeadingSmall
+  HeadingSmall,
+  HeadingXSmall,
+  HeadingXXSmall
 } from "baseui/typography";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
+import { Card, StyledBody } from "baseui/card";
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;
@@ -244,144 +247,243 @@ const TeamStandingsV2 = () => {
   }
 
   return (
-    <div className="table__contain ">
-     
-        <Block className="table__header" marginTop="-50px">
-          
+
+    <Block display="flex" justifyContent="center" alignItems="stretch" height="100%">
+
+      <Block flex={1}
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        className="west-leaders"
+        marginTop="40px"
+        marginLeft="20px"
+        paddingLeft="30px"
+        paddingRight="30px"
+        >
+        {/* West Leaders content here */}
+        <Block alignItems="center" justifyContent="center" display="flex">
+          <HeadingSmall color="black" marginBottom="-80px">West Leaders</HeadingSmall>
+        </Block>
+
+        <Block>
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+        <Block >
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+        <Block >
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall >Trivia</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+
+      </Block>
+
+      <Block flex={2} display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        className="table__contain"
+        height="100%">
+
+        <Block className="table__header" marginTop="-190px">
+
           <Block display="flex" justifyContent="center" width="100%">
-          <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
-            <img
-              src={logo}
-              alt={`NBA Logo`}
-              style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }} 
-            />
-          </Link> &nbsp; &nbsp; 
+            <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
+              <img
+                src={logo}
+                alt={`NBA Logo`}
+                style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }}
+              />
+            </Link> &nbsp; &nbsp;
             <HeadingLevel>
               <Heading styleLevel={4} color="black" >{stage} {season}</Heading>
             </HeadingLevel>
           </Block>
 
         </Block>
-     
-      <Block display="flex" justifyContent="center" width="100%" marginTop="30px">
-        <HeadingMedium color="black" >West</HeadingMedium>
+
+        <Block display="flex" justifyContent="center" width="100%" marginTop="30px">
+          <HeadingMedium color="black" >West</HeadingMedium>
+        </Block>
+        <TableBuilder className="animate__animated animate__zoomIn"
+          overrides={{ Root: { style: { maxHeight: '300px' } } }}
+          data={DATA}
+        >
+          <TableBuilderColumn header="Team">
+            {(row) => (
+              <AvatarCell
+                src={row.avatarSrc}
+                title={row.name}
+                subtitle={row.title}
+              />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Position">
+            {(row) => (
+              <NumberCell value={row.position} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Lost">
+            {(row) => (
+              <NumberCell value={row.gamesLost} delta={-0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Lost %">
+            {(row) => (
+              <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Won">
+            {(row) => (
+              <NumberCell value={row.gamesWon} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Won %">
+            {(row) => (
+              <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Points Against">
+            {(row) => (
+              <NumberCell value={row.pointsAgainst} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Points For">
+            {(row) => (
+              <NumberCell value={row.pointsFor} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+        </TableBuilder>
+        <Block display="flex" justifyContent="center" width="100%" marginTop="-50px">
+          <HeadingMedium color="black" marginTop="50px">East</HeadingMedium>
+        </Block>
+        <TableBuilder className="animate__animated animate__zoomIn"
+          overrides={{ Root: { style: { maxHeight: '300px' } } }}
+          data={DATA2}
+        >
+          <TableBuilderColumn header="Team">
+            {(row) => (
+              <AvatarCell
+                src={row.avatarSrc}
+                title={row.name}
+                subtitle={row.title}
+              />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Position">
+            {(row) => (
+              <NumberCell value={row.position} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Lost">
+            {(row) => (
+              <NumberCell value={row.gamesLost} delta={-0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Lost %">
+            {(row) => (
+              <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Won">
+            {(row) => (
+              <NumberCell value={row.gamesWon} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Games Won %">
+            {(row) => (
+              <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Points Against">
+            {(row) => (
+              <NumberCell value={row.pointsAgainst} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+
+          <TableBuilderColumn header="Points For">
+            {(row) => (
+              <NumberCell value={row.pointsFor} delta={0.51} />
+            )}
+          </TableBuilderColumn>
+        </TableBuilder>
       </Block>
-      <TableBuilder className="animate__animated animate__zoomIn"
-        overrides={{ Root: { style: { maxHeight: '300px' } } }}
-        data={DATA}
-      >
-        <TableBuilderColumn header="Team">
-          {(row) => (
-            <AvatarCell
-              src={row.avatarSrc}
-              title={row.name}
-              subtitle={row.title}
-            />
-          )}
-        </TableBuilderColumn>
 
-        <TableBuilderColumn header="Position">
-          {(row) => (
-            <NumberCell value={row.position} delta={0.51} />
-          )}
-        </TableBuilderColumn>
+      <Block flex={1}
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        className="west-leaders"
+        marginTop="40px"
+        marginLeft="20px"
+        paddingLeft="30px"
+        paddingRight="30px"
+        >
+        {/* West Leaders content here */}
+        <Block alignItems="center" justifyContent="center" display="flex">
+          <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
+        </Block>
 
-        <TableBuilderColumn header="Games Lost">
-          {(row) => (
-            <NumberCell value={row.gamesLost} delta={-0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Lost %">
-          {(row) => (
-            <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Won">
-          {(row) => (
-            <NumberCell value={row.gamesWon} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Won %">
-          {(row) => (
-            <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Points Against">
-          {(row) => (
-            <NumberCell value={row.pointsAgainst} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Points For">
-          {(row) => (
-            <NumberCell value={row.pointsFor} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-      </TableBuilder>
-      <Block display="flex" justifyContent="center" width="100%" marginTop="-50px">
-        <HeadingMedium color="black" marginTop="50px">East</HeadingMedium>
+        <Block>
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+        <Block>
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+        <Block>
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall >Trivia</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+        
       </Block>
-      <TableBuilder className="animate__animated animate__zoomIn"
-        overrides={{ Root: { style: { maxHeight: '300px' } } }}
-        data={DATA2}
-      >
-        <TableBuilderColumn header="Team">
-          {(row) => (
-            <AvatarCell
-              src={row.avatarSrc}
-              title={row.name}
-              subtitle={row.title}
-            />
-          )}
-        </TableBuilderColumn>
 
-        <TableBuilderColumn header="Position">
-          {(row) => (
-            <NumberCell value={row.position} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Lost">
-          {(row) => (
-            <NumberCell value={row.gamesLost} delta={-0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Lost %">
-          {(row) => (
-            <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Won">
-          {(row) => (
-            <NumberCell value={row.gamesWon} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Games Won %">
-          {(row) => (
-            <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Points Against">
-          {(row) => (
-            <NumberCell value={row.pointsAgainst} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-
-        <TableBuilderColumn header="Points For">
-          {(row) => (
-            <NumberCell value={row.pointsFor} delta={0.51} />
-          )}
-        </TableBuilderColumn>
-      </TableBuilder>
-    </div>
+    </Block>
   );
 }
 
