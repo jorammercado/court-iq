@@ -6,6 +6,11 @@ import { Button, KIND } from "baseui/button";
 import { styled } from 'baseui';
 import { styled as styled2 } from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import { Card, StyledBody } from "baseui/card";
+import { Block } from "baseui/block";
+import {
+  HeadingXSmall
+} from "baseui/typography";
 
 import {
   signInWithGoogle,
@@ -27,12 +32,14 @@ const StyledButtons = styled('div', {
   padding: '20px',
   paddingLeft: "10px",
   paddingRight: "10px",
-  border: '1px solid #ECECEC',
-  borderRadius: '4px',
-  backgroundColor: '#585858',
   overflow: 'auto',
   display: 'flex',
   flexDirection: 'column',
+
+  '@media (max-width: 400px)': {
+    width: '250px', 
+    padding: '0', 
+  },
 
 });
 
@@ -55,32 +62,41 @@ export const Login = ({ currentUser,
   return (
     <div className="login">
       <section className="login__wrapper">
-        <div className="animate__animated animate__rotateIn">
+        <div className="a">
           <div className="contain__buttons">
-
             <div style={{ display: 'flex', flexWrap: 'wrap' }} >
-              <Wrapper>
-                <StyledButtons>
+              <Block >
+                <Card overrides={{
+                  Root: {
+                    style: {
+                      width: "auto", backgroundColor: "#ED751C", border: '1px solid #ECECEC',
+                      borderRadius: '4px',
+                    }
+                  }
+                }}>
+                  <HeadingXSmall ></HeadingXSmall>
+                  <StyledBody>
+                    <Wrapper>
+                      <StyledButtons>
+                        <div className="login__button">
+                          <GoogleLoginButton onClick={signInWithGoogle} className="animate__animated animate__fadeInUp">
+                          </GoogleLoginButton>
+                        </div>
 
-                  <div className="login__button">
-                    <GoogleLoginButton onClick={signInWithGoogle} className="animate__animated animate__fadeInUp">
-                    </GoogleLoginButton>
-                  </div>
+                        <div className="login__button">
+                          <FacebookLoginButton onClick={signInWithFacebook} className="animate__animated animate__fadeInUp">
+                          </FacebookLoginButton>
+                        </div>
 
-                  <div className="login__button">
-                    <FacebookLoginButton onClick={signInWithFacebook} className="animate__animated animate__fadeInUp">
-                    </FacebookLoginButton>
-                  </div>
-
-                  <button onClick={signInAnon}
-                    className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
-                    Continue as Guest
-                  </button>
-
-
-                  
-                </StyledButtons>
-              </Wrapper>
+                        <button onClick={signInAnon}
+                          className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
+                          Continue as Guest
+                        </button>
+                      </StyledButtons>
+                    </Wrapper>
+                  </StyledBody>
+                </Card>
+              </Block>
             </div>
           </div>
         </div>
