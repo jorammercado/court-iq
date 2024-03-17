@@ -37,7 +37,6 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             label: 'Players',
             navExitIcon: ChevronLeft,
             children: [
-                { icon: Blank, label: 'Rosters' },
                 { icon: Blank, label: 'Recently Searched' },
                 { icon: Blank, label: 'Favorites' }
             ],
@@ -47,6 +46,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
             label: 'Teams',
             navExitIcon: ChevronLeft,
             children: [
+                { icon: Blank, label: 'Rosters' },
                 { icon: Blank, label: 'Standings' },
                 { icon: Blank, label: 'Stats' },
                 { icon: Blank, label: 'Schedule' },
