@@ -79,6 +79,22 @@ const TeamStandingsV2 = () => {
     getData()
   }, [])
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+
   if (data == null || data === undefined || data.length === 0 || !data)
     return (
       <div className="v2__standings">
@@ -249,58 +265,64 @@ const TeamStandingsV2 = () => {
 
     <Block display="flex" justifyContent="center" alignItems="stretch" height="100%">
 
-      <Block flex={1}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        className="west-leaders"
-        marginTop="40px"
-        marginLeft="20px"
-        paddingLeft="30px"
-        paddingRight="30px"
+      {!isMobile ?
+        <Block flex={1}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          className="west-leaders"
+          marginTop="40px"
+          marginLeft="20px"
+          paddingLeft="30px"
+          paddingRight="30px"
         >
-        {/* West Leaders content here */}
-        <Block alignItems="center" justifyContent="center" display="flex">
-          <HeadingSmall color="black" marginBottom="-80px">West Leaders</HeadingSmall>
-        </Block>
+          {/* West Leaders content here */}
+          <Block alignItems="center" justifyContent="center" display="flex">
+            <HeadingSmall color="black" marginBottom="-80px">West Leaders</HeadingSmall>
+          </Block>
 
-        <Block>
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-            <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
-        <Block >
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-            <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
-        <Block >
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-            <HeadingXSmall >Trivia</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
+          <Block>
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+              <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
+              <StyledBody>
+                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                faucibus ex, non facilisis nisl.
+              </StyledBody>
+            </Card>
+          </Block>
+          <Block >
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+              <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
+              <StyledBody>
+                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                faucibus ex, non facilisis nisl.
+              </StyledBody>
+            </Card>
+          </Block>
+          <Block >
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+              <HeadingXSmall >Trivia</HeadingXSmall>
+              <StyledBody>
+                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                faucibus ex, non facilisis nisl.
+              </StyledBody>
+            </Card>
+          </Block>
 
-      </Block>
+        </Block>
+        : <></>
+      }
 
-      <Block flex={2} display="flex"
+      <Block flex={isMobile ? 'unset' : 2} display="flex"
         flexDirection="column"
         justifyContent="space-between"
         className="table__contain"
-        height="100%">
+        height="100%"
+        maxWidth={isMobile ? "85%" : "55%"}
+        style={{ width: isMobile ? '100%' : 'unset' }}
+      >
 
-        <Block className="table__header" marginTop="-190px">
+        <Block className="table__header" marginTop={!isMobile?"-190px":"-260px"}>
 
           <Block display="flex" justifyContent="center" width="100%">
             <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
@@ -311,13 +333,13 @@ const TeamStandingsV2 = () => {
               />
             </Link> &nbsp; &nbsp;
             <HeadingLevel>
-              <Heading styleLevel={4} color="black" >{stage} {season}</Heading>
+              <Heading styleLevel={!isMobile?4:6} color="black" >{stage} {season}</Heading>
             </HeadingLevel>
           </Block>
 
         </Block>
 
-        <Block display="flex" justifyContent="center" width="100%" marginTop="30px">
+        <Block display="flex" justifyContent="center" width="100%" marginTop="10px">
           <HeadingMedium color="black" >West</HeadingMedium>
         </Block>
         <TableBuilder className="animate__animated animate__zoomIn"
@@ -437,51 +459,53 @@ const TeamStandingsV2 = () => {
         </TableBuilder>
       </Block>
 
-      <Block flex={1}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        className="west-leaders"
-        marginTop="40px"
-        marginLeft="20px"
-        paddingLeft="30px"
-        paddingRight="30px"
+      {!isMobile ?
+        <Block flex={1}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          className="west-leaders"
+          marginTop="40px"
+          marginLeft="20px"
+          paddingLeft="30px"
+          paddingRight="30px"
         >
-        {/* West Leaders content here */}
-        <Block alignItems="center" justifyContent="center" display="flex">
-          <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
-        </Block>
+          {/* West Leaders content here */}
+          <Block alignItems="center" justifyContent="center" display="flex">
+            <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
+          </Block>
 
-        <Block>
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-            <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
-        <Block>
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-            <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
-        <Block>
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-            <HeadingXSmall >Trivia</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
-        
-      </Block>
+          <Block>
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+              <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
+              <StyledBody>
+                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                faucibus ex, non facilisis nisl.
+              </StyledBody>
+            </Card>
+          </Block>
+          <Block>
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+              <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
+              <StyledBody>
+                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                faucibus ex, non facilisis nisl.
+              </StyledBody>
+            </Card>
+          </Block>
+          <Block>
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+              <HeadingXSmall >Trivia</HeadingXSmall>
+              <StyledBody>
+                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                faucibus ex, non facilisis nisl.
+              </StyledBody>
+            </Card>
+          </Block>
 
+        </Block>
+        : <></>
+      }
     </Block>
   );
 }

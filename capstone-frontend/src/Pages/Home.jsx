@@ -7,22 +7,23 @@ import {
 import ChatApp from "../Components/ChatApp";
 import "animate.css";
 import logoInColor from '../assets/LOGO_IN_COLOR.svg';
+import { Block } from "baseui/block";
 
 function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className="home">
-            <div className="header-container">
-                <div className="sub-title">
+        <Block className="home">
+            <Block className="header-container">
+                <Block className="sub-title">
                     Elevate Your Game with CoutIQ: Where Analytics Meet Action
-                </div>
-                <div className="logo animate__animated animate__bounceInLeft">
+                </Block>
+                <Block className="logo animate__animated animate__bounceInLeft">
                     <img src={logoInColor} alt="Logo" />
-                </div>
-            </div>
+                </Block>
+            </Block>
             <ChatApp />
-        </div>
+        </Block>
     )
 }
 
