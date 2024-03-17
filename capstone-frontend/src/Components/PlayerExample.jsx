@@ -20,14 +20,14 @@ import { HistogramWithAxis } from "./HistogramWithAxis";
 import { Card, StyledBody } from "baseui/card";
 import { useStyletron } from "baseui";
 import {
-  StatefulDataTable,
-  BooleanColumn,
-  CategoricalColumn,
-  CustomColumn,
-  NumericalColumn,
-  StringColumn,
-  COLUMNS,
-  NUMERICAL_FORMATS,
+    StatefulDataTable,
+    BooleanColumn,
+    CategoricalColumn,
+    CustomColumn,
+    NumericalColumn,
+    StringColumn,
+    COLUMNS,
+    NUMERICAL_FORMATS,
 } from "baseui/data-table";
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
@@ -38,19 +38,16 @@ const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PlayerExample({ data, playerid }) {
     let navigate = useNavigate()
+    const [isScreenLargeEnough, setIsScreenLargeEnough] = useState(window.innerWidth > 768);
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     useEffect(() => {
         function handleResize() {
-            setWindowWidth(window.innerWidth);
+            setIsScreenLargeEnough(window.innerWidth > 768);
         }
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    const tableWidth = windowWidth < 768 ? '100%' : '60rem';
-
 
     const [playerImage, setPlayerImage] = useState({
         player_id: 0,
@@ -60,7 +57,6 @@ function PlayerExample({ data, playerid }) {
     })
     useEffect(() => {
         const player = `${data.firstname.toLowerCase()}` + ` ${data.lastname.toLowerCase()}`
-        // console.log(player)
         fetch(`${VITE_BASE_URL}/playerimages/${player}`)
             .then(response => response.json())
             .then(playerImage => {
@@ -109,7 +105,6 @@ function PlayerExample({ data, playerid }) {
                     }
                 });
                 setPersonalData(response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
-                // console.log("Personal Data= ", response.data.response.filter(e => Number(e.id) === Number(playerid))[0]);
             } catch (error) {
                 console.error(error);
             }
@@ -216,7 +211,7 @@ function PlayerExample({ data, playerid }) {
         let totalRebounds = 0;
         let totalGames = 0;
         playerStats.forEach((stat) => {
-            const rebounds = stat.totReb || 0; // Assuming totReb represents total rebounds
+            const rebounds = stat.totReb || 0;
             totalRebounds += parseInt(rebounds);
             totalGames++;
         });
@@ -288,7 +283,6 @@ function PlayerExample({ data, playerid }) {
         if (!playerStats) return [];
         const copyStats = [...playerStats].reverse()
 
-        // console.log("last5=", copyStats.slice(0, 5))
         return copyStats.slice(0, 5);
     };
 
@@ -391,25 +385,7 @@ function PlayerExample({ data, playerid }) {
                         />
                     </Block>
                 </Block>
-                <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
-                    <HeadingLarge color="black">Season Stats</HeadingLarge>
-                    {points.length > 0 ? (
-                        <Block className="graph" display="flex" justifyContent="center" alignItems="center" marginTop="-60px">
-                            <MyGraph
-                                playerStats={playerStats}
-                                points={points}
-                                assists={assists}
-                                rebounds={rebounds}
-                                threePoints={threePoints}
-                                plusMinus={plusMinus}
-                                minutes={minutes}
-                                blocks={blocks}
-                            />
-                        </Block>
-                    ) : (
-                        <Spin />
-                    )}
-                </Block>
+
                 <Block className="chart-container"  >
                     <Block className="left">
                         <HistogramWithAxis></HistogramWithAxis>
@@ -417,6 +393,27 @@ function PlayerExample({ data, playerid }) {
                         <HistogramWithAxis></HistogramWithAxis>
                     </Block>
                     <Block className="middle">
+                        <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
+                            <HeadingLarge color="black">Season Stats</HeadingLarge>
+                            {points.length > 0 ? (
+                                <Block className="graph" display="flex" justifyContent="center" alignItems="center" marginTop="-60px">
+                                    {isScreenLargeEnough ?
+                                        <MyGraph
+                                            playerStats={playerStats}
+                                            points={points}
+                                            assists={assists}
+                                            rebounds={rebounds}
+                                            threePoints={threePoints}
+                                            plusMinus={plusMinus}
+                                            minutes={minutes}
+                                            blocks={blocks}
+                                        /> : <div></div>
+                                    }
+                                </Block>
+                            ) : (
+                                <Spin />
+                            )}
+                        </Block>
                         <Block width="100%" overflow="auto">
                             {playerStats ? (
                                 <Table

@@ -7,10 +7,9 @@
     margin: auto;
 
     @media (max-width: 768px) {
-        .graph {
-            max-width: 100%;
-            padding: 0 10px;
-        }
+        max-width: 100%;
+        padding: 0 10px;
+        display: none;
     }
 }
 
@@ -23,6 +22,46 @@
     padding: 20px;
     height: 256px;
     margin-top: -1px;
+    align-items: center;
+    box-sizing: border-box;
+
+
+    .info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .head__shot,
+    .team__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -10px;
+
+        img,
+        .avatar {
+            height: auto;
+            max-width: auto;
+            max-height: 260px; 
+        }
+    }
+
+    @media (max-width: 1024px) {
+
+        .head__shot img,
+        .team__logo .avatar {
+            max-height: 190px; 
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        .head__shot,
+        .team__logo {
+            display: none; 
+        }
+    }
 }
 
 .filler {
@@ -36,21 +75,10 @@
 }
 
 
-.head__shot {
-    margin-top: -10px;
-}
-
-.head__shot,
-.info,
-.team__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .divider {
     margin-top: 20px;
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .chart-container {
@@ -60,39 +88,37 @@
     width: 100%;
     margin-bottom: 50px;
 
-    .left, .right {
+    .left,
+    .right {
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      }
-      
-      .middle {
-        flex: 2;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+
+    .middle {
+        flex: 3;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         max-width: 900px;
-      }
-}
-
-
-@media (max-width: 768px) {
-    .sub__heading {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .head__shot,
-    .info,
-    .team__logo {
         width: 100%;
-        margin-top: 10px;
-    }
 
-    .divider {
-        margin-top: 10px;
+        @media (max-width: 768px) {
+            flex: 1;
+            flex-direction: column;
+            padding: 5px;
+        }
+        
+        >div {
+            width: 100%; 
+        }
+
     }
 }
