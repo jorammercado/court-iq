@@ -23,13 +23,35 @@ const TeamStatsComponent = ({ teamId, season }) => {
 
             try {
                 const response = await axios.request(options);
-                const filteredData = response.data.response[0];
-                // Add 'plusMinus' to keysToRemove to exclude it from the table
-                const keysToRemove = ['fastBreakPoints', 'pointsInPaint', 'biggestLead', 'secondChancePoints', 'pointsOffTurnovers', 'longestRun', 'plusMinus'];
-                keysToRemove.forEach(key => delete filteredData[key]); // Remove specified keys
-                setTeamStats([filteredData]); // Wrap in array for TableBuilder
+                if (response.data.response && response.data.response.length > 0) {
+                    // Initialize a structure for totals with games played count
+                    let totals = { games: response.data.response.length };
+
+                    // Define stats to exclude from the averaging
+                    const excludeStats = ['fastBreakPoints', 'pointsInPaint', 'biggestLead', 'secondChancePoints', 'pointsOffTurnovers', 'longestRun', 'plusMinus'];
+
+                    // Aggregate stats for averages
+                    response.data.response.forEach(game => {
+                        Object.keys(game).forEach(stat => {
+                            if (!excludeStats.includes(stat) && typeof game[stat] === 'number') {
+                                totals[stat] = (totals[stat] || 0) + game[stat];
+                            }
+                        });
+                    });
+
+                    // Calculate averages, excluding games from division
+                    let averages = Object.keys(totals).reduce((acc, stat) => {
+                        acc[stat] = stat === 'games' ? totals[stat] : parseFloat((totals[stat] / totals.games).toFixed(2));
+                        return acc;
+                    }, {});
+
+                    setTeamStats([averages]);
+                } else {
+                    setTeamStats(null); // Use null to indicate no data or invalid structure
+                }
             } catch (error) {
-                console.error(error);
+                console.error('Failed to fetch team stats:', error);
+                setTeamStats(null);
             }
         };
 
@@ -40,15 +62,17 @@ const TeamStatsComponent = ({ teamId, season }) => {
         return <p>Loading team statistics...</p>;
     }
 
-    // Prepare columns dynamically based on keys, excluding 'plusMinus'
-    const statColumns = Object.keys(teamStats[0]).map(key => ({
-        header: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the first letter
-        id: key,
-    }));
+    // Dynamically generate columns for the stats, excluding the 'games' column from averaging
+    const statColumns = Object.keys(teamStats[0])
+      .filter(stat => !['games'].includes(stat)) // Optionally exclude 'games' from the columns if it's not needed
+      .map(key => ({
+          header: key.charAt(0).toUpperCase() + key.slice(1).replace(/[A-Z]/g, letter => ` ${letter}`), // Improve readability of acronyms
+          id: key,
+      }));
 
     return (
         <div className="TeamStatsTable">
-            <h2>Current Season</h2>
+            <h2>Team Statistics {season}</h2>
             <TableBuilder data={teamStats}>
                 {statColumns.map(column => (
                     <TableBuilderColumn key={column.id} header={column.header}>

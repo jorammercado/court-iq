@@ -3,6 +3,7 @@ import TeamStatsComponent from '../Components/TeamStatsComponent';
 import PlayerStatsComponent from '../Components/PlayerStatsE'
 import TeamScheduleComponent from '../Components/TeamScheduleComponent';
 import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
+import TeamStatsGlossary from '../Components/TeamStatsGlossary';
 import "./TeamsPage.scss"
 
 const TeamsPage = () => {
@@ -72,7 +73,7 @@ const TeamsPage = () => {
             <TeamScheduleComponent teamId={teamId} season={season}/>
             <TeamStatsComponent teamId={teamId} season={season}/>
             <PlayerStatsComponent team={teamId} season={season}/>
-
+            <TeamStatsGlossary />
         </div>
     );
 }
