@@ -31,7 +31,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
     const navigate = useNavigate();
 
     const [mainItems, setMainItems] = React.useState([
-        { icon: Search, label: 'Search' },
+        { icon: Search, label: 'League Leaders' },
         {
             icon: ChevronDown,
             label: 'Players',
@@ -71,7 +71,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         if (item.label === "Standings") navigate("/teamstandingsV2");
         if (item.label === "Schedule") navigate("/GamesSchedule");
         if (item.label === "RostersV2") navigate("/player_stats_table");
-        if (item.label === "Search") navigate("/Search");
+        if (item.label === "League Leaders") navigate("/Search");
         if (item.label === "Comparate") navigate("/PlayerComparation"); 
     }
     

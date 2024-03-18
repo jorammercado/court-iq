@@ -44,7 +44,7 @@ import CustomGPT from "./Pages/CustomGPT.jsx";
 
 import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx";
 
-import SearchPage from "./Pages/SearchPage.jsx";
+import SearchPage from "./Components/SearchPage.jsx";
 
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";

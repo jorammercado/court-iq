@@ -46,7 +46,7 @@ const PlayerStatsComponent = ( {team, season} ) => {
     return (
         <div>
         <div className="playerCardsContainer"> {/* Updated class name */}
-            {playerStats && playerStats.slice(0, 18).map((player, index) => (
+            {playerStats && playerStats.slice(0, 15).map((player, index) => (
                 <PlayerCard key={index} player={player} />
             ))}
         </div>
