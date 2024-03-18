@@ -10,13 +10,12 @@ const PlayerCard = ({ player }) => {
     useEffect(() => {
         // Construct the player name string as required by your API or image source
         const playerName = `${player.player.firstname.toLowerCase()}` + ` ${player.player.lastname.toLowerCase()}`
-       console.log(playerName)
         // Replace VITE_BASE_URL with your actual base URL environment variable
         const imageUrl = `${import.meta.env.VITE_BASE_URL}/playerimages/${playerName}`;
         fetch(imageUrl)
             .then((response) => response.json())
             .then((data) => {
-                    console.log(data.image_url)
+                    
                     setPlayerImage(data.image_url);
                 
             })

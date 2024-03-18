@@ -6,10 +6,10 @@ import "./TeamLeaderPlayerCard.scss"
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL; // Assuming this is correct
 
 const TeamPlayerLeaderCard = ({ teamId, season }) => {
     const [leaders, setLeaders] = useState([]);
-    const [teamLogo, setTeamLogo] = useState('');
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -19,33 +19,41 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                 params: { team: teamId, season },
                 headers: {
                     'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY,
-                    'X-RAPIDAPI-HOST': VITE_X_RAPIDAPI_HOST,
+                    'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST,
                 },
             };
 
             try {
-                const { data } = await axios.request(options);
-                const playerStats = data.response.reduce((acc, curr) => {
-                    const playerId = curr.player.id;
-                    if (!acc[playerId]) {
-                        acc[playerId] = { ...curr.player, points: 0, assists: 0, rebounds: 0 };
-                    }
-                    acc[playerId].points += curr.points;
-                    acc[playerId].assists += curr.assists;
-                    acc[playerId].rebounds += curr.totReb;
-                    return acc;
-                }, {});
+                const response = await axios.request(options);
+                if (response.data && response.data.response) {
+                    const playerStats = response.data.response.reduce((acc, curr) => {
+                        const playerId = curr.player.id;
+                        if (!acc[playerId]) {
+                            acc[playerId] = { ...curr.player, points: 0, assists: 0, rebounds: 0 };
+                        }
+                        acc[playerId].points += curr.points;
+                        acc[playerId].assists += curr.assists;
+                        acc[playerId].rebounds += curr.totReb;
+                        return acc;
+                    }, {});
+                    console.log(leaders)
+                    // Sort and find leaders
+                    const sortedPoints = Object.values(playerStats).sort((a, b) => b.points - a.points);
+                    const sortedAssists = Object.values(playerStats).sort((a, b) => b.assists - a.assists);
+                    const sortedRebounds = Object.values(playerStats).sort((a, b) => b.rebounds - a.rebounds);
 
-                const sortedPoints = Object.values(playerStats).sort((a, b) => b.points - a.points);
-                const sortedAssists = Object.values(playerStats).sort((a, b) => b.assists - a.assists);
-                const sortedRebounds = Object.values(playerStats).sort((a, b) => b.rebounds - a.rebounds);
-
-                // Including the category along with each leader's data
-                setLeaders([
-                    { ...sortedPoints[0], category: 'Points Leader' },
-                    { ...sortedAssists[0], category: 'Assists Leader' },
-                    { ...sortedRebounds[0], category: 'Rebounds Leader' }
-                ]);
+                    // Include category and construct image URL
+                    const leadersWithCategory = [
+                        { ...sortedPoints[0], category: 'Points Leader' },
+                        { ...sortedAssists[0], category: 'Assists Leader' },
+                        { ...sortedRebounds[0], category: 'Rebounds Leader' }
+                    ].map(leader => ({
+                        ...leader,
+                        image_url: `${VITE_PLAYER_IMAGE_BASE_URL}/playerimages/`+`${leader.firstname.toLowerCase()}`+` ${leader.lastname.toLowerCase()}`
+                    }));
+                    // const imageUrl = `${import.meta.env.VITE_BASE_URL}/playerimages/${playerName}`;
+                    setLeaders(leadersWithCategory);
+                }
             } catch (error) {
                 console.error('Failed to fetch team leaders:', error);
             }
@@ -61,12 +69,8 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                     key={index}
                     overrides={{ Root: { style: { width: "328px", marginBottom: "20px" } } }}
                 >
-                    <StyledTitle>
-                        {leader.category}
-                    </StyledTitle>
-                    <StyledThumbnail
-                        src={teamLogo || 'https://via.placeholder.com/150'} // Placeholder image
-                    />
+                    <StyledTitle>{leader.category}</StyledTitle>
+                    <StyledThumbnail src={leader.image_url || 'https://via.placeholder.com/150'} />
                     <StyledBody>
                         {`${leader.firstname} ${leader.lastname}`}<br />
                         Points: {leader.points}, Assists: {leader.assists}, Rebounds: {leader.rebounds}
