@@ -4,6 +4,7 @@ import * as React from "react";
 import { useStyletron } from "baseui";
 import { AppNavBar } from "baseui/app-nav-bar";
 import logo3 from "../assets/logo3.png"
+import ball from "../assets/BALL.svg"
 
 export default function NavBar({ currentUser, photoURL }) {
     const [css] = useStyletron();
@@ -28,10 +29,10 @@ export default function NavBar({ currentUser, photoURL }) {
                 navigate("/Search");
                 break;
             case "Rosters":
-                navigate("/conley_example");
+                navigate("/rosters");
                 break;
             case "Standings":
-                navigate("/teamstandingsV2");
+                navigate("/teamstandings");
                 break;
             case "Schedule":
                 navigate("/GamesSchedule");
@@ -79,9 +80,7 @@ export default function NavBar({ currentUser, photoURL }) {
                 username={currentUser ? currentUser.displayName : "User"}
                 usernameSubtitle="Pursuit Fellow"
                 userImgUrl={
-                    !/[<>]/.test(photoURL) && currentUser
-                        ? photoURL // assuming this is the correct photo URL for the user
-                        : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"
+                    ball
                 }
             />
         </div>
