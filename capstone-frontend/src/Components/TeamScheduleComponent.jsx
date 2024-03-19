@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
+import { Block } from "baseui/block";
+import {
+    LabelMedium,
+    LabelXSmall,
+    LabelLarge,
+    HeadingLarge,
+    HeadingMedium,
+    HeadingSmall
+} from "baseui/typography";
+import { Heading, HeadingLevel } from 'baseui/heading';
+import "./TeamScheduleComponent.scss"
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -20,37 +31,41 @@ const TeamScheduleComponent = ({ teamId, season }) => {
                     'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST,
                 },
             };
-    
+
             try {
                 const response = await axios.request(options);
                 const gamesData = response.data.response;
-    
+
                 // Filter out games from 2023 and earlier
                 const futureGames = gamesData.filter(game => {
                     const gameYear = new Date(game.date.start).getFullYear();
                     return gameYear > 2023; // Change this as needed for different years
                 });
-    
+
                 // Get the last 5 games from the filtered list
                 const lastFiveGames = futureGames.slice(-5);
-    
+
                 setGames(lastFiveGames);
             } catch (error) {
                 console.error('Failed to fetch games:', error);
             }
         };
-    
+
         fetchGames();
     }, [teamId, season]);
-    
+
 
     if (games.length === 0) {
         return <p>Loading games...</p>;
     }
 
     return (
-        <div className="TeamGamesTable">
-            <h2>Next 5 Games</h2>
+        <Block className="TeamGamesTable">
+            <HeadingLevel >
+                <Heading  styleLevel={4} color="black">
+                    Next 5 Games
+                </Heading>
+            </HeadingLevel>
             <TableBuilder data={games}>
                 <TableBuilderColumn header="Date">
                     {row => <div>{new Date(row.date.start).toLocaleString()}</div>}
@@ -66,7 +81,7 @@ const TeamScheduleComponent = ({ teamId, season }) => {
                 </TableBuilderColumn>
                 {/* Add more columns as necessary */}
             </TableBuilder>
-        </div>
+        </Block>
     );
 };
 

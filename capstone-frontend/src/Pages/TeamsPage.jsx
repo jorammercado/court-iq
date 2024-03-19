@@ -22,6 +22,7 @@ const TeamsPage = () => {
     const [season, setSeason] = useState('2023');
     const [selectedSeason, setSelectedSeason] = useState("2023");
     const [selectedTeam, setSelectedTeam] = useState("1");
+    const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
 
     const handleTeamChange = (params) => {
         const { value } = params;
@@ -29,6 +30,7 @@ const TeamsPage = () => {
         if (value.length > 0) {
             setSelectedTeam(value[0].id);
             setTeamId(value[0].id)
+            setSelectedTeamName(value[0].label)
         }
     };
 
@@ -94,6 +96,18 @@ const TeamsPage = () => {
                         value={selectedTeamValue}
                         placeholder={<Block> &nbsp;Team&nbsp; </Block>}
                         clearable={false}
+                        overrides={{
+                            ValueContainer: {
+                                style: ({ $theme }) => ({
+                                    ...$theme.typography.font100
+                                }),
+                            },
+                            Option: {
+                                style: ({ $theme }) => ({
+                                    ...$theme.typography.font100
+                                }),
+                            },
+                        }}
                     />
                 </Block>
                 <Block>
@@ -110,17 +124,34 @@ const TeamsPage = () => {
                         value={selectedValue}
                         placeholder={<Block> &nbsp;Season&nbsp; </Block>}
                         clearable={false}
+                        overrides={{
+                            ValueContainer: {
+                                style: ({ $theme }) => ({
+                                    ...$theme.typography.font100
+                                }),
+                            },
+                            Option: {
+                                style: ({ $theme }) => ({
+                                    ...$theme.typography.font100
+                                }),
+                            },
+                        }}
                     />
                 </Block>
-                
+
+            </Block>
+            <Block className="team">
+                <HeadingLevel>
+                    <Heading styleLevel={1} color="black">{selectedTeamName ? selectedTeamName : ""}</Heading>
+                </HeadingLevel>
             </Block>
             <Block className="teamLeaders">
-                    <HeadingLevel>
-                        <Heading styleLevel={4} color="black">Team Leaders</Heading>
-                    </HeadingLevel>
-                    <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
-                </Block>
-            <Block>
+                <HeadingLevel>
+                    <Heading styleLevel={6} color="black">Team Leaders</Heading>
+                </HeadingLevel>
+                <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
+            </Block>
+            <Block className="teamsItems">
                 <TeamScheduleComponent teamId={teamId} season={season} />
                 <TeamStatsComponent teamId={teamId} season={season} />
                 <PlayerStatsComponent team={teamId} season={season} />
