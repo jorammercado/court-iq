@@ -10,6 +10,21 @@ const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL; // Assuming th
 
 const TeamPlayerLeaderCard = ({ teamId, season }) => {
     const [leaders, setLeaders] = useState([]);
+    const [playerImages, setPlayerImages] = useState([])
+
+    useEffect(() => {
+        const data = []
+        for (let i = 0; i < leaders.length; i++) {
+            const player = `${leaders[i].firstname.toLowerCase()}` + ` ${leaders[i].lastname.toLowerCase()}`
+            fetch(`${VITE_PLAYER_IMAGE_BASE_URL}/playerimages/${player}`)
+                .then(response => response.json())
+                .then(playerImage => {
+                    data.push(playerImage.image_url)
+                })
+                .catch(() => navigate("/not-found"))
+        }
+        setPlayerImages(data)
+    }, [teamId, season, leaders.length])
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -47,11 +62,13 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                         { ...sortedPoints[0], category: 'Points Leader' },
                         { ...sortedAssists[0], category: 'Assists Leader' },
                         { ...sortedRebounds[0], category: 'Rebounds Leader' }
-                    ].map(leader => ({
-                        ...leader,
-                        image_url: `${VITE_PLAYER_IMAGE_BASE_URL}/playerimages/`+`${leader.firstname.toLowerCase()}`+` ${leader.lastname.toLowerCase()}`
-                    }));
-                    // const imageUrl = `${import.meta.env.VITE_BASE_URL}/playerimages/${playerName}`;
+                    ].map((leader, index) => {
+                        const imageURL = playerImages[index]?playerImages[index]:""
+                        return ({
+                            ...leader,
+                            image_url: imageURL
+                        })
+                    }, playerImages);
                     setLeaders(leadersWithCategory);
                 }
             } catch (error) {
