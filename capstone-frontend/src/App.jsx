@@ -157,7 +157,7 @@ function App() {
 
                 {/* private route - home screen of specific user */}
                 <Route
-                  path="/conley_example"
+                  path="/rosters"
                   element={
                     <TeamsPage
                       currentUser={currentUser}
@@ -177,7 +177,7 @@ function App() {
                 <Route path="/Search" element={<SearchPage />} />
 
                 <Route
-                  path="/teamstandingsV2"
+                  path="/teamstandings"
                   element={
                     <TeamStandingsV2
                       currentUser={currentUser}
