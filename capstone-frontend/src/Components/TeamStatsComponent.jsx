@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
+import { Block } from "baseui/block";
+import {
+    LabelMedium,
+    LabelXSmall,
+    LabelLarge,
+    HeadingLarge,
+    HeadingMedium,
+    HeadingSmall
+} from "baseui/typography";
+import { Heading, HeadingLevel } from 'baseui/heading';
+import "./TeamStatsComponent.scss"
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -72,7 +83,11 @@ const TeamStatsComponent = ({ teamId, season }) => {
 
     return (
         <div className="TeamStatsTable">
-            <h2>Team Statistics {season}</h2>
+            <HeadingLevel >
+                <Heading  styleLevel={4} color="black">
+                Team Statistics
+                </Heading>
+            </HeadingLevel>
             <TableBuilder data={teamStats}>
                 {statColumns.map(column => (
                     <TableBuilderColumn key={column.id} header={column.header}>
