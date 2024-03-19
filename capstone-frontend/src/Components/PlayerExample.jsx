@@ -308,7 +308,7 @@ function PlayerExample({ data, playerid }) {
     return (
         <div>
             <Block width="100%" display="flex" flexDirection="column" alignItems="center">
-                <Block className="filler"></Block>
+                {/* <Block className="filler"></Block> */}
                 <Block className="sub__heading" display="flex" justifyContent="space-between" alignItems="center" width="100%" backgroundColor="#ED751C" padding="20px">
                     <Block className="head__shot" $style={{ maxWidth: "250px", flexGrow: 1, marginLeft: "160px", marginBottom: "-6px" }}>
                         <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "260px" }} />
