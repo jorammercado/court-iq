@@ -75,26 +75,28 @@ const TeamStatsComponent = ({ teamId, season }) => {
 
     // Dynamically generate columns for the stats, excluding the 'games' column from averaging
     const statColumns = Object.keys(teamStats[0])
-      .filter(stat => !['games'].includes(stat)) // Optionally exclude 'games' from the columns if it's not needed
-      .map(key => ({
-          header: key.charAt(0).toUpperCase() + key.slice(1).replace(/[A-Z]/g, letter => ` ${letter}`), // Improve readability of acronyms
-          id: key,
-      }));
+        .filter(stat => !['games'].includes(stat)) // Optionally exclude 'games' from the columns if it's not needed
+        .map(key => ({
+            header: key.charAt(0).toUpperCase() + key.slice(1).replace(/[A-Z]/g, letter => ` ${letter}`), // Improve readability of acronyms
+            id: key,
+        }));
 
     return (
         <div className="TeamStatsTable">
             <HeadingLevel >
-                <Heading  styleLevel={4} color="black">
-                Team Statistics
+                <Heading styleLevel={4} color="black">
+                    Team Statistics
                 </Heading>
             </HeadingLevel>
-            <TableBuilder data={teamStats}>
-                {statColumns.map(column => (
-                    <TableBuilderColumn key={column.id} header={column.header}>
-                        {row => <div>{row[column.id]}</div>}
-                    </TableBuilderColumn>
-                ))}
-            </TableBuilder>
+            <Block className="tableContainer">
+                <TableBuilder data={teamStats}>
+                    {statColumns.map(column => (
+                        <TableBuilderColumn key={column.id} header={column.header}>
+                            {row => <div>{row[column.id]}</div>}
+                        </TableBuilderColumn>
+                    ))}
+                </TableBuilder>
+            </Block>
         </div>
     );
 };
