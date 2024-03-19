@@ -7,6 +7,7 @@ import TeamStatsGlossary from '../Components/TeamStatsGlossary';
 import "./TeamsPage.scss"
 import { Block } from "baseui/block";
 import {
+    LabelLarge,
     LabelMedium,
     LabelXSmall,
     HeadingLarge,
@@ -19,7 +20,8 @@ import { Select } from 'baseui/select';
 const TeamsPage = () => {
     const [teamId, setTeamId] = useState('1');
     const [season, setSeason] = useState('2023');
-    const [selectedTeam, setSelectedTeam] = useState("Atlanta Hawks");
+    const [selectedSeason, setSelectedSeason] = useState("2023");
+    const [selectedTeam, setSelectedTeam] = useState("1");
 
     const handleTeamChange = (params) => {
         const { value } = params;
@@ -30,9 +32,20 @@ const TeamsPage = () => {
         }
     };
 
-    const handleSeasonChange = (e) => {
-        setSeason(e.target.value);
+    const handleSeasonChange = (params) => {
+        const { value } = params;
+        if (value.length > 0) {
+            setSelectedSeason(value[0].id);
+            setSeason(value[0].id)
+        }
     };
+    const seasonOptions = [
+        { label: '2020', id: '2020' },
+        { label: '2021', id: '2021' },
+        { label: '2022', id: '2022' },
+        { label: 'Current', id: '2023' },
+    ];
+    const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
 
     const teamOptions = [
         { id: '1', label: 'Atlanta Hawks' },
@@ -79,29 +92,40 @@ const TeamsPage = () => {
                         valueKey="id"
                         onChange={handleTeamChange}
                         value={selectedTeamValue}
-                        placeholder={<Block> &nbsp;Select Team&nbsp; </Block>}
+                        placeholder={<Block> &nbsp;Team&nbsp; </Block>}
                         clearable={false}
                     />
                 </Block>
                 <Block>
-                    <label htmlFor="seasonSelect">Select Season:</label>
-                    <select id="seasonSelect" value={season} onChange={handleSeasonChange}>
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-
-                    </select>
+                    <Select
+                        options={[
+                            { id: '2020', label: '2020-2021' },
+                            { id: '2021', label: '2021-2022' },
+                            { id: '2022', label: '2022-2023' },
+                            { id: '2023', label: '2023-2024' },
+                        ]}
+                        labelKey="label"
+                        valueKey="id"
+                        onChange={handleSeasonChange}
+                        value={selectedValue}
+                        placeholder={<Block> &nbsp;Season&nbsp; </Block>}
+                        clearable={false}
+                    />
                 </Block>
-                <div className="teamLeaders">
-                    <h2>Team Leaders</h2>
-                    <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
-                </div>
+                
             </Block>
-            <TeamScheduleComponent teamId={teamId} season={season} />
-            <TeamStatsComponent teamId={teamId} season={season} />
-            <PlayerStatsComponent team={teamId} season={season} />
-            <TeamStatsGlossary />
+            <Block className="teamLeaders">
+                    <HeadingLevel>
+                        <Heading styleLevel={4} color="black">Team Leaders</Heading>
+                    </HeadingLevel>
+                    <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
+                </Block>
+            <Block>
+                <TeamScheduleComponent teamId={teamId} season={season} />
+                <TeamStatsComponent teamId={teamId} season={season} />
+                <PlayerStatsComponent team={teamId} season={season} />
+                <TeamStatsGlossary />
+            </Block>
         </div>
     );
 }
