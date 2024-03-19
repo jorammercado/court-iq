@@ -2,15 +2,56 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, StyledBody, StyledThumbnail, StyledTitle } from "baseui/card";
 import "./TeamLeaderPlayerCard.scss"
+import { Block } from "baseui/block";
+import {
+    LabelMedium,
+    LabelXSmall,
+    LabelLarge,
+    HeadingLarge,
+    HeadingMedium,
+    HeadingSmall
+} from "baseui/typography";
+import { Heading, HeadingLevel } from 'baseui/heading';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL; // Assuming this is correct
 
 const TeamPlayerLeaderCard = ({ teamId, season }) => {
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])
+    const [personalData, setPersonalData] = useState([]);
+    console.log(leaders)
+
+    useEffect(() => {
+        const fetchPlayerStats = async () => {
+            try {
+                const response = await axios.request({
+                    method: 'GET',
+                    url: VITE_X_RAPIDAPI_URL2,
+                    params: {
+                        team: teamId,
+                        season: season
+                    },
+                    headers: {
+                        'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY,
+                        'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST
+                    }
+                });
+                setPersonalData(response.data.response.filter(e => {
+                    return (leaders.map(e => e.id).includes(Number(e.id)))
+                }));
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        if (leaders.length > 0) {
+            fetchPlayerStats();
+        }
+    }, [teamId, season, leaders]);
+    console.log("PERSONAL DATA", personalData)
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -68,7 +109,7 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                     return data.image_url;
                 } catch (error) {
                     console.error('Failed to fetch player image:', error);
-                    return 'https://via.placeholder.com/150'; 
+                    return 'https://via.placeholder.com/150';
                 }
             }));
             setPlayerImages(images);
@@ -86,11 +127,35 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                     key={index}
                     overrides={{ Root: { style: { width: "328px", marginBottom: "20px" } } }}
                 >
-                    <StyledTitle>{leader.category}</StyledTitle>
+                    <StyledTitle>
+                        {leader.firstname} {leader.lastname} &nbsp;&nbsp;
+                        {personalData[index] ? "#" + personalData[index].leagues.standard.jersey : ""}
+                    </StyledTitle>
                     <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'} />
                     <StyledBody>
-                        {`${leader.firstname} ${leader.lastname}`}<br />
-                        Points: {leader.points}, Assists: {leader.assists}, Rebounds: {leader.rebounds}
+                        {/* <LabelLarge marginTop="-10px">{leader.firstname} {leader.lastname}</LabelLarge> */}
+                        <HeadingLevel >
+                            <Heading marginTop="-16px" marginBottom="-1px" styleLevel={6}>
+                                {leader.category.split(" ")[0] === "Points" && `Points: ${leader.points}`}
+                                {leader.category.split(" ")[0] === "Assists" && `Assists: ${leader.assists}`}
+                                {leader.category.split(" ")[0] === "Rebounds" && `Rebounds: ${leader.rebounds}`}
+                            </Heading>
+                        </HeadingLevel>
+                        {leader.category.split(" ")[0] === "Points" ?
+                            <LabelXSmall>Assists: {leader.assists} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelXSmall> : leader.category.split(" ")[0] === "Assists" ?
+                                <LabelXSmall>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelXSmall> : leader.category.split(" ")[0] === "Rebounds" ?
+                                    <LabelXSmall>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Assists: {leader.assists} </LabelXSmall> : "n/a"}
+                        <LabelXSmall>Affiliation: {personalData[index] ? personalData[index].affiliation.split("/").join(", ") : ""}  </LabelXSmall>
+                        <LabelXSmall>DOB: {personalData[index] ? personalData[index].birth.date.replace(/[-]/g, "/") + ", " + personalData[index].birth.country : ""}  </LabelXSmall>
+                        <LabelXSmall>
+                            Height: {personalData[index] ? personalData[index].height.feets + "'" + personalData[index].height.inches + "\"" : ""} &nbsp;&nbsp;&nbsp;&nbsp;
+                            Weight: {personalData[index] ? personalData[index].weight.pounds + "lbs" : ""}
+                        </LabelXSmall>
+                        <LabelXSmall>
+                            Pro Start: {personalData[index] ? personalData[index].nba.start : ""}  &nbsp;&nbsp;&nbsp;&nbsp;
+                            Years: {personalData[index] ? personalData[index].nba.pro : ""}
+                        </LabelXSmall>
+
                     </StyledBody>
                 </Card>
             ))}
