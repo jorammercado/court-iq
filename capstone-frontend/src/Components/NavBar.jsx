@@ -25,6 +25,13 @@ import {
     mapItemsActive,
     NavItem,
 } from "baseui/app-nav-bar";
+import { Avatar } from "baseui/avatar";
+import logoWhite from "../assets/logo_white.png"
+import logoOrange from "../assets/logo_orange_white.svg"
+import svg from "../assets/react.svg"
+import logovar2 from "../assets/LOGOINCOLOR2.svg"
+import logo from "../assets/logo.png"
+import logo3 from "../assets/logo3.png"
 
 export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
     const [css] = useStyletron();
@@ -72,9 +79,9 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
         if (item.label === "Schedule") navigate("/GamesSchedule");
         if (item.label === "RostersV2") navigate("/player_stats_table");
         if (item.label === "League Leaders") navigate("/Search");
-        if (item.label === "Comparate") navigate("/PlayerComparation"); 
+        if (item.label === "Comparate") navigate("/PlayerComparation");
     }
-    
+
     function handleUserItemSelect(item) {
         setUserItems((prev) => setItemActive(prev, item));
         setMainItems((prev) => setItemActive(prev, item));
@@ -93,10 +100,11 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                                 position: "fixed",
                                 top: "0",
                                 left: "0",
+                                right: "0"
                             })}
                         >
                             <AppNavBar
-                                title="Court IQ"
+                                title={<div><img src={logo3} atl="logo" height="35px" />Court IQ</div>}
                                 mainItems={mainItems}
                                 userItems={userItems}
                                 onMainItemSelect={handleMainItemSelect}
@@ -105,7 +113,7 @@ export default function NavBar({ currentUser, setCurrentUser, photoURL }) {
                                 usernameSubtitle="Pursuit Fellow"
                                 userImgUrl={
                                     !/[<>]/.test(photoURL) && currentUser
-                                        ? photoURL
+                                        ? logoOrange
                                         : "https://api.dicebear.com/7.x/adventurer/svg?seed=Bandit"
                                 }
                             />
