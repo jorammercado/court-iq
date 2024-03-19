@@ -7,19 +7,44 @@ import "./PlayerStatsE.scss"
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
+const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
-const PlayerStatsComponent = ( {team, season} ) => {
-    const [playerStats, setPlayerStats] = useState(null);
-    
+const PlayerStatsComponent = ({ team, season }) => {
+    const [playerStats, setPlayerStats] = useState([]);
+    const [personalData, setPersonalData] = useState({});
 
     useEffect(() => {
-        console.log("Making request with team:",team, "and season:",season);
         const fetchPlayerStats = async () => {
-            
+            try {
+                const response = await axios.request({
+                    method: 'GET',
+                    url: VITE_X_RAPIDAPI_URL2,
+                    params: {
+                        team: team,
+                        season: season
+                    },
+                    headers: {
+                        'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
+                        'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
+                    }
+                });
+                setPersonalData(response.data.response);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchPlayerStats();
+    }, [team, season]);
+
+
+    useEffect(() => {
+        console.log("Making request with team:", team, "and season:", season);
+        const fetchPlayerStats = async () => {
+
             const options = {
                 method: 'GET',
                 url: VITE_X_RAPIDAPI_URL3, // Make sure this URL points to the correct API endpoint
-                params: 
+                params:
                     { team: team, season: season } // Assuming 'season' is a valid prop being passed
                 ,
                 headers: {
@@ -30,7 +55,7 @@ const PlayerStatsComponent = ( {team, season} ) => {
             try {
                 const response = await axios.request(options);
                 setPlayerStats(response.data.response); // Adjust according to the actual data structure
-                console.log(response.data);
+                console.log(response.data.response)
             } catch (error) {
                 console.error(error);
             }
@@ -42,15 +67,18 @@ const PlayerStatsComponent = ( {team, season} ) => {
     if (!playerStats) {
         return <p>Loading player stats...</p>;
     }
+    // console.log(playerStats)
+    // console.log(personalData)
 
     return (
         <div>
-        <div className="playerCardsContainer"> {/* Updated class name */}
-            {playerStats && playerStats.slice(0, 15).map((player, index) => (
-                <PlayerCard key={index} player={player} />
-            ))}
+            <div className="playerCardsContainer"> {/* Updated class name */}
+                {playerStats && playerStats.slice(0, 15).map((player, index) => {
+                    const personalDataPassed = personalData.filter((elem,index) => elem.id===player.player.id)[0]
+                    return <PlayerCard key={index} player={player} personalData={personalDataPassed} />
+                }, personalData)}
+            </div>
         </div>
-    </div>
     );
 };
 

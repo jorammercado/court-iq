@@ -85,79 +85,87 @@ const TeamsPage = () => {
 
 
     return (
-        <div>
-            <Block className="Selector">
-                <Block>
-                    <Select
-                        options={teamOptions}
-                        labelKey="label"
-                        valueKey="id"
-                        onChange={handleTeamChange}
-                        value={selectedTeamValue}
-                        placeholder={<Block> &nbsp;Team&nbsp; </Block>}
-                        clearable={false}
-                        overrides={{
-                            ValueContainer: {
-                                style: ({ $theme }) => ({
-                                    ...$theme.typography.font100
-                                }),
-                            },
-                            Option: {
-                                style: ({ $theme }) => ({
-                                    ...$theme.typography.font100
-                                }),
-                            },
-                        }}
-                    />
-                </Block>
-                <Block>
-                    <Select
-                        options={[
-                            { id: '2020', label: '2020-2021' },
-                            { id: '2021', label: '2021-2022' },
-                            { id: '2022', label: '2022-2023' },
-                            { id: '2023', label: '2023-2024' },
-                        ]}
-                        labelKey="label"
-                        valueKey="id"
-                        onChange={handleSeasonChange}
-                        value={selectedValue}
-                        placeholder={<Block> &nbsp;Season&nbsp; </Block>}
-                        clearable={false}
-                        overrides={{
-                            ValueContainer: {
-                                style: ({ $theme }) => ({
-                                    ...$theme.typography.font100
-                                }),
-                            },
-                            Option: {
-                                style: ({ $theme }) => ({
-                                    ...$theme.typography.font100
-                                }),
-                            },
-                        }}
-                    />
-                </Block>
+        <Block className="parent">
+            <Block className="left">
 
             </Block>
-            <Block className="team">
-                <HeadingLevel>
-                    <Heading styleLevel={1} color="black">{selectedTeamName ? selectedTeamName : ""}</Heading>
-                </HeadingLevel>
+            <Block className="middle">
+                <Block className="Selector">
+                    <Block>
+                        <Select
+                            options={teamOptions}
+                            labelKey="label"
+                            valueKey="id"
+                            onChange={handleTeamChange}
+                            value={selectedTeamValue}
+                            placeholder={<Block> &nbsp;Team&nbsp; </Block>}
+                            clearable={false}
+                            overrides={{
+                                ValueContainer: {
+                                    style: ({ $theme }) => ({
+                                        ...$theme.typography.font100
+                                    }),
+                                },
+                                Option: {
+                                    style: ({ $theme }) => ({
+                                        ...$theme.typography.font100
+                                    }),
+                                },
+                            }}
+                        />
+                    </Block>
+                    <Block>
+                        <Select
+                            options={[
+                                { id: '2020', label: '2020-2021' },
+                                { id: '2021', label: '2021-2022' },
+                                { id: '2022', label: '2022-2023' },
+                                { id: '2023', label: '2023-2024' },
+                            ]}
+                            labelKey="label"
+                            valueKey="id"
+                            onChange={handleSeasonChange}
+                            value={selectedValue}
+                            placeholder={<Block> &nbsp;Season&nbsp; </Block>}
+                            clearable={false}
+                            overrides={{
+                                ValueContainer: {
+                                    style: ({ $theme }) => ({
+                                        ...$theme.typography.font100
+                                    }),
+                                },
+                                Option: {
+                                    style: ({ $theme }) => ({
+                                        ...$theme.typography.font100
+                                    }),
+                                },
+                            }}
+                        />
+                    </Block>
+
+                </Block>
+                <Block className="team">
+                    <HeadingLevel>
+                        <Heading styleLevel={1} color="black">{selectedTeamName ? selectedTeamName : ""}</Heading>
+                    </HeadingLevel>
+                </Block>
+                <Block className="teamLeaders">
+                    <HeadingLevel>
+                        <Heading styleLevel={6} color="black">Team Leaders</Heading>
+                    </HeadingLevel>
+                    <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
+                </Block>
+                <Block className="teamsItems">
+                    <TeamScheduleComponent teamId={teamId} season={season} />
+                    <TeamStatsComponent teamId={teamId} season={season} />
+                    <PlayerStatsComponent team={teamId} season={season} />
+                    <TeamStatsGlossary />
+                </Block>
             </Block>
-            <Block className="teamLeaders">
-                <HeadingLevel>
-                    <Heading styleLevel={6} color="black">Team Leaders</Heading>
-                </HeadingLevel>
-                <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
+            <Block className="right">
+
             </Block>
-            <Block className="teamsItems">
-                <TeamScheduleComponent teamId={teamId} season={season} />
-                <TeamStatsComponent teamId={teamId} season={season} />
-                <PlayerStatsComponent team={teamId} season={season} />
-                <TeamStatsGlossary />
-            </Block>
-        </div>
+        </Block>
     );
 }
 
