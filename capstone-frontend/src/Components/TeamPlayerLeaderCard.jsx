@@ -13,20 +13,6 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
     const [playerImages, setPlayerImages] = useState([])
 
     useEffect(() => {
-        const data = []
-        for (let i = 0; i < leaders.length; i++) {
-            const player = `${leaders[i].firstname.toLowerCase()}` + ` ${leaders[i].lastname.toLowerCase()}`
-            fetch(`${VITE_PLAYER_IMAGE_BASE_URL}/playerimages/${player}`)
-                .then(response => response.json())
-                .then(playerImage => {
-                    data.push(playerImage.image_url)
-                })
-                .catch(() => navigate("/not-found"))
-        }
-        setPlayerImages(data)
-    }, [teamId, season, leaders.length])
-
-    useEffect(() => {
         const fetchTeamLeaders = async () => {
             const options = {
                 method: 'GET',
@@ -62,22 +48,36 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                         { ...sortedPoints[0], category: 'Points Leader' },
                         { ...sortedAssists[0], category: 'Assists Leader' },
                         { ...sortedRebounds[0], category: 'Rebounds Leader' }
-                    ].map((leader, index) => {
-                        const imageURL = playerImages[index]?playerImages[index]:""
-                        return ({
-                            ...leader,
-                            image_url: imageURL
-                        })
-                    }, playerImages);
+                    ].map(leader => ({ ...leader }));
                     setLeaders(leadersWithCategory);
                 }
             } catch (error) {
                 console.error('Failed to fetch team leaders:', error);
             }
         };
-
         fetchTeamLeaders();
     }, [teamId, season]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const images = await Promise.all(leaders.map(async (leader) => {
+                const player = `${leader.firstname.toLowerCase()} ${leader.lastname.toLowerCase()}`;
+                try {
+                    const response = await fetch(`${VITE_PLAYER_IMAGE_BASE_URL}/playerimages/${player}`);
+                    const data = await response.json();
+                    return data.image_url;
+                } catch (error) {
+                    console.error('Failed to fetch player image:', error);
+                    return 'https://via.placeholder.com/150'; 
+                }
+            }));
+            setPlayerImages(images);
+        };
+
+        if (leaders.length > 0) {
+            fetchData();
+        }
+    }, [leaders, VITE_PLAYER_IMAGE_BASE_URL]);
 
     return (
         <div className="teamleaderdisplaycards">
@@ -87,7 +87,7 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                     overrides={{ Root: { style: { width: "328px", marginBottom: "20px" } } }}
                 >
                     <StyledTitle>{leader.category}</StyledTitle>
-                    <StyledThumbnail src={leader.image_url || 'https://via.placeholder.com/150'} />
+                    <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'} />
                     <StyledBody>
                         {`${leader.firstname} ${leader.lastname}`}<br />
                         Points: {leader.points}, Assists: {leader.assists}, Rebounds: {leader.rebounds}
