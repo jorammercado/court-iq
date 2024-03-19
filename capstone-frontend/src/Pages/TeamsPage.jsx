@@ -151,7 +151,7 @@ const TeamsPage = () => {
                 </Block>
                 <Block className="teamLeaders">
                     <HeadingLevel>
-                        <Heading styleLevel={6} color="black">Team Leaders</Heading>
+                        <Heading styleLevel={6} color="black">Team Leader(s)</Heading>
                     </HeadingLevel>
                     <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
                 </Block>
