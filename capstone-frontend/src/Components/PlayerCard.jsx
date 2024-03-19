@@ -26,18 +26,14 @@ const PlayerCard = ({ player, personalData }) => {
             });
     }, [player.player.firstname, player.player.lastname, navigate]);
 
-    // Function to handle button click
-    const handleButtonClick = () => {
-        navigate(`/player/${player.player.id}`, { state: { ...player.player } });
-    };
 
     return (
         <Card
             overrides={{
                 Root: {
                     style: {
-                        width: "220px",
-                        height: "200px",
+                        width: "210px",
+                        height: "175px",
                         marginBottom: "20px",
                         backgroundColor: "#EA6607",
                         display: "flex",
@@ -55,7 +51,7 @@ const PlayerCard = ({ player, personalData }) => {
                     },
                 }
             }}
-            title={`${player.player.firstname} ${player.player.lastname} ${personalData.leagues.standard.jersey ? "#" + personalData.leagues.standard.jersey : ""}
+            title={`${player.player.firstname} ${player.player.lastname} ${personalData ? !personalData.leagues.standard.jersey?"":"#" + personalData.leagues.standard.jersey : ""}
             ${personalData ?  personalData.leagues.standard.pos : ""}`}
         >
             <Block marginBottom="15px" marginTop="-15px">
@@ -64,7 +60,7 @@ const PlayerCard = ({ player, personalData }) => {
                     style={{ width: '68px', height: '68px', alignSelf: "center" }}
                 />
                 <StyledBody style={{ fontSize: "12px", lineHeight: "1.1" }}>
-                {personalData.birth.date ? "DOB: " + personalData.birth.date.replace(/[-]/g, "/")+", "+personalData.birth.country : ""} <br></br>
+                {personalData && personalData.birth ? "DOB: " + personalData.birth.date+", "+personalData.birth.country : ""} <br></br>
                 {personalData ? "College: " + personalData.college : ""} <br></br>
                 {personalData ? "Height: " + personalData.height.feets+"'"+personalData.height.inches+"\"" : ""} <br></br>
                 {personalData ? "Weight: " + personalData.weight.pounds+" lbs" : ""} <br></br>
@@ -73,22 +69,6 @@ const PlayerCard = ({ player, personalData }) => {
 
                 </StyledBody>
             </Block>
-            <StyledAction  style={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
-                <Button overrides={{
-                    BaseButton: {
-                        style: {
-                            width: "70%",
-                            padding: "0",
-                            alignSelf: "center",
-                            fontSize: "11px"
-                            // marginLeft: "10px"
-                        }
-                    }
-                }} onClick={handleButtonClick}>
-                    View Player Details
-                </Button>
-            </StyledAction>
-
         </Card>
     );
 };

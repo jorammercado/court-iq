@@ -10,6 +10,7 @@ const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
 const PlayerStatsComponent = ({ team, season }) => {
+    const navigate = useNavigate(); 
     const [playerStats, setPlayerStats] = useState([]);
     const [personalData, setPersonalData] = useState({});
 
@@ -67,15 +68,21 @@ const PlayerStatsComponent = ({ team, season }) => {
     if (!playerStats) {
         return <p>Loading player stats...</p>;
     }
-    // console.log(playerStats)
-    // console.log(personalData)
+
+    const handleCardClick = (playerId, playerData) => {
+        navigate(`/player/${playerId}`, { state: { ...playerData } });
+    };
 
     return (
         <div>
             <div className="playerCardsContainer"> {/* Updated class name */}
                 {playerStats && playerStats.slice(0, 15).map((player, index) => {
-                    const personalDataPassed = personalData.filter((elem,index) => elem.id===player.player.id)[0]
-                    return <PlayerCard key={index} player={player} personalData={personalDataPassed} />
+                    const personalDataPassed = personalData.filter((elem, index) => elem.id === player.player.id)[0]
+                    return (
+                        <div key={index} onClick={() => handleCardClick(player.player.id, player.player)} style={{ cursor: 'pointer' }}>
+                            <PlayerCard player={player} personalData={personalDataPassed} />
+                        </div>
+                    )
                 }, personalData)}
             </div>
         </div>
