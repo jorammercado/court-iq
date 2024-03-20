@@ -20,6 +20,8 @@ import { Avatar } from "baseui/avatar";
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
+
+
     const handleDataFromChild = (data) => {
         setTeam(data.team)
     };
@@ -94,7 +96,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     return (
         <Block className="parent">
             <Block className="left">
-                <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px" }}>
+                <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", zIndex: "112" }}>
                     <Avatar
                         overrides={{
                             Avatar: {
@@ -135,11 +137,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                 labelKey="label"
                                 valueKey="id"
                                 onChange={handleTeamChange}
-                                value={<Block>&nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp;; </Block>}
+                                value={[{ id: '0', label: 'Team' }]}
                                 placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
                                 clearable={false}
                                 overrides={{
-                                    ControlContainer: { style: { minHeight: '35px', height: '35px' } },
+                                    ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '26px',paddingRight: '15px', } },
                                     ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                     Placeholder: { style: { lineHeight: '30px' } },
                                     SingleValue: { style: { lineHeight: '30px' } },
@@ -158,11 +160,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                 labelKey="label"
                                 valueKey="id"
                                 onChange={handleSeasonChange}
-                                value={<Block> &nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
+                                value={[{ id: '0', label: 'Season' }]}
                                 placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
                                 clearable={false}
                                 overrides={{
-                                    ControlContainer: { style: { minHeight: '35px', height: '35px' } },
+                                    ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px',paddingRight: '1px' } },
                                     ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                     Placeholder: { style: { lineHeight: '30px' } },
                                     SingleValue: { style: { lineHeight: '30px' } },

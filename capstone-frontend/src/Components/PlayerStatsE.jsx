@@ -79,7 +79,7 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
             <div className="playerCardsContainer"> 
                 {playerStats && playerStats.slice(0, 15).map((player, index) => {
                     let personalDataPassed = null
-                    if (personalData)
+                    if (personalData&&personalData.length>0)
                         personalDataPassed = personalData.filter((elem, index) => elem.id === player.player.id)[0]
                     else
                         personalDataPassed = []
