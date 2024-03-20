@@ -1,33 +1,67 @@
 .player-comparison-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
     margin-top: 50px;
-    margin-left: 50rem;
   }
   
-  .player-card {
-    background-color: rgba(255, 166, 0, 0.798);
+  .comparison-heading-container {
+    animation: fadeIn 1s ease;
+  }
+  
+  .comparison-instruction-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .instruction-card {
+    background-color: #f9f9f9;
     padding: 20px;
-    border: 2px solid #ccc;
     border-radius: 12px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    animation: slideInUp 1s ease;
   }
   
-  .player-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  .player-inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    animation: slideInUp 1s ease;
   }
   
   .player-input {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 15px;
-    font-size: 18px;
-    border: 2px solid #ccc;
+    width: 300px; 
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 6px;
+  }
+  
+  .player-img {
+    width: 200px; 
+    height: 200px; 
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 4px 6px rgba(2, 2, 2, 0.1);
+  }
+  
+  .player-info {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .player-cards-container {
+    display: flex;
+    gap: 20px;
+    animation: slideInUp 1s ease;
+  }
+  
+  .compare-button-container {
+    animation: slideInUp 1s ease;
   }
   
   .compare-button {
@@ -45,29 +79,23 @@
     background-color: #0056b3;
   }
   
-  .player-name {
-    font-size: 3rem;
-    text-align: center;
-    font-weight: bold;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   
-  .info-card {
-    background-color: white;
-    border-radius: 3rem;
-  }
-  
-  .player-stat {
-    margin-bottom: 10px;
-    text-align: center;
-    height: 3rem;
-  }
-  
-  .player-img {
-    width: 30rem;
-    height: 30rem;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-    margin-right: 20px;
+  @keyframes slideInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
   
