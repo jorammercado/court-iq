@@ -14,11 +14,15 @@ import {
     Overflow,
     Upload
 } from "baseui/icon";
+import TeamStatsGlossary from '../Components/TeamStatsGlossary';
 
 export default function NavBar({ currentUser,
     photoURL,
     isSearchVisible,
-    setIsSearchVisible }) {
+    setIsSearchVisible,
+    isGlossaryVisible,
+    setIsGlossaryVisible
+}) {
     const [css] = useStyletron();
     const navigate = useNavigate();
 
@@ -41,28 +45,39 @@ export default function NavBar({ currentUser,
         switch (item.label) {
             case "League Leaders":
                 setIsSearchVisible(false)
+                setIsGlossaryVisible(false)
                 navigate("/Search");
                 break;
             case "Rosters":
                 setIsSearchVisible(false)
+                setIsGlossaryVisible(false)
                 navigate("/rosters");
                 break;
             case "Standings":
                 setIsSearchVisible(false)
+                setIsGlossaryVisible(false)
                 navigate("/teamstandings");
                 break;
             case "Schedule":
                 setIsSearchVisible(false)
+                setIsGlossaryVisible(false)
                 navigate("/GamesSchedule");
                 break;
             case "Comparate":
                 setIsSearchVisible(false)
+                setIsGlossaryVisible(false)
                 navigate("/PlayerComparation");
                 break;
             case "Search":
+                setIsGlossaryVisible(false)
                 setIsSearchVisible(!isSearchVisible);
                 break;
+            case "Glossary":
+                setIsGlossaryVisible(!isGlossaryVisible)
+                setIsSearchVisible(false);
+                break;
             default:
+                setIsGlossaryVisible(false)
                 setIsSearchVisible(false)
                 // Handle default case or do nothing
                 break;
@@ -72,17 +87,17 @@ export default function NavBar({ currentUser,
     function handleUserItemSelect(item) {
         switch (item.label) {
             case "User":
+                setIsGlossaryVisible(false)
                 setIsSearchVisible(false)
                 navigate("/loggedInPage"); // Update this route as needed
                 break;
             case "Home":
+                setIsGlossaryVisible(false)
                 setIsSearchVisible(false)
                 navigate("/");
                 break;
-            case "Search":
-                setIsSearchVisible(!isSearchVisible);
-                break;
             default:
+                setIsGlossaryVisible(false)
                 setIsSearchVisible(false)
                 // Handle default case or do nothing
                 break;
@@ -90,11 +105,13 @@ export default function NavBar({ currentUser,
     }
 
     const handleLogoClick = () => {
+        setIsGlossaryVisible(false)
         setIsSearchVisible(false)
         navigate("/");
     };
 
     const handleLogoUserClick = () => {
+        setIsGlossaryVisible(false)
         setIsSearchVisible(false)
         navigate("/loggedInPage");
     };
@@ -145,6 +162,32 @@ export default function NavBar({ currentUser,
                     onClick={() => setIsSearchVisible(false)}>
                     <div onClick={(e) => e.stopPropagation()}>
                         <ChatApp />
+                    </div>
+                </div>
+            }
+            {isGlossaryVisible &&
+                <div style={{
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: '1000',
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+                    onClick={() => setIsGlossaryVisible(false)}>
+                    <div onClick={(e) => e.stopPropagation()} style={{
+                        maxHeight: '80%', 
+                        overflowY: 'auto', 
+                        width: '60%', 
+                        backgroundColor: '#faf7f2', 
+                        padding: '25px', 
+                        borderRadius: '3px', 
+                    }}>
+                        <TeamStatsGlossary />
                     </div>
                 </div>
             }

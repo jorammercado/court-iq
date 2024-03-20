@@ -55,6 +55,7 @@ function App() {
   const [photoURL, setPhotoURL] = useState(null);
   const [currentUserPlaces, setCurrentUserPlaces] = useState(null);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [isGlossaryVisible, setIsGlossaryVisible] = useState(false);
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={DarkTheme}>
@@ -72,6 +73,8 @@ function App() {
                   setPhotoURL={setPhotoURL}
                   isSearchVisible={isSearchVisible}
                   setIsSearchVisible={setIsSearchVisible}
+                  isGlossaryVisible={isGlossaryVisible}
+                  setIsGlossaryVisible={setIsGlossaryVisible}
                 />
               </div>
 

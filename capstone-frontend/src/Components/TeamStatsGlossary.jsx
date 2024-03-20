@@ -1,5 +1,6 @@
 import React from 'react';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
+import { Heading, HeadingLevel } from 'baseui/heading';
 
 const TeamStatsGlossary = () => {
     const glossaryItems = [
@@ -26,7 +27,11 @@ const TeamStatsGlossary = () => {
 
     return (
         <div>
-            <h2>Team Stats Glossary</h2>
+            <HeadingLevel>
+                <Heading styleLevel={4} color="black" display="flex" justifyContent="center">
+                    Team Stats Glossary
+                </Heading>
+            </HeadingLevel>
             <TableBuilder data={glossaryItems}>
                 <TableBuilderColumn header="Acronym">
                     {row => <div>{row.acronym}</div>}
