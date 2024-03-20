@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Card, StyledBody, StyledAction, StyledThumbnail } from "baseui/card";
 import { Button } from "baseui/button";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import { Block } from "baseui/block";
 
 const PlayerCard = ({ player, personalData }) => {
-    const navigate = useNavigate(); // Initialize useNavigate
-    const [playerImage, setPlayerImage] = useState("https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png"); // Fallback image URL
+    const navigate = useNavigate(); 
+    const [playerImage, setPlayerImage] = useState("https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png");
 
     useEffect(() => {
-        // Construct the player name string as required by your API or image source
+       
         const playerName = `${player.player.firstname.toLowerCase()}` + ` ${player.player.lastname.toLowerCase()}`
-        // Replace VITE_BASE_URL with your actual base URL environment variable
+       
         const imageUrl = `${import.meta.env.VITE_BASE_URL}/playerimages/${playerName}`;
         fetch(imageUrl)
             .then((response) => response.json())
@@ -22,7 +22,7 @@ const PlayerCard = ({ player, personalData }) => {
             })
             .catch(() => {
                 console.error("Failed to fetch player image");
-                // navigate("/not-found") // Uncomment if you want to navigate to a not-found page on error
+          
             });
     }, [player.player.firstname, player.player.lastname, navigate]);
 
