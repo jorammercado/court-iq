@@ -28,15 +28,11 @@ import { useState } from "react";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
-import SignUp from "./Pages/SignUp.jsx";
+
 import Home from "./Pages/Home.jsx";
 import TeamsPage from "./Pages/TeamsPage.jsx"
 
-import Chart from "chart.js/auto";
-import { CategoryScale } from "chart.js";
-Chart.register(CategoryScale);
-import MyChartPage from "./Pages/MyChartPage.jsx";
-import InterpolationLineChart from "./Pages/InterpolationLineChart.jsx";
+
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
@@ -141,28 +137,6 @@ function App() {
 
                 {/* private route - home screen of specific user */}
                 <Route
-                  path="/chart"
-                  element={
-                    <MyChartPage
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                {/* private route - home screen of specific user */}
-                <Route
-                  path="/chartLine"
-                  element={
-                    <InterpolationLineChart
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                {/* private route - home screen of specific user */}
-                <Route
                   path="/rosters"
                   element={
                     <TeamsPage
@@ -233,18 +207,6 @@ function App() {
                     <CustomGPT
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                <Route
-                  path="/signup"
-                  element={
-                    <SignUp
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                      photoURL={photoURL}
-                      setPhotoURL={setPhotoURL}
                     />
                   }
                 />

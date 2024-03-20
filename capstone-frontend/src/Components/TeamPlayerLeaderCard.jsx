@@ -53,7 +53,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
             fetchPlayerStats();
         }
     }, [teamId, season, leaders]);
-    console.log("PERSONAL DATA", personalData)
+    //console.log("PERSONAL DATA", personalData)
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -69,6 +69,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
 
             try {
                 const response = await axios.request(options);
+                console.log("LEADERS: ", response)
                 sendDataToParent(response.data.response[0])
                 if (response.data && response.data.response) {
                     const playerStats = response.data.response.reduce((acc, curr) => {
@@ -135,11 +136,12 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                     }}
                 >
                     <Card
-                        overrides={{ Root: { style: { width: "328px", marginBottom: "20px", height: "185px", } } }}
+                        overrides={{ Root: { style: { width: "358px", marginBottom: "10px", height: "185px", } } }}
                     >
                         <StyledTitle>
                             {leader.firstname} {leader.lastname} &nbsp;&nbsp;
-                            {personalData[index] ? "#" + personalData[index].leagues.standard.jersey : ""}
+                            {personalData && personalData[index] ? "#" + personalData[index].leagues.standard.jersey : ""}  &nbsp;&nbsp;
+                            {personalData && personalData[index].leagues&&personalData[index].leagues.standard ? " " + personalData[index].leagues.standard.pos : ""}
                         </StyledTitle>
                         <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'} />
                         <StyledBody>

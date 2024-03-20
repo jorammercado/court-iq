@@ -49,8 +49,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     }, [selectedTeamName]);
 
     function selectPrimaryColor(selectedTeamName) {
-        for (let i = 0; i < teams.length;i++){
-            if(teams[i]===selectedTeamName)
+        for (let i = 0; i < teams.length; i++) {
+            if (teams[i] === selectedTeamName)
                 return primaryColors[i]
         }
         return '#ED751C'
@@ -61,8 +61,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     }, [selectedTeamName]);
 
     function selectSecondaryColor(selectedTeamName) {
-        for (let i = 0; i < teams.length;i++){
-            if(teams[i]===selectedTeamName)
+        for (let i = 0; i < teams.length; i++) {
+            if (teams[i] === selectedTeamName)
                 return secondaryColors[i]
         }
         return '#000000'
@@ -217,7 +217,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     </Block>
                     <Block className="teamLeaders">
                         <HeadingLevel>
-                            <Heading styleLevel={6} color="black">Team Leader(s)</Heading>
+                            <Heading styleLevel={5} color="black">Team Leader(s)</Heading>
                         </HeadingLevel>
                         <TeamPlayerLeaderCard
                             teamId={teamId}
@@ -231,8 +231,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         />
                     </Block>
                     <Block className="teamsItems">
-                        <TeamScheduleComponent teamId={teamId} season={season} />
                         <TeamStatsComponent teamId={teamId} season={season} />
+                        <TeamScheduleComponent teamId={teamId} season={season} />
                         <PlayerStatsComponent
                             team={teamId}
                             season={season}
@@ -241,7 +241,6 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
                         />
-                        {/* <TeamStatsGlossary /> */}
                     </Block>
                 </Block>
             </Block>
