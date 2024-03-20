@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./PLayerComparation.scss";
+import images from "../constants/images";
 
 function PlayerComparison() {
   const [player1, setPlayer1] = useState("");
@@ -85,46 +86,58 @@ function PlayerComparison() {
       </div>
 
       <div className="player-cards-container">
-  <div className="player-card">
-    {player1Data && (
-      <div className="player-info">
-        <img className="player-img" src={player1Data.espnHeadshot} alt="" />
-        <div className="info-card">
-          <h3 className="player-name">{player1Data.nbaComName}</h3>
-          <p className="player-stat">Weight: {player1Data.weight}</p>
-          <p className="player-stat">Height: {player1Data.height}</p>
-          <p className="player-stat">Team: {player1Data.team}</p>
-          <p className="player-stat">Rebounds: {player1Data.stats.reb}</p>
-          <p className="player-stat">Points: {player1Data.stats.pts}</p>
-          <p className="player-stat">Blocks: {player1Data.stats.blk}</p>
+        <div className="player-card">
+          {player1Data && (
+            <div className="player-info">
+              <img
+                className="player-img"
+                src={player1Data.espnHeadshot}
+                alt=""
+              />
+              <div className="info-card">
+                <h3 className="player-name">{player1Data.nbaComName}</h3>
+                <p className="player-stat">Weight: {player1Data.weight}</p>
+                <p className="player-stat">Height: {player1Data.height}</p>
+                <p className="player-stat">Team: {player1Data.team}</p>
+                <p className="player-stat">Rebounds: {player1Data.stats.reb}</p>
+                <p className="player-stat">Points: {player1Data.stats.pts}</p>
+                <p className="player-stat">Blocks: {player1Data.stats.blk}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="player-card">
+          {player2Data && (
+            <div className="player-info">
+              <img
+                className="player-img"
+                src={player2Data.espnHeadshot}
+                alt=""
+              />
+              <div className="info-card">
+                <h3 className="player-name">{player2Data.nbaComName}</h3>
+                <p className="player-stat">Weight: {player2Data.weight}</p>
+                <p className="player-stat">Height: {player2Data.height}</p>
+                <p className="player-stat">Team: {player2Data.team}</p>
+                <p className="player-stat">Rebounds: {player2Data.stats.reb}</p>
+                <p className="player-stat">Points: {player2Data.stats.pts}</p>
+                <p className="player-stat">Blocks: {player2Data.stats.blk}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    )}
-  </div>
-
-  <div className="player-card">
-    {player2Data && (
-      <div className="player-info">
-        <img className="player-img" src={player2Data.espnHeadshot} alt="" />
-        <div className="info-card">
-          <h3 className="player-name">{player2Data.nbaComName}</h3>
-          <p className="player-stat">Weight: {player2Data.weight}</p>
-          <p className="player-stat">Height: {player2Data.height}</p>
-          <p className="player-stat">Team: {player2Data.team}</p>
-          <p className="player-stat">Rebounds: {player2Data.stats.reb}</p>
-          <p className="player-stat">Points: {player2Data.stats.pts}</p>
-          <p className="player-stat">Blocks: {player2Data.stats.blk}</p>
-        </div>
-      </div>
-    )}
-  </div>
-</div>
-
 
       <div className="compare-button-container">
         <button className="compare-button" onClick={handleSearch}>
           Compare Players
         </button>
+      </div>
+      <div className="img-body">
+        <img className="court-img" src={images.nbaImgCourt} alt="" />
+        <img className="court-img" src={images.ball} alt="" />
+        <img className="court-img" src={images.ring} alt="" />
       </div>
     </div>
   );
