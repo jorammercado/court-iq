@@ -16,10 +16,15 @@ import {
 } from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
+import { Avatar } from "baseui/avatar";
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
+    const handleDataFromChild = (data) => {
+        setTeam(data.team)
+    };
 
+    const [team, setTeam] = useState({})
     const [teamId, setTeamId] = useState('1');
     const [season, setSeason] = useState('2023');
     const [selectedSeason, setSelectedSeason] = useState(null);
@@ -89,80 +94,114 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     return (
         <Block className="parent">
             <Block className="left">
-
-            </Block>
-            <Block className="middle">
-                <Block className="Selector" display="flex" justifyContent="space-between">
-                    <Block marginRight="5px" paddingTop="10px">
-                        <Select
-                            options={teamOptions}
-                            labelKey="label"
-                            valueKey="id"
-                            onChange={handleTeamChange}
-                            value={<Block>&nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp;; </Block>}
-                            placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
-                            clearable={false}
-                            overrides={{
-                                ControlContainer: { style: { minHeight: '35px', height: '35px' } },
-                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
-                                Placeholder: { style: { lineHeight: '30px' } },
-                                SingleValue: { style: { lineHeight: '30px' } },
-                            }}
-
-                        />
-                    </Block>
-                    <Block paddingTop="10px">
-                        <Select
-                            options={[
-                                { id: '2020', label: '2020-2021' },
-                                { id: '2021', label: '2021-2022' },
-                                { id: '2022', label: '2022-2023' },
-                                { id: '2023', label: '2023-2024' },
-                            ]}
-                            labelKey="label"
-                            valueKey="id"
-                            onChange={handleSeasonChange}
-                            value={<Block> &nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
-                            placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
-                            clearable={false}
-                            overrides={{
-                                ControlContainer: { style: { minHeight: '35px', height: '35px' } },
-                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
-                                Placeholder: { style: { lineHeight: '30px' } },
-                                SingleValue: { style: { lineHeight: '30px' } },
-                            }}
-
-                        />
-                    </Block>
-
-                </Block>
-                <Block className="team">
-                    <HeadingLevel>
-                        <Heading styleLevel={1} color="black">{selectedTeamName ? selectedTeamName : ""}</Heading>
-                        <Heading marginTop="-20px" styleLevel={3} color="black">{season ? season+`-${(Number(season)+1).toString()}` : ""}</Heading>
-                    </HeadingLevel>
-                </Block>
-                <Block className="teamLeaders">
-                    <HeadingLevel>
-                        <Heading styleLevel={6} color="black">Team Leader(s)</Heading>
-                    </HeadingLevel>
-                    <TeamPlayerLeaderCard
-                        teamId={teamId}
-                        season={season}
-                        category="points"
-                        isSearchVisible={isSearchVisible}
-                        setIsSearchVisible={setIsSearchVisible} />
-                </Block>
-                <Block className="teamsItems">
-                    <TeamScheduleComponent teamId={teamId} season={season} />
-                    <TeamStatsComponent teamId={teamId} season={season} />
-                    <PlayerStatsComponent
-                        team={teamId}
-                        season={season}
-                        isSearchVisible={isSearchVisible}
-                        setIsSearchVisible={setIsSearchVisible}
+                <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px" }}>
+                    <Avatar
+                        overrides={{
+                            Avatar: {
+                                style: ({ $theme }) => ({
+                                    borderRadius: "0",
+                                    width: 'auto',
+                                    objectFit: 'contain',
+                                    height: 'auto',
+                                    width: 'auto',
+                                    maxWidth: '100%',
+                                    maxHeight: '100%',
+                                }),
+                            },
+                            Root: {
+                                style: ({ $theme }) => ({
+                                    borderRadius: "0",
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    overflow: 'visible',
+                                    width: '120px',
+                                    height: '120px',
+                                }),
+                            },
+                        }}
+                        name={team && team.name ? team.name : ""}
+                        size="100px"
+                        src={team && team.logo ? team.logo : ""}
                     />
-                    <TeamStatsGlossary />
+                </Block>
+            </Block>
+            <Block className="backgroundWrapper" backgroundColor="#ED751C">
+                <Block className="middle">
+                    <Block className="Selector" display="flex" justifyContent="space-between">
+                        <Block marginRight="5px" paddingTop="10px">
+                            <Select
+                                options={teamOptions}
+                                labelKey="label"
+                                valueKey="id"
+                                onChange={handleTeamChange}
+                                value={<Block>&nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp;; </Block>}
+                                placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
+                                clearable={false}
+                                overrides={{
+                                    ControlContainer: { style: { minHeight: '35px', height: '35px' } },
+                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                    Placeholder: { style: { lineHeight: '30px' } },
+                                    SingleValue: { style: { lineHeight: '30px' } },
+                                }}
+
+                            />
+                        </Block>
+                        <Block paddingTop="10px">
+                            <Select
+                                options={[
+                                    { id: '2020', label: '2020-2021' },
+                                    { id: '2021', label: '2021-2022' },
+                                    { id: '2022', label: '2022-2023' },
+                                    { id: '2023', label: '2023-2024' },
+                                ]}
+                                labelKey="label"
+                                valueKey="id"
+                                onChange={handleSeasonChange}
+                                value={<Block> &nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
+                                placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
+                                clearable={false}
+                                overrides={{
+                                    ControlContainer: { style: { minHeight: '35px', height: '35px' } },
+                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                    Placeholder: { style: { lineHeight: '30px' } },
+                                    SingleValue: { style: { lineHeight: '30px' } },
+                                }}
+
+                            />
+                        </Block>
+
+                    </Block>
+                    <Block className="team">
+                        <HeadingLevel>
+                            <Heading styleLevel={1} color="black">{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading marginTop="-20px" styleLevel={3} color="black">{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
+                        </HeadingLevel>
+                    </Block>
+                    <Block className="teamLeaders">
+                        <HeadingLevel>
+                            <Heading styleLevel={6} color="black">Team Leader(s)</Heading>
+                        </HeadingLevel>
+                        <TeamPlayerLeaderCard
+                            teamId={teamId}
+                            season={season}
+                            category="points"
+                            isSearchVisible={isSearchVisible}
+                            setIsSearchVisible={setIsSearchVisible}
+                            sendDataToParent={handleDataFromChild}
+                        />
+                    </Block>
+                    <Block className="teamsItems">
+                        <TeamScheduleComponent teamId={teamId} season={season} />
+                        <TeamStatsComponent teamId={teamId} season={season} />
+                        <PlayerStatsComponent
+                            team={teamId}
+                            season={season}
+                            isSearchVisible={isSearchVisible}
+                            setIsSearchVisible={setIsSearchVisible}
+                        />
+                        <TeamStatsGlossary />
+                    </Block>
                 </Block>
             </Block>
             <Block className="right">

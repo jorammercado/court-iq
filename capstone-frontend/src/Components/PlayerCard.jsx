@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Card, StyledBody, StyledAction, StyledThumbnail } from "baseui/card";
 import { Button } from "baseui/button";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
 
 const PlayerCard = ({ player, personalData }) => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [playerImage, setPlayerImage] = useState("https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png");
 
     useEffect(() => {
-       
+
         const playerName = `${player.player.firstname.toLowerCase()}` + ` ${player.player.lastname.toLowerCase()}`
-       
+
         const imageUrl = `${import.meta.env.VITE_BASE_URL}/playerimages/${playerName}`;
         fetch(imageUrl)
             .then((response) => response.json())
@@ -22,7 +22,7 @@ const PlayerCard = ({ player, personalData }) => {
             })
             .catch(() => {
                 console.error("Failed to fetch player image");
-          
+
             });
     }, [player.player.firstname, player.player.lastname, navigate]);
 
@@ -51,8 +51,8 @@ const PlayerCard = ({ player, personalData }) => {
                     },
                 }
             }}
-            title={`${player.player.firstname} ${player.player.lastname} ${personalData ? !personalData.leagues.standard.jersey?"":"#" + personalData.leagues.standard.jersey : ""}
-            ${personalData ?  personalData.leagues.standard.pos : ""}`}
+            title={`${player.player.firstname} ${player.player.lastname} ${personalData ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
+            ${personalData ? personalData.leagues.standard.pos : ""}`}
         >
             <Block marginBottom="15px" marginTop="-15px">
                 <StyledThumbnail
@@ -60,12 +60,12 @@ const PlayerCard = ({ player, personalData }) => {
                     style={{ width: '68px', height: '68px', alignSelf: "center" }}
                 />
                 <StyledBody style={{ fontSize: "12px", lineHeight: "1.1" }}>
-                {personalData && personalData.birth ? "DOB: " + personalData.birth.date+", "+personalData.birth.country : ""} <br></br>
-                {personalData ? "College: " + personalData.college : ""} <br></br>
-                {personalData ? "Height: " + personalData.height.feets+"'"+personalData.height.inches+"\"" : ""} <br></br>
-                {personalData ? "Weight: " + personalData.weight.pounds+" lbs" : ""} <br></br>
-                {personalData ? "Pro Start: " + personalData.nba.start : ""}<br></br>
-                {personalData ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
+                    {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
+                    {personalData ? "College: " + personalData.college : ""} <br></br>
+                    {personalData ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>
+                    {personalData ? "Weight: " + personalData.weight.pounds + " lbs" : ""} <br></br>
+                    {personalData ? "Pro Start: " + personalData.nba.start : ""}<br></br>
+                    {personalData ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
 
                 </StyledBody>
             </Block>
