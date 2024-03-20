@@ -20,7 +20,7 @@ const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisible, sendDataToParent }) => {
+const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisible, sendDataToParent, primaryColor, secondaryColor }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])

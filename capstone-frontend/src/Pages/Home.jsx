@@ -6,7 +6,7 @@ import {
 } from "../Services/FireBase";
 import ChatApp from "../Components/ChatApp";
 import "animate.css";
-import logoInColor from '../assets/LOGO_IN_COLOR.svg';
+
 import { Block } from "baseui/block";
 
 function Home() {

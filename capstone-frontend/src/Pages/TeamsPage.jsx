@@ -226,6 +226,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             isSearchVisible={isSearchVisible}
                             setIsSearchVisible={setIsSearchVisible}
                             sendDataToParent={handleDataFromChild}
+                            primaryColor={primaryColor}
+                            secondaryColor={secondaryColor}
                         />
                     </Block>
                     <Block className="teamsItems">
@@ -236,6 +238,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             season={season}
                             isSearchVisible={isSearchVisible}
                             setIsSearchVisible={setIsSearchVisible}
+                            primaryColor={primaryColor}
+                            secondaryColor={secondaryColor}
                         />
                         <TeamStatsGlossary />
                     </Block>
