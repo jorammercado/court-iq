@@ -17,20 +17,20 @@ const ChatApp = () => {
     useEffect(() => {
         let timer
         if (isOpen && !isLoading) {
-            // about 4 seconds
+            // about 7 seconds
             timer = setTimeout(() => {
                 setIsOpen(false)
-            }, 4000)
+            }, 7000)
         }
-    
+
         return () => clearTimeout(timer)
     }, [isOpen, isLoading])
 
     const handleQuerySubmit = async (userQuery) => {
         setIsLoading(true)
-        setIsOpen(true) 
-        setResponse('') 
-        setErrorMessage('') 
+        setIsOpen(true)
+        setResponse('')
+        setErrorMessage('')
 
         if (!userQuery.trim()) {
             setIsLoading(false)
@@ -48,10 +48,10 @@ const ChatApp = () => {
             }
         } catch (error) {
             console.error('Error getting response from flask app:', error)
-            setErrorMessage('Type in a question!')
-            
+            setErrorMessage('error generating response')
+
         } finally {
-            setIsLoading(false) 
+            setIsLoading(false)
         }
     }
 
@@ -68,8 +68,15 @@ const ChatApp = () => {
                         <div style={{ padding: '10px' }}>{response}</div>
                 )}
                 placement={PLACEMENT.bottom}
+                overrides={{
+                    Body: {
+                        style: {
+                            zIndex: '1001', 
+                        },
+                    },
+                }}
             >
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}  >
                     <ChatInput onSubmit={handleQuerySubmit} />
                 </div>
             </Popover>

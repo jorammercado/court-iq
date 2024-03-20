@@ -54,6 +54,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [photoURL, setPhotoURL] = useState(null);
   const [currentUserPlaces, setCurrentUserPlaces] = useState(null);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={DarkTheme}>
@@ -69,6 +70,8 @@ function App() {
                   setCurrentUser={setCurrentUser}
                   photoURL={photoURL}
                   setPhotoURL={setPhotoURL}
+                  isSearchVisible={isSearchVisible}
+                  setIsSearchVisible={setIsSearchVisible}
                 />
               </div>
 
@@ -162,6 +165,8 @@ function App() {
                     <TeamsPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
+                      isSearchVisible={isSearchVisible}
+                      setIsSearchVisible={setIsSearchVisible}
                     />
                   }
                 />
@@ -171,6 +176,8 @@ function App() {
                     <PlayerExamplePage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
+                      isSearchVisible={isSearchVisible}
+                      setIsSearchVisible={setIsSearchVisible}
                     />
                   }
                 />

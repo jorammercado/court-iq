@@ -36,7 +36,14 @@ const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function PlayerExample({ data, playerid }) {
+function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) {
+
+    useEffect(() => {
+        if (isSearchVisible) {
+          setIsSearchVisible(false);
+        }
+      }, [isSearchVisible]);
+
     let navigate = useNavigate()
     const [isScreenLargeEnough, setIsScreenLargeEnough] = useState(window.innerWidth > 768);
 
