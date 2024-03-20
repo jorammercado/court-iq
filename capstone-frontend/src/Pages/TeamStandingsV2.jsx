@@ -1,5 +1,5 @@
 import { React as React2, useEffect, useState, useMemo } from 'react';
-import TeamStandingCompV2 from '../Components/TeamStandingCompV2';
+
 import Pagination from '../utils/Pagination';
 import axios from 'axios';
 import { Table } from 'baseui/table-semantic';
