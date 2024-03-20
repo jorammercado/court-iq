@@ -241,7 +241,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
                         />
-                        <TeamStatsGlossary />
+                        {/* <TeamStatsGlossary /> */}
                     </Block>
                 </Block>
             </Block>
