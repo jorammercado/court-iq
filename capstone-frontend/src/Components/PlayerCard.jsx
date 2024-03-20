@@ -4,7 +4,7 @@ import { Button } from "baseui/button";
 import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
 
-const PlayerCard = ({ player, personalData }) => {
+const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
     const navigate = useNavigate();
     const [playerImage, setPlayerImage] = useState("https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png");
 
@@ -35,7 +35,7 @@ const PlayerCard = ({ player, personalData }) => {
                         width: "210px",
                         height: "175px",
                         marginBottom: "20px",
-                        backgroundColor: "#EA6607",
+                        backgroundColor: primaryColor,
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "space-between"
@@ -47,7 +47,8 @@ const PlayerCard = ({ player, personalData }) => {
                         textAlign: 'center',
                         marginTop: "-10px",
                         marginBottom: "18px",
-                        lineHeight: "1.1"
+                        lineHeight: "1.1",
+                        color: secondaryColor
                     },
                 }
             }}
@@ -59,7 +60,7 @@ const PlayerCard = ({ player, personalData }) => {
                     src={playerImage}
                     style={{ width: '68px', height: '68px', alignSelf: "center" }}
                 />
-                <StyledBody style={{ fontSize: "12px", lineHeight: "1.1" }}>
+                <StyledBody style={{ fontSize: "13px", lineHeight: "1.1", marginTop:"26px" }}>
                     {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
                     {personalData ? "College: " + personalData.college : ""} <br></br>
                     {personalData ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>

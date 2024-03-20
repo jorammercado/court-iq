@@ -9,7 +9,7 @@ const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
-const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisible  }) => {
+const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisible, primaryColor, secondaryColor  }) => {
     const navigate = useNavigate();
     const [playerStats, setPlayerStats] = useState([]);
     const [personalData, setPersonalData] = useState({});
@@ -85,7 +85,9 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
                         personalDataPassed = []
                     return (
                         <div key={index} onClick={() => handleCardClick(player.player.id, player.player)} style={{ cursor: 'pointer' }}>
-                            <PlayerCard player={player} personalData={personalDataPassed} />
+                            <PlayerCard player={player} personalData={personalDataPassed}
+                            primaryColor={primaryColor}
+                            secondaryColor={secondaryColor} />
                         </div>
                     )
                 }, personalData)}
