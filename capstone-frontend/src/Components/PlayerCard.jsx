@@ -52,7 +52,7 @@ const PlayerCard = ({ player, personalData }) => {
                 }
             }}
             title={`${player.player.firstname} ${player.player.lastname} ${personalData ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
-            ${personalData ? personalData.leagues.standard.pos : ""}`}
+            ${personalData&&personalData.leagues&&personalData.leagues.standard ? personalData.leagues.standard.pos : ""}`}
         >
             <Block marginBottom="15px" marginTop="-15px">
                 <StyledThumbnail
