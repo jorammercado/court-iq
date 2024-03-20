@@ -18,9 +18,9 @@ const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
-const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL; // Assuming this is correct
+const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisible }) => {
+const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisible, sendDataToParent }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])
@@ -69,6 +69,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
 
             try {
                 const response = await axios.request(options);
+                sendDataToParent(response.data.response[0])
                 if (response.data && response.data.response) {
                     const playerStats = response.data.response.reduce((acc, curr) => {
                         const playerId = curr.player.id;
@@ -142,7 +143,6 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                         </StyledTitle>
                         <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'} />
                         <StyledBody>
-                            {/* <LabelLarge marginTop="-10px">{leader.firstname} {leader.lastname}</LabelLarge> */}
                             <HeadingLevel >
                                 <Heading marginTop="-16px" marginBottom="-1px" styleLevel={6}>
                                     {leader.category.split(" ")[0] === "Points" && `Points: ${leader.points}`}
