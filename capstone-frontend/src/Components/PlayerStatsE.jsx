@@ -9,8 +9,8 @@ const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
-const PlayerStatsComponent = ({ team, season }) => {
-    const navigate = useNavigate(); 
+const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisible  }) => {
+    const navigate = useNavigate();
     const [playerStats, setPlayerStats] = useState([]);
     const [personalData, setPersonalData] = useState({});
 
@@ -70,14 +70,19 @@ const PlayerStatsComponent = ({ team, season }) => {
     }
 
     const handleCardClick = (playerId, playerData) => {
+        setIsSearchVisible(false);
         navigate(`/player/${playerId}`, { state: { ...playerData } });
     };
 
     return (
         <div>
-            <div className="playerCardsContainer"> {/* Updated class name */}
+            <div className="playerCardsContainer"> 
                 {playerStats && playerStats.slice(0, 15).map((player, index) => {
-                    const personalDataPassed = personalData.filter((elem, index) => elem.id === player.player.id)[0]
+                    let personalDataPassed = null
+                    if (personalData)
+                        personalDataPassed = personalData.filter((elem, index) => elem.id === player.player.id)[0]
+                    else
+                        personalDataPassed = []
                     return (
                         <div key={index} onClick={() => handleCardClick(player.player.id, player.player)} style={{ cursor: 'pointer' }}>
                             <PlayerCard player={player} personalData={personalDataPassed} />

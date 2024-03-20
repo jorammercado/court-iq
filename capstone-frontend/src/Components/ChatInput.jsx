@@ -32,8 +32,10 @@ const ChatInput = ({ onSubmit }) => {
     },
     Input: {
       style: {
-        paddingRight: dynamicPadding,
-        paddingLeft: dynamicPadding,
+        width: '100%',
+        '::placeholder': {
+          color: 'white', 
+        },
       },
     },
     EndEnhancer: {
@@ -50,13 +52,14 @@ const ChatInput = ({ onSubmit }) => {
   )
 
   return (
-    <form onSubmit={handleSubmit} className="chatForm" style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+    <form onSubmit={handleSubmit} className="chatForm" style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent:'center' }}>
       <Input
         value={message}
         onChange={handleChange}
-        placeholder="Ask a stat question..."
+        placeholder="Search our database for quick answers, type in a question..."
         endEnhancer={endEnhancer}
         overrides={inputOverrides}
+        clearable={true}
       />
     </form>
   )

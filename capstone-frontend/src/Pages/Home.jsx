@@ -18,11 +18,7 @@ function Home() {
                 <Block className="sub-title">
                     Elevate Your Game with CoutIQ: Where Analytics Meet Action
                 </Block>
-                <Block className="logo animate__animated animate__bounceInLeft">
-                    <img src={logoInColor} alt="Logo" />
-                </Block>
             </Block>
-            <ChatApp />
         </Block>
     )
 }

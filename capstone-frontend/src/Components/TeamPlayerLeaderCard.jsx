@@ -20,7 +20,7 @@ const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL; // Assuming this is correct
 
-const TeamPlayerLeaderCard = ({ teamId, season }) => {
+const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisible }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])
@@ -128,7 +128,10 @@ const TeamPlayerLeaderCard = ({ teamId, season }) => {
                 <div
                     key={index}
                     style={{ cursor: 'pointer' }}
-                    onClick={() => navigate(`/player/${leader.id}`, { state: { ...leader } })}
+                    onClick={() => {
+                        setIsSearchVisible(false)
+                        navigate(`/player/${leader.id}`, { state: { ...leader } })
+                    }}
                 >
                     <Card
                         overrides={{ Root: { style: { width: "328px", marginBottom: "20px", height: "185px", } } }}

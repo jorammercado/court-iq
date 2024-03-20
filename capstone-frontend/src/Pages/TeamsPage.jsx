@@ -17,11 +17,13 @@ import {
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 
-const TeamsPage = () => {
+const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
+
+
     const [teamId, setTeamId] = useState('1');
     const [season, setSeason] = useState('2023');
-    const [selectedSeason, setSelectedSeason] = useState("2023");
-    const [selectedTeam, setSelectedTeam] = useState("1");
+    const [selectedSeason, setSelectedSeason] = useState(null);
+    const [selectedTeam, setSelectedTeam] = useState(null);
     const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
 
     const handleTeamChange = (params) => {
@@ -90,31 +92,26 @@ const TeamsPage = () => {
 
             </Block>
             <Block className="middle">
-                <Block className="Selector">
-                    <Block>
+                <Block className="Selector" display="flex" justifyContent="space-between">
+                    <Block marginRight="5px" paddingTop="10px">
                         <Select
                             options={teamOptions}
                             labelKey="label"
                             valueKey="id"
                             onChange={handleTeamChange}
-                            value={selectedTeamValue}
-                            placeholder={<Block> &nbsp;Team&nbsp; </Block>}
+                            value={<Block>&nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp;; </Block>}
+                            placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
                             clearable={false}
                             overrides={{
-                                ValueContainer: {
-                                    style: ({ $theme }) => ({
-                                        ...$theme.typography.font100
-                                    }),
-                                },
-                                Option: {
-                                    style: ({ $theme }) => ({
-                                        ...$theme.typography.font100
-                                    }),
-                                },
+                                ControlContainer: { style: { minHeight: '35px', height: '35px' } },
+                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                Placeholder: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px' } },
                             }}
+
                         />
                     </Block>
-                    <Block>
+                    <Block paddingTop="10px">
                         <Select
                             options={[
                                 { id: '2020', label: '2020-2021' },
@@ -125,21 +122,16 @@ const TeamsPage = () => {
                             labelKey="label"
                             valueKey="id"
                             onChange={handleSeasonChange}
-                            value={selectedValue}
-                            placeholder={<Block> &nbsp;Season&nbsp; </Block>}
+                            value={<Block> &nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
+                            placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
                             clearable={false}
                             overrides={{
-                                ValueContainer: {
-                                    style: ({ $theme }) => ({
-                                        ...$theme.typography.font100
-                                    }),
-                                },
-                                Option: {
-                                    style: ({ $theme }) => ({
-                                        ...$theme.typography.font100
-                                    }),
-                                },
+                                ControlContainer: { style: { minHeight: '35px', height: '35px' } },
+                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                Placeholder: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px' } },
                             }}
+
                         />
                     </Block>
 
@@ -147,18 +139,29 @@ const TeamsPage = () => {
                 <Block className="team">
                     <HeadingLevel>
                         <Heading styleLevel={1} color="black">{selectedTeamName ? selectedTeamName : ""}</Heading>
+                        <Heading marginTop="-20px" styleLevel={3} color="black">{season ? season+`-${(Number(season)+1).toString()}` : ""}</Heading>
                     </HeadingLevel>
                 </Block>
                 <Block className="teamLeaders">
                     <HeadingLevel>
                         <Heading styleLevel={6} color="black">Team Leader(s)</Heading>
                     </HeadingLevel>
-                    <TeamPlayerLeaderCard teamId={teamId} season={season} category="points" />
+                    <TeamPlayerLeaderCard
+                        teamId={teamId}
+                        season={season}
+                        category="points"
+                        isSearchVisible={isSearchVisible}
+                        setIsSearchVisible={setIsSearchVisible} />
                 </Block>
                 <Block className="teamsItems">
                     <TeamScheduleComponent teamId={teamId} season={season} />
                     <TeamStatsComponent teamId={teamId} season={season} />
-                    <PlayerStatsComponent team={teamId} season={season} />
+                    <PlayerStatsComponent
+                        team={teamId}
+                        season={season}
+                        isSearchVisible={isSearchVisible}
+                        setIsSearchVisible={setIsSearchVisible}
+                    />
                     <TeamStatsGlossary />
                 </Block>
             </Block>
