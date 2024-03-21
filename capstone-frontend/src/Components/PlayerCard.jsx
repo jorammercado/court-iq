@@ -52,7 +52,7 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
                     },
                 }
             }}
-            title={`${player.player.firstname} ${player.player.lastname} ${personalData ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
+            title={`${player.player.firstname} ${player.player.lastname} ${personalData&&personalData.leagues&&personalData.leagues.standard ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
             ${personalData&&personalData.leagues&&personalData.leagues.standard ? personalData.leagues.standard.pos : ""}`}
         >
             <Block marginBottom="15px" marginTop="-15px">
