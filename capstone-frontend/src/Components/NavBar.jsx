@@ -29,7 +29,7 @@ export default function NavBar({
       { icon: null, label: "Rosters" },
       { icon: null, label: "Standings" },
       { icon: null, label: "Schedule" },
-      { icon: null, label: "Comparate" },
+      { icon: null, label: "Compare" },
       { icon: null, label: "Search" },
       { icon: null, label: "Headlines" },
     ],
@@ -66,7 +66,7 @@ export default function NavBar({
         setIsGlossaryVisible(false);
         navigate("/GamesSchedule");
         break;
-      case "Comparate":
+      case "Compare":
         setIsSearchVisible(false);
         setIsGlossaryVisible(false);
         navigate("/PlayerComparation");
