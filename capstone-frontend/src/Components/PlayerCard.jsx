@@ -52,15 +52,15 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
                     },
                 }
             }}
-            title={`${player.player.firstname} ${player.player.lastname} ${personalData&&personalData.leagues&&personalData.leagues.standard ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
-            ${personalData&&personalData.leagues&&personalData.leagues.standard ? personalData.leagues.standard.pos : ""}`}
+            title={`${player.player.firstname} ${player.player.lastname} ${personalData && personalData.leagues && personalData.leagues.standard ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
+            ${personalData && personalData.leagues && personalData.leagues.standard ? personalData.leagues.standard.pos : ""}`}
         >
             <Block marginBottom="15px" marginTop="-15px">
                 <StyledThumbnail
                     src={playerImage}
                     style={{ width: '68px', height: '68px', alignSelf: "center" }}
                 />
-                <StyledBody style={{ fontSize: "13px", lineHeight: "1.1", marginTop:"26px" }}>
+                <StyledBody style={{ fontSize: "13px", lineHeight: "1.1", marginTop: "26px" }}>
                     {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
                     {personalData ? "College: " + personalData.college : ""} <br></br>
                     {personalData ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>

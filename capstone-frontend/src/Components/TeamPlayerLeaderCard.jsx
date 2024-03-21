@@ -140,7 +140,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                     >
                         <StyledTitle>
                             {leader.firstname} {leader.lastname} &nbsp;&nbsp;
-                            {personalData && personalData[index] ? "#" + personalData[index].leagues.standard.jersey : ""}  &nbsp;&nbsp;
+                            {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? "#" + personalData[index].leagues.standard.jersey : ""}  &nbsp;&nbsp;
                             {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? " " + personalData[index].leagues.standard.pos : ""}
                         </StyledTitle>
                         <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'} />
