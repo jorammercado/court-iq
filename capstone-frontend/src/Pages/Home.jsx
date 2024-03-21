@@ -11,7 +11,7 @@ import { Block } from "baseui/block";
 
 function Home() {
     const navigate = useNavigate();
-
+    
     return (
         <Block className="home">
             <Block className="header-container">

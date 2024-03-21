@@ -30,8 +30,7 @@ import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
 
 import Home from "./Pages/Home.jsx";
-import TeamsPage from "./Pages/TeamsPage.jsx"
-
+import TeamsPage from "./Pages/TeamsPage.jsx";
 
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 
@@ -45,6 +44,7 @@ import SearchPage from "./Components/SearchPage.jsx";
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PLayerComparation from "./Pages/PLayerComparation.jsx";
+import Headlines from "./Pages/Headlines.jsx";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -170,7 +170,6 @@ function App() {
                   }
                 />
 
-
                 <Route
                   path="/GamesSchedule"
                   element={
@@ -185,6 +184,15 @@ function App() {
                   path="/PlayerComparation"
                   element={
                     <PLayerComparation
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+                <Route
+                  path="/HeadLine"
+                  element={
+                    <Headlines
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
