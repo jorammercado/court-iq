@@ -381,7 +381,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                 {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
                                 {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
                                 {referenceData.team ? referenceData.team.name : ""} &nbsp;
-                                {personalData && personalData.leagues ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
                                 {referenceData ? referenceData.pos : ""}
                             </Heading>
                         </HeadingLevel>
