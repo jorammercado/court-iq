@@ -9,14 +9,28 @@ import "animate.css";
 
 import { Block } from "baseui/block";
 
+import Intro from "../Components/Intro";
+import SectionOne from "../Components/SectionOne";
+import SectionTwo from "../Components/SectionTwo";
+import MyWork from "../Components/MyWork";
+
+import Header from "../Components/Header";
+import "./css/main.css"
+import "./css/noscript.css"
+
+
 function Home() {
     const navigate = useNavigate();
-    
+
     return (
         <Block className="home">
             <Block className="header-container">
-                <Block className="sub-title">
-                    Elevate Your Game with CoutIQ: Where Analytics Meet Action
+                <Block>
+                    <Header></Header>
+                    <Intro></Intro>
+                    <SectionOne></SectionOne>
+                    <SectionTwo></SectionTwo>
+                    <MyWork></MyWork>
                 </Block>
             </Block>
         </Block>
