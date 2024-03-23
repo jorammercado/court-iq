@@ -2272,11 +2272,8 @@ body.is-touch .poptrox-popup .closer {
 /* Intro */
 
 .home #intro {
-	background: url("./images/overlay.png"), url("../images/intro.jpg");
-	background-size: 256px 256px, cover;
-	background-attachment: fixed, fixed;
-	background-position: top left, bottom center;
-	background-repeat: repeat, no-repeat;
+	background: url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg") no-repeat center center fixed;
+	background-size: cover;
 }
 
 /* One */
