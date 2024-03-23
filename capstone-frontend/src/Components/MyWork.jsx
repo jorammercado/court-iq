@@ -12,19 +12,12 @@ const galleryItems = [
 const MyWork = () => (
     <section id="work" className="main style3 primary">
         <div className="content">
-            <header>
-                <h2>Our Work</h2>
-                <p>Lorem ipsum dolor sit amet et sapien sed elementum egestas dolore condimentum...</p>
+        <header>
+                <h2>In Depth Prop Research</h2>
             </header>
-            <div className="gallery">
-                {galleryItems.map((item, index) => (
-                    <article key={index} className={`from-${index % 2 === 0 ? 'left' : 'right'}`}>
-                        <a href={item.fullSrc} className="image fit">
-                            <img src={item.src} title={item.title} alt="" />
-                        </a>
-                    </article>
-                ))}
-            </div>
+            <p className="deep-dive-message">
+                By exploring the depth of props, we enable users to make more informed assumptions
+            </p>
         </div>
     </section>
 );
