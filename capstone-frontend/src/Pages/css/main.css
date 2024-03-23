@@ -445,7 +445,6 @@ q {
 .standings:after,
 .player-comparison-container:after,
 .login:after,
-.playerCardsContainer,
 .logged-in:after,
 .headlines-container:after,
 .schedules:after,
@@ -2283,7 +2282,7 @@ body.is-touch .poptrox-popup .closer {
 /* One */
 
 .home #one {
-	background: url("./images/overlay.png"), url("../images/one.jpg");
+	background: url("./images/overlay.png"), url("../images/luca.png");
 	background-size: 256px 256px, cover;
 	background-attachment: fixed, fixed;
 	background-position: top left, center center;

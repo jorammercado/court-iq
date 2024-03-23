@@ -140,7 +140,6 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     width: 'auto',
                                     objectFit: 'contain',
                                     height: 'auto',
-                                    width: 'auto',
                                     maxWidth: '100%',
                                     maxHeight: '100%',
                                 }),

@@ -63,10 +63,10 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
                 <StyledBody style={{ fontSize: "13px", lineHeight: "1.1", marginTop: "26px" }}>
                     {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
                     {personalData ? "College: " + personalData.college : ""} <br></br>
-                    {personalData ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>
-                    {personalData ? "Weight: " + personalData.weight.pounds + " lbs" : ""} <br></br>
-                    {personalData ? "Pro Start: " + personalData.nba.start : ""}<br></br>
-                    {personalData ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
+                    {personalData&&personalData.height ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>
+                    {personalData&&personalData.weight ? "Weight: " + personalData.weight.pounds + " lbs" : ""} <br></br>
+                    {personalData&&personalData.nba ? "Pro Start: " + personalData.nba.start : ""}<br></br>
+                    {personalData&&personalData.nba ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
 
                 </StyledBody>
             </Block>
