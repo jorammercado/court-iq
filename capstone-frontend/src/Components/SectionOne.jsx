@@ -6,7 +6,7 @@ const SectionOne = () => (
             <header>
                 <h2>What We Do</h2>
             </header>
-            <p>We're revolutionizing the way basketball enthusiasts, teams, and analyst experience the game.</p>
+            <p>We're revolutionizing the way basketball enthusiasts analyze and experience the game.</p>
         </div>
         <a href="#two" className="button style2 down anchored">Next</a>
     </section>
