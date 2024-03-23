@@ -1972,6 +1972,11 @@ body.is-touch .poptrox-popup .closer {
 	
 }
 
+.contentbox{
+	padding-top: 150px;
+	text-align: center;
+}
+
 .home .main>.content> :last-child {
 	margin-bottom: 0;
 }
@@ -2300,10 +2305,7 @@ body.is-touch .poptrox-popup .closer {
 /* Two */
 
 .home #two {
-	background: url("./images/overlay.png"), url("../images/two.jpg");
-	background-size: 256px 256px, cover;
-	background-attachment: fixed, fixed;
-	background-position: top left, center center;
+	background-color: white;
 }
 
 /* Contact */
