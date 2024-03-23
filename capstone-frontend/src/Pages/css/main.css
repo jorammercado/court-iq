@@ -2349,3 +2349,8 @@ body.is-touch .poptrox-popup .closer {
 	}
 
 }
+
+div.element{
+	height: 50vh;
+    background-color: black;
+}
