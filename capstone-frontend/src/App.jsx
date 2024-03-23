@@ -35,7 +35,6 @@ import TeamsPage from "./Pages/TeamsPage.jsx";
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
 
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
-import CustomGPT from "./Pages/CustomGPT.jsx";
 
 import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx";
 
@@ -203,16 +202,6 @@ function App() {
                   path="/player_stats_table"
                   element={
                     <PlayerStatsTableVariation
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                <Route
-                  path="/custom_gpt"
-                  element={
-                    <CustomGPT
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />

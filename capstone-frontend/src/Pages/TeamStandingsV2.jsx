@@ -93,33 +93,6 @@ const TeamStandingsV2 = () => {
     };
   }, []);
 
-
-
-  if (data == null || data === undefined || data.length === 0 || !data)
-    return (
-      <div className="v2__standings">
-        <div>
-          <section >
-            <table className="logo__caption">
-              <caption>
-                <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">{/* Made NBA logo a link */}
-                  <img
-                    src={logo}
-                    alt={`NBA Logo`}
-                    style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }} // Added cursor pointer
-                  />
-                </Link>
-                &nbsp; {stage} {season.replace("\n", "")}
-              </caption>
-            </table>
-          </section>
-          <div className="max__width">
-            <Spin></Spin>
-          </div>
-        </div>
-      </div>
-    );
-
   const teamsWestern = westernConference.map(team => {
     return {
       position: team.position,
@@ -263,7 +236,7 @@ const TeamStandingsV2 = () => {
 
   return (
 
-    <Block display="flex" justifyContent="center" alignItems="stretch" height="100%">
+    <Block display="flex" justifyContent="center" alignItems="stretch" height="100%" className="standings">
 
       {!isMobile ?
         <Block flex={1}
@@ -322,7 +295,7 @@ const TeamStandingsV2 = () => {
         style={{ width: isMobile ? '100%' : 'unset' }}
       >
 
-        <Block className="table__header" marginTop={!isMobile?"-190px":"-260px"}>
+        <Block className="table__header" marginTop={!isMobile ? "-190px" : "-260px"}>
 
           <Block display="flex" justifyContent="center" width="100%">
             <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
@@ -333,7 +306,7 @@ const TeamStandingsV2 = () => {
               />
             </Link> &nbsp; &nbsp;
             <HeadingLevel>
-              <Heading styleLevel={!isMobile?4:6} color="black" >{stage} {season}</Heading>
+              <Heading styleLevel={!isMobile ? 4 : 6} color="black" >{stage} {season}</Heading>
             </HeadingLevel>
           </Block>
 
@@ -342,121 +315,125 @@ const TeamStandingsV2 = () => {
         <Block display="flex" justifyContent="center" width="100%" marginTop="10px">
           <HeadingMedium color="black" >West</HeadingMedium>
         </Block>
-        <TableBuilder className="animate__animated animate__zoomIn"
-          overrides={{ Root: { style: { maxHeight: '300px' } } }}
-          data={DATA}
-        >
-          <TableBuilderColumn header="Team">
-            {(row) => (
-              <AvatarCell
-                src={row.avatarSrc}
-                title={row.name}
-                subtitle={row.title}
-              />
-            )}
-          </TableBuilderColumn>
+        {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+          <TableBuilder className="animate__animated animate__zoomIn"
+            overrides={{ Root: { style: { maxHeight: '300px' } } }}
+            data={DATA}
+          >
+            <TableBuilderColumn header="Team">
+              {(row) => (
+                <AvatarCell
+                  src={row.avatarSrc}
+                  title={row.name}
+                  subtitle={row.title}
+                />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Position">
-            {(row) => (
-              <NumberCell value={row.position} delta={0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Position">
+              {(row) => (
+                <NumberCell value={row.position} delta={0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Lost">
-            {(row) => (
-              <NumberCell value={row.gamesLost} delta={-0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Lost">
+              {(row) => (
+                <NumberCell value={row.gamesLost} delta={-0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Lost %">
-            {(row) => (
-              <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Lost %">
+              {(row) => (
+                <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Won">
-            {(row) => (
-              <NumberCell value={row.gamesWon} delta={0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Won">
+              {(row) => (
+                <NumberCell value={row.gamesWon} delta={0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Won %">
-            {(row) => (
-              <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Won %">
+              {(row) => (
+                <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Points Against">
-            {(row) => (
-              <NumberCell value={row.pointsAgainst} delta={0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Points Against">
+              {(row) => (
+                <NumberCell value={row.pointsAgainst} delta={0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Points For">
-            {(row) => (
-              <NumberCell value={row.pointsFor} delta={0.51} />
-            )}
-          </TableBuilderColumn>
-        </TableBuilder>
+            <TableBuilderColumn header="Points For">
+              {(row) => (
+                <NumberCell value={row.pointsFor} delta={0.51} />
+              )}
+            </TableBuilderColumn>
+          </TableBuilder>
+        }
         <Block display="flex" justifyContent="center" width="100%" marginTop="-50px">
           <HeadingMedium color="black" marginTop="50px">East</HeadingMedium>
         </Block>
-        <TableBuilder className="animate__animated animate__zoomIn"
-          overrides={{ Root: { style: { maxHeight: '300px' } } }}
-          data={DATA2}
-        >
-          <TableBuilderColumn header="Team">
-            {(row) => (
-              <AvatarCell
-                src={row.avatarSrc}
-                title={row.name}
-                subtitle={row.title}
-              />
-            )}
-          </TableBuilderColumn>
+        {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+          <TableBuilder className="animate__animated animate__zoomIn"
+            overrides={{ Root: { style: { maxHeight: '300px' } } }}
+            data={DATA2}
+          >
+            <TableBuilderColumn header="Team">
+              {(row) => (
+                <AvatarCell
+                  src={row.avatarSrc}
+                  title={row.name}
+                  subtitle={row.title}
+                />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Position">
-            {(row) => (
-              <NumberCell value={row.position} delta={0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Position">
+              {(row) => (
+                <NumberCell value={row.position} delta={0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Lost">
-            {(row) => (
-              <NumberCell value={row.gamesLost} delta={-0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Lost">
+              {(row) => (
+                <NumberCell value={row.gamesLost} delta={-0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Lost %">
-            {(row) => (
-              <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Lost %">
+              {(row) => (
+                <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Won">
-            {(row) => (
-              <NumberCell value={row.gamesWon} delta={0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Won">
+              {(row) => (
+                <NumberCell value={row.gamesWon} delta={0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Games Won %">
-            {(row) => (
-              <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Games Won %">
+              {(row) => (
+                <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Points Against">
-            {(row) => (
-              <NumberCell value={row.pointsAgainst} delta={0.51} />
-            )}
-          </TableBuilderColumn>
+            <TableBuilderColumn header="Points Against">
+              {(row) => (
+                <NumberCell value={row.pointsAgainst} delta={0.51} />
+              )}
+            </TableBuilderColumn>
 
-          <TableBuilderColumn header="Points For">
-            {(row) => (
-              <NumberCell value={row.pointsFor} delta={0.51} />
-            )}
-          </TableBuilderColumn>
-        </TableBuilder>
+            <TableBuilderColumn header="Points For">
+              {(row) => (
+                <NumberCell value={row.pointsFor} delta={0.51} />
+              )}
+            </TableBuilderColumn>
+          </TableBuilder>
+        }
       </Block>
 
       {!isMobile ?
