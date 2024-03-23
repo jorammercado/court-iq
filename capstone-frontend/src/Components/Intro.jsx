@@ -6,8 +6,8 @@ const Intro = () => (
             <header>
                 <h2>Beyond the Arc Analytics Unleashed</h2>
             </header>
-            <p>Elevate your game <br /> <strong>
-                Where Analytics Meet Action.</strong></p>
+            <p>Elevate your game <br /> 
+                Where Analytics Meet Action.</p>
             <footer>
                 <a href="#one" className="button style2 down">More</a>
             </footer>
