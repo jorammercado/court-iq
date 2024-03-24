@@ -359,22 +359,6 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                         <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "260px" }} />
                     </Block>
                     <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
-                        <Block width="auto" maxWidth="300px" display="flex" alignItems="center" marginBottom="20px" marginTop="-30px">
-                            <Select
-                                options={[
-                                    { id: '2020', label: '2020-2021' },
-                                    { id: '2021', label: '2021-2022' },
-                                    { id: '2022', label: '2022-2023' },
-                                    { id: '2023', label: '2023-2024' },
-                                ]}
-                                labelKey="label"
-                                valueKey="id"
-                                onChange={handleSeasonChange}
-                                value={selectedValue}
-                                placeholder="Select..."
-                                clearable={false}
-                            />
-                        </Block>
                         <HeadingLevel>
                             <Heading styleLevel={3} color={secondaryColor}>{data.firstname} {data.lastname} </Heading>
                             <Heading styleLevel={6} color={secondaryColor}>
@@ -399,8 +383,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             <LabelMedium color={secondaryColor}>{calculateTS()}</LabelMedium>
                         </Block>
                     </Block>
-                    <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px" }}>
-                        {/* <img src={referenceData.team.logo} alt="Team Logo" style={{ height: "150px" }} /> */}
+                    <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", marginLeft:"-100px" }}>
                         <Avatar
                             overrides={{
                                 Avatar: {
@@ -428,6 +411,22 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             name={referenceData.team ? referenceData.team.name : ""}
                             size="100px"
                             src={referenceData.team ? referenceData.team.logo : ""}
+                        />
+                    </Block>
+                    <Block className="selector" width="auto" maxWidth="300px" display="flex" alignItems="center" marginBottom="0px" marginTop="0px" marginRight="100px" marginLeft="-75px">
+                        <Select
+                            options={[
+                                { id: '2020', label: '2020-2021' },
+                                { id: '2021', label: '2021-2022' },
+                                { id: '2022', label: '2022-2023' },
+                                { id: '2023', label: '2023-2024' },
+                            ]}
+                            labelKey="label"
+                            valueKey="id"
+                            onChange={handleSeasonChange}
+                            value={selectedValue}
+                            placeholder="Select..."
+                            clearable={false}
                         />
                     </Block>
                 </Block>

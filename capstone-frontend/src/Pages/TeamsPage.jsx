@@ -34,7 +34,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings',
         'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
     const fontsfamilies = ['bucks', 'bulls', 'cavaliers', 'celtics', 'clippers', 'grizzlies', 'hawks', 'heat', 'hornets', 'jazz', 'kings', 'knicks', 'lakers',
-     'magic', 'mavericks', 'nets', 'nuggets', 'pacers', 'pelicans', 'pistons', 'raptors', 'rockets', 'spurs', 'suns', 'timberwolves', 'trailblazers', 'warriors', 'wizards', '76ers']
+        'magic', 'mavericks', 'nets', 'nuggets', 'pacers', 'pelicans', 'pistons', 'raptors', 'rockets', 'spurs', 'suns', 'timberwolves', 'trailblazers', 'warriors', 'wizards', '76ers']
 
 
     const handleDataFromChild = (data) => {
@@ -168,59 +168,16 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
             </Block>
             <Block className="backgroundWrapper" backgroundColor={primaryColor}>
                 <Block className="middle">
-                    <Block className="Selector" display="flex" justifyContent="space-between">
-                        <Block marginRight="5px" paddingTop="10px">
-                            <Select
-                                options={teamOptions}
-                                labelKey="label"
-                                valueKey="id"
-                                onChange={handleTeamChange}
-                                value={[{ id: '0', label: 'Team' }]}
-                                placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
-                                clearable={false}
-                                overrides={{
-                                    ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '26px', paddingRight: '15px', } },
-                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
-                                    Placeholder: { style: { lineHeight: '30px' } },
-                                    SingleValue: { style: { lineHeight: '30px' } },
-                                }}
 
-                            />
-                        </Block>
-                        <Block paddingTop="10px">
-                            <Select
-                                options={[
-                                    { id: '2020', label: '2020-2021' },
-                                    { id: '2021', label: '2021-2022' },
-                                    { id: '2022', label: '2022-2023' },
-                                    { id: '2023', label: '2023-2024' },
-                                ]}
-                                labelKey="label"
-                                valueKey="id"
-                                onChange={handleSeasonChange}
-                                value={[{ id: '0', label: 'Season' }]}
-                                placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
-                                clearable={false}
-                                overrides={{
-                                    ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px', paddingRight: '1px' } },
-                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
-                                    Placeholder: { style: { lineHeight: '30px' } },
-                                    SingleValue: { style: { lineHeight: '30px' } },
-                                }}
-
-                            />
-                        </Block>
-
-                    </Block>
                     <Block className="team">
                         <HeadingLevel>
-                            <Heading styleLevel={1} color={secondaryColor}>{selectedTeamName ? selectedTeamName : ""}</Heading>
-                            <Heading marginTop="-20px" styleLevel={3} color={secondaryColor}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
+                            <Heading styleLevel={1}marginTop="10px" color={secondaryColor}>{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading marginTop="-5px" styleLevel={3} color={secondaryColor}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
                         </HeadingLevel>
                     </Block>
                     <Block className="teamLeaders">
                         <HeadingLevel>
-                            <Heading styleLevel={5} color="black">Team Leader(s)</Heading>
+                            <Heading styleLevel={5} color="black" style={{ marginTop: "50px" }}>Team Leader(s)</Heading>
                         </HeadingLevel>
                         <TeamPlayerLeaderCard
                             teamId={teamId}
@@ -248,6 +205,50 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 </Block>
             </Block>
             <Block className="right">
+                <Block className="Selector" display="flex" justifyContent="center">
+                    <Block marginRight="10px" paddingTop="10px">
+                        <Select
+                            options={teamOptions}
+                            labelKey="label"
+                            valueKey="id"
+                            onChange={handleTeamChange}
+                            value={[{ id: '0', label: 'Team' }]}
+                            placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
+                            clearable={false}
+                            overrides={{
+                                ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '26px', paddingRight: '15px', } },
+                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                Placeholder: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px' } },
+                            }}
+
+                        />
+                    </Block>
+                    <Block paddingTop="10px">
+                        <Select
+                            options={[
+                                { id: '2020', label: '2020-2021' },
+                                { id: '2021', label: '2021-2022' },
+                                { id: '2022', label: '2022-2023' },
+                                { id: '2023', label: '2023-2024' },
+                            ]}
+                            labelKey="label"
+                            valueKey="id"
+                            onChange={handleSeasonChange}
+                            value={[{ id: '0', label: 'Season' }]}
+                            placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
+                            clearable={false}
+                            overrides={{
+                                ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px', paddingRight: '1px' } },
+                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                Placeholder: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px' } },
+                            }}
+
+                        />
+                    </Block>
+
+                </Block>
 
             </Block>
         </Block>
