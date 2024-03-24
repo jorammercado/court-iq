@@ -16,6 +16,8 @@ import { useStyletron } from 'baseui';
 import { ArrowUp, ArrowDown } from 'baseui/icon';
 import Spin from '../Components/SpinLoad';
 import "./TeamStandingsV2.scss"
+import TopScoringTeamCard from '../Components/TopScoringTeamCard'; // Adjust the import path as needed
+import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
 import "animate.css";
 import {
   LabelMedium,
@@ -50,34 +52,51 @@ const options = {
 
 
 const TeamStandingsV2 = () => {
-  const [data, setData] = useState([])
-  const [season, setSeason] = useState("")
-  const [stage, setStage] = useState("")
-  const [logo, setLogo] = useState("")
-  const [westernConference, setWesternConference] = useState([])
-  const [easternConference, setEasternConference] = useState([])
-  //console.log(data)
-  console.log(westernConference)
-  console.log(easternConference)
-  console.log(season)
-  console.log(stage)
-  console.log(logo)
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.request(options);
-        setData(response.data.response[0])
-        setEasternConference(response.data.response[0].filter(e => e.group.name === "Eastern Conference"))
-        setWesternConference(response.data.response[0].filter(e => e.group.name === "Western Conference"))
-        setSeason(response.data.response[0][0].league.season)
-        setStage(response.data.response[0][0].stage)
-        setLogo(response.data.response[0][0].league.logo)
+  const [data, setData] = useState([]);
+  const [season, setSeason] = useState("");
+  const [stage, setStage] = useState("");
+  const [logo, setLogo] = useState("");
+  const [westernConference, setWesternConference] = useState([]);
+  const [easternConference, setEasternConference] = useState([]);
+  const [easternTopScoringTeam, setEasternTopScoringTeam] = useState({});
+  const [westernTopScoringTeam, setWesternTopScoringTeam] = useState({});
+  const [easternTopDefensiveTeam, setEasternTopDefensiveTeam] = useState({});
+  const [westernTopDefensiveTeam, setWesternTopDefensiveTeam] = useState({});
+
+    useEffect(() => {
+      const getData = async () => {
+        try {
+          const response = await axios.request(options);
+          const responseData = response.data.response[0];
+          console.log(responseData)
+          setData(responseData);
+        const easternTeams = responseData.filter(e => e.group.name === "Eastern Conference");
+        const westernTeams = responseData.filter(e => e.group.name === "Western Conference");
+        setEasternConference(easternTeams);
+        setWesternConference(westernTeams);
+        setSeason(responseData[0].league.season);
+        setStage(responseData[0].stage);
+        setLogo(responseData[0].league.logo);
+
+        // Top scoring teams logic
+        setEasternTopScoringTeam(easternTeams[0]?.team);
+        setWesternTopScoringTeam(westernTeams[0]?.team);
+
+        // Top defensive teams logic
+        const easternDefensiveTeam = easternTeams.reduce((prev, current) => (prev.points.against < current.points.against) ? prev : current, easternTeams[0]).team;
+        const westernDefensiveTeam = westernTeams.reduce((prev, current) => (prev.points.against < current.points.against) ? prev : current, westernTeams[0]).team;
+        
+        setEasternTopDefensiveTeam(easternDefensiveTeam);
+        setWesternTopDefensiveTeam(westernDefensiveTeam);
       } catch (error) {
         console.error(error);
       }
-    }
-    getData()
-  }, [])
+    };
+    getData();
+  }, []);
+    
+   
+  
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -235,9 +254,7 @@ const TeamStandingsV2 = () => {
   }
 
   return (
-
     <Block display="flex" justifyContent="center" alignItems="stretch" height="100%" className="standings">
-
       {!isMobile ?
         <Block flex={1}
           display="flex"
@@ -249,43 +266,40 @@ const TeamStandingsV2 = () => {
           paddingLeft="30px"
           paddingRight="30px"
         >
-          {/* West Leaders content here */}
+          {/* West Leaders */}
           <Block alignItems="center" justifyContent="center" display="flex">
             <HeadingSmall color="black" marginBottom="-80px">West Leaders</HeadingSmall>
           </Block>
-
           <Block>
+            <TopScoringTeamCard
+              logo={westernTopScoringTeam.logo}
+              name={westernTopScoringTeam.name}
+              conference="Western"
+            />
+          </Block>
+          <Block>
+            {/* Replace this block with the TopDefensiveTeamCard for Western Conference */}
+            <TopDefensiveTeamCard
+              logo={westernTopDefensiveTeam.logo}
+              name={westernTopDefensiveTeam.name}
+              conference="Western"
+            />
+          </Block>
+          <Block>
+            {/* Trivia or any other content */}
             <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-              <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
+              <HeadingXSmall>Trivia</HeadingXSmall>
               <StyledBody>
                 Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
                 faucibus ex, non facilisis nisl.
               </StyledBody>
             </Card>
           </Block>
-          <Block >
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-              <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
-              <StyledBody>
-                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                faucibus ex, non facilisis nisl.
-              </StyledBody>
-            </Card>
-          </Block>
-          <Block >
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-              <HeadingXSmall >Trivia</HeadingXSmall>
-              <StyledBody>
-                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                faucibus ex, non facilisis nisl.
-              </StyledBody>
-            </Card>
-          </Block>
-
         </Block>
         : <></>
       }
-
+  
+      {/* Main content block */}
       <Block flex={isMobile ? 'unset' : 2} display="flex"
         flexDirection="column"
         justifyContent="space-between"
@@ -294,22 +308,15 @@ const TeamStandingsV2 = () => {
         maxWidth={isMobile ? "85%" : "55%"}
         style={{ width: isMobile ? '100%' : 'unset' }}
       >
-
         <Block className="table__header" marginTop={!isMobile ? "-190px" : "-260px"}>
-
           <Block display="flex" justifyContent="center" width="100%">
             <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
-              <img
-                src={logo}
-                alt={`NBA Logo`}
-                style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }}
-              />
+              <img src={logo} alt="NBA Logo" style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }} />
             </Link> &nbsp; &nbsp;
             <HeadingLevel>
               <Heading styleLevel={!isMobile ? 4 : 6} color="black" >{stage} {season}</Heading>
             </HeadingLevel>
           </Block>
-
         </Block>
 
         <Block display="flex" justifyContent="center" width="100%" marginTop="10px">
@@ -437,54 +444,50 @@ const TeamStandingsV2 = () => {
       </Block>
 
       {!isMobile ?
-        <Block flex={1}
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-          className="west-leaders"
-          marginTop="40px"
-          marginLeft="20px"
-          paddingLeft="30px"
-          paddingRight="30px"
-        >
-          {/* West Leaders content here */}
-          <Block alignItems="center" justifyContent="center" display="flex">
-            <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
-          </Block>
-
-          <Block>
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-              <HeadingXSmall >Top Offensive Team in Division</HeadingXSmall>
-              <StyledBody>
-                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                faucibus ex, non facilisis nisl.
-              </StyledBody>
-            </Card>
-          </Block>
-          <Block>
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-              <HeadingXSmall >Top Deffensive Team in Division</HeadingXSmall>
-              <StyledBody>
-                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                faucibus ex, non facilisis nisl.
-              </StyledBody>
-            </Card>
-          </Block>
-          <Block>
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
-              <HeadingXSmall >Trivia</HeadingXSmall>
-              <StyledBody>
-                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                faucibus ex, non facilisis nisl.
-              </StyledBody>
-            </Card>
-          </Block>
-
+      <Block flex={1}
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        className="east-leaders"
+        marginTop="40px"
+        marginLeft="20px"
+        paddingLeft="30px"
+        paddingRight="30px"
+      >
+        {/* East Leaders */}
+        <Block alignItems="center" justifyContent="center" display="flex">
+          <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
         </Block>
-        : <></>
-      }
-    </Block>
-  );
-}
+        <Block>
+          <TopScoringTeamCard
+            logo={easternTopScoringTeam.logo}
+            name={easternTopScoringTeam.name}
+            conference="Eastern"
+          />
+        </Block>
+        <Block>
+          {/* Replace this block with the TopDefensiveTeamCard for Eastern Conference */}
+          <TopDefensiveTeamCard
+            logo={easternTopDefensiveTeam.logo}
+            name={easternTopDefensiveTeam.name}
+            conference="Eastern"
+          />
+        </Block>
+        <Block>
+          {/* Trivia or any other content for the Eastern Conference */}
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <HeadingXSmall>Trivia</HeadingXSmall>
+            <StyledBody>
+              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+              faucibus ex, non facilisis nisl.
+            </StyledBody>
+          </Card>
+        </Block>
+      </Block>
+      : <></>
+    }
+  </Block>
+);
+  }
 
 export default TeamStandingsV2;
