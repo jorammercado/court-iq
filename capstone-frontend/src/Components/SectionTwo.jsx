@@ -8,7 +8,7 @@ const SectionTwo = () => (
             </header>
             <p>Our AI Delivers Instant Insights</p>
           <div className="image-content-box">
-            <img src="../../src/Pages/css/images/search.png" alt="Descriptive Alt Text" />
+            <img src="src/Pages/css/images/search.png" alt="Descriptive Alt Text" />
           </div>
         </div>
         <a href="#work" className="button style2 down anchored">Next</a>
