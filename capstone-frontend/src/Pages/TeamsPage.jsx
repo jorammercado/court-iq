@@ -17,9 +17,11 @@ import {
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
+import "../App.scss"
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
+    const [fontFamily, setFontFamily] = useState()
     const [primaryColor, setPrimaryColor] = useState("#ED751C")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
@@ -31,6 +33,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves',
         'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings',
         'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
+    const fontsfamilies = ['bucks', 'bulls', 'cavaliers', 'celtics', 'clippers', 'grizzlies', 'hawks', 'heat', 'hornets', 'jazz', 'kings', 'knicks', 'lakers',
+     'magic', 'mavericks', 'nets', 'nuggets', 'pacers', 'pelicans', 'pistons', 'raptors', 'rockets', 'spurs', 'suns', 'timberwolves', 'trailblazers', 'warriors', 'wizards', '76ers']
 
 
     const handleDataFromChild = (data) => {
@@ -131,7 +135,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     return (
         <Block className="parent">
             <Block className="left">
-                <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", zIndex: "112" }}>
+                <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", zIndex: "1" }}>
                     <Avatar
                         overrides={{
                             Avatar: {
