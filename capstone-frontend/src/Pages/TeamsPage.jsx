@@ -21,7 +21,7 @@ import "../App.scss"
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
-    const [fontFamily, setFontFamily] = useState()
+    const [fontFamily, setFontFamily] = useState('UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif')
     const [primaryColor, setPrimaryColor] = useState("#ED751C")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
@@ -47,6 +47,29 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const [selectedSeason, setSelectedSeason] = useState(null);
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
+
+    // function MyComponent() {
+    //     return (
+    //         <div style={{ fontFamily: 'YourCustomFont, sans-serif' }}>
+    //             This text uses the custom font.
+    //         </div>
+    //     );
+    // }
+
+    useEffect(() => {
+        setFontFamily(selectFontFamily(selectedTeamName))
+    }, [selectedTeamName]);
+
+    function selectFontFamily(selectedTeamName) {
+        console.log("11111111",selectedTeamName)
+        for (let i = 0; i < teams.length; i++) {
+            console.log("222222222",teams[i].split(" ")[teams[i].split(" ").length-1].toLowerCase())
+            if (teams[i] === selectedTeamName && fontsfamilies.includes(teams[i].split(" ")[teams[i].split(" ").length-1].toLowerCase()))
+                return fontsfamilies[fontsfamilies.indexOf(teams[i].split(" ")[teams[i].split(" ").length-1].toLowerCase())]
+        }
+        return 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif'
+    }
+
 
     useEffect(() => {
         setPrimaryColor(selectPrimaryColor(selectedTeamName))
@@ -131,6 +154,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     ];
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
 
+    console.log("FONT FAMILY=", fontFamily)
 
     return (
         <Block className="parent">
@@ -171,8 +195,8 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
                     <Block className="team">
                         <HeadingLevel>
-                            <Heading styleLevel={1}marginTop="10px" color={secondaryColor}>{selectedTeamName ? selectedTeamName : ""}</Heading>
-                            <Heading marginTop="-5px" styleLevel={3} color={secondaryColor}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
+                            <Heading styleLevel={1}marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading marginTop="-5px" styleLevel={3} color={secondaryColor} style={{ fontFamily: fontFamily }}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
                         </HeadingLevel>
                     </Block>
                     <Block className="teamLeaders">
