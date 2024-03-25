@@ -3,6 +3,7 @@ import axios from "axios";
 import "./HeadLine.scss";
 import { Link } from "react-router-dom";
 import images from "../constants/images";
+
 function Headlines() {
   const [headlines, setHeadlines] = useState([]);
   const [error, setError] = useState(null);
@@ -47,11 +48,11 @@ function Headlines() {
   return (
     <div className="headlines-container">
       <h1 className="headlines-title">Top Headlines News</h1>
-      <p className="headlines-description">
+      <h4 className="headlines-description">
         Welcome to our NBA news section, where you can find the latest and top
         headlines from the world of NBA. Stay updated with the most recent
         happenings in the basketball world.
-      </p>
+      </h4>
       {error && <p className="error-message">Error: {error}</p>}
       <div className="headline-list">
         {headlines.map((headline, index) => (
@@ -85,13 +86,10 @@ function Headlines() {
             each other?{" "}
           </strong>{" "}
           <br /> Our player comparison tool allows you to explore detailed
-          statistics and make informed comparisons.{" "}
-          <br />
-          <strong>Click below to begin your  exploration.</strong>
-        
-         
+          statistics and make informed comparisons. <br />
+          <strong>Click below to begin your exploration.</strong>
         </h4>
-        <Link className="compare-link" to="/PlayerComparation">
+        <Link className="compare-link" to="/PlayerComparison">
           <p>
             {" "}
             <strong>Explore player comparisons</strong>

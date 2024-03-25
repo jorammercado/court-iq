@@ -168,6 +168,7 @@ function PlayerComparison() {
       </div>
       <div className="img-body">
         <img className="court-img" src={images.nbaImgCourt} alt="" />
+        <img className="court-img" src={images.playerVs} alt="" />
         <img className="court-img" src={images.ball} alt="" />
         <img className="court-img" src={images.ring} alt="" />
       </div>

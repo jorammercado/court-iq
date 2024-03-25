@@ -28,7 +28,7 @@ export default function NavBar({
         // { icon: null, label: "League Leaders" },
         { icon: null, label: "Rosters" },
         { icon: null, label: "Standings" },
-        // { icon: null, label: "Compare" },
+        { icon: null, label: "Compare" },
         { icon: null, label: "Headlines" },
     ]);
 
@@ -90,11 +90,11 @@ export default function NavBar({
                 setIsGlossaryVisible(false);
                 navigate("/GamesSchedule");
                 break;
-            // case "Compare":
-            //     setIsSearchVisible(false);
-            //     setIsGlossaryVisible(false);
-            //     navigate("/PlayerComparation");
-            //     break;
+            case "Compare":
+                setIsSearchVisible(false);
+                setIsGlossaryVisible(false);
+                navigate("/PlayerComparation");
+                break;
             case "Headlines":
                 setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
