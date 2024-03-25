@@ -49,6 +49,54 @@
     margin-top: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
+  .compare-card {
+    background-color: orange;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 3rem;
+
+  }
+  .compare-card:hover{
+    background-color: #0f0f10;
+    color: rgb(252, 251, 247);
+  }
+  .compare-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .court-im1{
+    width: 12rem;
+    border-radius: 20rem;
+    padding: 1rem;
+   
+  }
+  .compare-description {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .compare-link {
+    display: block;
+    margin: auto; 
+    padding: 10px 20px;
+    background-color: #0f0f10;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .compare-link:hover {
+    background-color: orange;
+    color: rgb(17, 16, 16);
+  }
   
   @keyframes fadeIn {
     from {
