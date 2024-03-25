@@ -74,9 +74,9 @@ function Headlines() {
       <div className="compare-card">
         <h1 className="compare-title">Curious about player comparisons?</h1>
         <div className="img-headlines">
-          <img className="court-im1" src={images.ball} alt="" />
-          <img className="court-im1" src={images.ring} alt="" />
-          <img className="court-im1" src={images.nbaImgCourt} alt="" />
+          <img className="court-im1" src={images.playerVs2} alt="" />
+          <img className="court-im1" src={images.vs} alt="" />
+          <img className="court-im1" src={images.playerVs} alt="" />
         </div>
         <h4 className="compare-description">
           <strong>
