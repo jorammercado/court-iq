@@ -46,7 +46,12 @@ function Headlines() {
 
   return (
     <div className="headlines-container">
-      <h1 className="headlines-title"> Top Headlines News</h1>
+      <h1 className="headlines-title">Top Headlines News</h1>
+      <p className="headlines-description">
+        Welcome to our NBA news section, where you can find the latest and top
+        headlines from the world of NBA. Stay updated with the most recent
+        happenings in the basketball world.
+      </p>
       {error && <p className="error-message">Error: {error}</p>}
       <div className="headline-list">
         {headlines.map((headline, index) => (
@@ -68,15 +73,29 @@ function Headlines() {
       </div>
       <div className="compare-card">
         <h1 className="compare-title">Curious about player comparisons?</h1>
-        <div>
+        <div className="img-headlines">
           <img className="court-im1" src={images.ball} alt="" />
           <img className="court-im1" src={images.ring} alt="" />
+          <img className="court-im1" src={images.nbaImgCourt} alt="" />
         </div>
-        <p className="compare-description">
-          Discover who outshines the competition. Click below.
-        </p>
+        <h4 className="compare-description">
+          <strong>
+            {" "}
+            Are you eager to see how your favorite NBA players stack up against
+            each other?{" "}
+          </strong>{" "}
+          <br /> Our player comparison tool allows you to explore detailed
+          statistics and make informed comparisons.{" "}
+          <br />
+          <strong>Click below to begin your  exploration.</strong>
+        
+         
+        </h4>
         <Link className="compare-link" to="/PlayerComparation">
-          <p>Explore player comparisons</p>
+          <p>
+            {" "}
+            <strong>Explore player comparisons</strong>
+          </p>
         </Link>
       </div>
     </div>
