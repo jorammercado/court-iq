@@ -25,10 +25,10 @@ export default function NavBar({
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const [mainItems, setMainItems] = useState([
-        { icon: null, label: "League Leaders" },
+        // { icon: null, label: "League Leaders" },
         { icon: null, label: "Rosters" },
         { icon: null, label: "Standings" },
-        { icon: null, label: "Compare" },
+        // { icon: null, label: "Compare" },
         { icon: null, label: "Headlines" },
     ]);
 
@@ -47,10 +47,10 @@ export default function NavBar({
 
     const updateMainItems = (width) => {
         const items = [
-            { icon: null, label: "League Leaders" },
+            // { icon: null, label: "League Leaders" },
             { icon: null, label: "Rosters" },
             { icon: null, label: "Standings" },
-            { icon: null, label: "Compare" },
+            // { icon: null, label: "Compare" },
             { icon: null, label: "Headlines" },
         ];
 
@@ -70,11 +70,11 @@ export default function NavBar({
 
     function handleMainItemSelect(item) {
         switch (item.label) {
-            case "League Leaders":
-                setIsSearchVisible(false);
-                setIsGlossaryVisible(false);
-                navigate("/Search");
-                break;
+            // case "League Leaders":
+            //     setIsSearchVisible(false);
+            //     setIsGlossaryVisible(false);
+            //     navigate("/Search");
+            //     break;
             case "Rosters":
                 setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
@@ -90,11 +90,11 @@ export default function NavBar({
                 setIsGlossaryVisible(false);
                 navigate("/GamesSchedule");
                 break;
-            case "Compare":
-                setIsSearchVisible(false);
-                setIsGlossaryVisible(false);
-                navigate("/PlayerComparation");
-                break;
+            // case "Compare":
+            //     setIsSearchVisible(false);
+            //     setIsGlossaryVisible(false);
+            //     navigate("/PlayerComparation");
+            //     break;
             case "Headlines":
                 setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
