@@ -180,7 +180,7 @@ function App() {
                 />
 
                 <Route
-                  path="/PlayerComparation"
+                  path="/PlayerComparison"
                   element={
                     <PLayerComparation
                       currentUser={currentUser}
