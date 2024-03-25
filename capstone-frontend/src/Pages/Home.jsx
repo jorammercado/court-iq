@@ -1,20 +1,11 @@
 import "./Home.scss"
 import React from 'react';
-import { Button, KIND } from "baseui/button";
 import { useNavigate, useParams } from "react-router-dom"
-import {
-    signInAnon,
-} from "../Services/FireBase";
-import ChatApp from "../Components/ChatApp";
-import "animate.css";
-
 import { Block } from "baseui/block";
-
 import Intro from "../Components/Intro";
 import SectionOne from "../Components/SectionOne";
 import SectionTwo from "../Components/SectionTwo";
 import MyWork from "../Components/MyWork";
-
 import Header from "../Components/Header";
 import "./css/main.css"
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';

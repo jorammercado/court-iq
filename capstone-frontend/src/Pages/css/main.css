@@ -447,10 +447,10 @@ q {
 .schedules:after,
 .search:after,
 .fourOfour-message:after {
-	-moz-animation: overlay-hide .4s ease-in forwards !important;
-	-webkit-animation: overlay-hide .4s ease-in forwards !important;
-	-ms-animation: overlay-hide .4s ease-in forwards !important;
-	animation: overlay-hide .4s ease-in forwards !important;
+	-moz-animation: overlay-hide .5s ease-in forwards !important;
+	-webkit-animation: overlay-hide .5s ease-in forwards !important;
+	-ms-animation: overlay-hide .5s ease-in forwards !important;
+	animation: overlay-hide .5s ease-in forwards !important;
 	background: #ffffff;
 	content: '';
 	display: block;
