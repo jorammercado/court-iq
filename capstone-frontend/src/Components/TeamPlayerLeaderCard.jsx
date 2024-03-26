@@ -7,12 +7,14 @@ import { Block } from "baseui/block";
 import {
     LabelMedium,
     LabelXSmall,
+    LabelSmall,
     LabelLarge,
     HeadingLarge,
     HeadingMedium,
     HeadingSmall
 } from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
+import Spin from './SpinLoad';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -53,7 +55,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
             fetchPlayerStats();
         }
     }, [teamId, season, leaders]);
-    //console.log("PERSONAL DATA", personalData)
+    console.log("PERSONAL DATA", personalData)
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -125,52 +127,67 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
     }, [leaders, VITE_PLAYER_IMAGE_BASE_URL]);
 
     return (
-        <div className="teamleaderdisplaycards">
-            {leaders.map((leader, index) => (
-                <div
-                    key={index}
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => {
-                        setIsSearchVisible(false)
-                        navigate(`/player/${leader.id}`, { state: { ...leader } })
-                    }}
-                >
-                    <Card
-                        overrides={{ Root: { style: { width: "358px", marginBottom: "10px", height: "185px", } } }}
-                    >
-                        <StyledTitle>
-                            {leader.firstname} {leader.lastname} &nbsp;&nbsp;
-                            {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? "#" + personalData[index].leagues.standard.jersey : ""}  &nbsp;&nbsp;
-                            {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? " " + personalData[index].leagues.standard.pos : ""}
-                        </StyledTitle>
-                        <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'} />
-                        <StyledBody>
-                            <HeadingLevel >
-                                <Heading marginTop="-16px" marginBottom="-1px" styleLevel={6}>
-                                    {leader.category.split(" ")[0] === "Points" && `Points: ${leader.points}`}
-                                    {leader.category.split(" ")[0] === "Assists" && `Assists: ${leader.assists}`}
-                                    {leader.category.split(" ")[0] === "Rebounds" && `Rebounds: ${leader.rebounds}`}
-                                </Heading>
-                            </HeadingLevel>
-                            {leader.category.split(" ")[0] === "Points" ?
-                                <LabelXSmall>Assists: {leader.assists} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelXSmall> : leader.category.split(" ")[0] === "Assists" ?
-                                    <LabelXSmall>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelXSmall> : leader.category.split(" ")[0] === "Rebounds" ?
-                                        <LabelXSmall>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Assists: {leader.assists} </LabelXSmall> : "n/a"}
-                            <LabelXSmall>Affiliation: {personalData[index] ? personalData[index].affiliation : ""}  </LabelXSmall>
-                            <LabelXSmall>DOB: {personalData[index] ? personalData[index].birth.date + ", " + personalData[index].birth.country : ""}  </LabelXSmall>
-                            <LabelXSmall>
-                                Height: {personalData[index] ? personalData[index].height.feets + "'" + personalData[index].height.inches + "\"" : ""} &nbsp;&nbsp;&nbsp;&nbsp;
-                                Weight: {personalData[index] ? personalData[index].weight.pounds + "lbs" : ""}
-                            </LabelXSmall>
-                            <LabelXSmall>
-                                Pro Start: {personalData[index] ? personalData[index].nba.start : ""}  &nbsp;&nbsp;&nbsp;&nbsp;
-                                Years: {personalData[index] ? personalData[index].nba.pro : ""}
-                            </LabelXSmall>
+        <div>
+            {personalData.length > 0 ?
+                <div className="teamleaderdisplaycards">
+                    {leaders.map((leader, index) => (
+                        <div
+                            key={index}
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                setIsSearchVisible(false)
+                                navigate(`/player/${leader.id}`, { state: { ...leader } })
+                            }}
+                        >
 
-                        </StyledBody>
-                    </Card>
+                            <Card
+                                overrides={{
+                                    Root: {
+                                        style: {
+                                            width: "420px",
+                                            marginBottom: "10px",
+                                            height: "190px",
+                                            borderRadius: "0"
+                                        }
+                                    }
+                                }}
+                            >
+                                <StyledTitle>
+                                    {leader.firstname} {leader.lastname} &nbsp;&nbsp;
+                                    {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? "#" + personalData[index].leagues.standard.jersey : ""}  &nbsp;&nbsp;
+                                    {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? " " + personalData[index].leagues.standard.pos : ""}
+                                </StyledTitle>
+                                <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
+                                    style={{ marginTop: "-55px", marginRight: "15px", height: '160px', alignSelf: "center", border: "none" }} />
+                                <StyledBody>
+                                    <HeadingLevel >
+                                        <Heading marginTop="-16px" marginBottom="-1px" styleLevel={6}>
+                                            {leader.category.split(" ")[0] === "Points" && `Points: ${leader.points}`}
+                                            {leader.category.split(" ")[0] === "Assists" && `Assists: ${leader.assists}`}
+                                            {leader.category.split(" ")[0] === "Rebounds" && `Rebounds: ${leader.rebounds}`}
+                                        </Heading>
+                                    </HeadingLevel>
+                                    {leader.category.split(" ")[0] === "Points" ?
+                                        <LabelMedium>Assists: {leader.assists} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelMedium> : leader.category.split(" ")[0] === "Assists" ?
+                                            <LabelMedium>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelMedium> : leader.category.split(" ")[0] === "Rebounds" ?
+                                                <LabelMedium>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Assists: {leader.assists} </LabelMedium> : "n/a"}
+                                    <LabelMedium>College: {personalData[index] ? personalData[index].college : ""}  </LabelMedium>
+                                    <LabelMedium>DOB: {personalData[index] ? personalData[index].birth.date + ", " + personalData[index].birth.country : ""}  </LabelMedium>
+                                    <LabelMedium>
+                                        Height: {personalData[index] ? personalData[index].height.feets + "'" + personalData[index].height.inches + "\"" : ""} &nbsp;&nbsp;&nbsp;&nbsp;
+                                        Weight: {personalData[index] ? personalData[index].weight.pounds + "lbs" : ""}
+                                    </LabelMedium>
+                                    <LabelMedium>
+                                        Pro Start: {personalData[index] ? personalData[index].nba.start : ""}  &nbsp;&nbsp;&nbsp;&nbsp;
+                                        Years: {personalData[index] ? personalData[index].nba.pro : ""}
+                                    </LabelMedium>
+
+                                </StyledBody>
+                            </Card>
+                        </div>
+                    ))}
                 </div>
-            ))}
+                : <Spin></Spin>}
         </div>
     );
 };
