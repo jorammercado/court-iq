@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import searchImage from "../Pages/css/images/search.png"
+
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
