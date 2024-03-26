@@ -48,24 +48,16 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
 
-    // function MyComponent() {
-    //     return (
-    //         <div style={{ fontFamily: 'YourCustomFont, sans-serif' }}>
-    //             This text uses the custom font.
-    //         </div>
-    //     );
-    // }
-
     useEffect(() => {
         setFontFamily(selectFontFamily(selectedTeamName))
     }, [selectedTeamName]);
 
     function selectFontFamily(selectedTeamName) {
-        console.log("11111111",selectedTeamName)
+        console.log("11111111", selectedTeamName)
         for (let i = 0; i < teams.length; i++) {
-            console.log("222222222",teams[i].split(" ")[teams[i].split(" ").length-1].toLowerCase())
-            if (teams[i] === selectedTeamName && fontsfamilies.includes(teams[i].split(" ")[teams[i].split(" ").length-1].toLowerCase()))
-                return fontsfamilies[fontsfamilies.indexOf(teams[i].split(" ")[teams[i].split(" ").length-1].toLowerCase())]
+            console.log("222222222", teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase())
+            if (teams[i] === selectedTeamName && fontsfamilies.includes(teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase()))
+                return fontsfamilies[fontsfamilies.indexOf(teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase())]
         }
         return 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif'
     }
@@ -195,14 +187,16 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
                     <Block className="team">
                         <HeadingLevel>
-                            <Heading styleLevel={1}marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading styleLevel={1} marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
                             <Heading marginTop="-5px" styleLevel={3} color={secondaryColor} style={{ fontFamily: fontFamily }}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
                         </HeadingLevel>
                     </Block>
                     <Block className="teamLeaders">
-                        <HeadingLevel>
-                            <Heading styleLevel={5} color="black" style={{ marginTop: "50px" }}>Team Leader(s)</Heading>
-                        </HeadingLevel>
+                        <Block style={{ justifyContent:"flex-start",alignItems:"flex-start",display:"flex",flexDirection:"row" }}>
+                            <HeadingLevel >
+                                <Heading styleLevel={5} color="black" style={{ marginTop: "40px",justifyContent:"flex-start" }}>Leaders</Heading>
+                            </HeadingLevel>
+                        </Block>
                         <TeamPlayerLeaderCard
                             teamId={teamId}
                             season={season}

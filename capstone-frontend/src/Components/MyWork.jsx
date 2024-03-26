@@ -109,42 +109,42 @@ const MyWork = () => {
                 <div className="gallery" >
                     <article className="from-left">
                         <MoveInWhenVisible>
-                            <div class="image fit">
+                            <div className="image fit">
                                 <img src={image01} ref={ref} title="The Anonymous Red" alt="" />
                             </div>
                         </MoveInWhenVisible>
                     </article>
                     <article className="from-right">
                         <MoveInWhenVisibleRight>
-                            <div class="image fit">
+                            <div className="image fit">
                                 <img src={image02} title="Airchitecture II" alt="" />
                             </div>
                         </MoveInWhenVisibleRight>
                     </article>
                     <article className="from-left">
                         <MoveInWhenVisible>
-                            <div class="image fit">
+                            <div className="image fit">
                                 <img src={image03} title="Air Lounge" alt="" />
                             </div>
                         </MoveInWhenVisible>
                     </article>
                     <article className="from-right">
                         <MoveInWhenVisibleRight>
-                            <div class="image fit">
+                            <div className="image fit">
                                 <img src={image04} title="Carry on" alt="" />
                             </div>
                         </MoveInWhenVisibleRight>
                     </article>
                     <article className="from-left">
                         <MoveInWhenVisible>
-                            <div class="image fit">
+                            <div className="image fit">
                                 <img src={image05} title="The sparkling shell" alt="" />
                             </div>
                         </MoveInWhenVisible>
                     </article>
                     <article className="from-right">
                         <MoveInWhenVisibleRight>
-                            <div class="image fit">
+                            <div className="image fit">
                                 <img src={image06} title="Bent IX" alt="" />
                             </div>
                         </MoveInWhenVisibleRight>
