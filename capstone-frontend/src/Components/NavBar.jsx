@@ -48,6 +48,7 @@ export default function NavBar({
     const updateMainItems = (width) => {
         const items = [
             // { icon: null, label: "League Leaders" },
+            { icon: null, label: "Glossary" },
             { icon: null, label: "Rosters" },
             { icon: null, label: "Standings" },
             // { icon: null, label: "Compare" },
@@ -64,7 +65,6 @@ export default function NavBar({
     const userItems = [
         { icon: null, label: "Home" },
         { icon: null, label: "User" },
-        { icon: null, label: "Glossary" },
     ]
 
 
