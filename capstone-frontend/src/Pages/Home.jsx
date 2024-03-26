@@ -31,7 +31,7 @@ function Home() {
 
     return (
         <div className="home">
-            <Header></Header>
+            {/* <Header></Header> */}
             <Link activeClass="active" to="intro" spy={true} smooth={true} duration={500}>
 
             </Link>
