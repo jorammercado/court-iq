@@ -37,7 +37,7 @@ const SectionOne = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    console.log("DDDDDDDDD=", divWidth, "WWWWWWWWW=", screenWidth)
+
     const variants = {
         onscreen: {
             x: screenWidth-divWidth, 
@@ -68,7 +68,7 @@ const SectionOne = () => {
 
             <MoveInWhenVisible>
 
-                <div className="content box style2" ref={ref}>
+                <div className="content box style2" ref={ref} style={{backgroundColor:"#faf7f2"}}>
                     <header>
                         <h2>What We Do</h2>
                     </header>
