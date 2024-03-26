@@ -1,5 +1,5 @@
 import "./Home.scss"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom"
 import { Block } from "baseui/block";
 import Intro from "../Components/Intro";
@@ -13,11 +13,11 @@ import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } f
 
 function Home() {
     React.useEffect(() => {
-        Events.scrollEvent.register('begin', function() {
+        Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);
         });
 
-        Events.scrollEvent.register('end', function() {
+        Events.scrollEvent.register('end', function () {
             console.log("end", arguments);
         });
 
@@ -33,16 +33,16 @@ function Home() {
         <div className="home">
             <Header></Header>
             <Link activeClass="active" to="intro" spy={true} smooth={true} duration={500}>
-        
+
             </Link>
             <Link activeClass="active" to="sectionOne" spy={true} smooth={true} duration={500}>
-                
+
             </Link>
             <Link activeClass="active" to="sectionTwo" spy={true} smooth={true} duration={500}>
-                
+
             </Link>
             <Link activeClass="active" to="myWork" spy={true} smooth={true} duration={500}>
-               
+
             </Link>
             <Element name="intro" className="element" style={{ height: "100vh" }}>
                 <Intro />
