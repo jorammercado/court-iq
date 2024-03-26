@@ -2,7 +2,7 @@ import React from 'react';
 
 const Intro = () => (
     <section id="intro" className="main style1 dark fullscreen">
-        <div className="content">
+        <div className="content" style={{backgroundColor:"#faf7f2"}}>
             <header>
                 <h2>Beyond the Arc Analytics Unleashed</h2>
             </header>
