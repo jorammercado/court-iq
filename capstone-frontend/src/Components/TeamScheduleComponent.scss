@@ -1,6 +1,40 @@
 .TeamGamesTable{
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-items: flex-start;
+
+
+    @media (min-width: 767px) {
+        max-width: 1300px;
+    }
+
+    @media (max-width: 870px) {
+        max-width: 45%;
+        justify-content: center;
+            align-items: center;
+    }
+
+    @media (max-width: 1300px) {
+        width: 80%;
+        justify-content: center;
+            align-items: center;
+    }
+
+    .scheduleTable{
+        width:100%;
+        justify-content: left;
+       
+
+        @media (max-width: 1300px) {
+            width: 80%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+    }
+
 }

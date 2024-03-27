@@ -47,6 +47,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const [selectedSeason, setSelectedSeason] = useState(null);
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
+    const [gamesInView, setGamesInView] = useState('5')
 
     useEffect(() => {
         setFontFamily(selectFontFamily(selectedTeamName))
@@ -104,6 +105,14 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
             setSeason(value[0].id)
         }
     };
+
+    const handleGamesChange = (params) => {
+        const { value } = params;
+        if (value.length > 0) {
+            setGamesInView(value[0].id);
+        }
+    };
+
     const seasonOptions = [
         { label: '2020', id: '2020' },
         { label: '2021', id: '2021' },
@@ -192,9 +201,9 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         </HeadingLevel>
                     </Block>
                     <Block className="teamLeaders">
-                        <Block style={{ justifyContent:"flex-start",alignItems:"flex-start",display:"flex",flexDirection:"row" }}>
+                        <Block className="leadersHeading" style={{ justifyContent: "flex-start", alignItems: "flex-start", display: "flex", flexDirection: "row" }}>
                             <HeadingLevel >
-                                <Heading styleLevel={4} color="black" style={{ marginTop: "40px",justifyContent:"flex-start" }}>Leaders</Heading>
+                                <Heading styleLevel={4} color="black" style={{ marginTop: "40px", justifyContent: "flex-start" }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
                         <TeamPlayerLeaderCard
@@ -210,7 +219,10 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     </Block>
                     <Block className="teamsItems" >
                         <TeamStatsComponent teamId={teamId} season={season} />
-                        <TeamScheduleComponent teamId={teamId} season={season} />
+                        <TeamScheduleComponent
+                            teamId={teamId}
+                            season={season}
+                            gamesInView={gamesInView} />
                         <PlayerStatsComponent
                             team={teamId}
                             season={season}
@@ -242,7 +254,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
                         />
                     </Block>
-                    <Block paddingTop="10px">
+                    <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={[
                                 { id: '2020', label: '2020-2021' },
@@ -255,6 +267,29 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             onChange={handleSeasonChange}
                             value={[{ id: '0', label: 'Season' }]}
                             placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
+                            clearable={false}
+                            overrides={{
+                                ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px', paddingRight: '1px' } },
+                                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                Placeholder: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px' } },
+                            }}
+
+                        />
+                    </Block>
+                    <Block paddingTop="10px">
+                        <Select
+                            options={[
+                                { id: '50', label: '50' },
+                                { id: '20', label: '20' },
+                                { id: '10', label: '10' },
+                                { id: '5', label: '5' },
+                            ]}
+                            labelKey="label"
+                            valueKey="id"
+                            onChange={handleGamesChange}
+                            value={[{ id: '0', label: 'Games' }]}
+                            placeholder={<Block> &nbsp;&nbsp;Games&nbsp;&nbsp; </Block>}
                             clearable={false}
                             overrides={{
                                 ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px', paddingRight: '1px' } },

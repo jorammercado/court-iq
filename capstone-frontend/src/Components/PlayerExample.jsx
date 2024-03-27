@@ -486,7 +486,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                     ]}
                                 />
                             ) : (
-                                <p>Loading...</p>
+                                <Spin></Spin>
                             )}
                         </Block>
                         <Block width="100%" overflow="auto">
@@ -530,7 +530,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                     )}
                                 />
                             ) : (
-                                <p>Loading...</p>
+                                <Spin></Spin>
                             )}
                         </Block>
                     </Block>

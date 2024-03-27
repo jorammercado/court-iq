@@ -14,13 +14,17 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import "./TeamScheduleComponent.scss"
 import { useStyletron } from 'baseui';
 import { Avatar } from 'baseui/avatar';
+import Spin from './SpinLoad';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL_GAMES = import.meta.env.VITE_X_RAPIDAPI_URL_GAMES;
 
-const TeamScheduleComponent = ({ teamId, season }) => {
+const TeamScheduleComponent = ({ teamId, season, gamesInView }) => {
     const [games, setGames] = useState([]);
+    const [games10, setGames10] = useState([]);
+    const [games20, setGames20] = useState([]);
+    const [games50, setGames50] = useState([]);
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -38,16 +42,22 @@ const TeamScheduleComponent = ({ teamId, season }) => {
                 const response = await axios.request(options);
                 const gamesData = response.data.response;
                 console.log("GAMESSSSSSSSSSS= ", response.data)
-                // Filter out games from 2023 and earlier
+                // Filter out games year year/season
                 const futureGames = gamesData.filter(game => {
                     const gameYear = new Date(game.date.start).getFullYear();
-                    return gameYear > 2023; // Change this as needed for different years
+                    return gameYear > Number(season);
                 });
 
-                // Get the last 5 games from the filtered list
                 const lastFiveGames = futureGames.slice(-5);
+                console.log("LAST 555555", lastFiveGames)
+                const last10Games = futureGames.slice(-10);
+                const last20Games = futureGames.slice(-20);
+                const last50Games = futureGames.slice(-50);
 
                 setGames(lastFiveGames);
+                setGames10(last10Games);
+                setGames20(last20Games);
+                setGames50(last50Games);
             } catch (error) {
                 console.error('Failed to fetch games:', error);
             }
@@ -58,7 +68,7 @@ const TeamScheduleComponent = ({ teamId, season }) => {
 
 
     if (games.length === 0) {
-        return <p>Loading games...</p>;
+        return <Spin></Spin>;
     }
 
     function AvatarCell({
@@ -99,34 +109,47 @@ const TeamScheduleComponent = ({ teamId, season }) => {
     }
 
     return (
-        <Block className="TeamGamesTable">
+        <Block className="TeamGamesTable" style={{ justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%" }}>
             <HeadingLevel >
                 <Heading styleLevel={4} color="black">
-                    Next 5 Games
+                    {Number(season >= 2023 && gamesInView === '5') ? `Next 5 Games` :
+                        Number(season >= 2023 && gamesInView === '10') ? `Last 10 Games Schedule of Season` :
+                            Number(season >= 2023 && gamesInView === '20') ? `Last 20 Games Schedule of Season` :
+                                Number(season >= 2023 && gamesInView === '50') ? `Last 50 Games Schedule of Season` :
+                                    gamesInView === '10' ? `Last 10 Games of Season` :
+                                        gamesInView === '20' ? `Last 20 Games of Season` :
+                                            gamesInView === '50' ? `Last 50 Games of Season` :
+                                                `Last 5 Games of Season`}
                 </Heading>
             </HeadingLevel>
-            <TableBuilder data={games}>
-                <TableBuilderColumn header="Date">
-                    {row => <div>{row && row.date && row.date.start ? row.date.start.split("T")[0] : ""}</div>}
-                </TableBuilderColumn>
-                <TableBuilderColumn header="Time">
-                    {row => <div>{row && row.date && row.date.start ? row.date.start.split("T")[1].split(".000")[0] : ""} Zulu</div>}
-                </TableBuilderColumn>
-                <TableBuilderColumn header="Opponent">
-                    {row => {
-                        const opponent = row.teams.visitors.id.toString() === teamId ? row.teams.home : row.teams.visitors;
-                        return <AvatarCell
-                        src={opponent.logo}
-                        title={opponent.name}
-                        subtitle={opponent.code}
-                      />;
-                    }}
-                </TableBuilderColumn>
-                <TableBuilderColumn header="Location">
-                    {row => <div>{`${row.arena.name}, ${row.arena.city} ${row.arena.state}`}</div>}
-                </TableBuilderColumn>
-                {/* Add more columns as necessary */}
-            </TableBuilder>
+            <Block className="scheduleTable">
+                <TableBuilder data={gamesInView === '5' ? games : gamesInView === '10' ? games10 : gamesInView === '20' ? games20 : games50}
+                    overrides={{ Root: { style: { maxHeight: "500px" } } }}>
+                    <TableBuilderColumn header="Date">
+                        {row => <div>{row && row.date && row.date.start ? row.date.start.split("T")[0] : ""}</div>}
+                    </TableBuilderColumn>
+                    <TableBuilderColumn header="Time">
+                        {row => <div>{row && row.date && row.date.start && row.date.start.split("T")[1] ? row.date.start.split("T")[1].split(".000")[0] : ""} Zulu</div>}
+                    </TableBuilderColumn>
+                    <TableBuilderColumn header="Opponent">
+                        {row => {
+                            const opponent = row.teams.visitors.id.toString() === teamId ? row.teams.home : row.teams.visitors;
+                            return <AvatarCell
+                                src={opponent.logo}
+                                title={opponent.name}
+                                subtitle={opponent.code}
+                            />;
+                        }}
+                    </TableBuilderColumn>
+                    <TableBuilderColumn header="Location">
+                        {row => <div>{`${row.arena.name ? row.arena.name + "," : "n/a"} ${row.arena.city ? row.arena.city : ""} ${row.arena.state ? row.arena.state : ""}`}</div>}
+                    </TableBuilderColumn>
+                    <TableBuilderColumn header="Score (h-v)">
+                        {row => <div>{`${row && row.scores && row.scores.home && row.scores.home.points ? `${row.scores.home.points} - ${row.scores.visitors.points}` : "n/a"}`}</div>}
+                    </TableBuilderColumn>
+                    {/* Add more columns as necessary */}
+                </TableBuilder>
+            </Block>
         </Block>
     );
 };
