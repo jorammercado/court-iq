@@ -194,7 +194,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     <Block className="teamLeaders">
                         <Block style={{ justifyContent:"flex-start",alignItems:"flex-start",display:"flex",flexDirection:"row" }}>
                             <HeadingLevel >
-                                <Heading styleLevel={5} color="black" style={{ marginTop: "40px",justifyContent:"flex-start" }}>Leaders</Heading>
+                                <Heading styleLevel={4} color="black" style={{ marginTop: "40px",justifyContent:"flex-start" }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
                         <TeamPlayerLeaderCard
@@ -208,7 +208,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             secondaryColor={secondaryColor}
                         />
                     </Block>
-                    <Block className="teamsItems">
+                    <Block className="teamsItems" >
                         <TeamStatsComponent teamId={teamId} season={season} />
                         <TeamScheduleComponent teamId={teamId} season={season} />
                         <PlayerStatsComponent

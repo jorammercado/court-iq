@@ -12,6 +12,7 @@ import {
 } from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import "./TeamStatsComponent.scss"
+import Spin from './SpinLoad';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -70,7 +71,7 @@ const TeamStatsComponent = ({ teamId, season }) => {
     }, [teamId, season]);
 
     if (!teamStats) {
-        return <p>Loading team statistics...</p>;
+        return <Spin></Spin>;
     }
 
     // Dynamically generate columns for the stats, excluding the 'games' column from averaging
@@ -82,14 +83,16 @@ const TeamStatsComponent = ({ teamId, season }) => {
         }));
 
     return (
-        <div className="TeamStatsTable">
-            <HeadingLevel >
-                <Heading styleLevel={4} color="black">
-                    Team Statistics
-                </Heading>
-            </HeadingLevel>
-            <Block className="tableContainer">
-                <TableBuilder data={teamStats}>
+        <Block className="TeamStatsTable" style={{justifyContent:"left", alignItems:"flex-left", display:"flex", width:"91%"}}>
+            <Block className="heading">
+                <HeadingLevel >
+                    <Heading styleLevel={4} color="black">
+                        Season Stats
+                    </Heading>
+                </HeadingLevel>
+            </Block>
+            <Block className="tableContainer" style={{ width: '100%', justifyContent: "left" }}>
+                <TableBuilder data={teamStats} >
                     {statColumns.map(column => (
                         <TableBuilderColumn key={column.id} header={column.header}>
                             {row => <div>{row[column.id]}</div>}
@@ -97,7 +100,7 @@ const TeamStatsComponent = ({ teamId, season }) => {
                     ))}
                 </TableBuilder>
             </Block>
-        </div>
+        </Block>
     );
 };
 
