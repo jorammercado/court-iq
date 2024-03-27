@@ -71,7 +71,7 @@ const SectionTwo = () => {
           <header>
             <h2>Ask Anything About Basketball Stats</h2>
           </header>
-          <p>Our AI Delivers Instant Insights</p>
+          <h5>Our AI Delivers Instant Insights</h5>
 
         </div>
       </MoveInWhenVisible>

@@ -102,9 +102,9 @@ const MyWork = () => {
             <div className="content" style={{ backgroundColor: "#faf7f2", boxShadow: "none" }}>
                 <header>
                     <h2>In Depth Prop Research</h2>
-                    <p className="deep-dive-message">
+                    <h5 className="deep-dive-message">
                         By exploring the depth of props, we enable users to make more informed assumptions
-                    </p>
+                    </h5>
                 </header>
                 <div className="gallery" >
                     <article className="from-left">

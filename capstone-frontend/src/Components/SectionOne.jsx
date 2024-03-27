@@ -72,7 +72,7 @@ const SectionOne = () => {
                     <header>
                         <h2>What We Do</h2>
                     </header>
-                    <p>We're revolutionizing the way basketball enthusiasts, teams, and analysts experience the game.</p>
+                    <h5>We're revolutionizing the way basketball enthusiasts, teams, and analysts experience the game.</h5>
                 </div>
             </MoveInWhenVisible>
 
