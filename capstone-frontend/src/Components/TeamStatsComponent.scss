@@ -9,6 +9,11 @@
         max-width: 1300px;
     }
 
+    @media (max-width: 1300px) {
+        justify-content: center;
+        align-items: center;
+    }
+
     .heading {
         display: flex;
         flex-direction: column;
@@ -20,12 +25,16 @@
         width: 100%;
         overflow-x: auto;
 
-        @media (max-width: 767px) {
-            max-width: 70%;
+        @media (max-width: 870px) {
+            max-width: 40%;
         }
 
         @media (min-width: 768px) {
             // max-width: 775px;
+        }
+
+        @media (max-width: 1300px) {
+            width: 80%;
         }
     }
 }

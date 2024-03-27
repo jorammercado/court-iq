@@ -91,7 +91,7 @@ const TeamStatsComponent = ({ teamId, season }) => {
                     </Heading>
                 </HeadingLevel>
             </Block>
-            <Block className="tableContainer" style={{ width: '100%', justifyContent: "left" }}>
+            <Block className="tableContainer" style={{ justifyContent: "left" }}>
                 <TableBuilder data={teamStats} >
                     {statColumns.map(column => (
                         <TableBuilderColumn key={column.id} header={column.header}>

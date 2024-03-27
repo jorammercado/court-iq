@@ -140,7 +140,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                             }}
                         >
 
-                            <Card
+                            <Card className="responsiveCard"
                                 overrides={{
                                     Root: {
                                         style: {
