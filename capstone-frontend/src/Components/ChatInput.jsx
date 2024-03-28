@@ -24,6 +24,11 @@ const ChatInput = ({ onSubmit }) => {
   const dynamicPadding = windowWidth > 768 ? '250px' : windowWidth > 480 ? '50px' : '20px'
 
   const inputOverrides = {
+    Root: {
+      style: {
+        borderRadius: "0"
+      },
+    },
     InputContainer: {
       style: {
         width: '100%',

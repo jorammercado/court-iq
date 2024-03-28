@@ -37,6 +37,25 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         'magic', 'mavericks', 'nets', 'nuggets', 'pacers', 'pelicans', 'pistons', 'raptors', 'rockets', 'spurs', 'suns', 'timberwolves', 'trailblazers', 'warriors', 'wizards', '76ers']
 
 
+    const calculateMarginLeft = () => {
+        const screenWidth = window.innerWidth;
+        console.log("SCREEN WIDTH", screenWidth)
+        return screenWidth > 1425 ? ((screenWidth - 1425) / 2) + 65 : 50;
+    };
+    const [marginLeft, setMarginLeft] = useState(calculateMarginLeft());
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+            setMarginLeft(calculateMarginLeft());
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    console.log("MARGINLEFTMARGINLEFTMARGINLEFT", marginLeft)
+
     const handleDataFromChild = (data) => {
         setTeam(data.team)
     };
@@ -160,7 +179,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     return (
         <Block className="parent">
             <Block className="left">
-                <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", zIndex: "1" }}>
+                <Block className="team__logo" $style={{ flexGrow: 1, zIndex: "1", marginLeft: `${marginLeft+15}px` }}>
                     <Avatar
                         overrides={{
                             Avatar: {
@@ -235,7 +254,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 </Block>
             </Block>
             <Block className="right">
-                <Block className="Selector" display="flex" justifyContent="center">
+                <Block className="Selector"
+                    display="flex"
+                    justifyContent="center"
+                    marginBottom="70px"
+                    $style={{ marginRight: `${marginLeft - 12}px` }}>
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={teamOptions}
@@ -246,10 +269,23 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             placeholder={<Block> &nbsp;&nbsp;&nbsp;Team&nbsp;&nbsp; </Block>}
                             clearable={false}
                             overrides={{
-                                ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '26px', paddingRight: '15px', } },
+                                ControlContainer: {
+                                    style: {
+                                        minHeight: '35px', height: '35px', paddingLeft: '15px',
+                                        paddingRight: '5px',
+                                        borderRadius: "0",
+                                        cursor: 'default',
+                                    }
+                                },
                                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                 Placeholder: { style: { lineHeight: '30px' } },
                                 SingleValue: { style: { lineHeight: '30px' } },
+                                OptionContent: { style: { cursor: 'default' }, },
+                                DropdownContainer: { style: { cursor: 'default' } },
+                                DropdownListItem: { style: { cursor: 'default' } },
+                                InputContainer: { style: { cursor: 'default' } },
+                                Input: { style: { cursor: 'default' } },
+                                Root: { style: { width: '122px' } }
                             }}
 
                         />
@@ -269,15 +305,27 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
                             clearable={false}
                             overrides={{
-                                ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px', paddingRight: '1px' } },
+                                ControlContainer: {
+                                    style: {
+                                        minHeight: '35px', height: '35px', paddingLeft: '15px',
+                                        paddingRight: '5px',
+                                        borderRadius: "0",
+                                        cursor: 'default'
+                                    }
+                                },
                                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                 Placeholder: { style: { lineHeight: '30px' } },
                                 SingleValue: { style: { lineHeight: '30px' } },
+                                OptionContent: { style: { cursor: 'default' }, },
+                                DropdownContainer: { style: { cursor: 'default' } },
+                                DropdownListItem: { style: { cursor: 'default' } },
+                                InputContainer: { style: { cursor: 'default' } },
+                                Input: { style: { cursor: 'default' } },
+                                Root: { style: { width: '122px' } }
                             }}
-
                         />
                     </Block>
-                    <Block paddingTop="10px">
+                    <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={[
                                 { id: '50', label: '50' },
@@ -292,10 +340,23 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             placeholder={<Block> &nbsp;&nbsp;Games&nbsp;&nbsp; </Block>}
                             clearable={false}
                             overrides={{
-                                ControlContainer: { style: { minHeight: '35px', height: '35px', paddingLeft: '12px', paddingRight: '1px' } },
+                                ControlContainer: {
+                                    style: {
+                                        minHeight: '35px', height: '35px', paddingLeft: '15px',
+                                        paddingRight: '5px',
+                                        borderRadius: "0",
+                                        cursor: 'default'
+                                    }
+                                },
                                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                 Placeholder: { style: { lineHeight: '30px' } },
                                 SingleValue: { style: { lineHeight: '30px' } },
+                                OptionContent: { style: { cursor: 'default' }, },
+                                DropdownContainer: { style: { cursor: 'default' } },
+                                DropdownListItem: { style: { cursor: 'default' } },
+                                InputContainer: { style: { cursor: 'default' } },
+                                Input: { style: { cursor: 'default' } },
+                                Root: { style: { width: '122px' } }
                             }}
 
                         />
