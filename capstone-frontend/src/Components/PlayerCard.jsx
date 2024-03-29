@@ -32,23 +32,27 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
             overrides={{
                 Root: {
                     style: {
-                        width: "210px",
+                        width: "310px",
                         height: "175px",
                         marginBottom: "20px",
-                        backgroundColor: primaryColor,
+                        // backgroundColor: primaryColor,
+                        backgroundColor: "#ED751C",
                         display: "flex",
                         flexDirection: "column",
-                        justifyContent: "space-between"
+                        justifyContent: "space-between",
+                        borderRadius: "0",
+                        border: "none",
                     }
                 },
                 Title: {
                     style: {
-                        fontSize: '16px',
+                        fontSize: '19px',
                         textAlign: 'center',
                         marginTop: "-10px",
                         marginBottom: "18px",
                         lineHeight: "1.1",
-                        color: secondaryColor
+                        // color: secondaryColor
+                        color:"black"
                     },
                 }
             }}
@@ -58,9 +62,9 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
             <Block marginBottom="15px" marginTop="-15px">
                 <StyledThumbnail
                     src={playerImage}
-                    style={{ width: '68px', height: '68px', alignSelf: "center", border:"none" }}
+                    style={{ width: '125px', height: '125px', alignSelf: "center", border:"none" }}
                 />
-                <StyledBody style={{ fontSize: "13px", lineHeight: "1.1", marginTop: "26px" }}>
+                <StyledBody style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.1", marginTop: "23px", color:"black", marginLeft:"4px" }}>
                     {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
                     {personalData ? "College: " + personalData.college : ""} <br></br>
                     {personalData&&personalData.height ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>

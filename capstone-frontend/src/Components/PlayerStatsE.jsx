@@ -3,13 +3,16 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import PlayerCard from './PlayerCard';
 import "./PlayerStatsE.scss"
-// Assuming these environment variables are correctly defined in your .env file
+import Spin from './SpinLoad';
+import { Block } from 'baseui/block';
+
+
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 
-const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisible, primaryColor, secondaryColor  }) => {
+const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisible, primaryColor, secondaryColor }) => {
     const navigate = useNavigate();
     const [playerStats, setPlayerStats] = useState([]);
     const [personalData, setPersonalData] = useState({});
@@ -44,9 +47,9 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
 
             const options = {
                 method: 'GET',
-                url: VITE_X_RAPIDAPI_URL3, // Make sure this URL points to the correct API endpoint
+                url: VITE_X_RAPIDAPI_URL3,
                 params:
-                    { team: team, season: season } // Assuming 'season' is a valid prop being passed
+                    { team: team, season: season }
                 ,
                 headers: {
                     'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
@@ -55,7 +58,7 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
             };
             try {
                 const response = await axios.request(options);
-                setPlayerStats(response.data.response); // Adjust according to the actual data structure
+                setPlayerStats(response.data.response);
                 console.log(response.data.response)
             } catch (error) {
                 console.error(error);
@@ -66,7 +69,7 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
     }, [team, season]);
 
     if (!playerStats) {
-        return <p>Loading player stats...</p>;
+        return <Spin></Spin>;
     }
 
     const handleCardClick = (playerId, playerData) => {
@@ -75,24 +78,28 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
     };
 
     return (
-        <div>
-            <div className="playerCardsContainer"> 
+        <Block maxWidth="1450px" marginLeft="60px" marginRight="60px" >
+            <Block className="playerCardsContainer">
                 {playerStats && playerStats.slice(0, 15).map((player, index) => {
                     let personalDataPassed = null
-                    if (personalData&&personalData.length>0)
+                    if (personalData && personalData.length > 0)
                         personalDataPassed = personalData.filter((elem, index) => elem.id === player.player.id)[0]
                     else
                         personalDataPassed = []
                     return (
-                        <div key={index} onClick={() => handleCardClick(player.player.id, player.player)} style={{ cursor: 'pointer' }}>
+                        <Block
+                            className="playerCardWrapper"
+                            key={index}
+                            onClick={() => handleCardClick(player.player.id, player.player)}
+                            style={{ cursor: 'pointer' }}>
                             <PlayerCard player={player} personalData={personalDataPassed}
-                            primaryColor={primaryColor}
-                            secondaryColor={secondaryColor} />
-                        </div>
+                                primaryColor={primaryColor}
+                                secondaryColor={secondaryColor} />
+                        </Block>
                     )
                 }, personalData)}
-            </div>
-        </div>
+            </Block>
+        </Block>
     );
 };
 
