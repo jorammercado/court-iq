@@ -80,6 +80,18 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         }
     }, [gamesInView]);
 
+    const [isHighlightedSeason, setIsHighlightedSeason] = useState(false);
+    useEffect(() => {
+        if (season) {
+            setIsHighlightedSeason(true);
+            const timer = setTimeout(() => {
+                setIsHighlightedSeason(false);
+            }, 500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [season]);
+
     const [avatarBackgroundColor, setAvatarBackgroundColor] = useState("none")
     useEffect(() => {
         if (selectedTeamName === "Houston Rockets" || selectedTeamName === "LA Clippers")
@@ -258,7 +270,10 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         />
                     </Block>
                     <Block className="teamsItems" >
-                        <TeamStatsComponent teamId={teamId} season={season} />
+                        <TeamStatsComponent
+                            teamId={teamId}
+                            season={season}
+                            isHighlightedSeason={isHighlightedSeason} />
                         <TeamScheduleComponent
                             teamId={teamId}
                             season={season}

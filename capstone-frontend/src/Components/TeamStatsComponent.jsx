@@ -18,7 +18,7 @@ const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL = import.meta.env.VITE_X_RAPIDAPI_URL4;
 
-const TeamStatsComponent = ({ teamId, season }) => {
+const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
     const [teamStats, setTeamStats] = useState(null);
 
     useEffect(() => {
@@ -86,7 +86,7 @@ const TeamStatsComponent = ({ teamId, season }) => {
         <Block className="TeamStatsTable" style={{justifyContent:"left", alignItems:"flex-left", display:"flex", width:"91%"}}>
             <Block className="heading">
                 <HeadingLevel >
-                    <Heading styleLevel={4} color="black">
+                    <Heading className="titleHighlight" styleLevel={4} color="black" backgroundColor={isHighlightedSeason?"#EA6607":"none"}>
                         Season Stats
                     </Heading>
                 </HeadingLevel>
