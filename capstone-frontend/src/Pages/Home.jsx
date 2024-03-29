@@ -7,6 +7,7 @@ import SectionOne from "../Components/SectionOne";
 import SectionTwo from "../Components/SectionTwo";
 import MyWork from "../Components/MyWork";
 import Header from "../Components/Header";
+import GameOdds from "../Components/GameOdds"
 import "./css/main.css"
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
@@ -54,7 +55,7 @@ function Home() {
                 <SectionTwo />
             </Element>
             <Element name="myWork" className="element" style={{ height: "70vh" }}>
-                <MyWork />
+                <GameOdds/>
             </Element>
         </div>
     );
