@@ -69,7 +69,7 @@ export const Login = ({ currentUser,
                 <Card overrides={{
                   Root: {
                     style: {
-                      width: "auto", backgroundColor: "#ED751C", border: '1px solid #ECECEC',
+                      width: "auto", backgroundColor: "#EA6607", border: '1px solid #ECECEC',
                       borderRadius: '4px',
                     }
                   }

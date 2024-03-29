@@ -22,7 +22,7 @@ import "../App.scss"
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
     const [fontFamily, setFontFamily] = useState('UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif')
-    const [primaryColor, setPrimaryColor] = useState("#ED751C")
+    const [primaryColor, setPrimaryColor] = useState("#EA6607")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
     const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#FDBB30", "#000000", "#FEC524", "#BEC0C2", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#F9A01B", "#E31837"]
@@ -124,7 +124,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
             if (teams[i] === selectedTeamName)
                 return primaryColors[i]
         }
-        return '#ED751C'
+        return '#EA6607'
     }
 
     useEffect(() => {
