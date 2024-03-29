@@ -20,12 +20,12 @@ const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL_GAMES = import.meta.env.VITE_X_RAPIDAPI_URL_GAMES;
 
-const TeamScheduleComponent = ({ teamId, season, gamesInView }) => {
+const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) => {
     const [games, setGames] = useState([]);
     const [games10, setGames10] = useState([]);
     const [games20, setGames20] = useState([]);
     const [games50, setGames50] = useState([]);
-
+    // color={isHighlighted?"red":"none"}
     useEffect(() => {
         const fetchGames = async () => {
             const options = {
@@ -111,7 +111,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView }) => {
     return (
         <Block className="TeamGamesTable" style={{ justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%" }}>
             <HeadingLevel >
-                <Heading styleLevel={4} color="black">
+                <Heading className="headingTransition" styleLevel={4} color="black" backgroundColor={isHighlighted?"#EA6607":"none"}>
                     {Number(season >= 2023 && gamesInView === '5') ? `Next 5 Games` :
                         Number(season >= 2023 && gamesInView === '10') ? `Last 10 Games Schedule of Season` :
                             Number(season >= 2023 && gamesInView === '20') ? `Last 20 Games Schedule of Season` :
