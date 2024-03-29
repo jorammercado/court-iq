@@ -19,6 +19,10 @@
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
+
+        .titleHighlight {
+            transition: background-color .5s ease-in-out;
+        }
     }
 
     .tableContainer {
