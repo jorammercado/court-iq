@@ -1,7 +1,26 @@
 .playerCardsContainer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Adjust gap as needed */
-    justify-content: center; // This centers the cards within the container
-    margin-top: 50px 
+    gap: 10px;
+    justify-content: center;
+    margin-top: 50px;
+    align-items:center;
+    flex-direction: row;
+    flex-wrap:wrap;
+
+    @media (max-width: 900px) {
+        max-width: 800px;
+     }
+
+     @media (max-width: 750px) {
+        max-width: 750px;
+     }
+
+     @media (max-width: 670px) {
+        max-width: 600px;
+     }
+
 }
+
+// .playerCardWrapper {
+//     flex: 0 1 auto;
+// }
