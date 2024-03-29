@@ -2,12 +2,15 @@ import { useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 
 const MARGIN = { top: 30, right: 30, bottom: 40, left: 50 };
-const BUCKET_NUMBER = 21;
+// const BUCKET_NUMBER = 12;
 const BUCKET_PADDING = 1;
 
 
 export const Histogram = ({ width, height, data, title }) => {
+    let BUCKET_NUMBER = 12;
     data = data.map(e => Number(e))
+    // if(title==="Rebounds")
+    //     BUCKET_NUMBER = 5
     const axesRef = useRef(null);
     const boundsWidth = width - MARGIN.right - MARGIN.left;
     const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -17,7 +20,7 @@ export const Histogram = ({ width, height, data, title }) => {
         const max = Math.max(...data);
         return d3
             .scaleLinear()
-            .domain([min < 0 ? min : 0, Math.max(...data) + 5])
+            .domain([min < 0 ? min : 0, Math.max(...data) + 1])
             .range([10, boundsWidth]);
     }, [data, width]);
 
@@ -40,8 +43,9 @@ export const Histogram = ({ width, height, data, title }) => {
         svgElement.selectAll("*").remove();
 
         let xAxisGenerator = null
-        if (title !== "Points" && title !== "+/-")
+        if (title !== "Points" && title !== "+/-") {
             xAxisGenerator = d3.axisBottom(xScale);
+        }
         else {
             xAxisGenerator = d3.axisBottom(xScale)
                 .ticks(boundsWidth / 20);
@@ -61,6 +65,12 @@ export const Histogram = ({ width, height, data, title }) => {
 
         const yAxisGenerator = d3.axisLeft(yScale);
         svgElement.append("g").call(yAxisGenerator);
+        svgElement.selectAll("text")
+            .style("fill", "white"); // Set text color to white
+        svgElement.selectAll("line")
+            .style("stroke", "white"); // Set axes lines color to white
+        svgElement.selectAll("path")
+            .style("stroke", "white"); // Set the color of the axis itself to white
 
         svgElement.append("text")
             .attr("transform", "rotate(-90)")
@@ -69,14 +79,15 @@ export const Histogram = ({ width, height, data, title }) => {
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .style("font-size", "11px")
-            .text("Season Freq.");
+            .style("fill", "white")
+            .text("frequency");
     }, [xScale, yScale, boundsHeight]);
 
     const allRects = buckets.map((bucket, i) => {
         return (
             <rect
                 key={i}
-                fill="#69b3a2"
+                fill="#EA6607"
                 x={xScale(bucket.x0) + BUCKET_PADDING / 2}
                 width={xScale(bucket.x1) - xScale(bucket.x0) - BUCKET_PADDING}
                 y={yScale(bucket.length)}
@@ -86,11 +97,12 @@ export const Histogram = ({ width, height, data, title }) => {
     });
 
     return (
-        <svg width={width} height={height}>
+        <svg width={width} height={height} style={{marginTop:"5px", marginBottom:"5px"}}>
+            <rect width="100%" height="100%" fill="black" />
             <text
                 transform={`translate(${width / 2},${MARGIN.top / 2})`}
                 textAnchor="middle"
-                style={{ fontSize: '16px', fill: '#333' }}
+                style={{ fontSize: '16px', fill: 'white' }}
             >
                 {title ? title : "title"}
             </text>
@@ -106,6 +118,7 @@ export const Histogram = ({ width, height, data, title }) => {
                 height={boundsHeight}
                 ref={axesRef}
                 transform={`translate(${[MARGIN.left, MARGIN.top].join(",")})`}
+                style={{ color: 'white' }}
             />
         </svg>
     );

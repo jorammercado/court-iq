@@ -439,7 +439,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                     </Block>
                     <Block className="middle">
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
-                            <HeadingLarge color="black">Season Stats</HeadingLarge>
+                            <HeadingMedium $style={{color:"white", zIndex:"10"}}>Season Stats</HeadingMedium>
                             {points.length > 0 ? (
                                 <Block className="graph" display="flex" justifyContent="center" alignItems="center" marginTop="-60px">
                                     {isScreenLargeEnough ?
