@@ -6,6 +6,9 @@
     align-items: center;
     align-items: flex-start;
 
+    .headingTransition {
+        transition: background-color .5s ease-in-out;
+    }
 
     @media (min-width: 767px) {
         max-width: 1300px;

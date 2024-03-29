@@ -4,9 +4,21 @@ import { Button } from "baseui/button";
 import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
 
-const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
+const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }) => {
     const navigate = useNavigate();
     const [playerImage, setPlayerImage] = useState("https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png");
+    const [textColor, setTextColor] = useState("white")
+
+    useEffect(() => {
+        switch (team) {
+            case "San Antonio Spurs":
+                setTextColor("black");
+                break;
+            default:
+                setTextColor("white");
+        }
+    }, [team, secondaryColor]);
+
 
     useEffect(() => {
 
@@ -32,11 +44,11 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
             overrides={{
                 Root: {
                     style: {
-                        width: "310px",
-                        height: "175px",
-                        marginBottom: "20px",
-                        // backgroundColor: primaryColor,
-                        backgroundColor: "#ED751C",
+                        width: "316px",
+                        height: "179px",
+                        marginBottom: "5px",
+                        backgroundColor: primaryColor,
+                        // backgroundColor: "#ED751C",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "space-between",
@@ -47,12 +59,13 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
                 Title: {
                     style: {
                         fontSize: '19px',
-                        textAlign: 'center',
-                        marginTop: "-10px",
+                        textAlign: 'left',
+                        marginTop: "-6px",
                         marginBottom: "18px",
                         lineHeight: "1.1",
                         // color: secondaryColor
-                        color:"black"
+                        color: textColor,
+                        // paddingTop: "2px"
                     },
                 }
             }}
@@ -62,15 +75,15 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor }) => {
             <Block marginBottom="15px" marginTop="-15px">
                 <StyledThumbnail
                     src={playerImage}
-                    style={{ width: '125px', height: '125px', alignSelf: "center", border:"none" }}
+                    style={{ width: '127px', height: '127px', alignSelf: "center", border: "none", marginTop: "-10px" }}
                 />
-                <StyledBody style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.1", marginTop: "23px", color:"black", marginLeft:"4px" }}>
+                <StyledBody style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.1", marginTop: "23px", color: textColor }}>
                     {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
                     {personalData ? "College: " + personalData.college : ""} <br></br>
-                    {personalData&&personalData.height ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>
-                    {personalData&&personalData.weight ? "Weight: " + personalData.weight.pounds + " lbs" : ""} <br></br>
-                    {personalData&&personalData.nba ? "Pro Start: " + personalData.nba.start : ""}<br></br>
-                    {personalData&&personalData.nba ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
+                    {personalData && personalData.height ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>
+                    {personalData && personalData.weight ? "Weight: " + personalData.weight.pounds + " lbs" : ""} <br></br>
+                    {personalData && personalData.nba ? "Pro Start: " + personalData.nba.start : ""}<br></br>
+                    {personalData && personalData.nba ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
 
                 </StyledBody>
             </Block>
