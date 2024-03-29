@@ -15,6 +15,7 @@ export default function Spin() {
       <Spinner
         $borderWidth={theme.sizing.scale100}
         $size={theme.sizing.scale1600}
+        $color="#EA6607"
       />
       <div
         className={css({
