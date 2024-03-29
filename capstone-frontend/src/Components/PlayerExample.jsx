@@ -29,6 +29,7 @@ import {
     COLUMNS,
     NUMERICAL_FORMATS,
 } from "baseui/data-table";
+import { Spinner, SIZE } from "baseui/spinner";
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -72,7 +73,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
             .catch(() => navigate("/not-found"))
     }, [data, navigate])
 
-    const [primaryColor, setPrimaryColor] = useState("#ED751C")
+    const [primaryColor, setPrimaryColor] = useState("#EA6607")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
     const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#041E42", "#002B5E", "#FEC524", "#1D42BA", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#00471B", "#E31837"]
@@ -218,7 +219,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                 if (teams[i] === referenceData.team.name)
                     return primaryColors[i]
             }
-        return '#ED751C'
+        return '#EA6607'
     }
 
     useEffect(() => {
@@ -383,7 +384,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             <LabelMedium color={secondaryColor}>{calculateTS()}</LabelMedium>
                         </Block>
                     </Block>
-                    <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", marginLeft:"-100px" }}>
+                    <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", marginLeft: "-100px" }}>
                         <Avatar
                             overrides={{
                                 Avatar: {
@@ -432,16 +433,24 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                 </Block>
 
                 <Block className="chart-container"  >
-                    <Block className="left">
-                        <HistogramWithAxis title={`Points`} data={points}></HistogramWithAxis>
-                        <HistogramWithAxis title={`Assist`} data={assists}></HistogramWithAxis>
-                        <HistogramWithAxis title={`Rebounds`} data={rebounds}></HistogramWithAxis>
+                    <Block className="left" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-25px" : "-1px"} >
+                        {points && points.length > 0 ? <HistogramWithAxis title={`Points`} data={points}></HistogramWithAxis> : <Spin></Spin>}
+                        {assists && assists.length > 0 ? <HistogramWithAxis title={`Assist`} data={assists}></HistogramWithAxis> : <Spin></Spin>}
+                        {rebounds && rebounds.length > 0 ? <HistogramWithAxis title={`Rebounds`} data={rebounds}></HistogramWithAxis> : <Spin></Spin>}
+                        {fga && fga.length > 0 ? <HistogramWithAxis title={`fga`} data={fga}></HistogramWithAxis> : <Spin></Spin>}
                     </Block>
                     <Block className="middle">
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
-                            <HeadingMedium $style={{color:"white", zIndex:"10"}}>Season Stats</HeadingMedium>
+                            <HeadingMedium $style={{ color: "white", zIndex: "10" }}>
+                                Season Stats
+                            </HeadingMedium>
                             {points.length > 0 ? (
-                                <Block className="graph" display="flex" justifyContent="center" alignItems="center" marginTop="-60px">
+                                <Block className="graph"
+                                    display="flex"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    marginTop="-60px"
+                                    marginBottom="-40px">
                                     {isScreenLargeEnough ?
                                         <MyGraph
                                             playerStats={playerStats}
@@ -489,11 +498,12 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                 <Spin></Spin>
                             )}
                         </Block>
-                        <Block width="100%" overflow="auto">
-                            <Block display="flex" justifyContent="center" width="100%">
-                                <HeadingSmall color="black" marginTop="20px">Last 5 Games</HeadingSmall>
+                        <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "25px" : "90px"}>
+                            <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
+                                <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex" }}>
+                                    Last 5 Games
+                                </HeadingSmall>
                             </Block>
-
                             {playerStats ? (
                                 <Table
                                     overrides={overrides}
@@ -502,27 +512,27 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                     data={getLastFiveGames().map((game, index) => {
                                         if (last5Games.length > 0) {
                                             return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
-                                            `${referenceData.team ? referenceData.team.name : "n/a"}`,
+                                            `${referenceData.team ? referenceData.team.name : <Spinner $color="#EA6607" $size={SIZE.small}/>}`,
                                             `${referenceData.team
                                                 ? last5Games[index].teams.home
                                                     ? referenceData.team.name === last5Games[index].teams.home.name
                                                         ? last5Games[index].teams.visitors.name
                                                         : last5Games[index].teams.home.name
-                                                    : "n/a"
-                                                : "n/a"}`,
+                                                    : <Spinner $color="#EA6607" $size={SIZE.small}/>
+                                                : <Spinner $color="#EA6607" $size={SIZE.small}/>}`,
                                             `${referenceData.team
                                                 ? last5Games[index].teams.home
                                                     ? referenceData.team.name === last5Games[index].teams.home.name
                                                         ? last5Games[index].scores.home.points + "-" + last5Games[index].scores.visitors.points
                                                         : last5Games[index].scores.visitors.points + "-" + last5Games[index].scores.home.points
-                                                    : "n/a"
-                                                : "n/a"}`,
+                                                    : <Spinner $color="#EA6607" $size={SIZE.small}/>
+                                                : <Spinner $color="#EA6607" $size={SIZE.small}/>}`,
                                             game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
                                             game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
                                             game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
                                         }
                                         else {
-                                            return ["n/a", "n/a", "n/a", "n/a", game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
+                                            return [<Spinner $color="#EA6607" $size={SIZE.small}/>, <Spinner $color="#EA6607" $size={SIZE.small}/>, <Spinner $color="#EA6607" $size={SIZE.small}/>, <Spinner $color="#EA6607" $size={SIZE.small}/>, game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
                                                 game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
                                                 game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
                                         }
@@ -534,10 +544,11 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             )}
                         </Block>
                     </Block>
-                    <Block className="right">
-                        <HistogramWithAxis title={`Turnovers`} data={turnovers}></HistogramWithAxis>
-                        <HistogramWithAxis title={`Three Pointers`} data={tpm}></HistogramWithAxis>
-                        <HistogramWithAxis title={`+/-`} data={plusMinus}></HistogramWithAxis>
+                    <Block className="right" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-25px" : "-1px"}>
+                        {turnovers && turnovers.length > 0 ? <HistogramWithAxis title={`Turnovers`} data={turnovers}></HistogramWithAxis> : <Spin></Spin>}
+                        {tpm && tpm.length > 0 ? <HistogramWithAxis title={`Three Pointers`} data={tpm}></HistogramWithAxis> : <Spin></Spin>}
+                        {plusMinus && plusMinus.length > 0 ? <HistogramWithAxis title={`+/-`} data={plusMinus}></HistogramWithAxis> : <Spin></Spin>}
+                        {fgp && fgp.length > 0 ? <HistogramWithAxis title={`fg%`} data={fgp}></HistogramWithAxis> : <Spin></Spin>}
                     </Block>
                 </Block>
             </Block>
@@ -546,3 +557,4 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
 }
 
 export default PlayerExample;
+// && last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start 

@@ -287,7 +287,7 @@ const TeamStandingsV2 = () => {
           </Block>
           <Block>
             {/* Trivia or any other content */}
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#EA6607" } } }}>
               <HeadingXSmall>Trivia</HeadingXSmall>
               <StyledBody>
                 Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
@@ -475,7 +475,7 @@ const TeamStandingsV2 = () => {
         </Block>
         <Block>
           {/* Trivia or any other content for the Eastern Conference */}
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#ED751C" } } }}>
+          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#EA6607" } } }}>
             <HeadingXSmall>Trivia</HeadingXSmall>
             <StyledBody>
               Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
