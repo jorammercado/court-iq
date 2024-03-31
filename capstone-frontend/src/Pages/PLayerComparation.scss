@@ -47,6 +47,14 @@
   animation: slideInUp 1s ease;
 }
 
+.player-img {
+  width: 300px;
+  height: 200px; 
+  object-fit: cover;
+  box-shadow: 0px 4px 6px rgba(2, 2, 2, 0.1);
+  background-color: #faf7f2;
+}
+
 
 .player-input {
   height: 45px;
