@@ -10,8 +10,10 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import { Avatar } from "baseui/avatar";
 import { Select } from 'baseui/select';
 import {
+    LabelLarge,
     LabelMedium,
     LabelXSmall,
+    LabelSmall,
     HeadingLarge,
     HeadingMedium,
     HeadingSmall
@@ -76,7 +78,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
     const [primaryColor, setPrimaryColor] = useState("#EA6607")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
-    const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#041E42", "#002B5E", "#FEC524", "#1D42BA", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#00471B", "#E31837"]
+    const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#041E42", "#B8C4CA", "#FEC524", "#1D42BA", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#00471B", "#E31837"]
     const tertiaryColors = ["#000000", "#963821", "#FFFFFF", "#A1A1A4", "#000000", "#FDBB30", "#B8C4CA", "#8B2131", "#BEC0C2", "#FFC72C", "#C4CED4", "#BEC0C2", "#BEC0C2", "#000000", "#F5B112", "#000000", "#0077C0", "#9EA2A2", "#85714D", "#BEC0C2", "#002D62", "#000000", "#002B5C", "#000000", "#000000", "#000000", "#000000", "#A1A1A4", "#F9A01B", "#C4CED4"]
     const quaternaryColors = ["#9EA2A2", "#FFFFFF", "#FFFFFF", "#A1A1A4", "#000000", "#000000", "#000000", "#1D428A", "#002D62", "#FFC72C", "#C4CED4", "BEC0C2", "#000000", "#000000", "#707271", "#000000", "#000000", "#78BE20", "#85714D", "#000000", "#FDBB30", "#000000", "#C4CED4", "#63727A", "#000000", "#000000", "#000000", "#B4975A", "#F9A01B", "#C4CED4"]
     const quinaryColors = ["#FFFFFF", "#000000", "#FFFFFF", "#A1A1A4", "#000000", "#000000", "#000000", "#1D428A", "#002D62", "#FFC72C", "#C4CED4", "BEC0C2", "#000000", "#000000", "#707271", "#000000", "#000000", "#78BE20", "#85714D", "#000000", "#FDBB30", "#000000", "#C4CED4", "#F9AD1B", "#000000", "#000000", "#000000", "#B4975A", "#F9A01B", "#C4CED4"]
@@ -109,6 +111,18 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
     const [last5Games, setLast5Games] = useState([])
     const [last5Ids, setLast5Ids] = useState([])
     const [tpm, setTPM] = useState([]);
+
+    const [isHighlighted, setIsHighlighted] = useState(false);
+    useEffect(() => {
+        if (selectedSeason) {
+            setIsHighlighted(true);
+            const timer = setTimeout(() => {
+                setIsHighlighted(false);
+            }, 500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [selectedSeason]);
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -353,95 +367,117 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
 
     return (
         <div>
-            <Block width="100%" display="flex" flexDirection="column" alignItems="center">
+            <Block className="topplayer" display="flex" flexDirection="column" alignItems="center">
                 {/* <Block className="filler"></Block> */}
-                <Block className="sub__heading" display="flex" justifyContent="space-between" alignItems="center" width="100%" backgroundColor={primaryColor} padding="20px">
-                    <Block className="head__shot" $style={{ maxWidth: "250px", flexGrow: 1, marginLeft: "160px", marginBottom: "-6px" }}>
-                        <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "260px" }} />
-                    </Block>
-                    <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
-                        <HeadingLevel>
-                            <Heading styleLevel={3} color={secondaryColor}>{data.firstname} {data.lastname} </Heading>
-                            <Heading styleLevel={6} color={secondaryColor}>
-                                {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
-                                {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
-                                {referenceData.team ? referenceData.team.name : ""} &nbsp;
-                                {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
-                                {referenceData ? referenceData.pos : ""}
-                            </Heading>
-                        </HeadingLevel>
+                <Block className="sub__heading" display="flex" justifyContent="center" alignItems="center"  width="100%" flexDirection="row"  backgroundColor={primaryColor} padding="20px" >
+                    <Block className="wraper" display="flex" justifyContent="center" alignItems="center" flexDirection="row"  >
+                        <Block className="head__shot" $style={{  marginBottom: "-6px" }}>
+                            <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "240px" }} />
+                        </Block>
+                        <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
+                            <HeadingLevel>
+                                <Heading styleLevel={2} color={secondaryColor}>{data.firstname} {data.lastname} </Heading>
+                                <Heading styleLevel={5} color={secondaryColor}>
+                                    {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
+                                    {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
+                                    {referenceData.team ? referenceData.team.name : ""} &nbsp;
+                                    {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                    {referenceData ? referenceData.pos : ""}
+                                </Heading>
+                            </HeadingLevel>
 
-                        <Block display="flex" justifyContent="space-around" width="60%">
-                            <LabelXSmall color={secondaryColor}>PPG</LabelXSmall>
-                            <LabelXSmall color={secondaryColor}>RPG</LabelXSmall>
-                            <LabelXSmall color={secondaryColor}>APG</LabelXSmall>
-                            <LabelXSmall color={secondaryColor}>TS%</LabelXSmall>
+                            <Block display="flex" justifyContent="space-around" width="60%">
+                                <LabelMedium color={secondaryColor}>PPG</LabelMedium>
+                                <LabelMedium color={secondaryColor}>RPG</LabelMedium>
+                                <LabelMedium color={secondaryColor}>APG</LabelMedium>
+                                <LabelMedium color={secondaryColor}>TS%</LabelMedium>
+                            </Block>
+                            <Block display="flex" justifyContent="space-around" width="60%">
+                                <LabelLarge color={secondaryColor}>{calculateAveragePointsPerGame()}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{calculateAverageReboundsPerGame()}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{calculateAverageAssistsPerGame()}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{calculateTS()}</LabelLarge>
+                            </Block>
                         </Block>
-                        <Block display="flex" justifyContent="space-around" width="60%">
-                            <LabelMedium color={secondaryColor}>{calculateAveragePointsPerGame()}</LabelMedium>
-                            <LabelMedium color={secondaryColor}>{calculateAverageReboundsPerGame()}</LabelMedium>
-                            <LabelMedium color={secondaryColor}>{calculateAverageAssistsPerGame()}</LabelMedium>
-                            <LabelMedium color={secondaryColor}>{calculateTS()}</LabelMedium>
+                        <Block className="team__logo" >
+                            <Avatar
+                                overrides={{
+                                    Avatar: {
+                                        style: ({ $theme }) => ({
+                                            borderRadius: "0",
+                                            width: 'auto',
+                                            objectFit: 'contain',
+                                            height: 'auto',
+                                            maxWidth: '100%',
+                                            maxHeight: '100%',
+                                        }),
+                                    },
+                                    Root: {
+                                        style: ({ $theme }) => ({
+                                            borderRadius: "0",
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            overflow: 'visible',
+                                            width: '170px',
+                                            height: '170px',
+                                        }),
+                                    },
+                                }}
+                                name={referenceData.team ? referenceData.team.name : ""}
+                                size="100px"
+                                src={referenceData.team ? referenceData.team.logo : ""}
+                            />
                         </Block>
-                    </Block>
-                    <Block className="team__logo" $style={{ flexGrow: 1, marginRight: "100px", marginLeft: "-100px" }}>
-                        <Avatar
-                            overrides={{
-                                Avatar: {
-                                    style: ({ $theme }) => ({
-                                        borderRadius: "0",
-                                        width: 'auto',
-                                        objectFit: 'contain',
-                                        height: 'auto',
-                                        maxWidth: '100%',
-                                        maxHeight: '100%',
-                                    }),
-                                },
-                                Root: {
-                                    style: ({ $theme }) => ({
-                                        borderRadius: "0",
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        overflow: 'visible',
-                                        width: '170px',
-                                        height: '170px',
-                                    }),
-                                },
-                            }}
-                            name={referenceData.team ? referenceData.team.name : ""}
-                            size="100px"
-                            src={referenceData.team ? referenceData.team.logo : ""}
-                        />
-                    </Block>
-                    <Block className="selector" width="auto" maxWidth="300px" display="flex" alignItems="center" marginBottom="0px" marginTop="0px" marginRight="100px" marginLeft="-75px">
-                        <Select
-                            options={[
-                                { id: '2020', label: '2020-2021' },
-                                { id: '2021', label: '2021-2022' },
-                                { id: '2022', label: '2022-2023' },
-                                { id: '2023', label: '2023-2024' },
-                            ]}
-                            labelKey="label"
-                            valueKey="id"
-                            onChange={handleSeasonChange}
-                            value={selectedValue}
-                            placeholder="Select..."
-                            clearable={false}
-                        />
+                        <Block className="selector" width="auto"  display="flex" marginBottom="170px" marginLeft="25px" marginRight="10px"    >
+                            <Select
+                                options={[
+                                    { id: '2020', label: '2020-2021' },
+                                    { id: '2021', label: '2021-2022' },
+                                    { id: '2022', label: '2022-2023' },
+                                    { id: '2023', label: '2023-2024' },
+                                ]}
+                                labelKey="label"
+                                valueKey="id"
+                                onChange={handleSeasonChange}
+                                value={selectedValue}
+                                placeholder="Select..."
+                                clearable={false}
+                                overrides={{
+                                    ControlContainer: {
+                                        style: {
+                                            minHeight: '35px', height: '35px', paddingLeft: '15px',
+                                            paddingRight: '5px',
+                                            borderRadius: "0",
+                                            cursor: 'default',
+                                        }
+                                    },
+                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                    Placeholder: { style: { lineHeight: '30px' } },
+                                    SingleValue: { style: { lineHeight: '30px' } },
+                                    OptionContent: { style: { cursor: 'default' }, },
+                                    DropdownContainer: { style: { cursor: 'default' } },
+                                    DropdownListItem: { style: { cursor: 'default' } },
+                                    InputContainer: { style: { cursor: 'default' } },
+                                    Input: { style: { cursor: 'default' } },
+                                    Root: { style: { width: '122px' } }
+                                }}
+                            />
+                        </Block>
                     </Block>
                 </Block>
 
-                <Block className="chart-container"  >
-                    <Block className="left" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-25px" : "-1px"} >
+                <Block className="chart-container" marginTop="15px" >
+                    <Block className="left" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-90px" : "-1px"} >
                         {points && points.length > 0 ? <HistogramWithAxis title={`Points`} data={points}></HistogramWithAxis> : <Spin></Spin>}
                         {assists && assists.length > 0 ? <HistogramWithAxis title={`Assist`} data={assists}></HistogramWithAxis> : <Spin></Spin>}
                         {rebounds && rebounds.length > 0 ? <HistogramWithAxis title={`Rebounds`} data={rebounds}></HistogramWithAxis> : <Spin></Spin>}
                         {fga && fga.length > 0 ? <HistogramWithAxis title={`fga`} data={fga}></HistogramWithAxis> : <Spin></Spin>}
                     </Block>
-                    <Block className="middle">
-                        <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center">
-                            <HeadingMedium $style={{ color: "white", zIndex: "10" }}>
+                    <Block className="middle" marginLeft="-10px" marginRight="-10px">
+                        <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center" marginTop="5px">
+                            <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
+                                $style={{ color: "white", zIndex: "10", transition: "background-color 0.5s ease-in-out" }}>
                                 Season Stats
                             </HeadingMedium>
                             {points.length > 0 ? (
@@ -498,7 +534,8 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                 <Spin></Spin>
                             )}
                         </Block>
-                        <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "25px" : "90px"}>
+                        <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
+                        marginBottom="80px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
                                 <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex" }}>
                                     Last 5 Games
@@ -506,35 +543,41 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             </Block>
                             {playerStats ? (
                                 <Table
-                                    overrides={overrides}
+                                overrides={{
+                                    TableBodyCell: {
+                                      style: ({ $theme }) => ({
+                                        // whiteSpace: 'nowrap',
+                                      }),
+                                    },
+                                  }}
                                     columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
                                         "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}
                                     data={getLastFiveGames().map((game, index) => {
-                                        if (last5Games.length > 0) {
+                                        if (last5Games.length > 0 && last5Games && last5Games[index] && last5Games[index].date) {
                                             return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
-                                            `${referenceData.team ? referenceData.team.name : <Spinner $color="#EA6607" $size={SIZE.small}/>}`,
+                                            `${referenceData.team ? referenceData.team.nickname : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             `${referenceData.team
                                                 ? last5Games[index].teams.home
                                                     ? referenceData.team.name === last5Games[index].teams.home.name
-                                                        ? last5Games[index].teams.visitors.name
-                                                        : last5Games[index].teams.home.name
-                                                    : <Spinner $color="#EA6607" $size={SIZE.small}/>
-                                                : <Spinner $color="#EA6607" $size={SIZE.small}/>}`,
+                                                        ? last5Games[index].teams.visitors.nickname
+                                                        : last5Games[index].teams.home.nickname
+                                                    : <Spinner $color="#EA6607" $size={SIZE.small} />
+                                                : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             `${referenceData.team
                                                 ? last5Games[index].teams.home
                                                     ? referenceData.team.name === last5Games[index].teams.home.name
                                                         ? last5Games[index].scores.home.points + "-" + last5Games[index].scores.visitors.points
                                                         : last5Games[index].scores.visitors.points + "-" + last5Games[index].scores.home.points
-                                                    : <Spinner $color="#EA6607" $size={SIZE.small}/>
-                                                : <Spinner $color="#EA6607" $size={SIZE.small}/>}`,
+                                                    : <Spinner $color="#EA6607" $size={SIZE.small} />
+                                                : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
                                             game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
                                             game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
                                         }
                                         else {
-                                            return [<Spinner $color="#EA6607" $size={SIZE.small}/>, <Spinner $color="#EA6607" $size={SIZE.small}/>, <Spinner $color="#EA6607" $size={SIZE.small}/>, <Spinner $color="#EA6607" $size={SIZE.small}/>, game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
-                                                game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
-                                                game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
+                                            return [<Spinner $color="#EA6607" $size={SIZE.small} />, <Spinner $color="#EA6607" $size={SIZE.small} />, <Spinner $color="#EA6607" $size={SIZE.small} />, <Spinner $color="#EA6607" $size={SIZE.small} />, game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
+                                            game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
+                                            game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
                                         }
                                     }, last5Games
                                     )}
@@ -544,7 +587,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             )}
                         </Block>
                     </Block>
-                    <Block className="right" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-25px" : "-1px"}>
+                    <Block className="right" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-90px" : "-1px"}>
                         {turnovers && turnovers.length > 0 ? <HistogramWithAxis title={`Turnovers`} data={turnovers}></HistogramWithAxis> : <Spin></Spin>}
                         {tpm && tpm.length > 0 ? <HistogramWithAxis title={`Three Pointers`} data={tpm}></HistogramWithAxis> : <Spin></Spin>}
                         {plusMinus && plusMinus.length > 0 ? <HistogramWithAxis title={`+/-`} data={plusMinus}></HistogramWithAxis> : <Spin></Spin>}
@@ -557,4 +600,3 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
 }
 
 export default PlayerExample;
-// && last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start 
