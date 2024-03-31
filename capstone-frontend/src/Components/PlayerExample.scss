@@ -14,59 +14,60 @@
 }
 
 .sub__heading {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
     background-color: #EA6607;
-    padding: 20px;
-    height: 256px;
+    height: 236px;
     margin-top: -1px;
-    align-items: center;
-    box-sizing: border-box;
 
+    .wraper {
+        width: 100%;
 
-    .info {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .head__shot,
-    .team__logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: -10px;
-
-        img,
-        .avatar {
-            height: auto;
-            max-width: auto;
-            max-height: 260px;
+        @media (min-width: 1300px) {
+            width: 1300px;
         }
-    }
 
-    @media (max-width: 1024px) {
 
-        .head__shot img,
-        .team__logo .avatar {
-            max-height: 190px;
+        .info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-    }
-
-    @media (max-width: 768px) {
 
         .head__shot,
         .team__logo {
-            display: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -10px;
+
+            img,
+            .avatar {
+                height: auto;
+                max-width: auto;
+                max-height: 260px;
+            }
         }
-    }
 
-    @media (max-width: 900px) {
+        @media (max-width: 1024px) {
 
-        .selector {
-            display: none;
+            .head__shot img,
+            .team__logo .avatar {
+                max-height: 190px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .head__shot,
+            .team__logo {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .selector {
+                display: none;
+            }
         }
     }
 }
@@ -94,6 +95,10 @@
     align-items: center;
     width: 100%;
     margin-bottom: 50px;
+
+    @media (min-width: 1350px) {
+        width:1350px;
+    }
 
     .left,
     .right {

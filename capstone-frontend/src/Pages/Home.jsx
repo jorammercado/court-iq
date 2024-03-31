@@ -55,7 +55,7 @@ function Home() {
                 <SectionTwo />
             </Element>
             <Element name="myWork" className="element" style={{ height: "70vh" }}>
-                <GameOdds/>
+                <MyWork/>
             </Element>
         </div>
     );

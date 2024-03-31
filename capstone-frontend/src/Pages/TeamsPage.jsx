@@ -18,6 +18,7 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
 import "../App.scss"
+import NBAGameOdds from '../Components/GameOdds';
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
@@ -25,7 +26,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const [primaryColor, setPrimaryColor] = useState("#EA6607")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
-    const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#FDBB30", "#000000", "#FEC524", "#BEC0C2", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#F9A01B", "#E31837"]
+    const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#FDBB30", "#B8C4CA", "#FEC524", "#BEC0C2", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#F9A01B", "#E31837"]
     const tertiaryColors = ["#000000", "#963821", "#FFFFFF", "#A1A1A4", "#000000", "#FDBB30", "#B8C4CA", "#8B2131", "#BEC0C2", "#FFC72C", "#C4CED4", "#BEC0C2", "#BEC0C2", "#000000", "#F5B112", "#000000", "#0077C0", "#9EA2A2", "#85714D", "#BEC0C2", "#002D62", "#000000", "#002B5C", "#000000", "#000000", "#000000", "#000000", "#A1A1A4", "#F9A01B", "#C4CED4"]
     const quaternaryColors = ["#9EA2A2", "#FFFFFF", "#FFFFFF", "#A1A1A4", "#000000", "#000000", "#000000", "#1D428A", "#002D62", "#FFC72C", "#C4CED4", "BEC0C2", "#000000", "#000000", "#707271", "#000000", "#000000", "#78BE20", "#85714D", "#000000", "#FDBB30", "#000000", "#C4CED4", "#63727A", "#000000", "#000000", "#000000", "#B4975A", "#F9A01B", "#C4CED4"]
     const quinaryColors = ["#FFFFFF", "#000000", "#FFFFFF", "#A1A1A4", "#000000", "#000000", "#000000", "#1D428A", "#002D62", "#FFC72C", "#C4CED4", "BEC0C2", "#000000", "#000000", "#707271", "#000000", "#000000", "#78BE20", "#85714D", "#000000", "#FDBB30", "#000000", "#C4CED4", "#F9AD1B", "#000000", "#000000", "#000000", "#B4975A", "#F9A01B", "#C4CED4"]
@@ -289,6 +290,18 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             secondaryColor={secondaryColor}
                             teamName={selectedTeamName}
                         />
+                    </Block>
+                </Block>
+                <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                    <Block className="odds__l2" backgroundColor="black" style={{
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        display: "flex",
+                        flexDirection: "row",
+                        width: "1300px",
+                        marginBottom:"100px"
+                    }}>
+                        <NBAGameOdds />
                     </Block>
                 </Block>
             </Block>
