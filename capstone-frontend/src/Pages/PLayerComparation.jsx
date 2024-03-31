@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./PLayerComparation.scss";
 import images from "../constants/images";
-
+import 'animate.css'
 function PlayerComparison() {
   const [player1, setPlayer1] = useState("");
   const [player2, setPlayer2] = useState("");
@@ -56,7 +56,7 @@ function PlayerComparison() {
   return (
     <div className="player-comparison-container">
       <div className="comparison-heading-container">
-        <h1 className="comparison-heading">Compare NBA Players</h1>
+       <img  src={images.vsBall} className="court-img animate__animated animate__bounceInDown" alt="" />
       </div>
       <div className="comparison-instruction-container">
         <div className="instruction-card">
@@ -72,14 +72,14 @@ function PlayerComparison() {
         <input
           className="player-input"
           type="text"
-          placeholder="Enter Player 1 Name"
-          value={player1}
+          placeholder="🌟 First Player"
           onChange={(e) => setPlayer1(e.target.value)}
         />
+       
         <input
           className="player-input"
           type="text"
-          placeholder="Enter Player 2 Name"
+          placeholder="🌟 Second Player"
           value={player2}
           onChange={(e) => setPlayer2(e.target.value)}
         />
@@ -88,13 +88,13 @@ function PlayerComparison() {
       <div className="player-cards-container">
         <div className="player-card">
           {player1Data && (
-            <div className="player-info">
+            <div className="player-info animate__animated animate__backInLeft">
               <img
                 className="player-img"
                 src={player1Data.espnHeadshot}
                 alt=""
               />
-              <div className="info-card">
+              <div className="info-card ">
                 <h3 className="player-name">{player1Data.nbaComName}</h3>
                 <p className="player-stat">College : {player1Data.college}</p>
                 <p className="player-stat">DOB : {player1Data.bDay}</p>
@@ -125,7 +125,7 @@ function PlayerComparison() {
 
         <div className="player-card">
           {player2Data && (
-            <div className="player-info">
+            <div className="player-info animate__animated animate__backInRight">
               <img
                 className="player-img"
                 src={player2Data.espnHeadshot}
