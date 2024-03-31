@@ -3,7 +3,7 @@ import axios from "axios";
 import "./HeadLine.scss";
 import { Link } from "react-router-dom";
 import images from "../constants/images";
-
+import "animate.css";
 function Headlines() {
   const [headlines, setHeadlines] = useState([]);
   const [error, setError] = useState(null);
@@ -48,21 +48,23 @@ function Headlines() {
   return (
     <div className="headlines-container">
       <h1 className="headlines-title">Top Headlines News</h1>
+
       <h4 className="headlines-description">
-        Welcome to our NBA news section, where you can find the latest and top
-        headlines from the world of NBA. Stay updated with the most recent
-        happenings in the basketball world.
+        Welcome to our NBA news section, providing the latest and foremost
+        headlines from the world of NBA. Keep abreast of the most recent
+        developments in the basketball realm.
       </h4>
+
       {error && <p className="error-message">Error: {error}</p>}
-      <div className="headline-list">
+      <div className="headline-list animate__animated animate__slideInDown">
         {headlines.map((headline, index) => (
           <div className="headline" key={index}>
-            <p className="headline-title">{headline.title}</p>
             <img
               className="headline-image"
               src={headline.image}
               alt={headline.title}
             />
+            <p className="headline-title">{headline.title}</p>
             <p
               className="headline-link"
               onClick={() => window.open(headline.link, "_blank")}
@@ -90,7 +92,7 @@ function Headlines() {
           <strong>Click below to begin your exploration.</strong>
         </h4>
         <Link className="compare-link" to="/PlayerComparison">
-          <p>
+          <p className="text-btn">
             {" "}
             <strong>Explore player comparisons</strong>
           </p>
