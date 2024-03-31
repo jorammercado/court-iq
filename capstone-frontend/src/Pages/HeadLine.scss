@@ -4,18 +4,29 @@
   align-items: center;
   gap: 20px;
   margin-top: 50px;
-  background-color: black;
- margin: 2rem;
- border-radius: 3rem;
+  margin: 2rem;
+  background-color: #FAF7F2;
 }
-.headlines-description{
+
+.headlines-description {
   color: white;
-  padding: 1rem;
+  padding: 1.5rem;
+  font-family: 'UberMove', 'UberMoveText', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: justify;
+  border: 2px solid #ccc;
+  background-color: black;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .headlines-title {
   font-size: 24px;
   animation: fadeIn 1s ease;
-  color: white;
+  color: rgb(7, 7, 7);
+  font-family: 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
+  font-weight: bold;
 }
 
 .headline-list {
@@ -23,55 +34,59 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+
 }
 
 .headline {
-  
   width: 300px;
   padding: 20px;
-  border-radius: 12px;
+  margin: 30px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  background-color: black;
   animation: slideInUp 1s ease;
+  height: 400px;
 }
 
 .headline-title {
+  margin-top: 30px;
+  color: white;
   font-weight: bold;
+  font-size: 1rem;
+  font-family: 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
 }
 
 .headline-link {
   margin-top: 10px;
-  color: #007bff;
+  color:white ;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .headline-link:hover {
-  color: #0056b3;
+  color: #EA6607;
 }
 
 .headline-image {
+ 
   width: 100%;
   height: auto;
-  border-radius: 12px;
   margin-top: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #FAF7F2;
 }
 .compare-card {
-  
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  margin-top: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 3rem;
   color: white;
+  padding: 1.5rem;
+  font-family: 'UberMove', 'UberMoveText', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: justify;
+  border: 2px solid #ccc;
+  background-color: black;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-// .compare-card:hover {
-//   background-color: orange;
-//   color: rgb(252, 251, 247);
-// }
+
 .compare-title {
   font-size: 24px;
   font-weight: bold;
@@ -82,8 +97,10 @@
   width: 12rem;
   border-radius: 20rem;
   padding: 1rem;
+  background-color: #EA6607;
+  margin: 10px;
 }
-.img-headlines{
+.img-headlines {
   display: flex;
   flex-direction: row;
   margin: 5.5rem;
@@ -98,16 +115,15 @@
   display: block;
   margin: auto;
   padding: 10px 20px;
-  background-color: orange;
+  background-color: #EA6607;
   color: black;
   border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  text-align: center;
 }
-
-.compare-link:hover {
-  background-color: white;
-  color: black;
+.text-btn:hover{
+  color: white;
 }
 
 @keyframes fadeIn {
