@@ -83,11 +83,17 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
         }));
 
     return (
-        <Block className="TeamStatsTable" style={{justifyContent:"left", alignItems:"flex-left", display:"flex", width:"91%"}}>
-            <Block className="heading">
+        <Block className="TeamStatsTable" style={{justifyContent:"left", alignItems:"flex-left", display:"flex", width:"91%",
+         marginBottom:"-20px", marginTop:"4px"}}>
+            <Block className="heading"  backgroundColor={isHighlightedSeason?"#EA6607":"black"} width="100%">
                 <HeadingLevel >
-                    <Heading className="titleHighlight" styleLevel={4} color="black" backgroundColor={isHighlightedSeason?"#EA6607":"none"}>
-                        Season Stats
+                    <Heading className="titleHighlight" styleLevel={4}
+                     color="white" 
+                    //  backgroundColor={isHighlightedSeason?"#EA6607":"none"}
+                    //  zIndex="10"
+                     marginBottom="0px"
+                     marginLeft="5px">
+                        Season Stats/player
                     </Heading>
                 </HeadingLevel>
             </Block>

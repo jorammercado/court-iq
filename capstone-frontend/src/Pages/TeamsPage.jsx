@@ -256,7 +256,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     <Block className="teamLeaders">
                         <Block className="leadersHeading" style={{ justifyContent: "flex-start", alignItems: "flex-start", display: "flex", flexDirection: "row" }}>
                             <HeadingLevel >
-                                <Heading styleLevel={4} color="black" style={{ marginTop: "40px", justifyContent: "flex-start" }}>Leaders</Heading>
+                                <Heading styleLevel={4} color="black" style={{ marginTop: "15px", justifyContent: "flex-start", marginBottom:"-5px" }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
                         <TeamPlayerLeaderCard
