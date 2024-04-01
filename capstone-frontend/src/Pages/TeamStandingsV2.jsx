@@ -62,14 +62,25 @@ const TeamStandingsV2 = () => {
   const [westernTopScoringTeam, setWesternTopScoringTeam] = useState({});
   const [easternTopDefensiveTeam, setEasternTopDefensiveTeam] = useState({});
   const [westernTopDefensiveTeam, setWesternTopDefensiveTeam] = useState({});
+  const [padding, setPadding] = useState(window.innerWidth / 100);
 
-    useEffect(() => {
-      const getData = async () => {
-        try {
-          const response = await axios.request(options);
-          const responseData = response.data.response[0];
-          console.log(responseData)
-          setData(responseData);
+  useEffect(() => {
+    const handleResize = () => {
+      setPadding(window.innerWidth > 1400 ? ((window.innerWidth - 1300) / 400) - 10 : 65);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.request(options);
+        const responseData = response.data.response[0];
+        console.log(responseData)
+        setData(responseData);
         const easternTeams = responseData.filter(e => e.group.name === "Eastern Conference");
         const westernTeams = responseData.filter(e => e.group.name === "Western Conference");
         setEasternConference(easternTeams);
@@ -85,7 +96,7 @@ const TeamStandingsV2 = () => {
         // Top defensive teams logic
         const easternDefensiveTeam = easternTeams.reduce((prev, current) => (prev.points.against < current.points.against) ? prev : current, easternTeams[0]).team;
         const westernDefensiveTeam = westernTeams.reduce((prev, current) => (prev.points.against < current.points.against) ? prev : current, westernTeams[0]).team;
-        
+
         setEasternTopDefensiveTeam(easternDefensiveTeam);
         setWesternTopDefensiveTeam(westernDefensiveTeam);
       } catch (error) {
@@ -94,9 +105,9 @@ const TeamStandingsV2 = () => {
     };
     getData();
   }, []);
-    
-   
-  
+
+
+
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -254,240 +265,247 @@ const TeamStandingsV2 = () => {
   }
 
   return (
-    <Block display="flex" justifyContent="center" alignItems="stretch" height="100%" className="standings">
-      {!isMobile ?
-        <Block flex={1}
-          display="flex"
+    <Block display="flex" justifyContent="center" alignItems="center" height="100%" flexDirection="column" className="standings">
+      <Block className="subb__heading" display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        flexDirection="row"
+        backgroundColor="#EA6607"
+        padding="0px"
+        height="60px"
+        marginBottom="30px" >
+        <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding + "px"}>
+          <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
+            <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} />
+          </Link>
+          <HeadingLevel>
+            <Heading styleLevel={!isMobile ? 4 : 6} color="black" >{stage} {season}</Heading>
+          </HeadingLevel>
+        </Block>
+      </Block>
+      <Block display="flex" justifyContent="center" alignItems="center" flexDirection="row">
+        {!isMobile ?
+          <Block 
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            className="west-leaders"
+            marginTop="-35px"
+            paddingLeft="10px"
+            paddingRight="10px"
+          >
+            <Block>
+              <TopScoringTeamCard
+                logo={westernTopScoringTeam.logo}
+                name={westernTopScoringTeam.name}
+                conference="Western"
+              />
+            </Block>
+            <Block>
+              {/* Replace this block with the TopDefensiveTeamCard for Western Conference */}
+              <TopDefensiveTeamCard
+                logo={westernTopDefensiveTeam.logo}
+                name={westernTopDefensiveTeam.name}
+                conference="Western"
+              />
+            </Block>
+            <Block>
+              {/* Trivia or any other content */}
+              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border:"none", height:"230px" } } }}>
+                <HeadingXSmall>Trivia</HeadingXSmall>
+                <StyledBody>
+                  Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                  faucibus ex, non facilisis nisl.
+                </StyledBody>
+              </Card>
+            </Block>
+          </Block>
+          : <></>
+        }
+
+        {/* Main content block */}
+        <Block display="flex"
           flexDirection="column"
           justifyContent="space-between"
-          className="west-leaders"
-          marginTop="40px"
-          marginLeft="20px"
-          paddingLeft="30px"
-          paddingRight="30px"
+          className="table__contain"
+          height="100%"
+          maxWidth={isMobile ? "85%" : "850px"}
+          style={{ width: isMobile ? '100%' : 'unset' }}
         >
-          {/* West Leaders */}
-          <Block alignItems="center" justifyContent="center" display="flex">
-            <HeadingSmall color="black" marginBottom="-80px">West Leaders</HeadingSmall>
-          </Block>
-          <Block>
-            <TopScoringTeamCard
-              logo={westernTopScoringTeam.logo}
-              name={westernTopScoringTeam.name}
-              conference="Western"
-            />
-          </Block>
-          <Block>
-            {/* Replace this block with the TopDefensiveTeamCard for Western Conference */}
-            <TopDefensiveTeamCard
-              logo={westernTopDefensiveTeam.logo}
-              name={westernTopDefensiveTeam.name}
-              conference="Western"
-            />
-          </Block>
-          <Block>
-            {/* Trivia or any other content */}
-            <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#EA6607" } } }}>
-              <HeadingXSmall>Trivia</HeadingXSmall>
-              <StyledBody>
-                Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                faucibus ex, non facilisis nisl.
-              </StyledBody>
-            </Card>
-          </Block>
-        </Block>
-        : <></>
-      }
-  
-      {/* Main content block */}
-      <Block flex={isMobile ? 'unset' : 2} display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        className="table__contain"
-        height="100%"
-        maxWidth={isMobile ? "85%" : "55%"}
-        style={{ width: isMobile ? '100%' : 'unset' }}
-      >
-        <Block className="table__header" marginTop={!isMobile ? "-190px" : "-260px"}>
-          <Block display="flex" justifyContent="center" width="100%">
-            <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
-              <img src={logo} alt="NBA Logo" style={{ height: "30px", backgroundColor: "#faf7f2", cursor: "pointer" }} />
-            </Link> &nbsp; &nbsp;
-            <HeadingLevel>
-              <Heading styleLevel={!isMobile ? 4 : 6} color="black" >{stage} {season}</Heading>
-            </HeadingLevel>
-          </Block>
+          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="-25px">
+              <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
+            </Block>
+          }
+          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+            <TableBuilder className="table1"
+              overrides={{ Root: { style: { maxHeight: '300px', marginBottom:"10px" } } }}
+              data={DATA}
+            >
+              <TableBuilderColumn header="Team">
+                {(row) => (
+                  <AvatarCell
+                    src={row.avatarSrc}
+                    title={row.name}
+                    subtitle={row.title}
+                  />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Position">
+                {(row) => (
+                  <NumberCell value={row.position} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Lost">
+                {(row) => (
+                  <NumberCell value={row.gamesLost} delta={-0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Lost %">
+                {(row) => (
+                  <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Won">
+                {(row) => (
+                  <NumberCell value={row.gamesWon} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Won %">
+                {(row) => (
+                  <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Points Against">
+                {(row) => (
+                  <NumberCell value={row.pointsAgainst} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Points For">
+                {(row) => (
+                  <NumberCell value={row.pointsFor} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+            </TableBuilder>
+          }
+          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%">
+              <HeadingMedium marginLeft="5px" color="white" >Eastern Conference</HeadingMedium>
+            </Block>
+          }
+          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+            <TableBuilder className="table2"
+              overrides={{ Root: { style: { maxHeight: '300px' } } }}
+              data={DATA2}
+            >
+              <TableBuilderColumn header="Team">
+                {(row) => (
+                  <AvatarCell
+                    src={row.avatarSrc}
+                    title={row.name}
+                    subtitle={row.title}
+                  />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Position">
+                {(row) => (
+                  <NumberCell value={row.position} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Lost">
+                {(row) => (
+                  <NumberCell value={row.gamesLost} delta={-0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Lost %">
+                {(row) => (
+                  <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Won">
+                {(row) => (
+                  <NumberCell value={row.gamesWon} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Games Won %">
+                {(row) => (
+                  <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Points Against">
+                {(row) => (
+                  <NumberCell value={row.pointsAgainst} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+
+              <TableBuilderColumn header="Points For">
+                {(row) => (
+                  <NumberCell value={row.pointsFor} delta={0.51} />
+                )}
+              </TableBuilderColumn>
+            </TableBuilder>
+          }
         </Block>
 
-        <Block display="flex" justifyContent="center" width="100%" marginTop="10px">
-          <HeadingMedium color="black" >West</HeadingMedium>
-        </Block>
-        {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-          <TableBuilder className="animate__animated animate__zoomIn"
-            overrides={{ Root: { style: { maxHeight: '300px' } } }}
-            data={DATA}
+        {!isMobile ?
+          <Block 
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            className="east-leaders"
+            marginTop="-35px"
+            paddingLeft="10px"
+            paddingRight="10px"
           >
-            <TableBuilderColumn header="Team">
-              {(row) => (
-                <AvatarCell
-                  src={row.avatarSrc}
-                  title={row.name}
-                  subtitle={row.title}
-                />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Position">
-              {(row) => (
-                <NumberCell value={row.position} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Lost">
-              {(row) => (
-                <NumberCell value={row.gamesLost} delta={-0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Lost %">
-              {(row) => (
-                <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Won">
-              {(row) => (
-                <NumberCell value={row.gamesWon} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Won %">
-              {(row) => (
-                <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Points Against">
-              {(row) => (
-                <NumberCell value={row.pointsAgainst} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Points For">
-              {(row) => (
-                <NumberCell value={row.pointsFor} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-          </TableBuilder>
-        }
-        <Block display="flex" justifyContent="center" width="100%" marginTop="-50px">
-          <HeadingMedium color="black" marginTop="50px">East</HeadingMedium>
-        </Block>
-        {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-          <TableBuilder className="animate__animated animate__zoomIn"
-            overrides={{ Root: { style: { maxHeight: '300px' } } }}
-            data={DATA2}
-          >
-            <TableBuilderColumn header="Team">
-              {(row) => (
-                <AvatarCell
-                  src={row.avatarSrc}
-                  title={row.name}
-                  subtitle={row.title}
-                />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Position">
-              {(row) => (
-                <NumberCell value={row.position} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Lost">
-              {(row) => (
-                <NumberCell value={row.gamesLost} delta={-0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Lost %">
-              {(row) => (
-                <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Won">
-              {(row) => (
-                <NumberCell value={row.gamesWon} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Games Won %">
-              {(row) => (
-                <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Points Against">
-              {(row) => (
-                <NumberCell value={row.pointsAgainst} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-
-            <TableBuilderColumn header="Points For">
-              {(row) => (
-                <NumberCell value={row.pointsFor} delta={0.51} />
-              )}
-            </TableBuilderColumn>
-          </TableBuilder>
-        }
-      </Block>
-
-      {!isMobile ?
-      <Block flex={1}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        className="east-leaders"
-        marginTop="40px"
-        marginLeft="20px"
-        paddingLeft="30px"
-        paddingRight="30px"
-      >
-        {/* East Leaders */}
-        <Block alignItems="center" justifyContent="center" display="flex">
+            {/* East Leaders */}
+            {/* <Block alignItems="center" justifyContent="center" display="flex">
           <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
-        </Block>
-        <Block>
-          <TopScoringTeamCard
-            logo={easternTopScoringTeam.logo}
-            name={easternTopScoringTeam.name}
-            conference="Eastern"
-          />
-        </Block>
-        <Block>
-          {/* Replace this block with the TopDefensiveTeamCard for Eastern Conference */}
-          <TopDefensiveTeamCard
-            logo={easternTopDefensiveTeam.logo}
-            name={easternTopDefensiveTeam.name}
-            conference="Eastern"
-          />
-        </Block>
-        <Block>
-          {/* Trivia or any other content for the Eastern Conference */}
-          <Card overrides={{ Root: { style: { width: "auto", backgroundColor: "#EA6607" } } }}>
-            <HeadingXSmall>Trivia</HeadingXSmall>
-            <StyledBody>
-              Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-              faucibus ex, non facilisis nisl.
-            </StyledBody>
-          </Card>
-        </Block>
+        </Block> */}
+            <Block>
+              <TopScoringTeamCard
+                logo={easternTopScoringTeam.logo}
+                name={easternTopScoringTeam.name}
+                conference="Eastern"
+              />
+            </Block>
+            <Block>
+              {/* Replace this block with the TopDefensiveTeamCard for Eastern Conference */}
+              <TopDefensiveTeamCard
+                logo={easternTopDefensiveTeam.logo}
+                name={easternTopDefensiveTeam.name}
+                conference="Eastern"
+              />
+            </Block>
+            <Block>
+              {/* Trivia or any other content for the Eastern Conference */}
+              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border:"none", height:"230px" } } }}>
+                <HeadingXSmall>Trivia</HeadingXSmall>
+                <StyledBody>
+                  Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
+                  faucibus ex, non facilisis nisl.
+                </StyledBody>
+              </Card>
+            </Block>
+          </Block>
+          : <></>
+        }
       </Block>
-      : <></>
-    }
-  </Block>
-);
-  }
+    </Block>
+  );
+}
 
 export default TeamStandingsV2;

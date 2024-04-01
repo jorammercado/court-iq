@@ -32,6 +32,7 @@ import {
     NUMERICAL_FORMATS,
 } from "baseui/data-table";
 import { Spinner, SIZE } from "baseui/spinner";
+import NBAGameOddsV2 from '../Components/GameOddsV2';
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -369,9 +370,9 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
         <div>
             <Block className="topplayer" display="flex" flexDirection="column" alignItems="center">
                 {/* <Block className="filler"></Block> */}
-                <Block className="sub__heading" display="flex" justifyContent="center" alignItems="center"  width="100%" flexDirection="row"  backgroundColor={primaryColor} padding="20px" >
+                <Block className="sub__heading" display="flex" justifyContent="center" alignItems="center" width="100%" flexDirection="row" backgroundColor={primaryColor} padding="20px" >
                     <Block className="wraper" display="flex" justifyContent="center" alignItems="center" flexDirection="row"  >
-                        <Block className="head__shot" $style={{  marginBottom: "-6px" }}>
+                        <Block className="head__shot" $style={{ marginBottom: "-6px" }}>
                             <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "240px" }} />
                         </Block>
                         <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
@@ -429,7 +430,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                 src={referenceData.team ? referenceData.team.logo : ""}
                             />
                         </Block>
-                        <Block className="selector" width="auto"  display="flex" marginBottom="170px" marginLeft="25px" marginRight="10px"    >
+                        <Block className="selector" width="auto" display="flex" marginBottom="170px" marginLeft="25px" marginRight="10px"    >
                             <Select
                                 options={[
                                     { id: '2020', label: '2020-2021' },
@@ -535,7 +536,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             )}
                         </Block>
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
-                        marginBottom="80px">
+                            marginBottom="80px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
                                 <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex" }}>
                                     Last 5 Games
@@ -543,24 +544,24 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                             </Block>
                             {playerStats ? (
                                 <Table
-                                overrides={{
-                                    TableBodyCell: {
-                                      style: ({ $theme }) => ({
-                                        // whiteSpace: 'nowrap',
-                                      }),
-                                    },
-                                  }}
+                                    overrides={{
+                                        TableBodyCell: {
+                                            style: ({ $theme }) => ({
+                                                // whiteSpace: 'nowrap',
+                                            }),
+                                        },
+                                    }}
                                     columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
                                         "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}
                                     data={getLastFiveGames().map((game, index) => {
                                         if (last5Games.length > 0 && last5Games && last5Games[index] && last5Games[index].date) {
                                             return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
-                                            `${referenceData.team ? referenceData.team.nickname : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
+                                            `${referenceData.team ? referenceData.team.nickname.replace(/[\s]/g, "") + " " + referenceData.team.code : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             `${referenceData.team
                                                 ? last5Games[index].teams.home
                                                     ? referenceData.team.name === last5Games[index].teams.home.name
-                                                        ? last5Games[index].teams.visitors.nickname
-                                                        : last5Games[index].teams.home.nickname
+                                                        ? last5Games[index].teams.visitors.nickname.replace(/[\s]/g, "") + " " + last5Games[index].teams.visitors.code
+                                                        : last5Games[index].teams.home.nickname.replace(/[\s]/g, "") + " " + last5Games[index].teams.home.code
                                                     : <Spinner $color="#EA6607" $size={SIZE.small} />
                                                 : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             `${referenceData.team
@@ -592,6 +593,18 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                         {tpm && tpm.length > 0 ? <HistogramWithAxis title={`Three Pointers`} data={tpm}></HistogramWithAxis> : <Spin></Spin>}
                         {plusMinus && plusMinus.length > 0 ? <HistogramWithAxis title={`+/-`} data={plusMinus}></HistogramWithAxis> : <Spin></Spin>}
                         {fgp && fgp.length > 0 ? <HistogramWithAxis title={`fg%`} data={fgp}></HistogramWithAxis> : <Spin></Spin>}
+                    </Block>
+                </Block>
+                <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                    <Block className="odds__l2" backgroundColor="black" style={{
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        display: "flex",
+                        flexDirection: "row",
+                        width: "1300px",
+                        marginBottom: "100px"
+                    }}>
+                        <NBAGameOddsV2 />
                     </Block>
                 </Block>
             </Block>
