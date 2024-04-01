@@ -8,10 +8,21 @@ const TopScoringTeamCard = ({ logo, name, conference }) => {
   return (
     <Card
       overrides={{
-        Root: { style: { width: "auto", marginBottom: "20px" } },
+        Root: {
+          style: {
+            marginBottom: "10px", borderRadius: "0px",
+            paddingLeft: "10px", paddingRight: "10px", width: "200px",
+            height:"220px"
+          }
+        },
+        Title: {
+          style: ({ $theme }) => ({
+            fontSize: "19px"
+          })
+        },
         HeaderImage: { style: { width: "60px", height: "60px" } }, // Adjust size as needed
       }}
-    
+
       title={`${conference} Conference Top Offensive Team`}
     >
       <StyledBody>
