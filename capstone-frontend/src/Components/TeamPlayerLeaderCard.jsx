@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, StyledBody, StyledThumbnail, StyledTitle } from "baseui/card";
@@ -153,12 +154,13 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                                 }}
                             >
                                 <StyledTitle>
-                                    {leader.firstname} {leader.lastname} &nbsp;&nbsp;
-                                    {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? "#" + personalData[index].leagues.standard.jersey : ""}  &nbsp;&nbsp;
-                                    {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? " " + personalData[index].leagues.standard.pos : ""}
-                                </StyledTitle>
+                                    {leader.firstname} {leader.lastname}
                                 <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
-                                    style={{ marginTop: "-55px", marginRight: "15px", height: '160px', alignSelf: "center", border: "none" }} />
+                                    style={{ marginLeft:'30px',marginTop: "-55px", height: '235px', width: '240px', alignSelf: "center", border: "none" }} />
+                                </StyledTitle>
+                                <StyledTitle>
+                                    {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? " #" + personalData[index].leagues.standard.jersey : ""}  &nbsp;
+                                    </StyledTitle>
                                 <StyledBody>
                                     <HeadingLevel >
                                         <Heading marginTop="-16px" marginBottom="-1px" styleLevel={6}>
@@ -171,16 +173,6 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                                         <LabelMedium>Assists: {leader.assists} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelMedium> : leader.category.split(" ")[0] === "Assists" ?
                                             <LabelMedium>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelMedium> : leader.category.split(" ")[0] === "Rebounds" ?
                                                 <LabelMedium>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Assists: {leader.assists} </LabelMedium> : "n/a"}
-                                    <LabelMedium>College: {personalData[index] ? personalData[index].college : ""}  </LabelMedium>
-                                    <LabelMedium>DOB: {personalData[index] ? personalData[index].birth.date + ", " + personalData[index].birth.country : ""}  </LabelMedium>
-                                    <LabelMedium>
-                                        Height: {personalData[index] ? personalData[index].height.feets + "'" + personalData[index].height.inches + "\"" : ""} &nbsp;&nbsp;&nbsp;&nbsp;
-                                        Weight: {personalData[index] ? personalData[index].weight.pounds + "lbs" : ""}
-                                    </LabelMedium>
-                                    <LabelMedium>
-                                        Pro Start: {personalData[index] ? personalData[index].nba.start : ""}  &nbsp;&nbsp;&nbsp;&nbsp;
-                                        Years: {personalData[index] ? personalData[index].nba.pro : ""}
-                                    </LabelMedium>
 
                                 </StyledBody>
                             </Card>
