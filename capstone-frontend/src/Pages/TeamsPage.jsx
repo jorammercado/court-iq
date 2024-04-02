@@ -5,6 +5,7 @@ import TeamScheduleComponent from '../Components/TeamScheduleComponent';
 import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
 import TeamStatsGlossary from '../Components/TeamStatsGlossary';
 import "./TeamsPage.scss"
+import axios from 'axios';
 import { Block } from "baseui/block";
 import {
     LabelLarge,
@@ -68,6 +69,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
     const [gamesInView, setGamesInView] = useState('5')
+    const [eventIds, setEventIds] = useState([]);
 
     const [isHighlighted, setIsHighlighted] = useState(false);
     useEffect(() => {
@@ -139,6 +141,30 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         }
         return '#000000'
     }
+
+    useEffect(() => {
+        const fetchEventsForTeam = async () => {
+            const apiKey = import.meta.env.VITE_ODDS_API_KEY;
+            const sport = 'basketball_nba';
+            try {
+                const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/events`, {
+                    params: { apiKey, regions: 'us' },
+                });
+                const events = response.data.filter(event =>
+                    event.home_team === selectedTeamName || event.away_team === selectedTeamName
+                );
+                const eventIds = events.map(event => event.id);
+                setEventIds(eventIds); // Store the fetched event IDs in state
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        if (selectedTeamName) {
+            fetchEventsForTeam();
+        }
+    }, [selectedTeamName]);
+    
 
     const handleTeamChange = (params) => {
         const { value } = params;
@@ -301,7 +327,9 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         width: "1400px",
                         marginBottom:"100px"
                     }}>
-                        <NBAGameOddsV2 />
+                       {
+    eventIds.map(eventId => <NBAGameOddsV2 key={eventId} eventId={eventId} />)
+}
                     </Block>
                 </Block>
             </Block>
