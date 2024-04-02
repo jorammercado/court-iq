@@ -18,7 +18,6 @@ import Spin from '../Components/SpinLoad';
 import "./TeamStandingsV2.scss"
 import TopScoringTeamCard from '../Components/TopScoringTeamCard'; // Adjust the import path as needed
 import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
-import NBAGameOdds from '../Components/GameOdds';
 import "animate.css";
 import {
   LabelMedium,
@@ -292,7 +291,7 @@ const TeamStandingsV2 = () => {
             flexDirection="column"
             justifyContent="space-between"
             className="west-leaders"
-            marginTop="-35px"
+            marginTop="-15px"
             paddingLeft="10px"
             paddingRight="10px"
           >
@@ -404,7 +403,7 @@ const TeamStandingsV2 = () => {
           }
           {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
             <TableBuilder className="table2"
-              overrides={{ Root: { style: { maxHeight: '300px' } } }}
+              overrides={{ Root: { style: { maxHeight: '300px', marginBottom:"-16px" } } }}
               data={DATA2}
             >
               <TableBuilderColumn header="Team">
@@ -468,14 +467,10 @@ const TeamStandingsV2 = () => {
             flexDirection="column"
             justifyContent="space-between"
             className="east-leaders"
-            marginTop="-35px"
+            marginTop="-15px"
             paddingLeft="10px"
             paddingRight="10px"
           >
-            {/* East Leaders */}
-            {/* <Block alignItems="center" justifyContent="center" display="flex">
-          <HeadingSmall color="black" marginBottom="-80px">East Leaders</HeadingSmall>
-        </Block> */}
             <Block>
               <TopScoringTeamCard
                 logo={easternTopScoringTeam.logo}
@@ -505,18 +500,6 @@ const TeamStandingsV2 = () => {
           : <></>
         }
       </Block>
-      <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                    <Block className="odds__l2" backgroundColor="black" style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        display: "flex",
-                        flexDirection: "row",
-                        width: "1400px",
-                        marginBottom:"100px"
-                    }}>
-                        <NBAGameOdds />
-                    </Block>
-                </Block>
     </Block>
   );
 }
