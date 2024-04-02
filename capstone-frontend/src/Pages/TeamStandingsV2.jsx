@@ -18,6 +18,7 @@ import Spin from '../Components/SpinLoad';
 import "./TeamStandingsV2.scss"
 import TopScoringTeamCard from '../Components/TopScoringTeamCard'; // Adjust the import path as needed
 import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
+import NBAGameOdds from '../Components/GameOdds';
 import "animate.css";
 import {
   LabelMedium,
@@ -286,7 +287,7 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block display="flex" justifyContent="center" alignItems="center" flexDirection="row">
         {!isMobile ?
-          <Block 
+          <Block
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
@@ -312,7 +313,7 @@ const TeamStandingsV2 = () => {
             </Block>
             <Block>
               {/* Trivia or any other content */}
-              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border:"none", height:"230px" } } }}>
+              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border: "none", height: "230px" } } }}>
                 <HeadingXSmall>Trivia</HeadingXSmall>
                 <StyledBody>
                   Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
@@ -340,7 +341,7 @@ const TeamStandingsV2 = () => {
           }
           {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
             <TableBuilder className="table1"
-              overrides={{ Root: { style: { maxHeight: '300px', marginBottom:"10px" } } }}
+              overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "10px" } } }}
               data={DATA}
             >
               <TableBuilderColumn header="Team">
@@ -403,7 +404,7 @@ const TeamStandingsV2 = () => {
           }
           {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
             <TableBuilder className="table2"
-              overrides={{ Root: { style: { maxHeight: '300px', marginBottom:"-16px" } } }}
+              overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "-16px" } } }}
               data={DATA2}
             >
               <TableBuilderColumn header="Team">
@@ -462,7 +463,7 @@ const TeamStandingsV2 = () => {
         </Block>
 
         {!isMobile ?
-          <Block 
+          <Block
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
@@ -488,7 +489,7 @@ const TeamStandingsV2 = () => {
             </Block>
             <Block>
               {/* Trivia or any other content for the Eastern Conference */}
-              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border:"none", height:"230px" } } }}>
+              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border: "none", height: "230px" } } }}>
                 <HeadingXSmall>Trivia</HeadingXSmall>
                 <StyledBody>
                   Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
@@ -499,6 +500,18 @@ const TeamStandingsV2 = () => {
           </Block>
           : <></>
         }
+      </Block>
+      <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+        <Block className="odds__l2" backgroundColor="black" style={{
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "row",
+          width: "1400px",
+          marginBottom: "100px"
+        }}>
+          <NBAGameOdds />
+        </Block>
       </Block>
     </Block>
   );
