@@ -120,7 +120,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
             alignItems: "flex-left",
             display: "flex",
             width: "91%",
-            marginBottom: "-30px"
+            marginBottom: "-23px"
         }}>
             <Block backgroundColor="black" width="100%">
                 <HeadingLevel >
