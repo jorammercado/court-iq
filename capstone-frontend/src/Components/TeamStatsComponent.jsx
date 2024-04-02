@@ -84,7 +84,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
 
     return (
         <Block className="TeamStatsTable" style={{justifyContent:"left", alignItems:"flex-left", display:"flex", width:"91%",
-         marginBottom:"-20px", marginTop:"4px"}}>
+         marginBottom:"15px", marginTop:"20px"}}>
             <Block className="heading"  backgroundColor={isHighlightedSeason?"#EA6607":"black"} width="100%">
                 <HeadingLevel >
                     <Heading className="titleHighlight" styleLevel={4}
@@ -93,7 +93,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
                     //  zIndex="10"
                      marginBottom="0px"
                      marginLeft="5px">
-                        Season Stats/player
+                        Season Stats
                     </Heading>
                 </HeadingLevel>
             </Block>
