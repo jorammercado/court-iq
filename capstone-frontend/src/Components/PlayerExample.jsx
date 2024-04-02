@@ -595,18 +595,6 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                         {fgp && fgp.length > 0 ? <HistogramWithAxis title={`fg%`} data={fgp}></HistogramWithAxis> : <Spin></Spin>}
                     </Block>
                 </Block>
-                <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                    <Block className="odds__l2" backgroundColor="black" style={{
-                        justifyContent: "flex-start",
-                        alignItems: "flex-start",
-                        display: "flex",
-                        flexDirection: "row",
-                        width: "1300px",
-                        marginBottom: "100px"
-                    }}>
-                        <NBAGameOddsV2 />
-                    </Block>
-                </Block>
             </Block>
         </div>
     );

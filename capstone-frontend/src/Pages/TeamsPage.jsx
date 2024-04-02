@@ -18,7 +18,7 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
 import "../App.scss"
-import NBAGameOdds from '../Components/GameOdds';
+import NBAGameOddsV2 from '../Components/GameOddsV2';
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
@@ -301,7 +301,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         width: "1400px",
                         marginBottom:"100px"
                     }}>
-                        <NBAGameOdds />
+                        <NBAGameOddsV2 />
                     </Block>
                 </Block>
             </Block>

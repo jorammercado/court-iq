@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Card from './Card'; // Import the Card component
 import "./GameOdds.scss"
 
 const NBAGameOddsV2 = () => {
@@ -11,36 +12,36 @@ const NBAGameOddsV2 = () => {
     const fetchOdds = async () => {
       setIsLoading(true);
       const apiKey = import.meta.env.VITE_ODDS_API_KEY;
-      const sport = 'basketball_nba'; // Correct sport key based on your API's documentation
+      const sport = 'basketball_nba';
       const regions = 'us';
       const markets = 'h2h';
+      const oddsFormat = 'american';
 
       try {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
-          params: { apiKey, regions, markets },
+          params: { apiKey, regions, markets, oddsFormat },
         });
-
+        console.log(response)
+    
         const draftKingsBets = response.data.map(game => {
           const draftKingsMarket = game.bookmakers.find(bookmaker => bookmaker.key === 'draftkings');
           if (draftKingsMarket) {
             const h2hMarket = draftKingsMarket.markets.find(market => market.key === 'h2h');
             if (h2hMarket) {
               return {
-                game: game.away_team,
+                game: game.away_team, // Assuming you want to use away_team as title
                 odds: h2hMarket.outcomes.map(outcome => ({
                   team: outcome.name,
-                  price: outcome.price,
+                  price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(), // Add plus sign for positive odds
                 })),
               };
             }
           }
           return null;
-        }).filter(Boolean); 
-
-        console.log(draftKingsBets); 
+        }).filter(Boolean);
+    
         setDraftKingsOdds(draftKingsBets);
       } catch (error) {
-        console.error("Error fetching data:", error);
         setError(error.message);
       } finally {
         setIsLoading(false);
@@ -54,18 +55,9 @@ const NBAGameOddsV2 = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="ContentGame">
-      <h2>NBA Game Odds</h2>
-      
+      <div className='ContentGameOdds'>
       {draftKingsOdds.map((game, index) => (
-        <div className="ContentGameOdds"key={index}>
-          <h3>{game.game} </h3>
-          {game.odds.map((outcome, index) => (
-            <p key={index}>{outcome.team}: {outcome.price}</p>
-          ))}
-          
-        </div>
-        
+        <Card key={index} title={game.game} odds={game.odds} />
       ))}
     </div>
   );
