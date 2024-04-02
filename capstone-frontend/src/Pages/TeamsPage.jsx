@@ -294,11 +294,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 </Block>
                 <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                     <Block className="odds__l2" backgroundColor="black" style={{
-                        justifyContent: "flex-start",
-                        alignItems: "flex-start",
+                        justifyContent: "center",
+                        alignItems: "center",
                         display: "flex",
                         flexDirection: "row",
-                        width: "1300px",
+                        width: "1400px",
                         marginBottom:"100px"
                     }}>
                         <NBAGameOdds />
