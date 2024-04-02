@@ -21,13 +21,14 @@ const NBAGameOdds = () => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
-        console.log(response)
-    
+        console.log("RESPONSERESPONSERESPONSE: ====",response)
+
         const draftKingsBets = response.data.map(game => {
           const draftKingsMarket = game.bookmakers.find(bookmaker => bookmaker.key === 'draftkings');
           if (draftKingsMarket) {
             const h2hMarket = draftKingsMarket.markets.find(market => market.key === 'h2h');
             if (h2hMarket) {
+              console.log("TTTTTTTTTTTT: ", h2hMarket)
               return {
                 game: game.away_team, // Assuming you want to use away_team as title
                 odds: h2hMarket.outcomes.map(outcome => ({
@@ -39,7 +40,7 @@ const NBAGameOdds = () => {
           }
           return null;
         }).filter(Boolean);
-    
+
         setDraftKingsOdds(draftKingsBets);
       } catch (error) {
         setError(error.message);
@@ -55,7 +56,7 @@ const NBAGameOdds = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-      <div className='ContentGameOdds'>
+    <div className='ContentGameOdds'>
       {draftKingsOdds.map((game, index) => (
         <Card key={index} title={game.game} odds={game.odds} />
       ))}

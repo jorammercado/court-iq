@@ -501,13 +501,18 @@ const TeamStandingsV2 = () => {
           : <></>
         }
       </Block>
-      <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+      <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
+        <HeadingLevel >
+          <Heading styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black", width: "1270px" }}>h2h Proposition Bets(Props)</Heading>
+        </HeadingLevel>
+      </Block>
+      <Block width="1270px" className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
         <Block className="odds__l2" backgroundColor="black" style={{
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
-          width: "1400px",
+          width: "100%",
           marginBottom: "100px"
         }}>
           <NBAGameOdds />
