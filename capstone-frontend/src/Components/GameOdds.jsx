@@ -21,6 +21,7 @@ const NBAGameOdds = () => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
+        console.log(response)
     
         const draftKingsBets = response.data.map(game => {
           const draftKingsMarket = game.bookmakers.find(bookmaker => bookmaker.key === 'draftkings');

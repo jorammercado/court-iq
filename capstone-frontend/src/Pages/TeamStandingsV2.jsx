@@ -18,6 +18,7 @@ import Spin from '../Components/SpinLoad';
 import "./TeamStandingsV2.scss"
 import TopScoringTeamCard from '../Components/TopScoringTeamCard'; // Adjust the import path as needed
 import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
+import NBAGameOdds from '../Components/GameOdds';
 import "animate.css";
 import {
   LabelMedium,
@@ -504,6 +505,18 @@ const TeamStandingsV2 = () => {
           : <></>
         }
       </Block>
+      <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                    <Block className="odds__l2" backgroundColor="black" style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        display: "flex",
+                        flexDirection: "row",
+                        width: "1400px",
+                        marginBottom:"100px"
+                    }}>
+                        <NBAGameOdds />
+                    </Block>
+                </Block>
     </Block>
   );
 }
