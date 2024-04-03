@@ -159,12 +159,12 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 console.error(error);
             }
         };
-    
+
         if (selectedTeamName) {
             fetchEventsForTeam();
         }
     }, [selectedTeamName]);
-    
+
 
     const handleTeamChange = (params) => {
         const { value } = params;
@@ -282,7 +282,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     <Block className="teamLeaders">
                         <Block className="leadersHeading" style={{ justifyContent: "flex-start", alignItems: "flex-start", display: "flex", flexDirection: "row" }}>
                             <HeadingLevel >
-                                <Heading styleLevel={4} color="black" style={{ marginTop: "15px", justifyContent: "flex-start", marginBottom:"-5px" }}>Leaders</Heading>
+                                <Heading styleLevel={4} color="black" style={{ marginTop: "15px", justifyContent: "flex-start", marginBottom: "-5px" }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
                         <TeamPlayerLeaderCard
@@ -324,12 +324,12 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         alignItems: "center",
                         display: "flex",
                         flexDirection: "row",
-                        width: "1400px",
-                        marginBottom:"100px"
+                        width: "1270px",
+                        marginBottom: "100px"
                     }}>
-                       {
-    eventIds.map(eventId => <NBAGameOddsV2 key={eventId} eventId={eventId} />)
-}
+                        {
+                             <NBAGameOddsV2 key={eventIds[0]} eventId={eventIds[0]} />
+                        }
                     </Block>
                 </Block>
             </Block>
