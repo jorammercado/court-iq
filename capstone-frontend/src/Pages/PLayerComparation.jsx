@@ -72,14 +72,14 @@ function PlayerComparison() {
         <input
           className="player-input"
           type="text"
-          placeholder="🌟 First Player"
+          placeholder="🏀 First Player"
           onChange={(e) => setPlayer1(e.target.value)}
         />
        
         <input
           className="player-input"
           type="text"
-          placeholder="🌟 Second Player"
+          placeholder="🏀 Second Player"
           value={player2}
           onChange={(e) => setPlayer2(e.target.value)}
         />
