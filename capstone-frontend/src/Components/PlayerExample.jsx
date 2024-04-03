@@ -468,7 +468,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                     </Block>
                 </Block>
 
-                <Block className="chart-container" marginTop="15px" >
+                <Block className="chart-container" marginTop="30px" >
                     <Block className="left" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "-90px" : "-1px"} >
                         {points && points.length > 0 ? <HistogramWithAxis title={`Points`} data={points}></HistogramWithAxis> : <Spin></Spin>}
                         {assists && assists.length > 0 ? <HistogramWithAxis title={`Assist`} data={assists}></HistogramWithAxis> : <Spin></Spin>}
