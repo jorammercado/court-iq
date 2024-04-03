@@ -311,16 +311,7 @@ const TeamStandingsV2 = () => {
                 conference="Western"
               />
             </Block>
-            <Block>
-              {/* Trivia or any other content */}
-              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border: "none", height: "230px" } } }}>
-                <HeadingXSmall>Trivia</HeadingXSmall>
-                <StyledBody>
-                  Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                  faucibus ex, non facilisis nisl.
-                </StyledBody>
-              </Card>
-            </Block>
+           
           </Block>
           : <></>
         }
@@ -487,16 +478,7 @@ const TeamStandingsV2 = () => {
                 conference="Eastern"
               />
             </Block>
-            <Block>
-              {/* Trivia or any other content for the Eastern Conference */}
-              <Card overrides={{ Root: { style: { width: "200px", backgroundColor: "#EA6607", borderRadius: "0px", border: "none", height: "230px" } } }}>
-                <HeadingXSmall>Trivia</HeadingXSmall>
-                <StyledBody>
-                  Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-                  faucibus ex, non facilisis nisl.
-                </StyledBody>
-              </Card>
-            </Block>
+         
           </Block>
           : <></>
         }
