@@ -11,7 +11,7 @@ const TopDefensiveTeamCard = ({ logo, name, conference }) => {
       overrides={{
         Root: {
           style: {
-            marginBottom: "10px", borderRadius: "0px",
+            marginBottom: "200px", borderRadius: "0px",
             paddingLeft: "10px", paddingRight: "10px", width: "200px",
             height:"220px"
           }
