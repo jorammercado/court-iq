@@ -74,30 +74,34 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                 const response = await axios.request(options);
                 console.log("LEADERS: ", response)
                 sendDataToParent(response.data.response[0])
+                console.log(response.data.response[0], "<------------")
                 if (response.data && response.data.response) {
                     const playerStats = response.data.response.reduce((acc, curr) => {
                         const playerId = curr.player.id;
                         if (!acc[playerId]) {
-                            acc[playerId] = { ...curr.player, points: 0, assists: 0, rebounds: 0 };
+                            acc[playerId] = { ...curr.player, points: 0, assists: 0, rebounds: 0, games:0 };
                         }
                         acc[playerId].points += curr.points;
                         acc[playerId].assists += curr.assists;
                         acc[playerId].rebounds += curr.totReb;
+                        acc[playerId].games ++;
                         return acc;
                     }, {});
-                    console.log(leaders)
+                    console.log(playerStats, "<==== PLAYERSTATS")
                     // Sort and find leaders
-                    const sortedPoints = Object.values(playerStats).sort((a, b) => b.points - a.points);
+                    const sortedPoints = Object.values(playerStats).sort((a, b) => b.points - a.points)
                     const sortedAssists = Object.values(playerStats).sort((a, b) => b.assists - a.assists);
                     const sortedRebounds = Object.values(playerStats).sort((a, b) => b.rebounds - a.rebounds);
+                    const calculateAverage = (stat, games) => games > 0 ? (stat / games).toFixed(2) : 0; // Ensure division by zero is handled
 
                     // Include category and construct image URL
                     const leadersWithCategory = [
-                        { ...sortedPoints[0], category: 'Points Leader' },
-                        { ...sortedAssists[0], category: 'Assists Leader' },
-                        { ...sortedRebounds[0], category: 'Rebounds Leader' }
+                        { ...sortedPoints[0], category: 'Points', average: calculateAverage(sortedPoints[0].points, sortedPoints[0].games) },
+                        { ...sortedAssists[0], category: 'Assists', average: calculateAverage(sortedAssists[0].assists, sortedAssists[0].games) },
+                        { ...sortedRebounds[0], category: 'Rebounds', average: calculateAverage(sortedRebounds[0].rebounds, sortedRebounds[0].games) }
                     ].map(leader => ({ ...leader }));
                     setLeaders(leadersWithCategory);
+                    console.log(leadersWithCategory,"<=====vLEADERS WITH CATERGOR")
                 }
             } catch (error) {
                 console.error('Failed to fetch team leaders:', error);
@@ -128,56 +132,50 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
     }, [leaders, VITE_PLAYER_IMAGE_BASE_URL]);
 
     return (
-        <div>
+        <div className="teamLeaderDisplayCard_Main">
             {personalData.length > 0 ?
                 <div className="teamleaderdisplaycards">
                     {leaders.map((leader, index) => (
-                        <div
-                            key={index}
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => {
-                                setIsSearchVisible(false)
-                                navigate(`/player/${leader.id}`, { state: { ...leader } })
-                            }}
-                        >
-
-                            <Card className="responsiveCard"
-                                overrides={{
-                                    Root: {
-                                        style: {
-                                            width: "420px",
-                                            marginBottom: "10px",
-                                            height: "190px",
-                                            borderRadius: "0"
-                                        }
-                                    }
-                                }}
-                            >
-                                <StyledTitle>
-                                    {leader.firstname} {leader.lastname}
-                                <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
-                                    style={{ marginLeft:'30px',marginTop: "-55px", height: '235px', width: '240px', alignSelf: "center", border: "none" }} />
-                                </StyledTitle>
-                                <StyledTitle>
-                                    {personalData && personalData[index] && personalData[index].leagues && personalData[index].leagues.standard ? " #" + personalData[index].leagues.standard.jersey : ""}  &nbsp;
-                                    </StyledTitle>
-                                <StyledBody>
-                                    <HeadingLevel >
-                                        <Heading marginTop="-16px" marginBottom="-1px" styleLevel={6}>
-                                            {leader.category.split(" ")[0] === "Points" && `Points: ${leader.points}`}
-                                            {leader.category.split(" ")[0] === "Assists" && `Assists: ${leader.assists}`}
-                                            {leader.category.split(" ")[0] === "Rebounds" && `Rebounds: ${leader.rebounds}`}
-                                        </Heading>
-                                    </HeadingLevel>
-                                    {leader.category.split(" ")[0] === "Points" ?
-                                        <LabelMedium>Assists: {leader.assists} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelMedium> : leader.category.split(" ")[0] === "Assists" ?
-                                            <LabelMedium>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Rebounds: {leader.rebounds}</LabelMedium> : leader.category.split(" ")[0] === "Rebounds" ?
-                                                <LabelMedium>Points: {leader.points} &nbsp;&nbsp;&nbsp;&nbsp; Assists: {leader.assists} </LabelMedium> : "n/a"}
-
-                                </StyledBody>
-                            </Card>
-                        </div>
-                    ))}
+    <div
+        key={index}
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+            setIsSearchVisible(false)
+            navigate(`/player/${leader.id}`, { state: { ...leader } })
+        }}
+    >
+        <Card className="responsiveCard"
+            overrides={{
+                Root: {
+                    style: {
+                        width: "423px",
+                        marginTop: "10px",
+                        marginBottom: "20px",
+                        height: "auto",
+                        borderRadius: "0",
+                        padding: '20px',
+                    }
+                }
+            }}
+        >
+            <StyledTitle style={{ fontSize: '15px', marginRight: '0', padding: '0' }}>
+                {leader.firstname} {leader.lastname}
+                <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
+                    style={{ height: '190px', width: '180px', alignSelf: "center", border: "none", marginLeft: '40px' }} />
+            </StyledTitle>
+            
+            <StyledBody>
+                <HeadingLevel >
+                    <Heading style={{ fontSize: "25px" }} styleLevel={6}>
+                        {leader.category}
+                        <br/>
+                        <span style={{fontSize: "15px"}}>{leader.average}</span>
+                    </Heading>
+                </HeadingLevel>
+            </StyledBody>
+        </Card>
+    </div>
+))}
                 </div>
                 : <Spin></Spin>}
         </div>
