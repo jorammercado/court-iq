@@ -32,7 +32,7 @@ const PlayerExamplePage = () => {
             try {
                 const response = await axios.request(options);
                 setData(response.data.response[0]);
-                console.log(response.data.response);
+                // console.log(response.data.response);
             } catch (error) {
                 console.error(error);
             }

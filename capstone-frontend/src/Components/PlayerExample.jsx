@@ -166,7 +166,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
             try {
                 const response = await axios(requestOptions);
                 setPlayerStats(response.data.response);
-                console.log(response.data)
+                // console.log(response.data)
                 setTeam(response.data.response[0].team.id)
                 setReferenceData(response.data.response[0])
                 setPoints(response.data.response.map((e) => e.points));

@@ -41,7 +41,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
     const calculateMarginLeft = () => {
         const screenWidth = window.innerWidth;
-        console.log("SCREEN WIDTH", screenWidth)
+        // console.log("SCREEN WIDTH", screenWidth)
         return screenWidth > 1425 ? ((screenWidth - 1425) / 2) + 65 : 50;
     };
     const [marginLeft, setMarginLeft] = useState(calculateMarginLeft());
@@ -56,7 +56,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    console.log("MARGINLEFTMARGINLEFTMARGINLEFT", marginLeft)
+    // console.log("MARGINLEFTMARGINLEFTMARGINLEFT", marginLeft)
 
     const handleDataFromChild = (data) => {
         setTeam(data.team)
@@ -108,9 +108,9 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     }, [selectedTeamName]);
 
     function selectFontFamily(selectedTeamName) {
-        console.log("11111111", selectedTeamName)
+        // console.log("11111111", selectedTeamName)
         for (let i = 0; i < teams.length; i++) {
-            console.log("222222222", teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase())
+            // console.log("222222222", teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase())
             if (teams[i] === selectedTeamName && fontsfamilies.includes(teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase()))
                 return fontsfamilies[fontsfamilies.indexOf(teams[i].split(" ")[teams[i].split(" ").length - 1].toLowerCase())]
         }
@@ -168,7 +168,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
     const handleTeamChange = (params) => {
         const { value } = params;
-        console.log(value)
+        // console.log(value)
         if (value.length > 0) {
             setSelectedTeam(value[0].id);
             setTeamId(value[0].id)
@@ -233,7 +233,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     ];
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
 
-    console.log("FONT FAMILY=", fontFamily)
+    // console.log("FONT FAMILY=", fontFamily)
 
     return (
         <Block className="parent">
