@@ -44,22 +44,24 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
             overrides={{
                 Root: {
                     style: {
+                        display: "flex",
+                        justifyContent: "center",
                         width: "316px",
                         height: "179px",
                         marginBottom: "5px",
                         backgroundColor: primaryColor,
                         // backgroundColor: "#EA6607",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
+                        
                         borderRadius: "0",
                         border: "none",
                     }
                 },
                 Title: {
                     style: {
+                       
+
                         fontSize: '19px',
-                        textAlign: 'left',
+                        textAlign: 'center',
                         marginTop: "-6px",
                         marginBottom: "18px",
                         lineHeight: "1.1",
@@ -69,21 +71,15 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                     },
                 }
             }}
-            title={`${player.player.firstname} ${player.player.lastname} ${personalData && personalData.leagues && personalData.leagues.standard ? !personalData.leagues.standard ? "" : "#" + personalData.leagues.standard.jersey : ""}
-            ${personalData && personalData.leagues && personalData.leagues.standard ? personalData.leagues.standard.pos : ""}`}
+            title={`${player.player.firstname} ${player.player.lastname}`}
         >
-            <Block marginBottom="15px" marginTop="-15px">
+            <Block marginBottom="16px" marginTop="-16px">
                 <StyledThumbnail
                     src={playerImage}
-                    style={{ width: '127px', height: '127px', alignSelf: "center", border: "none", marginTop: "-10px" }}
+                    style={{ width: '240px', height: '168px',border: "none", marginTop: "-10px" }}
                 />
                 <StyledBody style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.1", marginTop: "23px", color: textColor }}>
-                    {personalData && personalData.birth ? "DOB: " + personalData.birth.date + ", " + personalData.birth.country : ""} <br></br>
-                    {personalData ? "College: " + personalData.college : ""} <br></br>
-                    {personalData && personalData.height ? "Height: " + personalData.height.feets + "'" + personalData.height.inches + "\"" : ""} <br></br>
-                    {personalData && personalData.weight ? "Weight: " + personalData.weight.pounds + " lbs" : ""} <br></br>
-                    {personalData && personalData.nba ? "Pro Start: " + personalData.nba.start : ""}<br></br>
-                    {personalData && personalData.nba ? "Pro Years: " + personalData.nba.pro : ""}<br></br>
+                    
 
                 </StyledBody>
             </Block>
