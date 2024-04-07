@@ -42,7 +42,7 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
 
 
     useEffect(() => {
-        console.log("Making request with team:", team, "and season:", season);
+        // console.log("Making request with team:", team, "and season:", season);
         const fetchPlayerStats = async () => {
 
             const options = {
@@ -59,7 +59,7 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
             try {
                 const response = await axios.request(options);
                 setPlayerStats(response.data.response);
-                console.log(response.data.response)
+                // console.log(response.data.response)
             } catch (error) {
                 console.error(error);
             }

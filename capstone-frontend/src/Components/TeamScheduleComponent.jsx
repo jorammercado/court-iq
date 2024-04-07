@@ -41,7 +41,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
             try {
                 const response = await axios.request(options);
                 const gamesData = response.data.response;
-                console.log("GAMESSSSSSSSSSS= ", response.data)
+                // console.log("GAMESSSSSSSSSSS= ", response.data)
                 // Filter out games year year/season
                 const futureGames = gamesData.filter(game => {
                     const gameYear = new Date(game.date.start).getFullYear();
@@ -55,7 +55,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
                 });
 
                 const lastFiveGames = futureGames.slice(-5);
-                console.log("LAST 555555", lastFiveGames)
+                // console.log("LAST 555555", lastFiveGames)
                 const last10Games = futureGames.slice(-10);
                 const last20Games = futureGames.slice(-20);
                 const last50Games = futureGames.slice(-50);

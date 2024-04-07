@@ -80,7 +80,7 @@ const TeamStandingsV2 = () => {
       try {
         const response = await axios.request(options);
         const responseData = response.data.response[0];
-        console.log(responseData)
+        // console.log(responseData)
         setData(responseData);
         const easternTeams = responseData.filter(e => e.group.name === "Eastern Conference");
         const westernTeams = responseData.filter(e => e.group.name === "Western Conference");
