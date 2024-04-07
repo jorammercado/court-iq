@@ -3,8 +3,34 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 50px;
+  margin-top: 10px;
   background-color: #faf7f2;
+
+  .comparison-instruction{
+    @media (max-width: 1400px) {
+      width: 1220px;
+    }
+  
+    @media (max-width: 1290px) {
+      width: 1050px;
+    }
+  
+    @media (max-width: 1170px) {
+      width: 1000px;
+    }
+  
+    @media (max-width: 1095px) {
+      width: 950px;
+    }
+  
+    @media (max-width: 940px) {
+      width: 640px;
+    }
+  
+    @media (max-width: 640px) {
+      width: 440px;
+    }
+  }
 }
 
 .comparison-heading-container {
@@ -87,9 +113,9 @@
 }
 
 .player-info {
-  background-color: black;
-  padding: 20px;
-  margin: 5rem;
+  background-color: #141414;
+  padding: 1px;
+  margin: 3rem;
   margin-top: 35px;
   font-family: 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
   font-weight: bold;

@@ -8,6 +8,7 @@ import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import {
   LabelMedium,
+  LabelLarge
 } from "baseui/typography";
 import Spin from "../Components/SpinLoad";
 
@@ -89,7 +90,7 @@ function Headlines() {
         marginBottom="30px" >
         <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding - 5 + "px"}>
           <HeadingLevel>
-            <Heading styleLevel={!isMobile ? 5 : 6} color="black" >Top Headlines News</Heading>
+            <Heading styleLevel={!isMobile ? 5 : 6} color="black" >Top Headline News</Heading>
           </HeadingLevel>
         </Block>
       </Block>
@@ -112,10 +113,10 @@ function Headlines() {
                 src={headline.image}
                 alt={headline.title}
               />
-              <LabelMedium className="headline-title"
+              <LabelLarge className="headline-title"
               >
                 {headline.title}
-              </LabelMedium>
+              </LabelLarge>
               <LabelMedium
                 className="headline-link"
                 onClick={() => window.open(headline.link, "_blank")}
@@ -142,8 +143,8 @@ function Headlines() {
             statistics and make informed comparisons. <br />
             <strong>Click below to begin your exploration.</strong>
           </h4>
-          <Link className="compare-link" to="/PlayerComparison">
-            <p className="text-btn">
+          <Link className="compare-link" to="/PlayerComparison" style={{borderRadius:"0px", padding:"5px 15px"}}>
+            <p className="text-btn" style={{marginBottom:"4px"}}>
               {" "}
               <strong>Explore player comparisons</strong>
             </p>
