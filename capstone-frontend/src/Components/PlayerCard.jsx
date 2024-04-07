@@ -73,10 +73,10 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
             }}
             title={`${player.player.firstname} ${player.player.lastname}`}
         >
-            <Block marginBottom="16px" marginTop="-16px">
+            <Block marginBottom="26px" marginTop="-16px">
                 <StyledThumbnail
                     src={playerImage}
-                    style={{ width: '240px', height: '168px',border: "none", marginTop: "-10px" }}
+                    style={{ width: '240px', height: '180px',border: "none", marginTop: "-10px" }}
                 />
                 <StyledBody style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.1", marginTop: "23px", color: textColor }}>
                     
