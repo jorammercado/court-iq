@@ -281,7 +281,7 @@ const TeamStandingsV2 = () => {
             <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} />
           </Link>
           <HeadingLevel>
-            <Heading styleLevel={!isMobile ? 4 : 6} color="black" >{stage} {season}</Heading>
+            <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading>
           </HeadingLevel>
         </Block>
       </Block>
@@ -292,7 +292,7 @@ const TeamStandingsV2 = () => {
             flexDirection="column"
             justifyContent="space-between"
             className="west-leaders"
-            marginTop="-15px"
+            marginTop="-28px"
             paddingLeft="10px"
             paddingRight="10px"
           >
@@ -326,7 +326,7 @@ const TeamStandingsV2 = () => {
           style={{ width: isMobile ? '100%' : 'unset' }}
         >
           {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="-25px">
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px">
               <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
             </Block>
           }
@@ -459,7 +459,7 @@ const TeamStandingsV2 = () => {
             flexDirection="column"
             justifyContent="space-between"
             className="east-leaders"
-            marginTop="-15px"
+            marginTop="-28px"
             paddingLeft="10px"
             paddingRight="10px"
           >
@@ -485,7 +485,7 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black", width: "1270px" }}>h2h Proposition Bets(Props)</Heading>
+          <Heading styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black", width: "1270px" }}>h2h Props</Heading>
         </HeadingLevel>
       </Block>
       <Block width="1270px" className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="10px">

@@ -4,9 +4,40 @@ import "./HeadLine.scss";
 import { Link } from "react-router-dom";
 import images from "../constants/images";
 import "animate.css";
+import { Block } from "baseui/block";
+import { Heading, HeadingLevel } from 'baseui/heading';
+import {
+  LabelMedium,
+} from "baseui/typography";
+import Spin from "../Components/SpinLoad";
+
 function Headlines() {
   const [headlines, setHeadlines] = useState([]);
   const [error, setError] = useState(null);
+  const [padding, setPadding] = useState(window.innerWidth / 100);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPadding(window.innerWidth > 1400 ? ((window.innerWidth - 1300) / 400) - 10 : 65);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const URL = import.meta.env.VITE_HEADLINE_URL;
   const KEY = import.meta.env.VITE_HEADLINE_KEY;
@@ -46,59 +77,80 @@ function Headlines() {
   }, []);
 
   return (
-    <div className="headlines-container">
-      <h1 className="headlines-title">Top Headlines News</h1>
+    <Block display="flex" justifyContent="center" alignItems="center" height="100%" flexDirection="column" className="standings">
+      <Block className="subb__heading" display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        flexDirection="row"
+        backgroundColor="#EA6607"
+        padding="0px"
+        height="60px"
+        marginBottom="30px" >
+        <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding - 5 + "px"}>
+          <HeadingLevel>
+            <Heading styleLevel={!isMobile ? 5 : 6} color="black" >Top Headlines News</Heading>
+          </HeadingLevel>
+        </Block>
+      </Block>
+      <div className="headlines-container">
 
-      <h4 className="headlines-description">
-        Welcome to our NBA news section, providing the latest and foremost
-        headlines from the world of NBA. Keep abreast of the most recent
-        developments in the basketball realm.
-      </h4>
-
-      {error && <p className="error-message">Error: {error}</p>}
-      <div className="headline-list animate__animated animate__slideInDown">
-        {headlines.map((headline, index) => (
-          <div className="headline" key={index}>
-            <img
-              className="headline-image"
-              src={headline.image}
-              alt={headline.title}
-            />
-            <p className="headline-title">{headline.title}</p>
-            <p
-              className="headline-link"
-              onClick={() => window.open(headline.link, "_blank")}
-            >
-              Read more
-            </p>
-          </div>
-        ))}
-      </div>
-      <div className="compare-card">
-        <h1 className="compare-title">Curious about player comparisons?</h1>
-        <div className="img-headlines">
-          <img className="court-im1" src={images.playerVs2} alt="" />
-          <img className="court-im1" src={images.vs} alt="" />
-          <img className="court-im1" src={images.playerVs} alt="" />
+        <div className="headlines-description" style={{ maxWidth: "1270px" }}>
+          <HeadingLevel>
+            <Heading styleLevel={6} color="white" >Welcome to our NBA news section, providing the latest and foremost
+              headlines from the world of NBA. Keep abreast of the most recent
+              developments in the basketball realm.</Heading>
+          </HeadingLevel>
         </div>
-        <h4 className="compare-description">
-          <strong>
-            {" "}
-            Are you eager to see how your favorite NBA players stack up against
-            each other?{" "}
-          </strong>{" "}
-          <br /> Our player comparison tool allows you to explore detailed
-          statistics and make informed comparisons. <br />
-          <strong>Click below to begin your exploration.</strong>
-        </h4>
-        <Link className="compare-link" to="/PlayerComparison">
-          <p className="text-btn">
-            {" "}
-            <strong>Explore player comparisons</strong>
-          </p>
-        </Link>
+
+        {error && <p className="error-message">Error: {error}</p>}
+        <div className="headline-list">
+          {headlines.map((headline, index) => (
+            <div className="headline" key={index}>
+              <img
+                className="headline-image"
+                src={headline.image}
+                alt={headline.title}
+              />
+              <LabelMedium className="headline-title"
+              >
+                {headline.title}
+              </LabelMedium>
+              <LabelMedium
+                className="headline-link"
+                onClick={() => window.open(headline.link, "_blank")}
+              >
+                Read more
+              </LabelMedium>
+            </div>
+          ))}
+        </div>
+        <div className="compare-card">
+          <h1 className="compare-title">Curious about player comparisons?</h1>
+          <div className="img-headlines">
+            <img className="court-im1" src={images.playerVs2} alt="" />
+            <img className="court-im1" src={images.vs} alt="" />
+            <img className="court-im1" src={images.playerVs} alt="" />
+          </div>
+          <h4 className="compare-description">
+            <strong>
+              {" "}
+              Are you eager to see how your favorite NBA players stack up against
+              each other?{" "}
+            </strong>{" "}
+            <br /> Our player comparison tool allows you to explore detailed
+            statistics and make informed comparisons. <br />
+            <strong>Click below to begin your exploration.</strong>
+          </h4>
+          <Link className="compare-link" to="/PlayerComparison">
+            <p className="text-btn">
+              {" "}
+              <strong>Explore player comparisons</strong>
+            </p>
+          </Link>
+        </div>
       </div>
-    </div>
+    </Block>
   );
 }
 
