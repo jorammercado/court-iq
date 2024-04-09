@@ -13,6 +13,7 @@ import {
 import { Heading, HeadingLevel } from 'baseui/heading';
 import "./TeamStatsComponent.scss"
 import Spin from './SpinLoad';
+import { Avatar } from 'baseui/avatar';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -83,19 +84,29 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
         }));
 
     return (
-        <Block className="TeamStatsTable" style={{justifyContent:"left", alignItems:"flex-left", display:"flex", width:"91%",
-         marginBottom:"15px", marginTop:"20px"}}>
-            <Block className="heading"  backgroundColor={isHighlightedSeason?"#EA6607":"black"} width="100%">
-                <HeadingLevel >
-                    <Heading className="titleHighlight" styleLevel={4}
-                     color="white" 
-                    //  backgroundColor={isHighlightedSeason?"#EA6607":"none"}
-                    //  zIndex="10"
-                     marginBottom="0px"
-                     marginLeft="5px">
-                        Season Stats
-                    </Heading>
-                </HeadingLevel>
+        <Block className="TeamStatsTable" style={{
+            justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%",
+            marginBottom: "15px", marginTop: "20px"
+        }}>
+            <Block className="heading"  width="100%"
+                style={{
+                    backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
+                    url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'right',
+                    backgroundRepeat: 'no-repeat',
+                }}>
+                <Block className="heading" backgroundColor={isHighlightedSeason ? "#EA6607" : "transparent"} width="100%">
+                    <HeadingLevel >
+                        <Heading className="titleHighlight" styleLevel={4}
+                            color="white"
+                            backgroundColor={isHighlightedSeason ? "#EA6607" : "none"}
+                            marginBottom="0px"
+                            marginLeft="5px">
+                            Season Stats
+                        </Heading>
+                    </HeadingLevel>
+                </Block>
             </Block>
             <Block className="tableContainer" style={{ justifyContent: "left" }}>
                 <TableBuilder data={teamStats} >
