@@ -42,20 +42,12 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
                 const response = await axios.request(options);
                 const gamesData = response.data.response;
                 // console.log("GAMESSSSSSSSSSS= ", response.data)
-                // Filter out games year year/season
                 const futureGames = gamesData.filter(game => {
                     const gameYear = new Date(game.date.start).getFullYear();
-                    // const zuluTimeDate = new Date(game.date.start);
-                    // const easternTime = zuluTimeDate.toLocaleString('en-US', { timeZone: 'America/New_York' });
-                    // const pacificTime = zuluTimeDate.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
-                    // console.log('Zulu Time:', zuluTimeDate.toISOString());
-                    // console.log('Eastern Time:', easternTime);
-                    // console.log('Pacific Time:', pacificTime);
                     return gameYear > Number(season);
                 });
 
                 const lastFiveGames = futureGames.slice(-5);
-                // console.log("LAST 555555", lastFiveGames)
                 const last10Games = futureGames.slice(-10);
                 const last20Games = futureGames.slice(-20);
                 const last50Games = futureGames.slice(-50);
@@ -122,25 +114,33 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
             width: "91%",
             marginBottom: "-23px"
         }}>
-            <Block backgroundColor="black" width="100%">
-                <HeadingLevel >
-                    <Heading className="headingTransition"
-                        styleLevel={4}
-                        color="white"
-                        zIndex="10"
-                        marginBottom="0px"
-                        marginLeft="5px"
-                        backgroundColor={isHighlighted ? "#EA6607" : "none"}>
-                        {Number(season >= 2023 && gamesInView === '5') ? `Next 5 Games` :
-                            Number(season >= 2023 && gamesInView === '10') ? `Last 10 Games Schedule of Season` :
-                                Number(season >= 2023 && gamesInView === '20') ? `Last 20 Games Schedule of Season` :
-                                    Number(season >= 2023 && gamesInView === '50') ? `Last 50 Games Schedule of Season` :
-                                        gamesInView === '10' ? `Last 10 Games of Season` :
-                                            gamesInView === '20' ? `Last 20 Games of Season` :
-                                                gamesInView === '50' ? `Last 50 Games of Season` :
-                                                    `Last 5 Games of Season`}
-                    </Heading>
-                </HeadingLevel>
+            <Block className="head" width="100%"
+                style={{
+                    backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
+                    url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center calc(72% + 0px)',
+                    backgroundRepeat: 'no-repeat',
+                }}>
+                <Block className="head" width="100%">
+                    <HeadingLevel >
+                        <Heading className="headingTransition"
+                            styleLevel={4}
+                            color="white"
+                            marginBottom="0px"
+                            marginLeft="5px"
+                            backgroundColor={isHighlighted ? "#EA6607" : "none"}>
+                            {Number(season >= 2023 && gamesInView === '5') ? `Next 5 Games` :
+                                Number(season >= 2023 && gamesInView === '10') ? `Last 10 Games Schedule of Season` :
+                                    Number(season >= 2023 && gamesInView === '20') ? `Last 20 Games Schedule of Season` :
+                                        Number(season >= 2023 && gamesInView === '50') ? `Last 50 Games Schedule of Season` :
+                                            gamesInView === '10' ? `Last 10 Games of Season` :
+                                                gamesInView === '20' ? `Last 20 Games of Season` :
+                                                    gamesInView === '50' ? `Last 50 Games of Season` :
+                                                        `Last 5 Games of Season`}
+                        </Heading>
+                    </HeadingLevel>
+                </Block>
             </Block>
             <Block className="scheduleTable">
                 <TableBuilder data={gamesInView === '5' ? games : gamesInView === '10' ? games10 : gamesInView === '20' ? games20 : games50}
@@ -149,9 +149,9 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
                         {row => <div>{row && row.date && row.date.start ? new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] : ""}</div>}
                     </TableBuilderColumn>
                     <TableBuilderColumn header="Time">
-                        {row => <div>{row && row.date && row.date.start && row.date.start.split("T")[1] ? 
-                        new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '')+" EST,"+
-                        new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '')+" PST" : ""} </div>}
+                        {row => <div>{row && row.date && row.date.start && row.date.start.split("T")[1] ?
+                            new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '') + " EST," +
+                            new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '') + " PST" : ""} </div>}
                     </TableBuilderColumn>
                     <TableBuilderColumn header="Opponent">
                         {row => {

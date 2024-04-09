@@ -28,7 +28,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])
     const [personalData, setPersonalData] = useState([]);
-    console.log(leaders)
+    // console.log(leaders)
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -56,7 +56,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
             fetchPlayerStats();
         }
     }, [teamId, season, leaders]);
-    console.log("PERSONAL DATA", personalData)
+    // console.log("PERSONAL DATA", personalData)
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {

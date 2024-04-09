@@ -63,16 +63,40 @@ const SectionTwo = () => {
     );
   }
 
+  const giphyEmbedUrl = 'https://giphy.com/embed/dZR5yN9m8pTGcZ9qHZ'
+
+  const giphyContainerStyle = {
+    position: 'absolute',
+    right: 150,
+    bottom: 35,
+    zIndex: 0,
+    pointerEvents: 'none', 
+  };
+
+  const contentOverlayStyle = {
+    backgroundColor: "transparent",
+    border: "none",
+    margin: "0",
+    padding: "0",
+    position: 'relative',
+    zIndex: 1, 
+  };
+
   return (
     <section id="two" className="main style2 left dark fullscreen">
 
       <MoveInWhenVisible>
-        <div className="content box style2" style={{backgroundColor:"#faf7f2"}}>
-          <header>
-            <h2>Ask Anything About Basketball Stats</h2>
-          </header>
-          <h5>Our AI Delivers Instant Insights</h5>
-
+        <div className="content box style2" style={{  position: 'relative' }}>
+          <div style={giphyContainerStyle}>
+            {/* <iframe src={giphyEmbedUrl} style={{ width: 400, height: 390, paddingBottom:"120px", border: 'none' }} allowFullScreen></iframe> */}
+            <iframe src="https://giphy.com/embed/nUMdnsYhklgaB2TWkK" style={{ border: 'solid white' }} allowFullScreen></iframe>
+          </div>
+          <div style={contentOverlayStyle}>
+            <header style={{ paddingBottom: "120px", marginTop:"-25px" }}>
+              <h3>Ask Anything About Basketball Stats</h3>
+              <h5 >Quick answers with our custom search engine</h5>
+            </header>
+          </div>
         </div>
       </MoveInWhenVisible>
       <a href="#work" className="button style2 down anchored">Next</a>
