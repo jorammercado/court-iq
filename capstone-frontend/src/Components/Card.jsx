@@ -28,14 +28,14 @@ const Card = ({ title, odds }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: "228px", margin: "10px" }} >
+    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px" }} >
 
 
       <BaseCard
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "228px", margin: "10px", height: "160px", borderRadius: "0px",
+              display: 'flex', flexDirection: 'row', width: "278px", margin: "5px", height: "200px", borderRadius: "0px",
               backgroundColor: findBackgroundColor()
             }
           },
@@ -62,7 +62,7 @@ const Card = ({ title, odds }) => {
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "228px", margin: "10px", height: "160px", borderRadius: "0px",
+              display: 'flex', flexDirection: 'row', width: "278px", margin: "5px", height: "200px", borderRadius: "0px",
               backgroundColor: findBackgroundColor()
             }
           },
