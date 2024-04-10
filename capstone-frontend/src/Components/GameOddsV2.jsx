@@ -23,18 +23,25 @@ const NBAGameOddsV2 = ({ eventId }) => { // eventId passed as a prop
           params: { apiKey, regions: 'us', markets: 'player_points', oddsFormat: 'american' },
         });
         console.log("Points Props Response", response)
-        setAwayTeam(response.data.away_team)
-        setHomeTeam(response.data.home_team)
-        setCommenceTime(response.data.commence_time)
-        setLastUpdate(response.data.bookmakers[0].markets[0].last_update)
-        setBookmaker(response.data.bookmakers[0].title)
+        if (response && response.data && response.data.bookmakers && response.data.bookmakers[0] &&
+          response.data.bookmakers[0].markets && response.data.bookmakers[0].markets[0] &&
+          response.data.bookmakers[0].markets[0].outcomes) {
+          setAwayTeam(response.data.away_team)
+          setHomeTeam(response.data.home_team)
+          setCommenceTime(response.data.commence_time)
+          setLastUpdate(response.data.bookmakers[0].markets[0].last_update)
+          setBookmaker(response.data.bookmakers[0].title)
 
-        const pointsProps = response.data.bookmakers[0].markets[0].outcomes
+          const pointsProps = response.data.bookmakers[0].markets[0].outcomes
 
-        console.log(pointsProps)
-        setPlayerProps(pointsProps);
+          console.log(pointsProps)
+          setPlayerProps(pointsProps);
+        }
+        else
+          throw new Error("No Props or betting closed")
       } catch (error) {
         setError(error.message);
+        console.error(error)
       } finally {
         setIsLoading(false);
       }
@@ -45,7 +52,7 @@ const NBAGameOddsV2 = ({ eventId }) => { // eventId passed as a prop
     }
   }, [eventId]);
 
-  if (isLoading) return <Spin></Spin>;
+  if (isLoading) return <></>;
   // if (error) return <div>Error: {error}</div>;
 
   return (

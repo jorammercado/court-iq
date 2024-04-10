@@ -88,6 +88,16 @@
             align-items: flex-start;
             margin-top: 10px;
 
+            .leadersHeading{
+                margin-top: 5px;
+                margin-left: 220px;
+
+                @media (max-width: 1300px) {
+                    margin-left:inherit;
+                }
+
+            }
+
             @media (max-width: 1300px) {
                 justify-content: center;
                 align-items: center;
