@@ -28,14 +28,14 @@ const Card = ({ title, odds }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px" }} >
+    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px", border:'solid orange 3px', textAlign:'center' }} >
 
 
       <BaseCard
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "278px", margin: "5px", height: "200px", borderRadius: "0px",
+              display: 'flex', flexDirection: 'row', width: "278px",  height: "200px", borderRadius: "0px",
               backgroundColor: findBackgroundColor()
             }
           },
@@ -51,7 +51,7 @@ const Card = ({ title, odds }) => {
       >
         <StyledBody>
           {odds.slice(odds.length / 3, 2 * odds.length / 3).map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "20px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
+            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
               {outcome.team}: {outcome.price}
             </div>
           ))}
@@ -62,7 +62,7 @@ const Card = ({ title, odds }) => {
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "278px", margin: "5px", height: "200px", borderRadius: "0px",
+              display: 'flex', flexDirection: 'row', width: "278px", height: "200px", borderRadius: "0px",
               backgroundColor: findBackgroundColor()
             }
           },
@@ -78,7 +78,7 @@ const Card = ({ title, odds }) => {
       >
         <StyledBody>
           {odds.slice(2 * odds.length / 3, odds.length).map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "20px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
+            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
               {outcome.team}: {outcome.price}
             </div>
           ))}
