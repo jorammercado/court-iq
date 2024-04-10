@@ -35,7 +35,7 @@ const Card = ({ title, odds }) => {
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "278px",  height: "200px", borderRadius: "0px",
+              display: 'flex', flexDirection: 'row', width: "278px",  height: "200px", borderRadius: "0px", justifyContent:'center', alignItems:'center',
               backgroundColor: findBackgroundColor()
             }
           },
@@ -62,7 +62,7 @@ const Card = ({ title, odds }) => {
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "278px", height: "200px", borderRadius: "0px",
+              display: 'flex', flexDirection: 'row', width: "278px", height: "200px", borderRadius: "0px", justifyContent:'center', alignItems:'center',
               backgroundColor: findBackgroundColor()
             }
           },
