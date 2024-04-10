@@ -86,7 +86,7 @@ const SectionTwo = () => {
     <section id="two" className="main style2 left dark fullscreen">
 
       <MoveInWhenVisible>
-        <div className="content box style2" style={{  position: 'relative' }}>
+        <div className="content box style2" style={{  position: 'relative', backgroundColor:"#faf7f2" }}>
           <div style={giphyContainerStyle}>
             {/* <iframe src={giphyEmbedUrl} style={{ width: 400, height: 390, paddingBottom:"120px", border: 'none' }} allowFullScreen></iframe> */}
             <iframe src="https://giphy.com/embed/nUMdnsYhklgaB2TWkK" style={{ border: 'solid white' }} allowFullScreen></iframe>

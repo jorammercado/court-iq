@@ -10,6 +10,9 @@ const NBAGameOddsV2 = ({ eventId }) => { // eventId passed as a prop
   const [error, setError] = useState(null);
   const [lastUpdate, setLastUpdate] = useState('')
   const [bookmaker, setBookmaker] = useState('')
+  const [awayTeam, setAwayTeam] = useState('')
+  const [homeTeam, setHomeTeam] = useState('')
+  const [commenceTime, setCommenceTime] = useState('')
 
   useEffect(() => {
     const apiKey = import.meta.env.VITE_ODDS_API_KEY;
@@ -19,10 +22,13 @@ const NBAGameOddsV2 = ({ eventId }) => { // eventId passed as a prop
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/basketball_nba/events/${eventId}/odds`, {
           params: { apiKey, regions: 'us', markets: 'player_points', oddsFormat: 'american' },
         });
-        console.log("TTTTTTTTTTTTTTTTHHHHHHHHHHHHHHHHHH", response)
-        //  setLastUpdate(response.data.bookmaker.title)
-        //  setBookmaker(response.data.bookmaker.markets[0].last_update)
-        // Assuming the structure of your response and extracting player points props
+        console.log("Points Props Response", response)
+        setAwayTeam(response.data.away_team)
+        setHomeTeam(response.data.home_team)
+        setCommenceTime(response.data.commence_time)
+        setLastUpdate(response.data.bookmakers[0].markets[0].last_update)
+        setBookmaker(response.data.bookmakers[0].title)
+
         const pointsProps = response.data.bookmakers[0].markets[0].outcomes
 
         console.log(pointsProps)
