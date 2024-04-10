@@ -1,5 +1,8 @@
 
 .ContentGameOdds{
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
 }
