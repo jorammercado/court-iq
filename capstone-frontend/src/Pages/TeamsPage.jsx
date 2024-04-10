@@ -233,7 +233,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     ];
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
 
-    // console.log("FONT FAMILY=", fontFamily)
+    // console.log("FEVENT IDS:=", eventIds)
 
     return (
         <Block className="parent">
@@ -318,20 +318,38 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         />
                     </Block>
                 </Block>
-                <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                    <Block className="odds__l2" backgroundColor="black" style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        display: "flex",
-                        flexDirection: "row",
-                        width: "1270px",
-                        marginBottom: "100px"
-                    }}>
-                        {
-                             <NBAGameOddsV2 key={eventIds[0]} eventId={eventIds[0]} />
-                        }
-                    </Block>
-                </Block>
+
+                {eventIds && eventIds.length > 0 ? eventIds.map((eventId, index) => {
+                    return (
+                        <Block key={index} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                            <Block className="odds__l2" backgroundColor="black" style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                display: "flex",
+                                flexDirection: "row",
+                                width: "1270px",
+                                marginBottom: "100px"
+                            }}>
+                                <NBAGameOddsV2 eventId={eventId} />
+                            </Block>
+                        </Block>
+                    )
+                })
+                    :
+                    <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                            <Block className="odds__l2" backgroundColor="black" color="white" style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                display: "flex",
+                                flexDirection: "row",
+                                width: "1270px",
+                                marginBottom: "100px"
+                            }}>
+                                No Player Props currently available for this team, try another team
+                            </Block>
+                        </Block>
+                }
+
             </Block>
             <Block className="right">
                 <Block className="Selector"

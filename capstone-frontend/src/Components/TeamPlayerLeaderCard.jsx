@@ -79,12 +79,12 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                     const playerStats = response.data.response.reduce((acc, curr) => {
                         const playerId = curr.player.id;
                         if (!acc[playerId]) {
-                            acc[playerId] = { ...curr.player, points: 0, assists: 0, rebounds: 0, games:0 };
+                            acc[playerId] = { ...curr.player, points: 0, assists: 0, rebounds: 0, games: 0 };
                         }
                         acc[playerId].points += curr.points;
                         acc[playerId].assists += curr.assists;
                         acc[playerId].rebounds += curr.totReb;
-                        acc[playerId].games ++;
+                        acc[playerId].games++;
                         return acc;
                     }, {});
                     console.log(playerStats, "<==== PLAYERSTATS")
@@ -101,7 +101,7 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
                         { ...sortedRebounds[0], category: 'Rebounds', average: calculateAverage(sortedRebounds[0].rebounds, sortedRebounds[0].games) }
                     ].map(leader => ({ ...leader }));
                     setLeaders(leadersWithCategory);
-                    console.log(leadersWithCategory,"<=====vLEADERS WITH CATERGOR")
+                    console.log(leadersWithCategory, "<=====vLEADERS WITH CATERGOR")
                 }
             } catch (error) {
                 console.error('Failed to fetch team leaders:', error);
@@ -132,50 +132,57 @@ const TeamPlayerLeaderCard = ({ teamId, season, isSearchVisible, setIsSearchVisi
     }, [leaders, VITE_PLAYER_IMAGE_BASE_URL]);
 
     return (
-        <div className="teamLeaderDisplayCard_Main">
+        <div >
             {personalData.length > 0 ?
                 <div className="teamleaderdisplaycards">
                     {leaders.map((leader, index) => (
-    <div
-        key={index}
-        style={{ cursor: 'pointer' }}
-        onClick={() => {
-            setIsSearchVisible(false)
-            navigate(`/player/${leader.id}`, { state: { ...leader } })
-        }}
-    >
-        <Card className="responsiveCard"
-            overrides={{
-                Root: {
-                    style: {
-                        width: "423px",
-                        marginTop: "10px",
-                        marginBottom: "20px",
-                        height: "auto",
-                        borderRadius: "0",
-                        padding: '20px',
-                    }
-                }
-            }}
-        >
-            <StyledTitle style={{ fontSize: '15px', marginRight: '0', padding: '0' }}>
-                {leader.firstname} {leader.lastname}
-                <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
-                    style={{ height: '190px', width: '180px', alignSelf: "center", border: "none", marginLeft: '40px' }} />
-            </StyledTitle>
-            
-            <StyledBody>
-                <HeadingLevel >
-                    <Heading style={{ fontSize: "25px" }} styleLevel={6}>
-                        {leader.category}
-                        <br/>
-                        <span style={{fontSize: "15px"}}>{leader.average}</span>
-                    </Heading>
-                </HeadingLevel>
-            </StyledBody>
-        </Card>
-    </div>
-))}
+                        <div
+                            key={index}
+                            style={{ cursor: 'pointer', alignItems: "flex-start" }}
+                            onClick={() => {
+                                setIsSearchVisible(false)
+                                navigate(`/player/${leader.id}`, { state: { ...leader } })
+                            }}
+                        >
+                            <Card className="responsiveCard"
+                                overrides={{
+                                    Root: {
+                                        style: {
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent:"center",
+                                            alignItems:"center",
+                                            width: "285px",
+                                            marginTop: "0px",
+                                            marginBottom: "20px",
+                                            height: "400px",
+                                            borderRadius: "0",
+                                            padding: '20px',
+                                        }
+                                    }
+                                }}
+                            >
+                                <StyledTitle style={{ fontSize: '25px', marginRight: '0', padding: '0', textAlign:"center", marginBottom:"20px" }}>
+                                    {leader.firstname} {leader.lastname}
+                                </StyledTitle>
+
+                                <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
+                                    style={{ height: '190px', width: '260px', alignSelf: "center", border: "none", marginBottom:"35px" }}
+                                />
+
+                                <StyledBody>
+                                    <HeadingLevel >
+                                        <Heading style={{ fontSize: "25px", textAlign:"center", marginBottom:"-15px" }} styleLevel={6}>
+                                            {leader.category==="Points"?"PPG":leader.category==="Assists"?"APG":"RPG"}
+                                            <br />
+                                            <span style={{ fontSize: "15px" }}>{leader.average}</span>
+                                        </Heading>
+                                    </HeadingLevel>
+                                </StyledBody>
+                            </Card>
+
+                        </div>
+                    ))}
                 </div>
                 : <Spin></Spin>}
         </div>

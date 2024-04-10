@@ -1,9 +1,11 @@
-.teamleaderdisplaycards{
+.teamleaderdisplaycards {
     display: flex;
-    gap: 15px;
-
+    gap: 15;
+    width: 1300px;
     flex-wrap: wrap;
-    justify-content:center; 
-    align-items: center;
-    
+    justify-content:center;
+    align-items: flex-start;
+    // border: solid black;
+    margin-top: 0px;
+    padding-top: 0px;
 }

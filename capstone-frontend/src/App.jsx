@@ -143,6 +143,7 @@ function App() {
                       setCurrentUser={setCurrentUser}
                       isSearchVisible={isSearchVisible}
                       setIsSearchVisible={setIsSearchVisible}
+                      key={0}
                     />
                   }
                 />
