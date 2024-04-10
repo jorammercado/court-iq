@@ -319,9 +319,9 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     </Block>
                 </Block>
 
-                {eventIds && eventIds.length > 0 ? eventIds.map((eventId, index) => {
-                    return (
-                        <Block key={index} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                {eventIds && eventIds.length > 0 ? //eventIds.map((eventId, index) => {
+                    // return (
+                        <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                             <Block className="odds__l2" backgroundColor="black" style={{
                                 justifyContent: "center",
                                 alignItems: "center",
@@ -330,11 +330,10 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                 width: "1270px",
                                 marginBottom: "100px"
                             }}>
-                                <NBAGameOddsV2 eventId={eventId} />
+                                <NBAGameOddsV2 eventId={eventIds[0]} />
                             </Block>
                         </Block>
-                    )
-                })
+                 
                     :
                     <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                             <Block className="odds__l2" backgroundColor="black" color="white" style={{
