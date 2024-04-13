@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import "./SectionTwo.scss"
 
 const SectionTwo = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -67,10 +68,11 @@ const SectionTwo = () => {
 
   const giphyContainerStyle = {
     position: 'absolute',
-    right: 150,
-    bottom: 35,
-    zIndex: 0,
-    pointerEvents: 'none', 
+    right: 90,
+    left: 90,
+    bottom: -2,
+    zIndex: 2,
+    pointerEvents: 'none',
   };
 
   const contentOverlayStyle = {
@@ -79,27 +81,46 @@ const SectionTwo = () => {
     margin: "0",
     padding: "0",
     position: 'relative',
-    zIndex: 1, 
+    zIndex: 3,
   };
 
   return (
-    <section id="two" className="main style2 left dark fullscreen">
-
+    <section id="two" className="main style2 left dark fullscreen" style={{ zIndex: 1 }}>
+      {/* <div style={{ zIndex: 1, backgroundColor:"red" }}>test</div> */}
       <MoveInWhenVisible>
-        <div className="content box style2" style={{  position: 'relative', backgroundColor:"#faf7f2" }}>
+        <div className="content box style2" style={{ position: 'relative', backgroundColor: "black", zIndex: 4 }}>
+          <h3 style={{
+            color: "white",
+            backgroundColor: "black",
+            zIndex: 5,
+            position: "relative",
+            marginBottom: "110px",
+            marginTop: "-10px"
+          }}>Ask Anything About Basketball Stats</h3>
           <div style={giphyContainerStyle}>
             {/* <iframe src={giphyEmbedUrl} style={{ width: 400, height: 390, paddingBottom:"120px", border: 'none' }} allowFullScreen></iframe> */}
-            <iframe src="https://giphy.com/embed/nUMdnsYhklgaB2TWkK" style={{ border: 'solid white' }} allowFullScreen></iframe>
+            {/* <iframe src="https://giphy.com/embed/g623uVENzJhDI0lx40" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> */}
+            {/* <iframe src="https://giphy.com/embed/zYxfiQGXp4vtUKlhEN" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> */}
+            <iframe src="https://giphy.com/embed/g623uVENzJhDI0lx40" style={{ border: 'none', marginLeft: "-45px", marginBottom: "30px", width: "480px", height: "270px" }} allowFullScreen></iframe>
           </div>
           <div style={contentOverlayStyle}>
-            <header style={{ paddingBottom: "120px", marginTop:"-25px" }}>
-              <h3>Ask Anything About Basketball Stats</h3>
-              <h5 >Quick answers with our custom search engine</h5>
+            <header style={{ paddingBottom: "120px", marginTop: "-52px" }}>
             </header>
           </div>
+          <h5 style={{
+            color: "white",
+            backgroundColor: "black",
+            zIndex: 5,
+            position: "relative",
+            marginBottom: "-20px",
+            marginTop: "-30px",
+            textAlign: "left"
+          }}>Quick answers with our custom search engine, <br></br>
+            avaiable for any team, any player, multiple seasons.
+          </h5>
         </div>
       </MoveInWhenVisible>
-      <a href="#work" className="button style2 down anchored">Next</a>
+      <a href="#work" className="button style2 down anchored" style={{ zIndex: 5 }}>Next</a>
     </section>
   );
 };
