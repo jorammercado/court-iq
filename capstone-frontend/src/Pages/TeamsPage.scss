@@ -90,11 +90,11 @@
 
             .leadersHeading{
                 margin-top: 5px;
-                margin-left: 600px;
-                padding-bottom: 5px;
+                // margin-left: 509px;
+                padding-bottom: 5.5px;
 
                 @media (max-width: 1300px) {
-                    margin-left:inherit;
+                    margin-left:-508px;
                 }
 
             }

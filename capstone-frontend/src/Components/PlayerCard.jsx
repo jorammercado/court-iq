@@ -46,7 +46,7 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                     style: {
                         display: "flex",
                         justifyContent: "center",
-                        width: "316px",
+                        width: "252px",
                         height: "179px",
                         marginBottom: "5px",
                         backgroundColor: primaryColor,

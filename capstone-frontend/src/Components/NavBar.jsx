@@ -25,11 +25,10 @@ export default function NavBar({
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const [mainItems, setMainItems] = useState([
-        // { icon: null, label: "League Leaders" },
         { icon: null, label: "Rosters" },
         { icon: null, label: "Standings" },
-        { icon: null, label: "Compare" },
         { icon: null, label: "Headlines" },
+        { icon: null, label: "Glossary" },
     ]);
 
     useEffect(() => {
@@ -47,16 +46,14 @@ export default function NavBar({
 
     const updateMainItems = (width) => {
         const items = [
-            // { icon: null, label: "League Leaders" },
             { icon: null, label: "Rosters" },
             { icon: null, label: "Standings" },
-            // { icon: null, label: "Compare" },
             { icon: null, label: "Headlines" },
             { icon: null, label: "Glossary" },
         ];
 
         if (width >= 1136) {
-            items.unshift({ icon: null, label: "Search", id: "search" }); 
+            items.unshift({ icon: null, label: "Search", id: "search" });
         }
 
         setMainItems(items);
@@ -70,11 +67,6 @@ export default function NavBar({
 
     function handleMainItemSelect(item) {
         switch (item.label) {
-            // case "League Leaders":
-            //     setIsSearchVisible(false);
-            //     setIsGlossaryVisible(false);
-            //     navigate("/Search");
-            //     break;
             case "Rosters":
                 setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
@@ -151,7 +143,7 @@ export default function NavBar({
     };
 
     return (
-        <div >
+        <div style={{ position: 'relative', zIndex: 10 }}>
             <AppNavBar
                 title={
                     <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
@@ -183,11 +175,11 @@ export default function NavBar({
                     },
                     MainMenuItem: {
                         style: ({ $theme }) => ({
-                            outline: `none`,
+                            outline: `none`
                             // color: "blue"
                             // backgroundColor: $theme.colors.warning600
                         })
-                    }
+                    },
                 }}
                 username={currentUser ? currentUser.displayName : "User"}
                 usernameSubtitle={
