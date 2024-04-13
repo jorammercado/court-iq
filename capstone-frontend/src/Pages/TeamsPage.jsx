@@ -38,6 +38,44 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const fontsfamilies = ['bucks', 'bulls', 'cavaliers', 'celtics', 'clippers', 'grizzlies', 'hawks', 'heat', 'hornets', 'jazz', 'kings', 'knicks', 'lakers',
         'magic', 'mavericks', 'nets', 'nuggets', 'pacers', 'pelicans', 'pistons', 'raptors', 'rockets', 'spurs', 'suns', 'timberwolves', 'trailblazers', 'warriors', 'wizards', '76ers']
 
+    const teamOptions = [
+        { id: '1', label: 'Atlanta Hawks' },
+        { id: '2', label: 'Boston Celtics' },
+        { id: '4', label: 'Brooklyn Nets' },
+        { id: '5', label: 'Charlotte Hornets' },
+        { id: '6', label: 'Chicago Bulls' },
+        { id: '7', label: 'Cleveland Cavaliers' },
+        { id: '8', label: 'Dallas Mavericks' },
+        { id: '9', label: 'Denver Nuggets' },
+        { id: '10', label: 'Detroit Pistons' },
+        { id: '11', label: 'Golden State Warriors' },
+        { id: '14', label: 'Houston Rockets' },
+        { id: '15', label: 'Indiana Pacers' },
+        { id: '16', label: 'LA Clippers' },
+        { id: '17', label: 'Los Angeles Lakers' },
+        { id: '19', label: 'Memphis Grizzlies' },
+        { id: '20', label: 'Miami Heat' },
+        { id: '21', label: 'Milwaukee Bucks' },
+        { id: '22', label: 'Minnesota Timberwolves' },
+        { id: '23', label: 'New Orleans Pelicans' },
+        { id: '24', label: 'New York Knicks' },
+        { id: '25', label: 'Oklahoma City Thunder' },
+        { id: '26', label: 'Orlando Magic' },
+        { id: '27', label: 'Philadelphia 76ers' },
+        { id: '28', label: 'Phoenix Suns' },
+        { id: '29', label: 'Portland Trail Blazers' },
+        { id: '30', label: 'Sacramento Kings' },
+        { id: '31', label: 'San Antonio Spurs' },
+        { id: '38', label: 'Toronto Raptors' },
+        { id: '40', label: 'Utah Jazz' },
+        { id: '41', label: 'Washington Wizards' },
+    ];
+
+    function getRandomTeamId() {
+        const randomIndex = Math.floor(Math.random() * teamOptions.length);
+        return [teamOptions[randomIndex].id,teamOptions[randomIndex].label ]
+    }
+    const init = getRandomTeamId(); 
 
     const calculateMarginLeft = () => {
         const screenWidth = window.innerWidth;
@@ -63,13 +101,15 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     };
 
     const [team, setTeam] = useState({})
-    const [teamId, setTeamId] = useState('1');
+    const [teamId, setTeamId] = useState(init[0]);
     const [season, setSeason] = useState('2023');
     const [selectedSeason, setSelectedSeason] = useState(null);
     const [selectedTeam, setSelectedTeam] = useState(null);
-    const [selectedTeamName, setSelectedTeamName] = useState("Atlanta Hawks");
+    const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
     const [gamesInView, setGamesInView] = useState('5')
     const [eventIds, setEventIds] = useState([]);
+
+    // console.log(teamId, selectedTeamName); 
 
     const [isHighlighted, setIsHighlighted] = useState(false);
     useEffect(() => {
@@ -94,6 +134,22 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
             return () => clearTimeout(timer);
         }
     }, [season]);
+
+    const [isHighlightedLeaders, setIsHighlightedLeaders] = useState(false);
+    useEffect(() => {
+        if (selectedTeamName) {
+            setIsHighlightedLeaders(true);
+            setIsHighlightedSeason(true);
+            setIsHighlighted(true);
+            const timer = setTimeout(() => {
+                setIsHighlightedLeaders(false);
+                setIsHighlighted(false);
+                setIsHighlightedSeason(false);
+            }, 850);
+
+            return () => clearTimeout(timer);
+        }
+    }, [selectedTeamName]);
 
     const [avatarBackgroundColor, setAvatarBackgroundColor] = useState("none")
     useEffect(() => {
@@ -199,46 +255,14 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     ];
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
 
-    const teamOptions = [
-        { id: '1', label: 'Atlanta Hawks' },
-        { id: '2', label: 'Boston Celtics' },
-        { id: '4', label: 'Brooklyn Nets' },
-        { id: '5', label: 'Charlotte Hornets' },
-        { id: '6', label: 'Chicago Bulls' },
-        { id: '7', label: 'Cleveland Cavaliers' },
-        { id: '8', label: 'Dallas Mavericks' },
-        { id: '9', label: 'Denver Nuggets' },
-        { id: '10', label: 'Detroit Pistons' },
-        { id: '11', label: 'Golden State Warriors' },
-        { id: '14', label: 'Houston Rockets' },
-        { id: '15', label: 'Indiana Pacers' },
-        { id: '16', label: 'LA Clippers' },
-        { id: '17', label: 'Los Angeles Lakers' },
-        { id: '19', label: 'Memphis Grizzlies' },
-        { id: '20', label: 'Miami Heat' },
-        { id: '21', label: 'Milwaukee Bucks' },
-        { id: '22', label: 'Minnesota Timberwolves' },
-        { id: '23', label: 'New Orleans Pelicans' },
-        { id: '24', label: 'New York Knicks' },
-        { id: '25', label: 'Oklahoma City Thunder' },
-        { id: '26', label: 'Orlando Magic' },
-        { id: '27', label: 'Philadelphia 76ers' },
-        { id: '28', label: 'Phoenix Suns' },
-        { id: '29', label: 'Portland Trail Blazers' },
-        { id: '30', label: 'Sacramento Kings' },
-        { id: '31', label: 'San Antonio Spurs' },
-        { id: '38', label: 'Toronto Raptors' },
-        { id: '40', label: 'Utah Jazz' },
-        { id: '41', label: 'Washington Wizards' },
-    ];
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
 
     // console.log("FEVENT IDS:=", eventIds)
 
     return (
-        <Block className="parent">
+        <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
             <Block className="left">
-                <Block className="team__logo" $style={{ flexGrow: 1, zIndex: "1", marginLeft: `${marginLeft + 15}px` }}>
+                <Block className="team__logo" $style={{ flexGrow: 1, marginLeft: `${marginLeft + 15}px` }}>
                     <Avatar
                         overrides={{
                             Avatar: {
@@ -249,6 +273,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     height: 'auto',
                                     maxWidth: '100%',
                                     maxHeight: '100%',
+                                    zIndex: 1
                                 }),
                             },
                             Root: {
@@ -260,7 +285,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     overflow: 'visible',
                                     width: '120px',
                                     height: '120px',
-                                    backgroundColor: avatarBackgroundColor
+                                    backgroundColor: avatarBackgroundColor,
                                 }),
                             },
                         }}
@@ -282,7 +307,17 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     <Block className="teamLeaders">
                         <Block className="leadersHeading" style={{ justifyContent: "flex-start", alignItems: "flex-start", display: "flex", flexDirection: "row" }}>
                             <HeadingLevel >
-                                <Heading styleLevel={4} color="black" style={{ marginTop: "15px", justifyContent: "flex-start", marginBottom: "-5px" }}>Leaders</Heading>
+                                <Heading styleLevel={4} color="white"
+                                    style={{
+                                        marginTop: "35px",
+                                        paddingLeft: "89px",
+                                        paddingRight: "90px",
+                                        justifyContent: "flex-start",
+                                        marginBottom: "-5px",
+                                        backgroundColor: isHighlightedLeaders ? "#EA6607" : "black",
+                                        transition: 'background-color .85s ease-in-out',
+                                        marginLeft: "508px",
+                                    }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
                         <TeamPlayerLeaderCard
@@ -321,32 +356,32 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
                 {eventIds && eventIds.length > 0 ? //eventIds.map((eventId, index) => {
                     // return (
-                        <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                            <Block className="odds__l2" backgroundColor="black" style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                display: "flex",
-                                flexDirection: "row",
-                                width: "1270px",
-                                marginBottom: "100px"
-                            }}>
-                                <NBAGameOddsV2 eventId={eventIds[0]} />
-                            </Block>
+                    <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                        <Block className="odds__l2" backgroundColor="black" style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                            flexDirection: "row",
+                            width: "1270px",
+                            marginBottom: "100px"
+                        }}>
+                            <NBAGameOddsV2 eventId={eventIds[0]} />
                         </Block>
-                 
+                    </Block>
+
                     :
                     <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                            <Block className="odds__l2" backgroundColor="black" color="white" style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                display: "flex",
-                                flexDirection: "row",
-                                width: "1270px",
-                                marginBottom: "100px"
-                            }}>
-                                No Player Props currently available for this team, try another team
-                            </Block>
+                        <Block className="odds__l2" backgroundColor="black" color="white" style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                            flexDirection: "row",
+                            width: "1270px",
+                            marginBottom: "100px"
+                        }}>
+                            No Player Props currently available for this team, try another team
                         </Block>
+                    </Block>
                 }
 
             </Block>
@@ -390,10 +425,10 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={[
-                                { id: '2020', label: '2020-2021' },
-                                { id: '2021', label: '2021-2022' },
-                                { id: '2022', label: '2022-2023' },
                                 { id: '2023', label: '2023-2024' },
+                                { id: '2022', label: '2022-2023' },
+                                { id: '2021', label: '2021-2022' },
+                                { id: '2020', label: '2020-2021' },
                             ]}
                             labelKey="label"
                             valueKey="id"
@@ -425,10 +460,10 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={[
-                                { id: '50', label: '50' },
-                                { id: '20', label: '20' },
-                                { id: '10', label: '10' },
                                 { id: '5', label: '5' },
+                                { id: '10', label: '10' },
+                                { id: '20', label: '20' },
+                                { id: '55', label: '50' },
                             ]}
                             labelKey="label"
                             valueKey="id"

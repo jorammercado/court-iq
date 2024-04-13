@@ -8,4 +8,14 @@
     // border: solid black;
     margin-top: 0px;
     padding-top: 0px;
+
+    @media (max-width: 1300px) {
+        justify-content:center;
+    }
+
+    @media (max-width: 870px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
