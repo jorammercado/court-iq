@@ -186,6 +186,17 @@ const TeamStandingsV2 = () => {
     };
   });
 
+  const teamData = {
+    eastern: easternConference.map(team => ({
+      name: team.team.name,
+      logo: team.team.logo
+    })),
+    western: westernConference.map(team => ({
+      name: team.team.name,
+      logo: team.team.logo
+    }))
+  };
+
   function AvatarCell({
     src,
     title,
@@ -497,7 +508,7 @@ const TeamStandingsV2 = () => {
           width: "100%",
           marginBottom: "100px"
         }}>
-          <NBAGameOdds />
+          <NBAGameOdds teamData={teamData} />
         </Block>
       </Block>
     </Block>

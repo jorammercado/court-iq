@@ -2,10 +2,12 @@ import * as React from "react";
 import { Card as BaseCard, StyledBody } from "baseui/card";
 import Block from "baseui/block";
 
-const Card = ({ homeTeam, awayTeam, odds, data }) => {
+const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
+  
+
   const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"];
   const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards'];
-  console.log("Data Received:", data);
+
 
   const findBackgroundColor = (team1, team2) => {
     const index1 = teams.indexOf(team1);
@@ -42,18 +44,29 @@ const Card = ({ homeTeam, awayTeam, odds, data }) => {
     return `${formatter(estDate)} EST`;
   };
 
-  const gameDateTime = data ? formatDate(data) : 'Time Not Available';
+  const textStyle = {
+    fontSize: "16px",
+    fontWeight: "700",
+    color: "white",
+    margin: "5px 0", // Example margin
+    textAlign: "center",
+    textShadow: "0 0 18px Black"
+    
+  };
 
-  return  (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'row',
-      margin: "10px",
-      border: 'solid orange 3px',
-      textAlign: 'center',
-  
-    }}>
- <BaseCard
+  const imageStyle = {
+    width: '70px',
+    height: '70px',
+    objectFit: 'contain',
+    boxShadow: '0px 0px 2px 2px orange' // Adding a soft white glow
+  };
+
+
+
+  const gameDateTime = data ? formatDate(data) : 'Time Not Available';
+  return (
+    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid orange 3px', textAlign: 'center' }}>
+      <BaseCard
         overrides={{
           Root: {
             style: {
@@ -65,24 +78,25 @@ const Card = ({ homeTeam, awayTeam, odds, data }) => {
               justifyContent: 'center',
               alignItems: 'center',
               background: findBackgroundColor(homeTeam, awayTeam),
-              backgroundImage: `url('https://media.istockphoto.com/id/1146496553/photo/hardwood-maple-basketball-court-floor-viewed-from-above.jpg?s=612x612&w=0&k=20&c=Co17Ntpv-uPWgsVor66kcQc5SfL-fOK5AiL0bgpBhII='), ${findBackgroundColor(homeTeam, awayTeam)}`, // Change the URL to your hosted image
-              backgroundSize: 'cover', // Cover the entire area of the card
-              backgroundBlendMode: 'overlay' // Blend the background image with the gradient
+              backgroundImage: `url('image-url'), ${findBackgroundColor(homeTeam, awayTeam)}`,
+              backgroundSize: 'cover',
+              backgroundBlendMode: 'overlay'
             }
           }
         }}
       >
-        <StyledBody>
-          <div style={{ fontSize: "18px", fontWeight: "normal", color: "white", textAlign: 'center',fontWeight: "700" }}>
-            {"@"+homeTeam}<br/>
-            {"Game Time: " + gameDateTime}
+        <StyledBody style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <img src={homeLogo} alt={homeTeam} style={imageStyle} />
+          <div style={{ flex: '1' }}>
+            <div style={{ ...textStyle, fontSize: "18px" }}>{"@" + homeTeam}</div>
+            <div style={textStyle}>{"Game Time: " + gameDateTime}</div>
+            {odds.map((outcome, index) => (
+              <div key={index} style={textStyle}>
+                {outcome.team}: {outcome.price}
+              </div>
+            ))}
           </div>
-          <br></br>
-          {odds.map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", fontWeight: "700" }}>
-              {outcome.team}: {outcome.price}
-            </div>
-          ))}
+          <img src={awayLogo} alt={awayTeam} style={imageStyle} />
         </StyledBody>
       </BaseCard>
     </div>
