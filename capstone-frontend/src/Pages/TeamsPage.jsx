@@ -357,14 +357,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 {eventIds && eventIds.length > 0 ? //eventIds.map((eventId, index) => {
                     // return (
                     <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                        <Block className="odds__l2" backgroundColor="black" style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            display: "flex",
-                            flexDirection: "row",
-                            width: "1270px",
-                            marginBottom: "100px"
-                        }}>
+                        <Block className="oddsl2" >
                             <NBAGameOddsV2 eventId={eventIds[0]} />
                         </Block>
                     </Block>
