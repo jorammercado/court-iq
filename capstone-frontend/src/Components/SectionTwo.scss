@@ -1,18 +1,42 @@
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(10, 1fr); 
-    grid-template-rows: repeat(10, 1fr); 
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; 
-  }
-  
-  .grid-item {
-    width: 100%;
-    height: 100%;
-    transition: opacity 1s ease;
-    opacity: 0; 
-  }
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+
+
+
+    .grid-item {
+        transition: opacity 3s ease, background-image 3s ease, background-color 3s ease; 
+        opacity: 1;
+        box-sizing: border-box;
+        border-style: groove;
+        border-color: grey;
+        background-color: black;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px,
+            rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px,
+            rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+}
+
+// left info box
+.content {
+    position: relative;
+    z-index: 1;
+    border-style: groove;
+    border-color: grey;
+    border-left: none;
+    background-color: black;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}

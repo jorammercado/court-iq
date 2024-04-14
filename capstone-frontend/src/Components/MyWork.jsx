@@ -99,7 +99,7 @@ const MyWork = () => {
 
     return (
         <section id="work" className="main style3 primary" style={{ backgroundColor: "#faf7f2" }}>
-            <div className="content" style={{ backgroundColor: "#faf7f2", boxShadow: "none" }}>
+            <div className="content" style={{ backgroundColor: "#faf7f2", boxShadow: "none", borderStyle:"none" }}>
                 <header>
                     <h2>In Depth Prop Research</h2>
                     <h5 className="deep-dive-message">
