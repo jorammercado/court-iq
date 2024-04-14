@@ -78,7 +78,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
               justifyContent: 'center',
               alignItems: 'center',
               background: findBackgroundColor(homeTeam, awayTeam),
-              backgroundImage: `url('image-url'), ${findBackgroundColor(homeTeam, awayTeam)}`,
+              backgroundImage: `url('https://media.istockphoto.com/id/1146496553/photo/hardwood-maple-basketball-court-floor-viewed-from-above.jpg?s=612x612&w=0&k=20&c=Co17Ntpv-uPWgsVor66kcQc5SfL-fOK5AiL0bgpBhII='), ${findBackgroundColor(homeTeam, awayTeam)}`,
               backgroundSize: 'cover',
               backgroundBlendMode: 'overlay'
             }
