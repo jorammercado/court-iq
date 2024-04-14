@@ -485,7 +485,7 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black", width: "1270px" }}>h2h Props</Heading>
+          <Heading styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black", width: "1270px" }}>NBA Odds</Heading>
         </HeadingLevel>
       </Block>
       <Block width="1270px" className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="10px">

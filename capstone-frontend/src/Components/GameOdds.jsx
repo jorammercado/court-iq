@@ -5,6 +5,7 @@ import "./GameOdds.scss"
 
 const NBAGameOdds = () => {
   const [draftKingsOdds, setDraftKingsOdds] = useState([]);
+  const [apiResponse, setApiResponse] = useState([]); // New state for storing the full response
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,20 +22,24 @@ const NBAGameOdds = () => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
-        console.log("RESPONSERESPONSERESPONSE: ====",response)
+        console.log(response.data, "<------LOOOK HERE ERICK"); // Log full data for debugging
+
+        // Store the entire response in state
+        setApiResponse(response.data);
 
         const draftKingsBets = response.data.map(game => {
           const draftKingsMarket = game.bookmakers.find(bookmaker => bookmaker.key === 'draftkings');
           if (draftKingsMarket) {
             const h2hMarket = draftKingsMarket.markets.find(market => market.key === 'h2h');
             if (h2hMarket) {
-              console.log("TTTTTTTTTTTT: ", h2hMarket)
               return {
-                game: game.away_team, // Assuming you want to use away_team as title
+                homeTeam: game.home_team,
+                awayTeam: game.away_team,
                 odds: h2hMarket.outcomes.map(outcome => ({
                   team: outcome.name,
-                  price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(), // Add plus sign for positive odds
+                  price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
                 })),
+                additionalData: game.commence_time, // Assuming there is some additional_info you want to pass
               };
             }
           }
@@ -58,7 +63,7 @@ const NBAGameOdds = () => {
   return (
     <div className='ContentGameOdds'>
       {draftKingsOdds.map((game, index) => (
-        <Card key={index} title={game.game} odds={game.odds} />
+        <Card key={index} homeTeam={game.homeTeam} awayTeam={game.awayTeam} odds={game.odds} data={game.additionalData} />
       ))}
     </div>
   );

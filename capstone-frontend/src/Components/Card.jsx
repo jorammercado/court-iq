@@ -1,89 +1,89 @@
 import * as React from "react";
-import { Card as BaseCard, StyledBody, StyledAction } from "baseui/card";
-import Block from "baseui/block"
-import { Button } from "baseui/button";
+import { Card as BaseCard, StyledBody } from "baseui/card";
+import Block from "baseui/block";
 
-const Card = ({ title, odds }) => {
-  const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
-  const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#FDBB30", "#B8C4CA", "#FEC524", "#BEC0C2", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#F9A01B", "#E31837"]
-  const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons',
-    'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves',
-    'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings',
-    'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
+const Card = ({ homeTeam, awayTeam, odds, data }) => {
+  const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"];
+  const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards'];
+  console.log("Data Received:", data);
 
-  const findBackgroundColor = () => {
-    const teamIndex = teams.indexOf(title);
-    if (teamIndex !== -1) {
-      return primaryColors[teamIndex];
-    }
-    return "black";
+  const findBackgroundColor = (team1, team2) => {
+    const index1 = teams.indexOf(team1);
+    const index2 = teams.indexOf(team2);
+    const color1 = index1 !== -1 ? primaryColors[index1] : "black";
+    const color2 = index2 !== -1 ? primaryColors[index2] : "black";
+    return `linear-gradient(to right, ${color1}, ${color2})`;
   };
 
-  const findColor = () => {
-    const teamIndex = teams.indexOf(title);
-    if (teamIndex !== -1) {
-      return secondaryColors[teamIndex];
-    }
-    return "white";
+  const formatDate = (dateString) => {
+    const utcDate = new Date(dateString);
+    const estDate = new Date(utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000));
+  
+    // Determine if the date is in DST
+    const isDst = (date) => {
+      const marSecondSunday = new Date(date.getFullYear(), 2, 14 - (new Date(date.getFullYear(), 2, 1).getDay()));
+      const novFirstSunday = new Date(date.getFullYear(), 10, 7 - (new Date(date.getFullYear(), 10, 1).getDay()));
+      return date >= marSecondSunday && date < novFirstSunday;
+    };
+  
+    // Adjust for Eastern Time Zone (5 hours behind UTC; 4 hours during DST)
+    estDate.setHours(estDate.getHours() - (isDst(estDate) ? 4 : 5));
+  
+    const formatter = (date) => {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      return hours + ':' + minutes + ' ' + ampm;
+    };
+  
+    return `${formatter(estDate)} EST`;
   };
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px", border:'solid orange 3px', textAlign:'center' }} >
+  const gameDateTime = data ? formatDate(data) : 'Time Not Available';
 
-
-      <BaseCard
+  return  (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'row',
+      margin: "10px",
+      border: 'solid orange 3px',
+      textAlign: 'center',
+  
+    }}>
+ <BaseCard
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "278px",  height: "200px", borderRadius: "0px", justifyContent:'center', alignItems:'center',
-              backgroundColor: findBackgroundColor()
+              display: 'flex',
+              flexDirection: 'row',
+              width: "398px",
+              height: "200px",
+              borderRadius: "0px",
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: findBackgroundColor(homeTeam, awayTeam),
+              backgroundImage: `url('https://media.istockphoto.com/id/1146496553/photo/hardwood-maple-basketball-court-floor-viewed-from-above.jpg?s=612x612&w=0&k=20&c=Co17Ntpv-uPWgsVor66kcQc5SfL-fOK5AiL0bgpBhII='), ${findBackgroundColor(homeTeam, awayTeam)}`, // Change the URL to your hosted image
+              backgroundSize: 'cover', // Cover the entire area of the card
+              backgroundBlendMode: 'overlay' // Blend the background image with the gradient
             }
-          },
-          Title: {
-            style: ({ $theme }) => ({
-              fontSize: "15px",
-              fontWeight: "normal",
-              color: findColor()
-            })
-          },
-        }}
-        title={"Home Team: " + title}
-      >
-        <StyledBody>
-          {odds.slice(odds.length / 3, 2 * odds.length / 3).map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
-              {outcome.team}: {outcome.price}
-            </div>
-          ))}
-        </StyledBody>
-
-      </BaseCard>
-      <BaseCard
-        overrides={{
-          Root: {
-            style: {
-              display: 'flex', flexDirection: 'row', width: "278px", height: "200px", borderRadius: "0px", justifyContent:'center', alignItems:'center',
-              backgroundColor: findBackgroundColor()
-            }
-          },
-          Title: {
-            style: ({ $theme }) => ({
-              fontSize: "15px",
-              fontWeight: "normal",
-              color: findColor()
-            })
           }
         }}
-        title={"Home Team: " + title}
       >
         <StyledBody>
-          {odds.slice(2 * odds.length / 3, odds.length).map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
+          <div style={{ fontSize: "18px", fontWeight: "normal", color: "white", textAlign: 'center',fontWeight: "700" }}>
+            {"@"+homeTeam}<br/>
+            {"Game Time: " + gameDateTime}
+          </div>
+          <br></br>
+          {odds.map((outcome, index) => (
+            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", fontWeight: "700" }}>
               {outcome.team}: {outcome.price}
             </div>
           ))}
         </StyledBody>
-
       </BaseCard>
     </div>
   );
