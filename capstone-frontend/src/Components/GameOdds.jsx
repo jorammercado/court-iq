@@ -5,6 +5,9 @@ import "./GameOdds.scss";
 
 const NBAGameOdds = ({ teamData }) => {
   const [draftKingsOdds, setDraftKingsOdds] = useState([]);
+  const [fanduelOdds, setFanduelOdds] = useState([]);
+  const [betMGMOdds, setBetMGMOdds] = useState([]);
+  const [bovadaOdds, setBovadaOdds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   console.log("this is the teamData", teamData)
@@ -42,7 +45,67 @@ const NBAGameOdds = ({ teamData }) => {
           return null;
         }).filter(Boolean);
 
+        const enrichedOdds2 = response.data.map(game => {
+          const bookmaker2 = game.bookmakers.find(b => b.key === 'fanduel');
+          const market2 = bookmaker2?.markets.find(m => m.key === 'h2h');
+          if (market2) {
+            return {
+              homeTeam: game.home_team,
+              awayTeam: game.away_team,
+              odds: market2.outcomes.map(outcome => ({
+                team: outcome.name,
+                price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
+              })),
+              additionalData: game.commence_time,
+              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
+              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
+        const enrichedOdds3 = response.data.map(game => {
+          const bookmaker3 = game.bookmakers.find(b => b.key === 'betmgm');
+          const market3 = bookmaker3?.markets.find(m => m.key === 'h2h');
+          if (market3) {
+            return {
+              homeTeam: game.home_team,
+              awayTeam: game.away_team,
+              odds: market3.outcomes.map(outcome => ({
+                team: outcome.name,
+                price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
+              })),
+              additionalData: game.commence_time,
+              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
+              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
+        const enrichedOdds4 = response.data.map(game => {
+          const bookmaker4 = game.bookmakers.find(b => b.key === 'bovada');
+          const market4 = bookmaker4?.markets.find(m => m.key === 'h2h');
+          if (market4) {
+            return {
+              homeTeam: game.home_team,
+              awayTeam: game.away_team,
+              odds: market4.outcomes.map(outcome => ({
+                team: outcome.name,
+                price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
+              })),
+              additionalData: game.commence_time,
+              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
+              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
         setDraftKingsOdds(enrichedOdds);
+        setFanduelOdds(enrichedOdds2);
+        setBetMGMOdds(enrichedOdds3);
+        setBovadaOdds(enrichedOdds4);
       } catch (error) {
         console.error("Error fetching odds:", error);
         setError(error.message);
@@ -59,7 +122,7 @@ const NBAGameOdds = ({ teamData }) => {
 
   return (
     <div className='ContentGameOdds'>
-      {draftKingsOdds.map((game, index) => (
+      {draftKingsOdds && draftKingsOdds.length > 0 ? draftKingsOdds.map((game, index) => (
         <Card
           key={index}
           homeTeam={game.homeTeam}
@@ -68,8 +131,45 @@ const NBAGameOdds = ({ teamData }) => {
           data={game.additionalData}
           homeLogo={game.homeLogo}
           awayLogo={game.awayLogo}
+          bookmaker="DraftKings"
         />
-      ))}
+      )) : <></>}
+      {fanduelOdds && fanduelOdds.length > 0 ? fanduelOdds.map((game, index) => (
+        <Card
+          key={index}
+          homeTeam={game.homeTeam}
+          awayTeam={game.awayTeam}
+          odds={game.odds}
+          data={game.additionalData}
+          homeLogo={game.homeLogo}
+          awayLogo={game.awayLogo}
+          bookmaker="FanDuel"
+        />
+      )) : <></>}
+      {betMGMOdds && betMGMOdds.length > 0 ? betMGMOdds.map((game, index) => (
+        <Card
+          key={index}
+          homeTeam={game.homeTeam}
+          awayTeam={game.awayTeam}
+          odds={game.odds}
+          data={game.additionalData}
+          homeLogo={game.homeLogo}
+          awayLogo={game.awayLogo}
+          bookmaker="BetMGM"
+        />
+      )) : <></>}
+      {bovadaOdds && bovadaOdds.length > 0 ? bovadaOdds.map((game, index) => (
+        <Card
+          key={index}
+          homeTeam={game.homeTeam}
+          awayTeam={game.awayTeam}
+          odds={game.odds}
+          data={game.additionalData}
+          homeLogo={game.homeLogo}
+          awayLogo={game.awayLogo}
+          bookmaker="Bovada"
+        />
+      )) : <></>}
     </div>
   );
 };
