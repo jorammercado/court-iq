@@ -109,46 +109,67 @@ function PlayerComparison() {
     const player1DataSet = {
       label: player1Data.nbaComName,
       data: [
-        player1Data.stats.gamePlayed,
+        player1Data.stats.gamesPlayed,
         player1Data.stats.pts,
         player1Data.stats.ast,
         player1Data.stats.reb,
         player1Data.stats.blk,
       ],
-      backgroundColor: "blue",
+
+      backgroundColor: "#ea6607",
+
+
       borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
+      color: "black"
     };
 
     const player2DataSet = {
       label: player2Data.nbaComName,
       data: [
-        player2Data.stats.gamePlayed,
+        player2Data.stats.gamesPlayed,
         player2Data.stats.pts,
         player2Data.stats.ast,
         player2Data.stats.reb,
         player2Data.stats.blk,
       ],
-      backgroundColor: "red",
+
+      backgroundColor: "white",
+
+
       borderColor: "rgba(255, 99,132,1)",
       borderWidth: 1,
     };
+ 
+
+
+    
+    new Chart(ctx, {
 
     chartRef.current = new Chart(ctx, {
+
       type: "bar",
       data: {
         labels: ["Games Played", "Points", "Assists", "Rebounds", "Blocks"],
         datasets: [player1DataSet, player2DataSet],
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true,
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
           },
-        },
+          title: {
+            display: true,
+            text: 'Court IQ Comparision'
+          }
+        }
       },
     });
   };
+
+
+
 
   useEffect(() => {
     if (player1Data && player2Data) {
@@ -162,6 +183,7 @@ function PlayerComparison() {
       }
     };
   }, [player1Data, player2Data]);
+
 
   const inputOverrides = {
     Root: {
@@ -323,13 +345,12 @@ function PlayerComparison() {
             </StyledButton>
           </Block>
         </Block>
-
         <div className="player-cards-container">
           <div className="player-card">
             {player1Data && (
               <Block
-                className="player-info animate__animated animate__backInLeft"
-                style={{ backgroundColor: "#141414" }}
+              className="player-info animate__animated animate__backInLeft"
+              style={{ backgroundColor: "#141414" }}
               >
                 <img
                   style={{ backgroundColor: "#141414" }}
@@ -384,12 +405,12 @@ function PlayerComparison() {
               </Block>
             )}
           </div>
-
+       
           <div className="player-card">
             {player2Data && (
               <Block
-                className="player-info animate__animated animate__backInRight"
-                style={{ backgroundColor: "#141414" }}
+              className="player-info animate__animated animate__backInRight"
+              style={{ backgroundColor: "#141414" }}
               >
                 <img
                   style={{ backgroundColor: "#141414" }}
@@ -445,8 +466,10 @@ function PlayerComparison() {
             )}
           </div>
         </div>
+        <div className="chart-container">
+         <canvas  id="comparisionChart"></canvas>
+         </div>
       </Block>
-      <canvas id="comparisionChart"></canvas>
     </Block>
   );
 }
