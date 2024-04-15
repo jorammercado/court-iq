@@ -299,7 +299,6 @@ const TeamStandingsV2 = () => {
       <Block display="flex" justifyContent="center" alignItems="center" flexDirection="row">
         {!isMobile ?
           <Block
-            display="flex"
             flexDirection="column"
             justifyContent="space-between"
             className="west-leaders"
@@ -466,7 +465,6 @@ const TeamStandingsV2 = () => {
 
         {!isMobile ?
           <Block
-            display="flex"
             flexDirection="column"
             justifyContent="space-between"
             className="east-leaders"
@@ -496,11 +494,11 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black", width: "1270px" }}>NBA Odds</Heading>
+          <Heading className="heading" styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", zIndex: "10", backgroundColor: "black" }}>NBA h2h Ventures</Heading>
         </HeadingLevel>
       </Block>
-      <Block width="1270px" className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
-        <Block className="odds__l2" backgroundColor="black" style={{
+      <Block  className="oddsT" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
+        <Block className="odds__l2T" backgroundColor="black" style={{
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
