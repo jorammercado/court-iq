@@ -101,7 +101,6 @@ function PlayerComparison() {
   const renderChart = () => {
     const ctx = document.getElementById("comparisionChart").getContext("2d");
 
-    // if a chart instance already exists, destroy it
     if (chartRef.current) {
       chartRef.current.destroy();
     }
@@ -115,13 +114,9 @@ function PlayerComparison() {
         player1Data.stats.reb,
         player1Data.stats.blk,
       ],
-
       backgroundColor: "#ea6607",
-
-
       borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
-      color: "black"
     };
 
     const player2DataSet = {
@@ -133,21 +128,12 @@ function PlayerComparison() {
         player2Data.stats.reb,
         player2Data.stats.blk,
       ],
-
       backgroundColor: "white",
-
-
-      borderColor: "rgba(255, 99,132,1)",
+      borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
     };
- 
-
-
-    
-    new Chart(ctx, {
 
     chartRef.current = new Chart(ctx, {
-
       type: "bar",
       data: {
         labels: ["Games Played", "Points", "Assists", "Rebounds", "Blocks"],
@@ -161,15 +147,12 @@ function PlayerComparison() {
           },
           title: {
             display: true,
-            text: 'Court IQ Comparision'
+            text: 'Court IQ Comparison'
           }
         }
       },
     });
   };
-
-
-
 
   useEffect(() => {
     if (player1Data && player2Data) {
@@ -349,8 +332,8 @@ function PlayerComparison() {
           <div className="player-card">
             {player1Data && (
               <Block
-              className="player-info animate__animated animate__backInLeft"
-              style={{ backgroundColor: "#141414" }}
+                className="player-info animate__animated animate__backInLeft"
+                style={{ backgroundColor: "#141414" }}
               >
                 <img
                   style={{ backgroundColor: "#141414" }}
@@ -405,12 +388,12 @@ function PlayerComparison() {
               </Block>
             )}
           </div>
-       
+
           <div className="player-card">
             {player2Data && (
               <Block
-              className="player-info animate__animated animate__backInRight"
-              style={{ backgroundColor: "#141414" }}
+                className="player-info animate__animated animate__backInRight"
+                style={{ backgroundColor: "#141414" }}
               >
                 <img
                   style={{ backgroundColor: "#141414" }}
@@ -467,11 +450,12 @@ function PlayerComparison() {
           </div>
         </div>
         <div className="chart-container">
-         <canvas  id="comparisionChart"></canvas>
-         </div>
+          <canvas id="comparisionChart"></canvas>
+        </div>
       </Block>
     </Block>
   );
 }
 
 export default PlayerComparison;
+
