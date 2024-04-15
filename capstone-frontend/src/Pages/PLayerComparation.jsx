@@ -110,7 +110,7 @@ function PlayerComparison() {
         player1Data.stats.blk,
       ],
       backgroundColor: "#ea6607",
-      borderColor: "rbga(255, 99, 132, 1)",
+      borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
       color: "black"
     };
@@ -125,7 +125,7 @@ function PlayerComparison() {
         player2Data.stats.blk,
       ],
       backgroundColor: "white",
-      borderColor: "rbga(255, 99,132,1)",
+      borderColor: "rgba(255, 99,132,1)",
       borderWidth: 1,
     };
  
