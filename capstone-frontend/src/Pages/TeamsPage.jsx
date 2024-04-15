@@ -366,12 +366,13 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     :
                     <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                         <Block className="odds__l2" backgroundColor="black" color="white" style={{
-                            justifyContent: "center",
-                            alignItems: "center",
+                            justifyContent: "flex-start",
+                            alignItems: "flex-start",
                             display: "flex",
                             flexDirection: "row",
                             width: "100%",
-                            marginBottom: "100px"
+                            marginBottom: "100px",
+                            maxWidth:"1300px"
                         }}>
                             <Block display="flex" justifyContent="flex-start" alignItems="center" marginTop="10px">
                                 <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >

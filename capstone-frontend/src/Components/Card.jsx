@@ -1,9 +1,12 @@
 import * as React from "react";
 import { Card as BaseCard, StyledBody } from "baseui/card";
 import Block from "baseui/block";
+import "./Card.scss"
+const draftFamily = 'draftkings'
+const drafKingsColors = ["#9AC434", "#F46C22", "#D8D8D8", "#000000 "]
 
 const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
-  
+  // console.log("DATA ", data)
 
   const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"];
   const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards'];
@@ -20,17 +23,17 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
   const formatDate = (dateString) => {
     const utcDate = new Date(dateString);
     const estDate = new Date(utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000));
-  
+
     // Determine if the date is in DST
     const isDst = (date) => {
       const marSecondSunday = new Date(date.getFullYear(), 2, 14 - (new Date(date.getFullYear(), 2, 1).getDay()));
       const novFirstSunday = new Date(date.getFullYear(), 10, 7 - (new Date(date.getFullYear(), 10, 1).getDay()));
       return date >= marSecondSunday && date < novFirstSunday;
     };
-  
+
     // Adjust for Eastern Time Zone (5 hours behind UTC; 4 hours during DST)
     estDate.setHours(estDate.getHours() - (isDst(estDate) ? 4 : 5));
-  
+
     const formatter = (date) => {
       let hours = date.getHours();
       let minutes = date.getMinutes();
@@ -40,7 +43,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
       minutes = minutes < 10 ? '0' + minutes : minutes;
       return hours + ':' + minutes + ' ' + ampm;
     };
-  
+
     return `${formatter(estDate)} EST`;
   };
 
@@ -50,8 +53,8 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
     color: "white",
     margin: "5px 0", // Example margin
     textAlign: "center",
-    textShadow: "0 0 18px Black"
-    
+    textShadow: "0 0 18px Black",
+    lineHeight: "20px"
   };
 
   const imageStyle = {
@@ -65,7 +68,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
 
   const gameDateTime = data ? formatDate(data) : 'Time Not Available';
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid orange 3px', textAlign: 'center' }}>
+    <div className="h2hcard" style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid orange 3px', textAlign: 'center' }}>
       <BaseCard
         overrides={{
           Root: {
@@ -89,12 +92,18 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
           <img src={homeLogo} alt={homeTeam} style={imageStyle} />
           <div style={{ flex: '1' }}>
             <div style={{ ...textStyle, fontSize: "18px" }}>{"@" + homeTeam}</div>
-            <div style={textStyle}>{"Game Time: " + gameDateTime}</div>
+            <div style={textStyle}>{"Game Time: " +
+              data ? new Date(data).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] + `, ${gameDateTime}` : ""
+            }</div>
             {odds.map((outcome, index) => (
               <div key={index} style={textStyle}>
                 {outcome.team}: {outcome.price}
               </div>
             ))}
+            Bookmaker: &nbsp; <span style={{ color: drafKingsColors[0], fontFamily: draftFamily, fontSize: "11px" }} >
+              {/* <img width="18" height="18" src="https://img.icons8.com/color-glass/48/medieval-crown.png" alt="medieval-crown" /> */}
+              Draft Kings
+            </span>
           </div>
           <img src={awayLogo} alt={awayTeam} style={imageStyle} />
         </StyledBody>
