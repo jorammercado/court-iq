@@ -3,9 +3,15 @@ import { Card as BaseCard, StyledBody } from "baseui/card";
 import Block from "baseui/block";
 import "./Card.scss"
 const draftFamily = 'draftkings'
+const fanDuelFamily = 'fanduel'
+const betmgmFamily = 'caesars'
+const bovadaFamily = 'bovada'
 const drafKingsColors = ["#9AC434", "#F46C22", "#D8D8D8", "#000000 "]
+const fanDuelColors = ["#1381E0", "#818E95", "#1F375B", "#0E67B3"]
+const betmgmColors = ["#bda871"]
+const bovadaColors = ["#cc0000"]
 
-const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
+const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker }) => {
   // console.log("DATA ", data)
 
   const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"];
@@ -100,9 +106,17 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo }) => {
                 {outcome.team}: {outcome.price}
               </div>
             ))}
-            Bookmaker: &nbsp; <span style={{ color: drafKingsColors[0], fontFamily: draftFamily, fontSize: "11px" }} >
-              {/* <img width="18" height="18" src="https://img.icons8.com/color-glass/48/medieval-crown.png" alt="medieval-crown" /> */}
-              Draft Kings
+            Bookmaker: &nbsp; <span style={{
+              // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+              fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
+              fontSize: bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
+              // backgroundColor: bookmaker === "FanDuel" ? "#202020" : bookmaker === "Bovada" ? "#202020" : bookmaker === "BetMGM" ? "#202020" : "inherit",
+              borderRadius: bookmaker === "FanDuel" ? "1px" : bookmaker === "Bovada" ? "1px" : bookmaker === "BetMGM" ? "1px" : "inherit",
+              textDecoration: bookmaker === "DraftKings" ? "underline" : bookmaker === "FanDuel" ? "underline" : bookmaker === "Bovada" ? "underline" : bookmaker === "BetMGM" ? "underline" : "inherit",
+              textDecorationColor: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+              textDecorationThickness: bookmaker === "DraftKings" || bookmaker === "FanDuel" || bookmaker === "Bovada" || bookmaker === "BetMGM" ? "3px" : "inherit"
+            }} >
+              {bookmaker === "DraftKings" ? "Draft Kings" : bookmaker === "FanDuel" ? "FanDuel" : bookmaker === "Bovada" ? "Bovada" : bookmaker === "BetMGM" ? "BetMGM" : "unknown"}
             </span>
           </div>
           <img src={awayLogo} alt={awayTeam} style={imageStyle} />
