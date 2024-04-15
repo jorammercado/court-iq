@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
-import image01 from "../Pages/images/thumbs/01.jpg"
-import image02 from "../Pages/images/thumbs/02.jpg"
-import image03 from "../Pages/images/thumbs/03.jpg"
-import image04 from "../Pages/images/thumbs/04.jpg"
-import image05 from "../Pages/images/thumbs/05.jpg"
-import image06 from "../Pages/images/thumbs/06.jpg"
+import image01 from "../Pages/images/thumbs/1.png"
+import image02 from "../Pages/images/thumbs/2.png"
+import image03 from "../Pages/images/thumbs/3.png"
+import image04 from "../Pages/images/thumbs/4.png"
+import image05 from "../Pages/images/thumbs/5.png"
+import image06 from "../Pages/images/thumbs/6.png"
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import searchImage from "../Pages/css/images/search.png"
+import "./MyWork.scss"
 
 const MyWork = () => {
 
@@ -110,7 +111,7 @@ const MyWork = () => {
                     <article className="from-left">
                         <MoveInWhenVisible>
                             <div className="image fit">
-                                <img src={image01} ref={ref} title="The Anonymous Red" alt="" />
+                                <img src={image06} ref={ref} title="The Anonymous Red" alt="" />
                             </div>
                         </MoveInWhenVisible>
                     </article>
@@ -145,7 +146,7 @@ const MyWork = () => {
                     <article className="from-right">
                         <MoveInWhenVisibleRight>
                             <div className="image fit">
-                                <img src={image06} title="Bent IX" alt="" />
+                                <img src={image01} title="Bent IX" alt="" />
                             </div>
                         </MoveInWhenVisibleRight>
                     </article>
