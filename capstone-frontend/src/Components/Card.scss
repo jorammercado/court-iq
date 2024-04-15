@@ -1,0 +1,11 @@
+.h2hcard {
+    width: 398px;
+
+    @media (max-width: 470px) {
+        max-width: 300px
+    }
+
+    @media (max-width: 370px) {
+        max-width: 200px
+    }
+}
