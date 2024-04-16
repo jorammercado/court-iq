@@ -15,6 +15,53 @@
   // max-width: 55%;
   margin-top: 0px;
 
+  @media (max-width: 1300px) {
+    max-width: 1100px !important;
+  }
+
+  @media (max-width: 1265px) {
+    max-width: 1050px !important;
+  }
+
+  @media (max-width: 1215px) {
+    max-width: 975px !important;
+  }
+
+  @media (max-width: 1080px) {
+    max-width: 900px !important;
+  }
+
+  @media (max-width: 1015px) {
+    max-width: 800px !important;
+  }
+
+  @media (max-width: 915px) {
+    max-width: 700px !important;
+  }
+
+  @media (max-width: 815px) {
+    max-width: 600px !important;
+  }
+
+  @media (max-width: 715px) {
+    max-width: 500px !important;
+  }
+
+  @media (max-width: 605px) {
+    max-width: 400px !important;
+  }
+
+  @media (max-width: 470px) {
+    max-width: 300px !important;
+  }
+
+  @media (max-width: 370px) {
+    max-width: 200px !important;
+  }
+
+
+
+
   .team__title {
     display: flex;
     justify-content: center;
@@ -61,5 +108,111 @@
       background-color: #f0f0f0;
       font-weight: bold;
     }
+  }
+}
+
+.east-leaders {
+  display: "flex";
+
+  @media (max-width: 1300px) {
+    display: none;
+  }
+}
+
+.west-leaders {
+  display: "flex";
+
+  @media (max-width: 1300px) {
+    display: none;
+  }
+}
+
+.standings {
+  .oddsT {
+    width: 1270px;
+
+    @media (max-width: 1265px) {
+      max-width: 1050px
+    }
+
+    @media (max-width: 1215px) {
+      max-width: 975px
+    }
+
+    @media (max-width: 1080px) {
+      max-width: 900px
+    }
+
+    @media (max-width: 1015px) {
+      max-width: 800px
+    }
+
+    @media (max-width: 915px) {
+      max-width: 700px
+    }
+
+    @media (max-width: 815px) {
+      max-width: 600px
+    }
+
+    @media (max-width: 715px) {
+      max-width: 500px
+    }
+
+    @media (max-width: 605px) {
+      max-width: 400px
+    }
+
+    @media (max-width: 470px) {
+      max-width: 300px
+    }
+
+    @media (max-width: 370px) {
+      max-width: 200px
+    }
+  }
+}
+
+.heading {
+  width: 1270px;
+
+  @media (max-width: 1265px) {
+    max-width: 1050px
+  }
+
+  @media (max-width: 1215px) {
+    max-width: 975px
+  }
+
+  @media (max-width: 1080px) {
+    max-width: 900px
+  }
+
+  @media (max-width: 1015px) {
+    max-width: 800px
+  }
+
+  @media (max-width: 915px) {
+    max-width: 700px
+  }
+
+  @media (max-width: 815px) {
+    max-width: 600px
+  }
+
+  @media (max-width: 715px) {
+    max-width: 500px
+  }
+
+  @media (max-width: 605px) {
+    max-width: 400px
+  }
+
+  @media (max-width: 470px) {
+    max-width: 300px
+  }
+
+  @media (max-width: 370px) {
+    max-width: 200px
   }
 }

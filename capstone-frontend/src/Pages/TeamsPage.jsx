@@ -13,7 +13,8 @@ import {
     LabelXSmall,
     HeadingLarge,
     HeadingMedium,
-    HeadingSmall
+    HeadingSmall,
+    HeadingXSmall
 } from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
@@ -73,9 +74,9 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
     function getRandomTeamId() {
         const randomIndex = Math.floor(Math.random() * teamOptions.length);
-        return [teamOptions[randomIndex].id,teamOptions[randomIndex].label ]
+        return [teamOptions[randomIndex].id, teamOptions[randomIndex].label]
     }
-    const init = getRandomTeamId(); 
+    const init = getRandomTeamId();
 
     const calculateMarginLeft = () => {
         const screenWidth = window.innerWidth;
@@ -357,14 +358,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 {eventIds && eventIds.length > 0 ? //eventIds.map((eventId, index) => {
                     // return (
                     <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                        <Block className="odds__l2" backgroundColor="black" style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            display: "flex",
-                            flexDirection: "row",
-                            width: "1270px",
-                            marginBottom: "100px"
-                        }}>
+                        <Block className="oddsl2" >
                             <NBAGameOddsV2 eventId={eventIds[0]} />
                         </Block>
                     </Block>
@@ -372,14 +366,19 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     :
                     <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                         <Block className="odds__l2" backgroundColor="black" color="white" style={{
-                            justifyContent: "center",
-                            alignItems: "center",
+                            justifyContent: "flex-start",
+                            alignItems: "flex-start",
                             display: "flex",
                             flexDirection: "row",
-                            width: "1270px",
-                            marginBottom: "100px"
+                            width: "100%",
+                            marginBottom: "100px",
+                            maxWidth:"1300px"
                         }}>
-                            No Player Props currently available for this team, try another team
+                            <Block display="flex" justifyContent="flex-start" alignItems="center" marginTop="10px">
+                                <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >
+                                    No Player Props currently available for this team, try another team.
+                                </HeadingXSmall>
+                            </Block>
                         </Block>
                     </Block>
                 }

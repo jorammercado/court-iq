@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./PLayerComparation.scss";
 import images from "../constants/images";
@@ -20,6 +20,7 @@ function PlayerComparison() {
   const [player2Data, setPlayer2Data] = useState(null);
   const [padding, setPadding] = useState(window.innerWidth / 100);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const chartRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -110,6 +111,10 @@ function PlayerComparison() {
   const renderChart = () => {
     const ctx = document.getElementById("comparisionChart").getContext("2d");
 
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+
     const player1DataSet = {
       label: player1Data.nbaComName,
       data: [
@@ -122,7 +127,7 @@ function PlayerComparison() {
       backgroundColor: "#ea6607",
       borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
-      
+
     };
 
     const player2DataSet = {
@@ -135,16 +140,14 @@ function PlayerComparison() {
         player2Data.stats.blk,
       ],
       backgroundColor: "white",
-      borderColor: "rgba(255, 99,132,1)",
+      borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
     };
- 
 
-    
-    new Chart(ctx, {
+    chartRef.current = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Games Played", "Points", "Assists", "Rebounts", "Blocks"],
+        labels: ["Games Played", "Points", "Assists", "Rebounds", "Blocks"],
         datasets: [player1DataSet, player2DataSet],
       },
       options: {
@@ -156,7 +159,7 @@ function PlayerComparison() {
           },
           title: {
             display: true,
-            text: 'Court IQ Comparision'
+            text: 'Court IQ Comparison'
           }
         }
       },
@@ -164,6 +167,18 @@ function PlayerComparison() {
     });
   };
 
+  useEffect(() => {
+    if (player1Data && player2Data) {
+      renderChart();
+    }
+
+    // clean up function to destroy the chart 
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+    };
+  }, [player1Data, player2Data]);
 
 
   const inputOverrides = {
@@ -330,8 +345,8 @@ function PlayerComparison() {
           <div className="player-card">
             {player1Data && (
               <Block
-              className="player-info animate__animated animate__backInLeft"
-              style={{ backgroundColor: "#141414" }}
+                className="player-info animate__animated animate__backInLeft"
+                style={{ backgroundColor: "#141414" }}
               >
                 <img
                   style={{ backgroundColor: "#141414" }}
@@ -386,12 +401,12 @@ function PlayerComparison() {
               </Block>
             )}
           </div>
-       
+
           <div className="player-card">
             {player2Data && (
               <Block
-              className="player-info animate__animated animate__backInRight"
-              style={{ backgroundColor: "#141414" }}
+                className="player-info animate__animated animate__backInRight"
+                style={{ backgroundColor: "#141414" }}
               >
                 <img
                   style={{ backgroundColor: "#141414" }}
@@ -447,12 +462,15 @@ function PlayerComparison() {
             )}
           </div>
         </div>
+
      
          <canvas className="chart-container2" id="comparisionChart"></canvas>
         
+
       </Block>
     </Block>
   );
 }
 
 export default PlayerComparison;
+

@@ -1,89 +1,126 @@
 import * as React from "react";
-import { Card as BaseCard, StyledBody, StyledAction } from "baseui/card";
-import Block from "baseui/block"
-import { Button } from "baseui/button";
+import { Card as BaseCard, StyledBody } from "baseui/card";
+import Block from "baseui/block";
+import "./Card.scss"
+const draftFamily = 'draftkings'
+const fanDuelFamily = 'fanduel'
+const betmgmFamily = 'caesars'
+const bovadaFamily = 'bovada'
+const drafKingsColors = ["#9AC434", "#F46C22", "#D8D8D8", "#000000 "]
+const fanDuelColors = ["#1381E0", "#818E95", "#1F375B", "#0E67B3"]
+const betmgmColors = ["#bda871"]
+const bovadaColors = ["#cc0000"]
 
-const Card = ({ title, odds }) => {
-  const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
-  const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#FDBB30", "#B8C4CA", "#FEC524", "#BEC0C2", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#F9A01B", "#E31837"]
-  const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons',
-    'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves',
-    'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings',
-    'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
+const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker }) => {
+  // console.log("DATA ", data)
 
-  const findBackgroundColor = () => {
-    const teamIndex = teams.indexOf(title);
-    if (teamIndex !== -1) {
-      return primaryColors[teamIndex];
-    }
-    return "black";
+  const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"];
+  const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards'];
+
+
+  const findBackgroundColor = (team1, team2) => {
+    const index1 = teams.indexOf(team1);
+    const index2 = teams.indexOf(team2);
+    const color1 = index1 !== -1 ? primaryColors[index1] : "black";
+    const color2 = index2 !== -1 ? primaryColors[index2] : "black";
+    return `linear-gradient(to right, ${color1}, ${color2})`;
   };
 
-  const findColor = () => {
-    const teamIndex = teams.indexOf(title);
-    if (teamIndex !== -1) {
-      return secondaryColors[teamIndex];
-    }
-    return "white";
+  const formatDate = (dateString) => {
+    const utcDate = new Date(dateString);
+    const estDate = new Date(utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000));
+
+    // Determine if the date is in DST
+    const isDst = (date) => {
+      const marSecondSunday = new Date(date.getFullYear(), 2, 14 - (new Date(date.getFullYear(), 2, 1).getDay()));
+      const novFirstSunday = new Date(date.getFullYear(), 10, 7 - (new Date(date.getFullYear(), 10, 1).getDay()));
+      return date >= marSecondSunday && date < novFirstSunday;
+    };
+
+    // Adjust for Eastern Time Zone (5 hours behind UTC; 4 hours during DST)
+    estDate.setHours(estDate.getHours() - (isDst(estDate) ? 4 : 5));
+
+    const formatter = (date) => {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      return hours + ':' + minutes + ' ' + ampm;
+    };
+
+    return `${formatter(estDate)} EST`;
   };
 
+  const textStyle = {
+    fontSize: "16px",
+    fontWeight: "700",
+    color: "white",
+    margin: "5px 0", // Example margin
+    textAlign: "center",
+    textShadow: "0 0 18px Black",
+    lineHeight: "20px"
+  };
+
+  const imageStyle = {
+    width: '70px',
+    height: '70px',
+    objectFit: 'contain',
+    boxShadow: '0px 0px 2px 2px orange' // Adding a soft white glow
+  };
+
+
+
+  const gameDateTime = data ? formatDate(data) : 'Time Not Available';
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', margin: "10px", border:'solid orange 3px', textAlign:'center' }} >
-
-
+    <div className="h2hcard" style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid orange 3px', textAlign: 'center' }}>
       <BaseCard
         overrides={{
           Root: {
             style: {
-              display: 'flex', flexDirection: 'row', width: "278px",  height: "200px", borderRadius: "0px", justifyContent:'center', alignItems:'center',
-              backgroundColor: findBackgroundColor()
+              display: 'flex',
+              flexDirection: 'row',
+              width: "398px",
+              height: "200px",
+              borderRadius: "0px",
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: findBackgroundColor(homeTeam, awayTeam),
+              backgroundImage: `url('https://media.istockphoto.com/id/1146496553/photo/hardwood-maple-basketball-court-floor-viewed-from-above.jpg?s=612x612&w=0&k=20&c=Co17Ntpv-uPWgsVor66kcQc5SfL-fOK5AiL0bgpBhII='), ${findBackgroundColor(homeTeam, awayTeam)}`,
+              backgroundSize: 'cover',
+              backgroundBlendMode: 'overlay'
             }
-          },
-          Title: {
-            style: ({ $theme }) => ({
-              fontSize: "15px",
-              fontWeight: "normal",
-              color: findColor()
-            })
-          },
-        }}
-        title={"Home Team: " + title}
-      >
-        <StyledBody>
-          {odds.slice(odds.length / 3, 2 * odds.length / 3).map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
-              {outcome.team}: {outcome.price}
-            </div>
-          ))}
-        </StyledBody>
-
-      </BaseCard>
-      <BaseCard
-        overrides={{
-          Root: {
-            style: {
-              display: 'flex', flexDirection: 'row', width: "278px", height: "200px", borderRadius: "0px", justifyContent:'center', alignItems:'center',
-              backgroundColor: findBackgroundColor()
-            }
-          },
-          Title: {
-            style: ({ $theme }) => ({
-              fontSize: "15px",
-              fontWeight: "normal",
-              color: findColor()
-            })
           }
         }}
-        title={"Home Team: " + title}
       >
-        <StyledBody>
-          {odds.slice(2 * odds.length / 3, odds.length).map((outcome, index) => (
-            <div key={index} style={{ marginBottom: "8px", fontSize: "16px", color: title == "San Antonio Spurs" ? "black" : "white", fontWeight: "700" }}>
-              {outcome.team}: {outcome.price}
-            </div>
-          ))}
+        <StyledBody style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <img src={homeLogo} alt={homeTeam} style={imageStyle} />
+          <div style={{ flex: '1' }}>
+            <div style={{ ...textStyle, fontSize: "18px" }}>{"@" + homeTeam}</div>
+            <div style={textStyle}>{"Game Time: " +
+              data ? new Date(data).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] + `, ${gameDateTime}` : ""
+            }</div>
+            {odds.map((outcome, index) => (
+              <div key={index} style={textStyle}>
+                {outcome.team}: {outcome.price}
+              </div>
+            ))}
+            Bookmaker: &nbsp; <span style={{
+              // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+              fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
+              fontSize: bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
+              // backgroundColor: bookmaker === "FanDuel" ? "#202020" : bookmaker === "Bovada" ? "#202020" : bookmaker === "BetMGM" ? "#202020" : "inherit",
+              borderRadius: bookmaker === "FanDuel" ? "1px" : bookmaker === "Bovada" ? "1px" : bookmaker === "BetMGM" ? "1px" : "inherit",
+              textDecoration: bookmaker === "DraftKings" ? "underline" : bookmaker === "FanDuel" ? "underline" : bookmaker === "Bovada" ? "underline" : bookmaker === "BetMGM" ? "underline" : "inherit",
+              textDecorationColor: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+              textDecorationThickness: bookmaker === "DraftKings" || bookmaker === "FanDuel" || bookmaker === "Bovada" || bookmaker === "BetMGM" ? "3px" : "inherit"
+            }} >
+              {bookmaker === "DraftKings" ? "Draft Kings" : bookmaker === "FanDuel" ? "FanDuel" : bookmaker === "Bovada" ? "Bovada" : bookmaker === "BetMGM" ? "BetMGM" : "unknown"}
+            </span>
+          </div>
+          <img src={awayLogo} alt={awayTeam} style={imageStyle} />
         </StyledBody>
-
       </BaseCard>
     </div>
   );
