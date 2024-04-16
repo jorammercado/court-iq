@@ -97,6 +97,16 @@ function PlayerComparison() {
     }
   }, [player1Data, player2Data]);
 
+  
+  const backgroundColorPlugin = {
+    id: 'backgroundColorPlugin',  
+    beforeDraw: (chart) => {
+      const ctx = chart.ctx;
+      ctx.fillStyle = '#141414';  
+      ctx.fillRect(0, 0, chart.width, chart.height);
+    }
+  };
+  
   const renderChart = () => {
     const ctx = document.getElementById("comparisionChart").getContext("2d");
 
@@ -112,7 +122,7 @@ function PlayerComparison() {
       backgroundColor: "#ea6607",
       borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
-      color: "black"
+      
     };
 
     const player2DataSet = {
@@ -142,6 +152,7 @@ function PlayerComparison() {
         plugins: {
           legend: {
             position: 'top',
+            
           },
           title: {
             display: true,
@@ -149,6 +160,7 @@ function PlayerComparison() {
           }
         }
       },
+      plugins: [backgroundColorPlugin]
     });
   };
 
@@ -435,9 +447,9 @@ function PlayerComparison() {
             )}
           </div>
         </div>
-        <div className="chart-container">
-         <canvas  id="comparisionChart"></canvas>
-         </div>
+     
+         <canvas className="chart-container2" id="comparisionChart"></canvas>
+        
       </Block>
     </Block>
   );
