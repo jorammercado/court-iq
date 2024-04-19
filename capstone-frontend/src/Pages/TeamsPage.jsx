@@ -358,7 +358,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 {eventIds  ? 
                     <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                         <Block className="oddsl2" >
-                            <NBAGameOddsV2 eventId={eventIds[0]} />
+                            <NBAGameOddsV2 eventId={eventIds[0]} teamName={selectedTeamName} />
                         </Block>
                     </Block>
 

@@ -31,7 +31,7 @@ import pointsbet from "../assets/logopointsbet.png"
 import betmgm from "../assets/betmgm.png"
 const API = import.meta.env.VITE_BASE_URL
 
-const NBAGameOddsV2 = ({ eventId }) => {
+const NBAGameOddsV2 = ({ eventId, teamName }) => {
   const [flattenedProps, setFlattenedProps] = useState([]);
   const [flattenedPropsDemo, setFlattenedPropsDemo] = useState([]);
   const [playerProps, setPlayerProps] = useState([[]]);
@@ -268,13 +268,13 @@ const NBAGameOddsV2 = ({ eventId }) => {
           </Block>) : (
           <Block display="flex" justifyContent="center" alignItems="center" marginTop="10px">
             <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >
-              No Player Props currently available for this team, try another team
+              No Player Props currently available for this team, try another team.
             </HeadingXSmall>
           </Block>
         )}
       </div>
       <div >
-        {flattenedPropsDemo && flattenedPropsDemo.length > 0 && (homeTeam === "New York Knicks" || awayTeam === "New York Knicks") ? (
+        {flattenedPropsDemo && flattenedPropsDemo.length > 0 && ((teamName && teamName === "New York Knicks") || ( teamName && teamName === "Philadelphia 76ers")) ? (
           <div style={{ marginTop: "50px", paddingBottom: "75px" }}>
             <Block className="oddsContain" >
               <Block className="headl1" width="100%" marginBottom="0px" paddingBottom="0px">
