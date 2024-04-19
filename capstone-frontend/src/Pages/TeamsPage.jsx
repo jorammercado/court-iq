@@ -355,8 +355,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     </Block>
                 </Block>
 
-                {eventIds && eventIds.length > 0 ? //eventIds.map((eventId, index) => {
-                    // return (
+                {eventIds  ? 
                     <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                         <Block className="oddsl2" >
                             <NBAGameOddsV2 eventId={eventIds[0]} />
@@ -364,23 +363,24 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                     </Block>
 
                     :
-                    <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
-                        <Block className="odds__l2" backgroundColor="black" color="white" style={{
-                            justifyContent: "flex-start",
-                            alignItems: "flex-start",
-                            display: "flex",
-                            flexDirection: "row",
-                            width: "100%",
-                            marginBottom: "100px",
-                            maxWidth:"1300px"
-                        }}>
-                            <Block display="flex" justifyContent="flex-start" alignItems="center" marginTop="10px">
-                                <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >
-                                    No Player Props currently available for this team, try another team.
-                                </HeadingXSmall>
-                            </Block>
-                        </Block>
-                    </Block>
+                    <></>
+                    // <Block className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                    //     <Block className="odds__l2" backgroundColor="black" color="white" style={{
+                    //         justifyContent: "flex-start",
+                    //         alignItems: "flex-start",
+                    //         display: "flex",
+                    //         flexDirection: "row",
+                    //         width: "100%",
+                    //         marginBottom: "100px",
+                    //         maxWidth:"1300px"
+                    //     }}>
+                    //         <Block display="flex" justifyContent="flex-start" alignItems="center" marginTop="10px">
+                    //             <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >
+                    //                 No Player Props currently available for this team, try another team.
+                    //             </HeadingXSmall>
+                    //         </Block>
+                    //     </Block>
+                    // </Block>
                 }
 
             </Block>

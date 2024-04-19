@@ -115,7 +115,28 @@ const NBAGameOdds = ({ teamData }) => {
     };
 
     fetchOdds();
-  }, [teamData]); // Depend on teamData to re-run this effect when it changes
+  //  saveOddsDataLocally(draftKingsOdds, fanduelOdds, betMGMOdds, bovadaOdds);
+  }, [teamData]); 
+
+  // save data for demo day
+  const saveOddsDataLocally = (draftKingsOdds, fanduelOdds, betMGMOdds, bovadaOdds) => {
+    const dataToSave = {
+      draftKingsOdds,
+      fanduelOdds,
+      betMGMOdds,
+      bovadaOdds
+    };
+
+    const jsonData = JSON.stringify(dataToSave);
+    const fileName = 'oddsData.json';
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.click();
+  };
+
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
