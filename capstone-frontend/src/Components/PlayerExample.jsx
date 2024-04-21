@@ -478,7 +478,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                     <Block className="middle" marginLeft="-10px" marginRight="-10px">
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center" marginTop="5px">
                             <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
-                                $style={{ color: "white", zIndex: "10", transition: "background-color 0.5s ease-in-out" }}>
+                                $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
                                 Season Stats
                             </HeadingMedium>
                             {points.length > 0 ? (
