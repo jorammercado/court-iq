@@ -153,56 +153,76 @@ const NBAGameOdds = ({ teamData }) => {
     }
   };
 
+  const urls = {
+    DraftKings: "https://www.draftkings.com",
+    FanDuel: "https://www.fanduel.com",
+    Caesars: "https://www.caesars.com/sportsbook-and-casino/welcome",
+    Bovada: "https://www.bovada.lv",
+    PointsBet: "https://www.pointsbet.com",
+    BetMGM: "https://www.betmgm.com",
+    BetOnline: "https://www.betonline.ag",
+    Unibet: "https://www.unibet.com",
+    BetRivers: "https://www.betrivers.com"
+  };
+
   return (
     <div>
       <div className='ContentGameOdds'>
         {draftKingsOdds && draftKingsOdds.length > 0 ? draftKingsOdds.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="DraftKings"
-          />
+          <a href={urls['DraftKings']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="DraftKings"
+            />
+          </a>
         )) : <></>}
         {fanduelOdds && fanduelOdds.length > 0 ? fanduelOdds.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="FanDuel"
-          />
+          <a href={urls['FanDuel']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="FanDuel"
+            />
+          </a>
         )) : <></>}
         {betMGMOdds && betMGMOdds.length > 0 ? betMGMOdds.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="BetMGM"
-          />
+          <a href={urls['BetMGM']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="BetMGM"
+            />
+          </a>
         )) : <></>}
         {bovadaOdds && bovadaOdds.length > 0 ? bovadaOdds.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="Bovada"
-          />
+          <a href={urls['Bovada']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="Bovada"
+            />
+          </a>
         )) : <></>}
       </div>
       <div className='ContentGameOdds' >
@@ -217,62 +237,70 @@ const NBAGameOdds = ({ teamData }) => {
                 backgroundColor: "#141414",
                 paddingTop: "0px",
                 marginTop: "0px",
-                borderStyle: "solid", 
+                borderStyle: "solid",
                 borderColor: "grey",
-                borderBottom:"none",
-                borderLeft:"none",
-                borderRight:"none",
-                borderWidth:"thin"
+                borderBottom: "none",
+                borderLeft: "none",
+                borderRight: "none",
+                borderWidth: "thin"
               }}>(Demo Day Old Data)</Heading>
           </HeadingLevel>
         </Block>
         {draftKingsOddsDemo && draftKingsOddsDemo.length > 0 ? draftKingsOddsDemo.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="DraftKings"
-          />
+          <a href={urls['DraftKings']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="DraftKings"
+            />
+          </a>
         )) : <></>}
         {fanduelOddsDemo && fanduelOddsDemo.length > 0 ? fanduelOddsDemo.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="FanDuel"
-          />
+          <a href={urls['FanDuel']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="FanDuel"
+            />
+          </a>
         )) : <></>}
         {betMGMOddsDemo && betMGMOddsDemo.length > 0 ? betMGMOddsDemo.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="BetMGM"
-          />
+          <a href={urls['BetMGM']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="BetMGM"
+            />
+          </a>
         )) : <></>}
         {bovadaOddsDemo && bovadaOddsDemo.length > 0 ? bovadaOddsDemo.map((game, index) => (
-          <Card
-            key={index}
-            homeTeam={game.homeTeam}
-            awayTeam={game.awayTeam}
-            odds={game.odds}
-            data={game.additionalData}
-            homeLogo={game.homeLogo}
-            awayLogo={game.awayLogo}
-            bookmaker="Bovada"
-          />
+          <a href={urls['Bovada']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Card
+              key={index}
+              homeTeam={game.homeTeam}
+              awayTeam={game.awayTeam}
+              odds={game.odds}
+              data={game.additionalData}
+              homeLogo={game.homeLogo}
+              awayLogo={game.awayLogo}
+              bookmaker="Bovada"
+            />
+          </a>
         )) : <></>}
       </div>
     </div>
