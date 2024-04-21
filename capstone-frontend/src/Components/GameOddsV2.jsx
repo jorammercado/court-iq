@@ -74,7 +74,7 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/basketball_nba/events/${eventId}/odds`, {
           params: { apiKey, regions: 'us', markets: 'player_points', oddsFormat: 'american' },
         });
-        //console.log("All Response = ", response)
+        // console.log("All Response = ", response)
         if (response && response.data && response.data.bookmakers && response.data.bookmakers[0] &&
           response.data.bookmakers[0].markets && response.data.bookmakers[0].markets[0] &&
           response.data.bookmakers[0].markets[0].outcomes) {
@@ -184,18 +184,40 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
                 overrides={{ Root: { style: { maxHeight: "500px" } } }}>
                 <TableBuilderColumn header="Bookmaker">
                   {row => {
+
                     const isDraftKings = row && row.bookmaker === "DraftKings";
                     const isFanDuel = row && row.bookmaker === "FanDuel";
                     const isCaesars = row && row.bookmaker === "Caesars";
                     const isBovada = row && row.bookmaker === "Bovada";
                     const isPointsBet = row && row.bookmaker === "PointsBet (US)";
                     const isBetMGM = row && row.bookmaker === "BetMGM";
+                    const isBetOnline = row && row.bookmaker === "BetOnline.ag";
+                    const isUnibet = row && row.bookmaker === "Unibet";
+                    const isBetRivers = row && row.bookmaker === "BetRivers";
 
                     const style = {
-                      color: isDraftKings ? drafKingsColors[0] : isFanDuel ? fanDuelColors[0] : isCaesars ? caesarsColors[0] : isBovada ? bovadaColors[0] : isPointsBet ? pointsbetColors[0] : isBetMGM ? betmgmColors[0] : "inherit",
+                      color: isDraftKings ? drafKingsColors[0] : isFanDuel ? fanDuelColors[0] : isCaesars ? caesarsColors[0] : isBovada ? bovadaColors[0] : isPointsBet ? pointsbetColors[0] : isBetMGM ? betmgmColors[0] : "white",
                       fontFamily: isDraftKings ? draftFamily : isFanDuel ? fanDuelFamily : isCaesars ? caesarsFamily : isBovada ? bovadaFamily : isPointsBet ? caesarsFamily : isBetMGM ? caesarsFamily : "inherit",
                       fontSize: isDraftKings ? "8.5px" : isFanDuel ? "18px" : isCaesars ? "18px" : isBovada ? "18px" : isBetMGM ? "18px" : "inherit"
                     };
+
+                    const urls = {
+                      DraftKings: "https://www.draftkings.com",
+                      FanDuel: "https://www.fanduel.com",
+                      Caesars: "https://www.caesars.com/sportsbook-and-casino/welcome",
+                      Bovada: "https://www.bovada.lv",
+                      PointsBet: "https://www.pointsbet.com",
+                      BetMGM: "https://www.betmgm.com",
+                      BetOnline: "https://www.betonline.ag",
+                      Unibet: "https://www.unibet.com",
+                      BetRivers: "https://www.betrivers.com"
+                    };
+
+                    let bookmakerUrl = urls[row?.bookmaker];
+                    if (isPointsBet)
+                      bookmakerUrl = "https://www.pointsbet.com"
+                    if (isBetOnline)
+                      bookmakerUrl = "https://www.betonline.ag"
 
                     let imageContent = null;
                     if (isDraftKings) {
@@ -232,10 +254,12 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
                     }
 
                     return (
-                      <span style={style}>
-                        {imageContent}
-                        {row && row.bookmaker ? row.bookmaker : "bookmaker"}
-                      </span>
+                      <a href={bookmakerUrl} target="_blank" style={{ textDecoration: 'none' }}>
+                        <span style={style}>
+                          {imageContent}
+                          {row && row.bookmaker ? row.bookmaker : "bookmaker"}
+                        </span>
+                      </a>
                     );
                   }}
                 </TableBuilderColumn>
@@ -274,7 +298,7 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
         )}
       </div>
       <div >
-        {flattenedPropsDemo && flattenedPropsDemo.length > 0 && ((teamName && teamName === "New York Knicks") || ( teamName && teamName === "Philadelphia 76ers")) ? (
+        {flattenedPropsDemo && flattenedPropsDemo.length > 0 && ((teamName && teamName === "New York Knicks") || (teamName && teamName === "Philadelphia 76ers")) ? (
           <div style={{ marginTop: "50px", paddingBottom: "75px" }}>
             <Block className="oddsContain" >
               <Block className="headl1" width="100%" marginBottom="0px" paddingBottom="0px">
@@ -319,12 +343,33 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
                       const isBovada = row && row.bookmaker === "Bovada";
                       const isPointsBet = row && row.bookmaker === "PointsBet (US)";
                       const isBetMGM = row && row.bookmaker === "BetMGM";
+                      const isBetOnline = row && row.bookmaker === "BetOnline.ag";
+                      const isUnibet = row && row.bookmaker === "Unibet";
+                      const isBetRivers = row && row.bookmaker === "BetRivers";
 
                       const style = {
-                        color: isDraftKings ? drafKingsColors[0] : isFanDuel ? fanDuelColors[0] : isCaesars ? caesarsColors[0] : isBovada ? bovadaColors[0] : isPointsBet ? pointsbetColors[0] : isBetMGM ? betmgmColors[0] : "inherit",
+                        color: isDraftKings ? drafKingsColors[0] : isFanDuel ? fanDuelColors[0] : isCaesars ? caesarsColors[0] : isBovada ? bovadaColors[0] : isPointsBet ? pointsbetColors[0] : isBetMGM ? betmgmColors[0] : "white",
                         fontFamily: isDraftKings ? draftFamily : isFanDuel ? fanDuelFamily : isCaesars ? caesarsFamily : isBovada ? bovadaFamily : isPointsBet ? caesarsFamily : isBetMGM ? caesarsFamily : "inherit",
                         fontSize: isDraftKings ? "8.5px" : isFanDuel ? "18px" : isCaesars ? "18px" : isBovada ? "18px" : isBetMGM ? "18px" : "inherit"
                       };
+
+                      const urls = {
+                        DraftKings: "https://www.draftkings.com",
+                        FanDuel: "https://www.fanduel.com",
+                        Caesars: "https://www.caesars.com/sportsbook-and-casino/welcome",
+                        Bovada: "https://www.bovada.lv",
+                        PointsBet: "https://www.pointsbet.com",
+                        BetMGM: "https://www.betmgm.com",
+                        BetOnline: "https://www.betonline.ag",
+                        Unibet: "https://www.unibet.com",
+                        BetRivers: "https://www.betrivers.com"
+                      };
+
+                      let bookmakerUrl = urls[row?.bookmaker];
+                      if (isPointsBet)
+                        bookmakerUrl = "https://www.pointsbet.com"
+                      if (isBetOnline)
+                        bookmakerUrl = "https://www.betonline.ag"
 
                       let imageContent = null;
                       if (isDraftKings) {
@@ -361,10 +406,12 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
                       }
 
                       return (
-                        <span style={style}>
-                          {imageContent}
-                          {row && row.bookmaker ? row.bookmaker : "bookmaker"}
-                        </span>
+                        <a href={bookmakerUrl} target="_blank" style={{ textDecoration: 'none' }}>
+                          <span style={style}>
+                            {imageContent}
+                            {row && row.bookmaker ? row.bookmaker : "bookmaker"}
+                          </span>
+                        </a>
                       );
                     }}
                   </TableBuilderColumn>
