@@ -1,46 +1,13 @@
 
-# Capstone
-Frontend git repo for capstone project, need backend server to run this application, links provided below.
+# Court IQ
+One stop shop for basketball betting help.
 
 Contents
 ========
- - [Sitemap](#sitemap)
  - [Deployed App Access](#deployed-app-access)
  - [GitHub Repositories](#github-repositories)
  - [Contributors](#contributors)
 
-
-
-## Sitemap 
-
-### The navbar contains the following links:
-
- 1. #### List of 4 main links
-    * maps of x places
-    * primary link B
-    * primary link C
-    * primary link D
- 2. #### User drop down menu
-    * User info / logout page
-    * Account Item 2
-    * Account item 3
-    * Account Item 4
-
-
-```shell
-Login
-│
-├─ User
-│   │
-│   ├── Account Item 2
-│   ├── Account Item 3
-│   └── Account Item 4       
-│       
-├── Primary B 
-├── Primary C
-├── Primary D     
-└── maps 
-```
 
 ## Deployed App Access
 
