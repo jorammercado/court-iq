@@ -7,7 +7,6 @@ import image05 from "../Pages/images/thumbs/5.png"
 import image06 from "../Pages/images/thumbs/6.png"
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import searchImage from "../Pages/css/images/search.png"
 import "./MyWork.scss"
 
 const MyWork = () => {

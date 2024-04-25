@@ -1,15 +1,10 @@
-import "./Home.scss"
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom"
-import { Block } from "baseui/block";
+import React from 'react';
 import Intro from "../Components/Intro";
 import SectionOne from "../Components/SectionOne";
 import SectionTwo from "../Components/SectionTwo";
 import MyWork from "../Components/MyWork";
-import Header from "../Components/Header";
-import GameOdds from "../Components/GameOdds"
 import "./css/main.css"
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { Link, Element, Events, scrollSpy } from 'react-scroll';
 
 
 function Home() {

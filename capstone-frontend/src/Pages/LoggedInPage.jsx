@@ -10,7 +10,6 @@ import "animate.css";
 
 export const LoggedInPage = ({ currentUser,
   setCurrentUser,
-  currentUserPlaces,
   setPhotoURL,
   photoURL }) => {
   const [clearMessage, setClearMessage] = useState(false);

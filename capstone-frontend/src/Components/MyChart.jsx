@@ -4,18 +4,13 @@ import * as d3 from 'd3';
 const MyGraph = ({ playerStats, points, assists,
     rebounds, threePoints, plusMinus, minutes, blocks }) => {
     const graphRef = useRef(null);
-    // console.log("CHARTCHARTCHART", points, playerStats)
 
     useEffect(() => {
         d3.select("#my_dataviz svg").remove();
-        // set the dimensions and margins of the graph
         var margin = { top: 60, right: 115, bottom: 50, left: 50 },
             width = 770 - margin.left - margin.right,
             height = 275 - margin.top - margin.bottom;
 
-        // Check if graph has already been rendered
-        // if (!graphRef.current) {
-        // append the svg object to the body of the page
         var svg = d3.select("#my_dataviz")
             .append("svg")
             .attr("width", width + margin.left + margin.right)

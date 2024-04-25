@@ -20,7 +20,7 @@ const TopScoringTeamCard = ({ logo, name, conference }) => {
             fontSize: "19px"
           })
         },
-        HeaderImage: { style: { width: "60px", height: "60px" } }, // Adjust size as needed
+        HeaderImage: { style: { width: "60px", height: "60px" } }, 
       }}
 
       title={`${conference} Conference Top Offensive Team`}

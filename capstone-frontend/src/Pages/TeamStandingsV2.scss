@@ -9,10 +9,8 @@
 }
 
 
-
 .table__contain {
   margin: 0 auto;
-  // max-width: 55%;
   margin-top: 0px;
 
   @media (max-width: 1300px) {
@@ -58,8 +56,6 @@
   @media (max-width: 370px) {
     max-width: 200px !important;
   }
-
-
 
 
   .team__title {

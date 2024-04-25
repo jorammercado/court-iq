@@ -8,9 +8,7 @@ import { Heading, HeadingLevel } from "baseui/heading";
 import { Input } from "baseui/input";
 import { Button } from "baseui/button";
 import Chart from "chart.js/auto";
-import { LabelMedium, LabelXLarge, LabelLarge } from "baseui/typography";
-import { ParagraphSmall } from "baseui/typography";
-import Spin from "../Components/SpinLoad";
+import { LabelLarge } from "baseui/typography";
 import styled from "styled-components";
 
 function PlayerComparison() {

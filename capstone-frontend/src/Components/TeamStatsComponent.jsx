@@ -2,18 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import { Block } from "baseui/block";
-import {
-    LabelMedium,
-    LabelXSmall,
-    LabelLarge,
-    HeadingLarge,
-    HeadingMedium,
-    HeadingSmall
-} from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import "./TeamStatsComponent.scss"
 import Spin from './SpinLoad';
-import { Avatar } from 'baseui/avatar';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;

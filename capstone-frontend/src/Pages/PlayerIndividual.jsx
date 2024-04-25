@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; 
 import PlayerExample from '../Components/PlayerExample';
-import Example from '../Components/PlayerStatsTable';
 import "./PlayerExamplePage.scss";
 
 const VITE_X_RAPIDAPI_KEY2 = process.env.REACT_APP_X_RAPIDAPI_KEY2;
@@ -32,7 +31,6 @@ const PlayerExamplePage = () => {
             try {
                 const response = await axios.request(options);
                 setData(response.data.response[0]);
-                // console.log(response.data.response);
             } catch (error) {
                 console.error(error);
             }
@@ -54,7 +52,6 @@ const PlayerExamplePage = () => {
         <div className="player-example-page">
             {data ? (
                 <>
-                   
                     <Link to={`/player/${data.id}`}>{data.firstname} {data.lastname}</Link>
                     <PlayerExample data={data} />
                     <div className="baseTable">

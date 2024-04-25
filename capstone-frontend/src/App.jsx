@@ -8,9 +8,7 @@ import {
   ThemeProvider,
 } from "baseui";
 import { StatefulInput } from "baseui/input";
-import GamesSchedule from "./Pages/GamesSchedule.jsx";
 const engine = new Styletron();
-
 const Centered = styled("div", {
   display: "flex",
   justifyContent: "center",
@@ -23,23 +21,17 @@ import { LoginPage } from "./Pages/LoginPage.jsx";
 import { UserProvider } from "./Providers/UserProvider";
 import { LoggedInPage } from "./Pages/LoggedInPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { MemoGoogleMap } from "./Components/googleMap/GoogleMap.jsx";
+// import { MemoGoogleMap } from "./Components/googleMap/GoogleMap.jsx";
 import { useState } from "react";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
-
 import Home from "./Pages/Home.jsx";
 import TeamsPage from "./Pages/TeamsPage.jsx";
-
 import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
-
 import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
-
 import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx";
-
 import SearchPage from "./Components/SearchPage.jsx";
-
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PLayerComparation from "./Pages/PLayerComparation.jsx";
@@ -74,7 +66,6 @@ function App() {
               </div>
 
               <Routes>
-                {/* public route login */}
                 <Route
                   path="/"
                   element={
@@ -119,9 +110,8 @@ function App() {
                     />
                   }
                 />
-
-                {/* private route - home screen of specific user */}
-                <Route
+                
+                {/* <Route
                   path="/maps"
                   element={
                     <MemoGoogleMap
@@ -132,9 +122,8 @@ function App() {
                       setCurrentUserPlaces={setCurrentUserPlaces}
                     />
                   }
-                />
-
-                {/* private route - home screen of specific user */}
+                /> */}
+                
                 <Route
                   path="/rosters"
                   element={
@@ -171,16 +160,6 @@ function App() {
                 />
 
                 <Route
-                  path="/GamesSchedule"
-                  element={
-                    <GamesSchedule
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                <Route
                   path="/PlayerComparison"
                   element={
                     <PLayerComparation
@@ -209,7 +188,6 @@ function App() {
                   }
                 />
 
-                {/* public route - page not found */}
                 <Route
                   path="*"
                   element={

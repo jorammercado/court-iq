@@ -1,8 +1,5 @@
-import { React as React2, useEffect, useState, useMemo } from 'react';
-
-import Pagination from '../utils/Pagination';
+import { React as React2, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table } from 'baseui/table-semantic';
 import * as React from "react";
 import {
   TableBuilder,
@@ -10,8 +7,6 @@ import {
 } from 'baseui/table-semantic';
 import { StyledLink as Link } from 'baseui/link';
 import { Avatar } from 'baseui/avatar';
-import { Button, KIND, SIZE } from 'baseui/button';
-import { Tag } from 'baseui/tag';
 import { useStyletron } from 'baseui';
 import { ArrowUp, ArrowDown } from 'baseui/icon';
 import Spin from '../Components/SpinLoad';
@@ -21,17 +16,10 @@ import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
 import NBAGameOdds from '../Components/GameOdds';
 import "animate.css";
 import {
-  LabelMedium,
-  LabelLarge,
-  LabelXSmall,
-  HeadingLarge,
   HeadingMedium,
-  HeadingSmall,
-  HeadingXSmall
 } from "baseui/typography";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
-import { Card, StyledBody } from "baseui/card";
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;

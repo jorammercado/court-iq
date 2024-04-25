@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import ChatInput from './ChatInput'
-import ChatOutput from './ChatOutput'
 import { Popover, PLACEMENT } from 'baseui/popover'
 import { Spinner } from 'baseui/spinner'
 import axios from 'axios'

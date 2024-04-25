@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, StyledBody, StyledAction, StyledThumbnail } from "baseui/card";
-import { Button } from "baseui/button";
+import { Card, StyledBody, StyledThumbnail } from "baseui/card";
 import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
 
@@ -50,8 +49,6 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                         height: "179px",
                         marginBottom: "5px",
                         backgroundColor: primaryColor,
-                        // backgroundColor: "#EA6607",
-                        
                         borderRadius: "0",
                         border: "none",
                     }
@@ -65,9 +62,7 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                         marginTop: "-6px",
                         marginBottom: "18px",
                         lineHeight: "1.1",
-                        // color: secondaryColor
                         color: textColor,
-                        // paddingTop: "2px"
                     },
                 }
             }}

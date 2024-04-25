@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState, createContext } from "react";
-import { Avatar } from "baseui/avatar";
 import { createAvatar } from '@dicebear/core';
 import { adventurer } from '@dicebear/collection';
 import { auth } from "../Services/FireBase";

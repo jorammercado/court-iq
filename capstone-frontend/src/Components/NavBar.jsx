@@ -3,12 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useStyletron } from "baseui";
-import { AppNavBar, setItemActive, mapItemsActive } from "baseui/app-nav-bar";
+import { AppNavBar } from "baseui/app-nav-bar";
 import logo3 from "../assets/logo3.png";
 import ball from "../assets/BALL.svg";
-import { Input } from "baseui/input";
 import ChatApp from "./ChatApp";
-import { ChevronDown, Delete, Overflow, Upload, Search } from "baseui/icon";
 import TeamStatsGlossary from "../Components/TeamStatsGlossary";
 
 
@@ -170,14 +168,11 @@ export default function NavBar({
                     Root: {
                         style: ({ $theme }) => ({
                             // backgroundColor: "#EA6607"
-                            // backgroundColor: "#202020"
                         })
                     },
                     MainMenuItem: {
                         style: ({ $theme }) => ({
                             outline: `none`
-                            // color: "blue"
-                            // backgroundColor: $theme.colors.warning600
                         })
                     },
                 }}
