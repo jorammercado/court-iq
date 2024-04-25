@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Card as BaseCard, StyledBody } from "baseui/card";
-import Block from "baseui/block";
 import "./Card.scss"
 const draftFamily = 'draftkings'
 const fanDuelFamily = 'fanduel'
@@ -57,7 +56,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker })
     fontSize: "16px",
     fontWeight: "700",
     color: "white",
-    margin: "5px 0", // Example margin
+    margin: "5px 0", 
     textAlign: "center",
     textShadow: "0 0 18px Black",
     lineHeight: "20px"

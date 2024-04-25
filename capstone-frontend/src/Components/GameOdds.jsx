@@ -19,7 +19,6 @@ const NBAGameOdds = ({ teamData }) => {
   const [betMGMOddsDemo, setBetMGMOddsDemo] = useState([]);
   const [bovadaOddsDemo, setBovadaOddsDemo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   // console.log("this is the teamData", teamData)
 
   useEffect(() => {
@@ -130,7 +129,6 @@ const NBAGameOdds = ({ teamData }) => {
         // saveSingleOddsData(enrichedOdds4, 'bovadaOdds');
       } catch (error) {
         console.error("Error fetching odds:", error);
-        setError(error.message);
       } finally {
         setIsLoading(false);
       }

@@ -10,7 +10,6 @@ import {
   LabelMedium,
   LabelLarge
 } from "baseui/typography";
-import Spin from "../Components/SpinLoad";
 
 function Headlines() {
   const [headlines, setHeadlines] = useState([]);

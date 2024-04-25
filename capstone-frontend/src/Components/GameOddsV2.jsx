@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from './CardPlayerProps'; // Import the Card component
-import "./GameOddsV2.scss"
-import Spin from './SpinLoad';
 import "../App.scss"
 const draftFamily = 'draftkings'
 const fanDuelFamily = 'fanduel'
@@ -15,12 +12,6 @@ const bovadaColors = ["#cc0000"]
 const pointsbetColors = ["#ED1B42"]
 const betmgmColors = ["#bda871"]
 import {
-  LabelLarge,
-  LabelMedium,
-  LabelXSmall,
-  HeadingLarge,
-  HeadingMedium,
-  HeadingSmall,
   HeadingXSmall
 } from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
@@ -36,7 +27,6 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
   const [flattenedPropsDemo, setFlattenedPropsDemo] = useState([]);
   const [playerProps, setPlayerProps] = useState([[]]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [lastUpdate, setLastUpdate] = useState([])
   const [bookmaker, setBookmaker] = useState([])
   const [awayTeam, setAwayTeam] = useState('')
@@ -74,7 +64,6 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/basketball_nba/events/${eventId}/odds`, {
           params: { apiKey, regions: 'us', markets: 'player_points', oddsFormat: 'american' },
         });
-        // console.log("All Response = ", response)
         if (response && response.data && response.data.bookmakers && response.data.bookmakers[0] &&
           response.data.bookmakers[0].markets && response.data.bookmakers[0].markets[0] &&
           response.data.bookmakers[0].markets[0].outcomes) {
@@ -98,7 +87,6 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
         else
           throw new Error("No Props or betting closed")
       } catch (error) {
-        setError(error.message);
         console.error(error)
       } finally {
         setIsLoading(false);
@@ -443,11 +431,6 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
               </Block>
             </Block>
           </div>) : (
-          // <Block display="flex" justifyContent="center" alignItems="center" marginTop="10px">
-          //   <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >
-          //     No Player Props currently available for this team, try another team.
-          //   </HeadingXSmall>
-          // </Block>
           <></>
         )}
       </div>

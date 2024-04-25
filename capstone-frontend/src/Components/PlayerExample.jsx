@@ -12,27 +12,11 @@ import { Select } from 'baseui/select';
 import {
     LabelLarge,
     LabelMedium,
-    LabelXSmall,
-    LabelSmall,
-    HeadingLarge,
     HeadingMedium,
     HeadingSmall
 } from "baseui/typography";
 import { HistogramWithAxis } from "./HistogramWithAxis";
-import { Card, StyledBody } from "baseui/card";
-import { useStyletron } from "baseui";
-import {
-    StatefulDataTable,
-    BooleanColumn,
-    CategoricalColumn,
-    CustomColumn,
-    NumericalColumn,
-    StringColumn,
-    COLUMNS,
-    NUMERICAL_FORMATS,
-} from "baseui/data-table";
 import { Spinner, SIZE } from "baseui/spinner";
-import NBAGameOddsV2 from '../Components/GameOddsV2';
 
 const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -80,9 +64,6 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
     const [secondaryColor, setSecondaryColor] = useState("#000000")
     const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"]
     const secondaryColors = ["#FDB927", "#BA9653", "#FFFFFF", "#00788C", "#000000", "#FDBB30", "#B8C4CA", "#FEC524", "#1D42BA", "#FFC72C", "#000000", "#FDBB30", "#1D428A", "#FDB927", "#12173F", "#F9A01B", "#EEE1C6", "#236192", "#C8102E", "#F58426", "#EF3B24", "#C4CED4", "#ED174C", "#E56020", "#000000", "#63727A", "#000000", "#000000", "#00471B", "#E31837"]
-    const tertiaryColors = ["#000000", "#963821", "#FFFFFF", "#A1A1A4", "#000000", "#FDBB30", "#B8C4CA", "#8B2131", "#BEC0C2", "#FFC72C", "#C4CED4", "#BEC0C2", "#BEC0C2", "#000000", "#F5B112", "#000000", "#0077C0", "#9EA2A2", "#85714D", "#BEC0C2", "#002D62", "#000000", "#002B5C", "#000000", "#000000", "#000000", "#000000", "#A1A1A4", "#F9A01B", "#C4CED4"]
-    const quaternaryColors = ["#9EA2A2", "#FFFFFF", "#FFFFFF", "#A1A1A4", "#000000", "#000000", "#000000", "#1D428A", "#002D62", "#FFC72C", "#C4CED4", "BEC0C2", "#000000", "#000000", "#707271", "#000000", "#000000", "#78BE20", "#85714D", "#000000", "#FDBB30", "#000000", "#C4CED4", "#63727A", "#000000", "#000000", "#000000", "#B4975A", "#F9A01B", "#C4CED4"]
-    const quinaryColors = ["#FFFFFF", "#000000", "#FFFFFF", "#A1A1A4", "#000000", "#000000", "#000000", "#1D428A", "#002D62", "#FFC72C", "#C4CED4", "BEC0C2", "#000000", "#000000", "#707271", "#000000", "#000000", "#78BE20", "#85714D", "#000000", "#FDBB30", "#000000", "#C4CED4", "#F9AD1B", "#000000", "#000000", "#000000", "#B4975A", "#F9A01B", "#C4CED4"]
     const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons',
         'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves',
         'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings',
@@ -219,7 +200,6 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                 }
             }
             setLast5Games(data);
-            console.log("LAST5=", data)
         };
         fetchLast5Games();
     }, [last5Ids]);

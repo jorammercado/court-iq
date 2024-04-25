@@ -5,15 +5,6 @@ import { Card, StyledBody, StyledThumbnail, StyledTitle } from "baseui/card";
 import "./TeamLeaderPlayerCard.scss"
 import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
-import {
-    LabelMedium,
-    LabelXSmall,
-    LabelSmall,
-    LabelLarge,
-    HeadingLarge,
-    HeadingMedium,
-    HeadingSmall
-} from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import Spin from './SpinLoad';
 
@@ -25,17 +16,12 @@ const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const TeamPlayerLeaderCard = ({ teamId,
     season,
-    isSearchVisible,
-    setIsSearchVisible,
-    sendDataToParent,
-    primaryColor,
-    secondaryColor
+    sendDataToParent
 }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])
     const [personalData, setPersonalData] = useState([]);
-    // console.log(leaders)
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -63,7 +49,6 @@ const TeamPlayerLeaderCard = ({ teamId,
             fetchPlayerStats();
         }
     }, [teamId, season, leaders]);
-    // console.log("PERSONAL DATA", personalData)
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -79,9 +64,7 @@ const TeamPlayerLeaderCard = ({ teamId,
 
             try {
                 const response = await axios.request(options);
-                // console.log("LEADERS: ", response)
                 sendDataToParent(response.data.response[0])
-                // console.log(response.data.response[0], "<------------")
                 if (response.data && response.data.response) {
                     const playerStats = response.data.response.reduce((acc, curr) => {
                         const playerId = curr.player.id;
@@ -94,7 +77,7 @@ const TeamPlayerLeaderCard = ({ teamId,
                         acc[playerId].games++;
                         return acc;
                     }, {});
-                    // console.log(playerStats, "<==== PLAYERSTATS")
+
                     // Sort and find leaders
                     const sortedPoints = Object.values(playerStats).sort((a, b) => b.points - a.points)
                     const sortedAssists = Object.values(playerStats).sort((a, b) => b.assists - a.assists);
@@ -108,7 +91,6 @@ const TeamPlayerLeaderCard = ({ teamId,
                         { ...sortedRebounds[0], category: 'Rebounds', average: calculateAverage(sortedRebounds[0].rebounds, sortedRebounds[0].games) }
                     ].map(leader => ({ ...leader }));
                     setLeaders(leadersWithCategory);
-                    // console.log(leadersWithCategory, "<=====vLEADERS WITH CATERGOR")
                 }
             } catch (error) {
                 console.error('Failed to fetch team leaders:', error);
@@ -147,7 +129,6 @@ const TeamPlayerLeaderCard = ({ teamId,
                             key={index}
                             style={{ cursor: 'pointer', alignItems: "flex-start" }}
                             onClick={() => {
-                                setIsSearchVisible(false)
                                 navigate(`/player/${leader.id}`, { state: { ...leader } })
                             }}
                         >

@@ -1,4 +1,3 @@
-
 .home {
 	margin: 0;
 	padding: 0;
@@ -652,12 +651,17 @@ q {
 	padding: 3.5em 2.5em 3.5em 2.5em;
 }
 
-.home .main > .content {
-    background-color: #FFFFFF; /* Sets the background color to white */
-    padding: .25em .25em; /* Adjusts the padding to match .box.style2, customize as needed */
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth, similar to .box style */
-    margin: auto; /* Centers the content within .main, if desired */
-    max-width: calc(100% - 4em); /* Keeps the existing max-width styling, adjust as needed */
+.home .main>.content {
+	background-color: #FFFFFF;
+	/* Sets the background color to white */
+	padding: .25em .25em;
+	/* Adjusts the padding to match .box.style2, customize as needed */
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+	/* Optional: adds a subtle shadow for depth, similar to .box style */
+	margin: auto;
+	/* Centers the content within .main, if desired */
+	max-width: calc(100% - 4em);
+	/* Keeps the existing max-width styling, adjust as needed */
 }
 
 @media screen and (max-width: 736px) {
@@ -842,7 +846,9 @@ q {
 
 	.home form>.fields>.field.quarter {
 		width: calc(25% - 0.375em);
-	} .home form>.fields {
+	}
+
+	.home form>.fields {
 		width: calc(100% + 2em);
 		margin: -1em 0 2em -1em;
 	}
@@ -1424,12 +1430,12 @@ q {
 	width: 45em;
 	max-width: calc(100% - 4em);
 	margin: 0 auto;
-	color:black;
-	
-	
+	color: black;
+
+
 }
 
-.contentbox{
+.contentbox {
 	padding-top: 150px;
 	text-align: center;
 }
@@ -1673,8 +1679,8 @@ q {
 	-webkit-justify-content: space-between;
 	-ms-justify-content: space-between;
 	justify-content: space-between;
-	position:absolute;
-	bottom:0;
+	position: absolute;
+	bottom: 0;
 	margin: 0;
 	line-height: 1em;
 	padding: 1.5em;
@@ -1753,7 +1759,7 @@ q {
 /* One */
 
 .home #one {
-	background:  url("../images/luca.png") no-repeat center center fixed;
+	background: url("../images/luca.png") no-repeat center center fixed;
 	background-size: cover;
 }
 
@@ -1766,7 +1772,7 @@ q {
 	background-position: top left, center center;
 	/* background:  url("../images/altpic.png") no-repeat center center fixed; */
 	/* background-color: #faf7f2;  */
-	 /* background-size: cover; */
+	/* background-size: cover; */
 }
 
 /* Contact */
@@ -1811,7 +1817,7 @@ q {
 
 }
 
-div.element{
+div.element {
 	height: 50vh;
-    background-color: black;
+	background-color: black;
 }

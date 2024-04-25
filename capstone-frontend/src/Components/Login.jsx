@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../Providers/UserProvider";
 import { useNavigate } from "react-router-dom";
-import { ButtonDock } from "baseui/button-dock";
-import { Button, KIND } from "baseui/button";
 import { styled } from 'baseui';
 import { styled as styled2 } from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";

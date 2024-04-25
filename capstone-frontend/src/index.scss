@@ -1,16 +1,12 @@
 body {
-  background-color: #faf7f2;
+    background-color: #faf7f2;
 }
 
 // Define color variables
-$scrollbar-track-color: 	#E8E8E8;
+$scrollbar-track-color: #E8E8E8;
 $scrollbar-thumb-color: #EA6607;
 $scrollbar-thumb-hover-color: #555;
 
-// Global scrollbar styling
-// ::-webkit-scrollbar {
-//     width: 12px;
-// }
 
 ::-webkit-scrollbar-track {
     background: $scrollbar-track-color;
@@ -19,10 +15,6 @@ $scrollbar-thumb-hover-color: #555;
 ::-webkit-scrollbar-thumb {
     background: $scrollbar-thumb-color;
 }
-
-// ::-webkit-scrollbar-thumb:hover {
-//     background: $scrollbar-thumb-hover-color;
-// }
 
 // Firefox
 * {

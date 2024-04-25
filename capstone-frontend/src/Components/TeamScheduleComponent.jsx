@@ -2,14 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import { Block } from "baseui/block";
-import {
-    LabelMedium,
-    LabelXSmall,
-    LabelLarge,
-    HeadingLarge,
-    HeadingMedium,
-    HeadingSmall
-} from "baseui/typography";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import "./TeamScheduleComponent.scss"
 import { useStyletron } from 'baseui';
@@ -25,7 +17,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
     const [games10, setGames10] = useState([]);
     const [games20, setGames20] = useState([]);
     const [games50, setGames50] = useState([]);
-    // color={isHighlighted?"red":"none"}
+
     useEffect(() => {
         const fetchGames = async () => {
             const options = {
@@ -41,7 +33,6 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
             try {
                 const response = await axios.request(options);
                 const gamesData = response.data.response;
-                // console.log("GAMESSSSSSSSSSS= ", response.data)
                 const futureGames = gamesData.filter(game => {
                     const gameYear = new Date(game.date.start).getFullYear();
                     return gameYear > Number(season);
@@ -169,7 +160,6 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
                     <TableBuilderColumn header="Score (h-v)">
                         {row => <div>{`${row && row.scores && row.scores.home && row.scores.home.points ? `${row.scores.home.points} - ${row.scores.visitors.points}` : "n/a"}`}</div>}
                     </TableBuilderColumn>
-                    {/* Add more columns as necessary */}
                 </TableBuilder>
             </Block>
         </Block>
