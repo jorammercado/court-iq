@@ -1,32 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from './Card'; // Import the Card component
+import Card from './Card'; 
 import "./GameOdds.scss";
-import gameOddsDraft from '../demoData/draftKingsOdds.json';
-import gameOddsFandule from '../demoData/fanduelOdds.json';
-import gameOddsMgm from '../demoData/betMGMOdds.json';
-import gameOddsBovada from '../demoData/bovadaOdds.json';
-import { Block } from "baseui/block";
-import { Heading, HeadingLevel } from 'baseui/heading';
 
 const NBAGameOdds = ({ teamData }) => {
   const [draftKingsOdds, setDraftKingsOdds] = useState([]);
   const [fanduelOdds, setFanduelOdds] = useState([]);
   const [betMGMOdds, setBetMGMOdds] = useState([]);
   const [bovadaOdds, setBovadaOdds] = useState([]);
-  const [draftKingsOddsDemo, setDraftKingsOddsDemo] = useState([]);
-  const [fanduelOddsDemo, setFanduelOddsDemo] = useState([]);
-  const [betMGMOddsDemo, setBetMGMOddsDemo] = useState([]);
-  const [bovadaOddsDemo, setBovadaOddsDemo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // console.log("this is the teamData", teamData)
-
-  useEffect(() => {
-    setDraftKingsOddsDemo(gameOddsDraft);
-    setFanduelOddsDemo(gameOddsFandule);
-    setBetMGMOddsDemo(gameOddsMgm);
-    setBovadaOddsDemo(gameOddsBovada);
-  }, []);
 
   useEffect(() => {
     const fetchOdds = async () => {
@@ -40,7 +22,6 @@ const NBAGameOdds = ({ teamData }) => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
-        //console.log("API Response:", response.data);
 
         const enrichedOdds = response.data.map(game => {
           const bookmaker = game.bookmakers.find(b => b.key === 'draftkings');
@@ -123,10 +104,6 @@ const NBAGameOdds = ({ teamData }) => {
         setBetMGMOdds(enrichedOdds3);
         setBovadaOdds(enrichedOdds4);
 
-        // saveSingleOddsData(enrichedOdds, 'draftKingsOdds');
-        // saveSingleOddsData(enrichedOdds2, 'fanduelOdds');
-        // saveSingleOddsData(enrichedOdds3, 'betMGMOdds');
-        // saveSingleOddsData(enrichedOdds4, 'bovadaOdds');
       } catch (error) {
         console.error("Error fetching odds:", error);
       } finally {
@@ -137,19 +114,6 @@ const NBAGameOdds = ({ teamData }) => {
     fetchOdds();
   }, [teamData]);
 
-  // save data for demo day
-  const saveSingleOddsData = (oddsData, fileNamePrefix) => {
-    if (oddsData && oddsData.length > 0) {
-      const jsonData = JSON.stringify(oddsData);
-      const fileName = `${fileNamePrefix}.json`;
-      const blob = new Blob([jsonData], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = fileName;
-      link.click();
-    }
-  };
 
   const urls = {
     DraftKings: "https://www.draftkings.com",
@@ -209,84 +173,6 @@ const NBAGameOdds = ({ teamData }) => {
           </a>
         )) : <></>}
         {bovadaOdds && bovadaOdds.length > 0 ? bovadaOdds.map((game, index) => (
-          <a href={urls['Bovada']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
-              key={index}
-              homeTeam={game.homeTeam}
-              awayTeam={game.awayTeam}
-              odds={game.odds}
-              data={game.additionalData}
-              homeLogo={game.homeLogo}
-              awayLogo={game.awayLogo}
-              bookmaker="Bovada"
-            />
-          </a>
-        )) : <></>}
-      </div>
-      <div className='ContentGameOdds' >
-        <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "-1px", paddingTop: "0px" }}>
-          <HeadingLevel >
-            <Heading className="heading" styleLevel={4} color="white"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "-10px",
-                backgroundColor: "#141414",
-                paddingTop: "0px",
-                marginTop: "0px",
-                borderStyle: "solid",
-                borderColor: "grey",
-                borderBottom: "none",
-                borderLeft: "none",
-                borderRight: "none",
-                borderWidth: "thin"
-              }}>(Demo Day Old Data)</Heading>
-          </HeadingLevel>
-        </Block>
-        {draftKingsOddsDemo && draftKingsOddsDemo.length > 0 ? draftKingsOddsDemo.map((game, index) => (
-          <a href={urls['DraftKings']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
-              key={index}
-              homeTeam={game.homeTeam}
-              awayTeam={game.awayTeam}
-              odds={game.odds}
-              data={game.additionalData}
-              homeLogo={game.homeLogo}
-              awayLogo={game.awayLogo}
-              bookmaker="DraftKings"
-            />
-          </a>
-        )) : <></>}
-        {fanduelOddsDemo && fanduelOddsDemo.length > 0 ? fanduelOddsDemo.map((game, index) => (
-          <a href={urls['FanDuel']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
-              key={index}
-              homeTeam={game.homeTeam}
-              awayTeam={game.awayTeam}
-              odds={game.odds}
-              data={game.additionalData}
-              homeLogo={game.homeLogo}
-              awayLogo={game.awayLogo}
-              bookmaker="FanDuel"
-            />
-          </a>
-        )) : <></>}
-        {betMGMOddsDemo && betMGMOddsDemo.length > 0 ? betMGMOddsDemo.map((game, index) => (
-          <a href={urls['BetMGM']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
-              key={index}
-              homeTeam={game.homeTeam}
-              awayTeam={game.awayTeam}
-              odds={game.odds}
-              data={game.additionalData}
-              homeLogo={game.homeLogo}
-              awayLogo={game.awayLogo}
-              bookmaker="BetMGM"
-            />
-          </a>
-        )) : <></>}
-        {bovadaOddsDemo && bovadaOddsDemo.length > 0 ? bovadaOddsDemo.map((game, index) => (
           <a href={urls['Bovada']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
             <Card
               key={index}
