@@ -13,8 +13,6 @@ import TeamStatsGlossary from "../Components/TeamStatsGlossary";
 export default function NavBar({
     currentUser,
     photoURL,
-    isSearchVisible,
-    setIsSearchVisible,
     isGlossaryVisible,
     setIsGlossaryVisible,
 }) {
@@ -66,41 +64,33 @@ export default function NavBar({
     function handleMainItemSelect(item) {
         switch (item.label) {
             case "Rosters":
-                setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
                 navigate("/rosters");
                 break;
             case "Standings":
-                setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
                 navigate("/teamstandings");
                 break;
             case "Schedule":
-                setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
                 navigate("/GamesSchedule");
                 break;
             case "Compare":
-                setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
-                navigate("/PlayerComparation");
+                navigate("/playerComparison");
                 break;
             case "Headlines":
-                setIsSearchVisible(false);
                 setIsGlossaryVisible(false);
-                navigate("/HeadLine");
+                navigate("/Headlines");
                 break;
             case "Search":
                 setIsGlossaryVisible(false);
-                setIsSearchVisible(!isSearchVisible);
                 break;
             case "Glossary":
                 setIsGlossaryVisible(!isGlossaryVisible);
-                setIsSearchVisible(false);
                 break;
             default:
                 setIsGlossaryVisible(false);
-                setIsSearchVisible(false);
                 break;
         }
     }
@@ -109,34 +99,28 @@ export default function NavBar({
         switch (item.label) {
             case "User":
                 setIsGlossaryVisible(false);
-                setIsSearchVisible(false);
                 navigate("/loggedInPage");
                 break;
             case "Home":
                 setIsGlossaryVisible(false);
-                setIsSearchVisible(false);
                 navigate("/");
                 break;
             case "Glossary":
                 setIsGlossaryVisible(!isGlossaryVisible);
-                setIsSearchVisible(false);
                 break;
             default:
                 setIsGlossaryVisible(false);
-                setIsSearchVisible(false);
                 break;
         }
     }
 
     const handleLogoClick = () => {
         setIsGlossaryVisible(false);
-        setIsSearchVisible(false);
         navigate("/");
     };
 
     const handleLogoUserClick = () => {
         setIsGlossaryVisible(false);
-        setIsSearchVisible(false);
         navigate("/loggedInPage");
     };
 
@@ -146,7 +130,7 @@ export default function NavBar({
                 title={
                     <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
                         <img src={logo3} alt="logo" height="35px" />
-                        Court IQ
+                        InsightWager
                     </div>
                 }
                 mainItems={mainItems}

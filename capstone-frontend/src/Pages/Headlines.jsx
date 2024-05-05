@@ -142,7 +142,7 @@ function Headlines() {
             statistics and make informed comparisons. <br />
             <strong>Click below to begin your exploration.</strong>
           </h4>
-          <Link className="compare-link" to="/PlayerComparison" style={{borderRadius:"0px", padding:"5px 15px"}}>
+          <Link className="compare-link" to="/playerComparison" style={{borderRadius:"0px", padding:"5px 15px"}}>
             <p className="text-btn" style={{marginBottom:"4px"}}>
               {" "}
               <strong>Explore player comparisons</strong>

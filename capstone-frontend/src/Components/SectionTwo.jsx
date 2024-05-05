@@ -1692,7 +1692,7 @@ const SectionTwo = () => {
             marginTop: "-10px"
           }}>Ask Anything About Basketball Stats</h3>
           <div style={giphyContainerStyle}>
-            <iframe src="https://giphy.com/embed/9kGXF3t2hAx2TmdL7S" style={{ border: 'none', marginLeft: "-45px", marginBottom: "30px", width: "480px", height: "270px" }} allowFullScreen></iframe>
+            <iframe src="https://giphy.com/embed/ftFYPUVo7oPlmrXqM4" style={{ border: 'none', marginLeft: "-45px", marginBottom: "30px", width: "480px", height: "270px" }} allowFullScreen></iframe>
           </div>
           <div style={contentOverlayStyle}>
             <header style={{ paddingBottom: "120px", marginTop: "-52px" }}>

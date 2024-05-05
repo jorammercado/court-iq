@@ -28,20 +28,18 @@ import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
 import Home from "./Pages/Home.jsx";
 import TeamsPage from "./Pages/TeamsPage.jsx";
-import PlayerExamplePage from "./Pages/PlayerExamplePage.jsx";
-import TeamStandingsV2 from "./Pages/TeamStandingsV2.jsx";
-import PlayerStatsTableVariation from "./Pages/PlayerStatsTableVariation.jsx";
+import PlayerPage from "./Pages/PlayerPage.jsx";
+import TeamStandings from "./Pages/TeamStandings.jsx";
+
 import SearchPage from "./Components/SearchPage.jsx";
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PLayerComparation from "./Pages/PLayerComparation.jsx";
+import PlayerComparison from "./Pages/PlayerComparison.jsx";
 import Headlines from "./Pages/Headlines.jsx";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [photoURL, setPhotoURL] = useState(null);
-  const [currentUserPlaces, setCurrentUserPlaces] = useState(null);
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isGlossaryVisible, setIsGlossaryVisible] = useState(false);
   return (
     <StyletronProvider value={engine}>
@@ -58,8 +56,6 @@ function App() {
                   setCurrentUser={setCurrentUser}
                   photoURL={photoURL}
                   setPhotoURL={setPhotoURL}
-                  isSearchVisible={isSearchVisible}
-                  setIsSearchVisible={setIsSearchVisible}
                   isGlossaryVisible={isGlossaryVisible}
                   setIsGlossaryVisible={setIsGlossaryVisible}
                 />
@@ -74,8 +70,7 @@ function App() {
                       setCurrentUser={setCurrentUser}
                       photoURL={photoURL}
                       setPhotoURL={setPhotoURL}
-                      currentUserPlaces={currentUser}
-                      setCurrentUserPlaces={setCurrentUserPlaces}
+                      
                     />
                   }
                 />
@@ -89,8 +84,6 @@ function App() {
                       setCurrentUser={setCurrentUser}
                       photoURL={photoURL}
                       setPhotoURL={setPhotoURL}
-                      currentUserPlaces={currentUser}
-                      setCurrentUserPlaces={setCurrentUserPlaces}
                     />
                   }
                 />
@@ -103,10 +96,8 @@ function App() {
                       element={LoggedInPage}
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-                      currentUserPlaces={currentUser}
                       photoURL={photoURL}
                       setPhotoURL={setPhotoURL}
-                      setCurrentUserPlaces={setCurrentUserPlaces}
                     />
                   }
                 />
@@ -117,9 +108,7 @@ function App() {
                     <MemoGoogleMap
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-                      currentUserPlaces={currentUser}
                       Places
-                      setCurrentUserPlaces={setCurrentUserPlaces}
                     />
                   }
                 /> */}
@@ -130,8 +119,8 @@ function App() {
                     <TeamsPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-                      isSearchVisible={isSearchVisible}
-                      setIsSearchVisible={setIsSearchVisible}
+  
+  
                       key={0}
                     />
                   }
@@ -139,11 +128,11 @@ function App() {
                 <Route
                   path="/player/:playerid"
                   element={
-                    <PlayerExamplePage
+                    <PlayerPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-                      isSearchVisible={isSearchVisible}
-                      setIsSearchVisible={setIsSearchVisible}
+  
+  
                     />
                   }
                 />
@@ -152,7 +141,7 @@ function App() {
                 <Route
                   path="/teamstandings"
                   element={
-                    <TeamStandingsV2
+                    <TeamStandings
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
@@ -160,28 +149,18 @@ function App() {
                 />
 
                 <Route
-                  path="/PlayerComparison"
+                  path="/playerComparison"
                   element={
-                    <PLayerComparation
+                    <PlayerComparison
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />
                   }
                 />
                 <Route
-                  path="/HeadLine"
+                  path="/Headlines"
                   element={
                     <Headlines
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                <Route
-                  path="/player_stats_table"
-                  element={
-                    <PlayerStatsTableVariation
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />

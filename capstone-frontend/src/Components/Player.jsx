@@ -4,7 +4,7 @@ import Spin from "./SpinLoad";
 import axios from "axios";
 import MyGraph from "./MyChart";
 import { useNavigate } from "react-router-dom"
-import "./PlayerExample.scss"
+import "./Player.scss"
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Avatar } from "baseui/avatar";

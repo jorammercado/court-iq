@@ -1,5 +1,5 @@
 
-# Court IQ
+# InsightWager
 One stop shop for basketball betting help.
 
 Contents
@@ -11,16 +11,16 @@ Contents
 
 ## Deployed App Access
 
-Deployed app: [Deployed App](https://neon-dragon-3dc023.netlify.app/)
+Deployed app: [Deployed App](https://insightwager.netlify.app/)
 
 
-Deployed server: [Server](https://capstone-qofe.onrender.com/)
+Deployed server: [Server](https://insightwager.onrender.com)
 
 ### GitHub Repositories
 
-[FrontEnd](https://github.com/Ericktolentino94/Capstone-front-end)
+[FrontEnd](https://github.com/jorammercado/insightwager-frontend)
 
-[BackEnd](https://github.com/Ericktolentino94/Capstone-back-end)
+[BackEnd](https://github.com/jorammercado/insightwager-backend)
 
 
 

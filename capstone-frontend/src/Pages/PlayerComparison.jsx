@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import "./PLayerComparation.scss";
+import "./PlayerComparison.scss";
 import images from "../constants/images";
 import "animate.css";
 import { Block } from "baseui/block";

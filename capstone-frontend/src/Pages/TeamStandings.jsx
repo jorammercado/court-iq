@@ -10,8 +10,8 @@ import { Avatar } from 'baseui/avatar';
 import { useStyletron } from 'baseui';
 import { ArrowUp, ArrowDown } from 'baseui/icon';
 import Spin from '../Components/SpinLoad';
-import "./TeamStandingsV2.scss"
-import TopScoringTeamCard from '../Components/TopScoringTeamCard'; // Adjust the import path as needed
+import "./TeamStandings.scss"
+import TopScoringTeamCard from '../Components/TopScoringTeamCard'; 
 import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
 import NBAGameOdds from '../Components/GameOdds';
 import "animate.css";

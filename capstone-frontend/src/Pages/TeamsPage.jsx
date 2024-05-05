@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TeamStatsComponent from '../Components/TeamStatsComponent';
-import PlayerStatsComponent from '../Components/PlayerStatsE'
+import PlayerStatsComponent from '../Components/PlayerCardWrap'
 import TeamScheduleComponent from '../Components/TeamScheduleComponent';
 import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
 import "./TeamsPage.scss"
@@ -10,7 +10,7 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
 import "../App.scss"
-import NBAGameOddsV2 from '../Components/GameOddsV2';
+import GameOddsStandings from '../Components/GameOddsStandings';
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
@@ -335,7 +335,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 {eventIds ?
                     <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                         <Block className="oddsl2" >
-                            <NBAGameOddsV2 eventId={eventIds[0]} teamName={selectedTeamName} />
+                            <GameOddsStandings eventId={eventIds[0]} teamName={selectedTeamName} />
                         </Block>
                     </Block>
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerExample from '../Components/PlayerExample';
+import Player from '../Components/Player';
 import { useParams, useLocation } from "react-router-dom"
-import "./PlayerExamplePage.scss"
+import "./PlayerPage.scss"
 
 const PlayerExamplePage = () => {
     const { state } = useLocation();
@@ -9,7 +9,7 @@ const PlayerExamplePage = () => {
 
     return (
         <div className="playerexamplepage">
-            <PlayerExample playerid={playerid} data={state} />
+            <Player playerid={playerid} data={state} />
         </div>
 
     );

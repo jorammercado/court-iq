@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import PlayerCard from './PlayerCard';
-import "./PlayerStatsE.scss"
+import "./PlayerCardWrap.scss"
 import Spin from './SpinLoad';
 import { Block } from 'baseui/block';
 
@@ -73,7 +73,6 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
     }
 
     const handleCardClick = (playerId, playerData) => {
-        setIsSearchVisible(false);
         navigate(`/player/${playerId}`, { state: { ...playerData } });
     };
 
