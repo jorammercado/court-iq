@@ -2,6 +2,7 @@ import React from 'react';
 import Intro from "../Components/Intro";
 import SectionOne from "../Components/SectionOne";
 import SectionTwo from "../Components/SectionTwo";
+import SectionThree from "../Components/SectionThree";
 import MyWork from "../Components/MyWork";
 import "./css/main.css"
 import { Link, Element, Events, scrollSpy } from 'react-scroll';
@@ -45,6 +46,9 @@ function Home() {
             </Element>
             <Element name="sectionOne" className="element" style={{ height: "100vh" }}>
                 <SectionOne />
+            </Element>
+            <Element name="sectionTwo" className="element" style={{ height: "100vh" }}>
+                <SectionThree />
             </Element>
             <Element name="sectionTwo" className="element" style={{ height: "100vh" }}>
                 <SectionTwo />

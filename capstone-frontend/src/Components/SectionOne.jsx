@@ -39,23 +39,23 @@ const SectionOne = () => {
 
     const variants = {
         onscreen: {
-            x: screenWidth-divWidth, 
+            x: screenWidth - divWidth,
         },
         offscreen: {
-            x: screenWidth  -100, 
+            x: screenWidth - 100,
         },
     };
 
     function MoveInWhenVisible({ children }) {
         return (
             <motion.div
-                
+
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: false }}
                 transition={{ duration: 1 }}
                 variants={variants}
-                style={{ marginRight: 0, padding: 0, width: "100%" }} 
+                style={{ marginRight: 0, padding: 0, width: "100%" }}
             >
                 {children}
             </motion.div>
@@ -67,15 +67,20 @@ const SectionOne = () => {
 
             <MoveInWhenVisible>
 
-                <div className="content box style2" ref={ref} style={{backgroundColor:"#faf7f2"}}>
+                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2" }}>
                     <header>
                         <h2>What We Do</h2>
                     </header>
-                    <h5>We're revolutionizing the way basketball enthusiasts, teams, and analysts experience the game.</h5>
+                    <h5>We're revolutionizing the way basketball enthusiasts, teams, and analysts experience the game.
+                        <span style={{ color: "#EA6607" }}>
+                            &nbsp; Click on any player from Rosters to see their stats graphically rendered for quick analysis.
+                        </span>
+                    </h5>
+
                 </div>
             </MoveInWhenVisible>
 
-            <a href="#two" className="button style2 down anchored">Next</a>
+            <a href="#three" className="button style2 down anchored">Next</a>
         </section>
     );
 };

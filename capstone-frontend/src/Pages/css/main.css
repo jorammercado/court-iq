@@ -1763,6 +1763,11 @@ q {
 	background-size: cover;
 }
 
+.home #three {
+	background: url("../images/luca2.png") no-repeat center center fixed;
+	background-size: cover;
+}
+
 /* Two */
 
 .home #two {

@@ -99,11 +99,11 @@ const MyWork = () => {
 
     return (
         <section id="work" className="main style3 primary" style={{ backgroundColor: "#faf7f2" }}>
-            <div className="content" style={{ backgroundColor: "#faf7f2", boxShadow: "none", borderStyle:"none" }}>
+            <div className="content" style={{ backgroundColor: "#faf7f2", boxShadow: "none", borderStyle: "none" }}>
                 <header>
-                    <h2>In Depth Prop Research</h2>
+                    <h2>Comparison of Propositional and Head-to-Head Bets Across Different Bookmakers</h2>
                     <h5 className="deep-dive-message">
-                        By exploring the depth of props, we enable users to make more informed assumptions
+                        By exploring a multitude of <span style={{ color: "#EA6607" }}>different bookmakers odds for the same event or prop, we </span><span style={{ color: "#EA6607" }}>enable users</span> to make more informed assumptions and <span style={{ color: "#EA6607" }}>obtain better outcomes</span>.
                     </h5>
                 </header>
                 <div className="gallery" >
