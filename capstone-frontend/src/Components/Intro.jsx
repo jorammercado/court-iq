@@ -1,8 +1,9 @@
 import React from 'react';
+import "./Intro.scss"
 
 const Intro = () => (
-    <section id="intro" className="main style1 dark fullscreen">
-        <div className="content" style={{backgroundColor:"#faf7f2"}}>
+    <section id="intro" className="main style1 dark fullscreen" >
+        <div className="content" style={{backgroundColor:"#faf7f2", borderRadius:"8px"}}>
             <header>
                 <h2>Beyond the Arc Analytics Unleashed</h2>
             </header>

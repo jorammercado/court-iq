@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import "./SectionOne.scss"
 
 const SectionOne = () => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -53,7 +54,7 @@ const SectionOne = () => {
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: false }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 1.5 }}
                 variants={variants}
                 style={{ marginRight: 0, padding: 0, width: "100%" }}
             >
@@ -67,13 +68,13 @@ const SectionOne = () => {
 
             <MoveInWhenVisible>
 
-                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2" }}>
+                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2", borderRadius:"8px" }}>
                     <header>
                         <h2>What We Do</h2>
                     </header>
-                    <h5>We're revolutionizing the way basketball enthusiasts, teams, and analysts experience the game.
+                    <h5>We're revolutionizing the way basketball enthusiasts, teams, and analysts experience the game. <br></br> <br></br>
                         <span style={{ color: "#EA6607" }}>
-                            &nbsp; Click on any player from Rosters to see their stats graphically rendered for quick analysis.
+                            Click on any player from Rosters to see their stats graphically rendered for quick analysis.
                         </span>
                     </h5>
 

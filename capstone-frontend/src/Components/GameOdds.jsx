@@ -22,7 +22,7 @@ const NBAGameOdds = ({ teamData }) => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
-
+        console.log(response.data)
         const enrichedOdds = response.data.map(game => {
           const bookmaker = game.bookmakers.find(b => b.key === 'draftkings');
           const market = bookmaker?.markets.find(m => m.key === 'h2h');
@@ -116,12 +116,12 @@ const NBAGameOdds = ({ teamData }) => {
 
 
   const urls = {
-    DraftKings: "https://www.draftkings.com",
+    DraftKings: "https://sportsbook.draftkings.com/?category=game-lines&subcategory=basketball",
     FanDuel: "https://www.fanduel.com",
     Caesars: "https://www.caesars.com/sportsbook-and-casino/welcome",
     Bovada: "https://www.bovada.lv",
     PointsBet: "https://www.pointsbet.com",
-    BetMGM: "https://www.betmgm.com",
+    BetMGM: "https://sports.betmgm.com/en/sports/basketball-7/betting",
     BetOnline: "https://www.betonline.ag",
     Unibet: "https://www.unibet.com",
     BetRivers: "https://www.betrivers.com"

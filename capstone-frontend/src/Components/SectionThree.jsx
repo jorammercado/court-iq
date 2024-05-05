@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import "./SectionThree.scss"
 
 const SectionThree = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -53,7 +54,7 @@ const SectionThree = () => {
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: false }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 1.5 }}
         variants={variants}
         style={{ marginRight: 0, padding: 0, width: "100%" }}
       >
@@ -66,7 +67,7 @@ const SectionThree = () => {
     <section id="three" className="main style2 left dark fullscreen">
 
       <MoveInWhenVisible>
-        <div className="content box style2" style={{ backgroundColor: "#faf7f2" }}>
+        <div className="content box style2" style={{ backgroundColor: "#faf7f2", borderTopRightRadius:"8px", borderBottomRightRadius:"8px" }}>
           <header>
             <h2>What We Do</h2>
           </header>

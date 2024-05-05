@@ -1628,7 +1628,7 @@ const SectionTwo = () => {
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: false }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 1.5 }}
                 variants={variants}
                 style={{ marginRight: 0, padding: 0, width: "100%" }}
             >
@@ -1670,6 +1670,7 @@ const SectionTwo = () => {
                         backgroundSize: 'contain',
                         backgroundPosition: 'center',
                         backgroundRepeat: "no-repeat",
+                        borderRadius:"8px",
                         opacity: visibleImages[index] ? 1 : 0.15
                     }}></div>
                 ))}
