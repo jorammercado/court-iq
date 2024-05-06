@@ -194,6 +194,8 @@ const MyGraph = ({ playerStats, points, assists,
             .attr("y", function (d, i) { return i * 20; })
             .attr("width", 10)
             .attr("height", 10)
+            .attr("rx", 3)  
+            .attr("ry", 3)  
             .style("fill", color)
             .style("stroke", color)
             .style("stroke-width", 2)
@@ -287,7 +289,7 @@ const MyGraph = ({ playerStats, points, assists,
     }, [playerStats, points, assists, rebounds, threePoints, plusMinus, minutes, blocks]);
 
     return (
-        <div style={{ backgroundColor: "black", paddingBottom:"15px" }} id="my_dataviz"></div>
+        <div style={{ backgroundColor: "black", paddingBottom: "15px", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} id="my_dataviz"></div>
     );
 };
 

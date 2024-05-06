@@ -70,7 +70,7 @@ const MyWork = () => {
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: false }}
-                transition={{ duration: 1.5 }}
+                transition={{ duration: 1.25 }}
                 variants={variants}
                 style={{ marginRight: 0, padding: 0, width: "100%" }}
             >
@@ -86,7 +86,7 @@ const MyWork = () => {
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: false }}
-                transition={{ duration: 1.5 }}
+                transition={{ duration: 1.25 }}
                 variants={variantsRight}
                 style={{ marginRight: 0, padding: 0, width: "100%" }}
             >

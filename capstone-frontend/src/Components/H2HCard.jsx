@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card as BaseCard, StyledBody } from "baseui/card";
-import "./Card.scss"
+import "./H2HCard.scss"
 const draftFamily = 'draftkings'
 const fanDuelFamily = 'fanduel'
 const betmgmFamily = 'caesars'
@@ -63,6 +63,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker })
   };
 
   const imageStyle = {
+    borderRadius:"8px",
     width: '70px',
     height: '70px',
     objectFit: 'contain',
@@ -73,7 +74,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker })
 
   const gameDateTime = data ? formatDate(data) : 'Time Not Available';
   return (
-    <div className="h2hcard" style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid orange 3px', textAlign: 'center' }}>
+    <div className="h2hcard" style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid #EA6607 3px', textAlign: 'center', borderRadius:"8px" }}>
       <BaseCard
         overrides={{
           Root: {
@@ -81,8 +82,8 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker })
               display: 'flex',
               flexDirection: 'row',
               width: "398px",
-              height: "200px",
-              borderRadius: "0px",
+              height: "180px",
+              borderRadius: "8px",
               justifyContent: 'center',
               alignItems: 'center',
               background: findBackgroundColor(homeTeam, awayTeam),

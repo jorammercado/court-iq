@@ -26,7 +26,7 @@ const ChatInput = ({ onSubmit }) => {
   const inputOverrides = {
     Root: {
       style: {
-        borderRadius: "0"
+        borderRadius: "8px"
       },
     },
     InputContainer: {

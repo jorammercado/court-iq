@@ -429,7 +429,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                         style: {
                                             minHeight: '35px', height: '35px', paddingLeft: '15px',
                                             paddingRight: '5px',
-                                            borderRadius: "0",
+                                            borderRadius: "8px",
                                             cursor: 'default',
                                         }
                                     },
@@ -518,7 +518,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
                             marginBottom="80px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
-                                <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex" }}>
+                                <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius:"8px", borderTopRightRadius:"8px"  }}>
                                     Last 5 Games
                                 </HeadingSmall>
                             </Block>

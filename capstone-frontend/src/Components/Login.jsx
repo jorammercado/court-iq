@@ -68,7 +68,7 @@ export const Login = ({ currentUser,
                   Root: {
                     style: {
                       width: "auto", backgroundColor: "#EA6607", border: '1px solid #ECECEC',
-                      borderRadius: '4px',
+                      borderRadius: '8px',
                     }
                   }
                 }}>

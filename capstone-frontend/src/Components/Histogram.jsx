@@ -97,7 +97,7 @@ export const Histogram = ({ width, height, data, title }) => {
     });
 
     return (
-        <svg width={width} height={height} style={{marginTop:"5px", marginBottom:"5px"}}>
+        <svg width={width} height={height} style={{marginTop:"5px", marginBottom:"5px", borderRadius:"8px"}}>
             <rect width="100%" height="100%" fill="black" />
             <text
                 transform={`translate(${width / 2},${MARGIN.top / 2})`}

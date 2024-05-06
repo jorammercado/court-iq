@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TeamStatsComponent from '../Components/TeamStatsComponent';
-import PlayerStatsComponent from '../Components/PlayerCardWrap'
+import PlayerCardWrap from '../Components/PlayerCardWrap'
 import TeamScheduleComponent from '../Components/TeamScheduleComponent';
 import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
 import "./TeamsPage.scss"
@@ -10,7 +10,7 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
 import "../App.scss"
-import GameOddsStandings from '../Components/GameOddsStandings';
+import GameOddsStandings from '../Components/GameOddsRosters';
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
@@ -288,14 +288,18 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             <HeadingLevel >
                                 <Heading styleLevel={4} color="white"
                                     style={{
-                                        marginTop: "35px",
-                                        paddingLeft: "89px",
-                                        paddingRight: "90px",
+                                        marginTop: "20px",
+                                        paddingLeft: "85px",
+                                        paddingRight: "86px",
                                         justifyContent: "flex-start",
                                         marginBottom: "-5px",
                                         backgroundColor: isHighlightedLeaders ? "#EA6607" : "black",
                                         transition: 'background-color .85s ease-in-out',
-                                        marginLeft: "508px",
+                                        marginLeft: "512px",
+                                        borderTopLeftRadius:"8px",
+                                        borderTopRightRadius:"8px",
+                                        borderBottomLeftRadius:"8px",
+                                        borderBottomRightRadius:"8px"
                                     }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
@@ -321,7 +325,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             gamesInView={gamesInView}
                             isHighlighted={isHighlighted}
                         />
-                        <PlayerStatsComponent
+                        <PlayerCardWrap
                             team={teamId}
                             season={season}
                             isSearchVisible={isSearchVisible}
@@ -363,7 +367,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     style: {
                                         minHeight: '35px', height: '35px', paddingLeft: '15px',
                                         paddingRight: '5px',
-                                        borderRadius: "0",
+                                        borderRadius: "8px",
                                         cursor: 'default',
                                     }
                                 },
@@ -399,7 +403,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     style: {
                                         minHeight: '35px', height: '35px', paddingLeft: '15px',
                                         paddingRight: '5px',
-                                        borderRadius: "0",
+                                        borderRadius: "8px",
                                         cursor: 'default'
                                     }
                                 },
@@ -421,7 +425,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                 { id: '5', label: '5' },
                                 { id: '10', label: '10' },
                                 { id: '20', label: '20' },
-                                { id: '55', label: '50' },
+                                { id: '50', label: '50' },
                             ]}
                             labelKey="label"
                             valueKey="id"
@@ -434,7 +438,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     style: {
                                         minHeight: '35px', height: '35px', paddingLeft: '15px',
                                         paddingRight: '5px',
-                                        borderRadius: "0",
+                                        borderRadius: "8px",
                                         cursor: 'default'
                                     }
                                 },

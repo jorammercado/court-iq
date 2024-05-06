@@ -135,7 +135,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
             </Block>
             <Block className="scheduleTable">
                 <TableBuilder data={gamesInView === '5' ? games : gamesInView === '10' ? games10 : gamesInView === '20' ? games20 : games50}
-                    overrides={{ Root: { style: { maxHeight: "500px" } } }}>
+                    overrides={{ Root: { style: { maxHeight: "500px", borderBottomLeftRadius:"8px", borderBottomRightRadius:"8px" } } }}>
                     <TableBuilderColumn header="Date">
                         {row => <div>{row && row.date && row.date.start ? new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] : ""}</div>}
                     </TableBuilderColumn>

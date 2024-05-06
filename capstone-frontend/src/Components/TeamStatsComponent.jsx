@@ -77,15 +77,17 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
     return (
         <Block className="TeamStatsTable" style={{
             justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%",
-            marginBottom: "15px", marginTop: "20px"
+            marginBottom: "-19px", marginTop: "0px"
         }}>
-            <Block className="heading"  width="100%"
+            <Block className="heading" width="100%"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
                     url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'right',
                     backgroundRepeat: 'no-repeat',
+                    borderTopLeftRadius: "8px",
+                    borderTopRightRadius: "8px"
                 }}>
                 <Block className="heading" backgroundColor={isHighlightedSeason ? "#EA6607" : "transparent"} width="100%">
                     <HeadingLevel >

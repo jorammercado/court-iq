@@ -1,9 +1,9 @@
 .playerCardsContainer {
     display: flex;
     gap: 10px;
-    justify-content: center;
-    margin-top: 50px;
-    align-items:center;
+    justify-content:space-around;
+    margin-top: 45px;
+    align-items:flex-start;
     flex-direction: row;
     flex-wrap:wrap;
 

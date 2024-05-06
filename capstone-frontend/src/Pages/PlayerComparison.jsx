@@ -96,16 +96,16 @@ function PlayerComparison() {
     }
   }, [player1Data, player2Data]);
 
-  
+
   const backgroundColorPlugin = {
-    id: 'backgroundColorPlugin',  
+    id: 'backgroundColorPlugin',
     beforeDraw: (chart) => {
       const ctx = chart.ctx;
-      ctx.fillStyle = '#141414';  
+      ctx.fillStyle = '#141414';
       ctx.fillRect(0, 0, chart.width, chart.height);
     }
   };
-  
+
   const renderChart = () => {
     const ctx = document.getElementById("comparisionChart").getContext("2d");
 
@@ -125,7 +125,6 @@ function PlayerComparison() {
       backgroundColor: "#ea6607",
       borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
-
     };
 
     const player2DataSet = {
@@ -153,7 +152,7 @@ function PlayerComparison() {
         plugins: {
           legend: {
             position: 'top',
-            
+
           },
           title: {
             display: true,
@@ -182,7 +181,7 @@ function PlayerComparison() {
   const inputOverrides = {
     Root: {
       style: {
-        borderRadius: "0",
+        borderRadius: "8px",
         maxWidth: "350px",
       },
     },
@@ -191,7 +190,7 @@ function PlayerComparison() {
     },
   };
   const StyledButton = styled(Button)`
-    border-radius: 0px;
+    border-radius: 8px;
     background-color: #ea6607;
 
     &:hover {
@@ -246,6 +245,7 @@ function PlayerComparison() {
               color="white"
               padding="15px"
               backgroundColor="black"
+              $style={{ borderRadius: "8px" }}
             >
               Welcome to our NBA player comparison tool! Enter the names of two
               NBA players below and click "Compare Players" to see their
@@ -333,7 +333,7 @@ function PlayerComparison() {
             <StyledButton
               className="compare-button"
               onClick={handleSearch}
-              $style={{ borderRadius: "0px", backgroundColor: "#ea6607" }}
+              $style={{ backgroundColor: "#ea6607" }}
             >
               Compare Players
             </StyledButton>
@@ -344,10 +344,10 @@ function PlayerComparison() {
             {player1Data && (
               <Block
                 className="player-info animate__animated animate__backInLeft"
-                style={{ backgroundColor: "#141414" }}
+                style={{ backgroundColor: "#141414", borderRadius:"8px" }}
               >
                 <img
-                  style={{ backgroundColor: "#141414" }}
+                  style={{ backgroundColor: "#141414", borderRadius:"8px"  }}
                   className="player-img"
                   src={player1Data.espnHeadshot}
                   alt=""
@@ -404,10 +404,10 @@ function PlayerComparison() {
             {player2Data && (
               <Block
                 className="player-info animate__animated animate__backInRight"
-                style={{ backgroundColor: "#141414" }}
+                style={{ backgroundColor: "#141414", borderRadius:"8px" }}
               >
                 <img
-                  style={{ backgroundColor: "#141414" }}
+                  style={{ backgroundColor: "#141414", borderRadius:"8px"  }}
                   className="player-img"
                   src={player2Data.espnHeadshot}
                   alt=""
@@ -461,9 +461,9 @@ function PlayerComparison() {
           </div>
         </div>
 
-     
-         <canvas className="chart-container2" id="comparisionChart"></canvas>
-        
+
+        <canvas className="chart-container2" id="comparisionChart"></canvas>
+
 
       </Block>
     </Block>

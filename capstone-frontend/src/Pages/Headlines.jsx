@@ -86,7 +86,7 @@ function Headlines() {
         backgroundColor="#EA6607"
         padding="0px"
         height="60px"
-        marginBottom="30px" >
+        marginBottom="5px" >
         <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding - 5 + "px"}>
           <HeadingLevel>
             <Heading styleLevel={!isMobile ? 5 : 6} color="black" >Top Headline News</Heading>
@@ -95,7 +95,7 @@ function Headlines() {
       </Block>
       <div className="headlines-container">
 
-        <div className="headlines-description" style={{ maxWidth: "1270px" }}>
+        <div className="headlines-description" style={{ maxWidth: "1270px", borderRadius:"8px" }}>
           <HeadingLevel>
             <Heading styleLevel={6} color="white" >Welcome to our NBA news section, providing the latest and foremost
               headlines from the world of NBA. Keep abreast of the most recent
@@ -106,7 +106,7 @@ function Headlines() {
         {error && <p className="error-message">Error: {error}</p>}
         <div className="headline-list">
           {headlines.map((headline, index) => (
-            <div className="headline" key={index}>
+            <div className="headline" key={index} style={{borderRadius:"8px"}}>
               <img
                 className="headline-image"
                 src={headline.image}
@@ -142,7 +142,7 @@ function Headlines() {
             statistics and make informed comparisons. <br />
             <strong>Click below to begin your exploration.</strong>
           </h4>
-          <Link className="compare-link" to="/playerComparison" style={{borderRadius:"0px", padding:"5px 15px"}}>
+          <Link className="compare-link" to="/playerComparison" style={{borderRadius:"8px", padding:"5px 15px"}}>
             <p className="text-btn" style={{marginBottom:"4px"}}>
               {" "}
               <strong>Explore player comparisons</strong>

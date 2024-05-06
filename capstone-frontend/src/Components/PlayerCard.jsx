@@ -45,11 +45,11 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                     style: {
                         display: "flex",
                         justifyContent: "center",
-                        width: "252px",
+                        width: "232px",
                         height: "179px",
                         marginBottom: "5px",
                         backgroundColor: primaryColor,
-                        borderRadius: "0",
+                        borderRadius: "8px",
                         border: "none",
                     }
                 },

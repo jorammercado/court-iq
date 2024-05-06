@@ -11,9 +11,9 @@ import { useStyletron } from 'baseui';
 import { ArrowUp, ArrowDown } from 'baseui/icon';
 import Spin from '../Components/SpinLoad';
 import "./TeamStandings.scss"
-import TopScoringTeamCard from '../Components/TopScoringTeamCard'; 
+import TopScoringTeamCard from '../Components/TopScoringTeamCard';
 import TopDefensiveTeamCard from '../Components/TopDefensiveTeamCard';
-import NBAGameOdds from '../Components/GameOdds';
+import GameOdds from '../Components/GameOdds';
 import "animate.css";
 import {
   HeadingMedium,
@@ -274,7 +274,7 @@ const TeamStandingsV2 = () => {
         backgroundColor="#EA6607"
         padding="0px"
         height="60px"
-        marginBottom="30px" >
+        marginBottom="10px" >
         <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding + "px"}>
           <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
             <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} />
@@ -309,7 +309,7 @@ const TeamStandingsV2 = () => {
                 conference="Western"
               />
             </Block>
-           
+
           </Block>
           : <></>
         }
@@ -324,7 +324,8 @@ const TeamStandingsV2 = () => {
           style={{ width: isMobile ? '100%' : 'unset' }}
         >
           {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px">
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
+              $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} >
               <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
             </Block>
           }
@@ -387,7 +388,8 @@ const TeamStandingsV2 = () => {
             </TableBuilder>
           }
           {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%">
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%"
+              $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
               <HeadingMedium marginLeft="5px" color="white" >Eastern Conference</HeadingMedium>
             </Block>
           }
@@ -475,26 +477,28 @@ const TeamStandingsV2 = () => {
                 conference="Eastern"
               />
             </Block>
-         
+
           </Block>
           : <></>
         }
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading className="heading" styleLevel={4} color="white" style={{ display: "flex",  paddingTop:"5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", backgroundColor: "black", paddingBottom:"1px" }}>NBA h2h Ventures</Heading>
+          <Heading className="heading" styleLevel={4} color="white" style={{ display: "flex", paddingTop: "5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", backgroundColor: "black", paddingBottom: "1px",
+        borderTopLeftRadius:"8px", borderTopRightRadius:"8px" }}>NBA h2h Ventures</Heading>
         </HeadingLevel>
       </Block>
-      <Block  className="oddsT" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
+      <Block className="oddsT" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
         <Block className="odds__l2T" backgroundColor="black" style={{
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
           width: "100%",
-          marginBottom: "100px"
+          marginBottom: "100px",
+          borderBottomLeftRadius:"8px", borderBottomRightRadius:"8px" 
         }}>
-          <NBAGameOdds teamData={teamData} />
+          <GameOdds teamData={teamData} />
         </Block>
       </Block>
     </Block>

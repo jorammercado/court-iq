@@ -30,8 +30,6 @@ import Home from "./Pages/Home.jsx";
 import TeamsPage from "./Pages/TeamsPage.jsx";
 import PlayerPage from "./Pages/PlayerPage.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
-
-import SearchPage from "./Components/SearchPage.jsx";
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PlayerComparison from "./Pages/PlayerComparison.jsx";
@@ -119,8 +117,6 @@ function App() {
                     <TeamsPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-  
-  
                       key={0}
                     />
                   }
@@ -131,12 +127,9 @@ function App() {
                     <PlayerPage
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
-  
-  
                     />
                   }
                 />
-                <Route path="/Search" element={<SearchPage />} />
 
                 <Route
                   path="/teamstandings"

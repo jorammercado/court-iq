@@ -22,7 +22,7 @@ import pointsbet from "../assets/logopointsbet.png"
 import betmgm from "../assets/betmgm.png"
 const API = import.meta.env.VITE_BASE_URL
 
-const NBAGameOddsV2 = ({ eventId, teamName }) => {
+const GameOddsRosters = ({ eventId, teamName }) => {
   const [flattenedProps, setFlattenedProps] = useState([]);
   const [playerProps, setPlayerProps] = useState([[]]);
   const [isLoading, setIsLoading] = useState(true);
@@ -88,7 +88,7 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
 
   return (
     <div>
-      <div>
+      <div >
         {flattenedProps && flattenedProps.length > 0 ? (
           <Block className="oddsContain">
             <Block className="headl1" width="100%" marginBottom="0px" paddingBottom="0px">
@@ -99,7 +99,10 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
                   textAlign: 'left',
                   paddingLeft: "5px",
                   backgroundColor: "black",
-                  marginBottom: "0px", paddingBottom: "0px"
+                  marginBottom: "0px",
+                  paddingBottom: "0px",
+                  borderTopLeftRadius: "8px",
+                  borderTopRightRadius: "8px"
                 }} >Player Props</Heading>
               </HeadingLevel>
             </Block>
@@ -124,7 +127,7 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
             </Block>
             <Block className="scheduleTable">
               <TableBuilder data={flattenedProps}
-                overrides={{ Root: { style: { maxHeight: "500px" } } }}>
+                overrides={{ Root: { style: { maxHeight: "500px", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" } } }}>
                 <TableBuilderColumn header="Bookmaker">
                   {row => {
 
@@ -233,8 +236,8 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
               </TableBuilder>
             </Block>
           </Block>) : (
-          <Block display="flex" justifyContent="center" alignItems="center" marginTop="10px">
-            <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" >
+          <Block display="flex" justifyContent="center" alignItems="center" marginTop="10px" >
+            <HeadingXSmall backgroundColor="black" padding="10px 15px" width="100%" $style={{ borderRadius: "8px" }} >
               No Player Props currently available for this team, try another team.
             </HeadingXSmall>
           </Block>
@@ -245,4 +248,4 @@ const NBAGameOddsV2 = ({ eventId, teamName }) => {
 };
 
 
-export default NBAGameOddsV2;
+export default GameOddsRosters;
