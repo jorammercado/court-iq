@@ -130,7 +130,7 @@ export default function NavBar({
                 title={
                     <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
                         <img src={logo3} alt="logo" height="35px" />
-                        InsightWager
+                        Court-IQ
                     </div>
                 }
                 mainItems={mainItems}
