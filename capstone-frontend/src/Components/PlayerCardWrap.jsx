@@ -77,7 +77,7 @@ const PlayerStatsComponent = ({ team, season, isSearchVisible, setIsSearchVisibl
     };
 
     return (
-        <Block maxWidth="1450px" marginLeft="60px" marginRight="60px" >
+        <Block maxWidth="1330px" marginLeft="60px" marginRight="60px" >
             <Block className="playerCardsContainer">
                 {playerStats && playerStats.slice(0, 15).map((player, index) => {
                     let personalDataPassed = null

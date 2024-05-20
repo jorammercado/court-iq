@@ -1689,11 +1689,11 @@ const SectionTwo = () => {
                         backgroundColor: "black",
                         zIndex: 5,
                         position: "relative",
-                        marginBottom: "70px",
-                        marginTop: "-10px"
-                    }}>Ask single stat questions from player's latest game.</h4>
+                        marginBottom: "90px",
+                        marginTop: "-20px"
+                    }}>Ask single stat questions from player's latest game (more to come).</h4>
                     <div style={giphyContainerStyle}>
-                        <iframe src="https://giphy.com/embed/ftFYPUVo7oPlmrXqM4" style={{ border: 'none', marginLeft: "-45px", marginBottom: "50px", width: "480px", height: "270px" }} allowFullScreen></iframe>
+                        <iframe src="https://giphy.com/embed/ftFYPUVo7oPlmrXqM4" style={{ border: 'none', marginLeft: "-40px", marginBottom: "50px", width: "480px", height: "270px" }} allowFullScreen></iframe>
                     </div>
                     <div style={contentOverlayStyle}>
                         <header style={{ paddingBottom: "120px", marginTop: "-52px" }}>
@@ -1708,8 +1708,8 @@ const SectionTwo = () => {
                         marginTop: "-30px",
                         textAlign: "left"
                     }}>
-                        Quick answers with our custom search engine — find data not available on Google for quick answers.<br />
-                        <span style={{ color: "#EA6607" }}>Points, assists, rebounds, blocks, 3-point percentage, and more.</span> Give our engine a try with any stat; our database is updated daily.
+                        Quick answers with our custom search engine, find data not Googleable for quick answers.<br />
+                        <span style={{ color: "#EA6607" }}>Points, assists, rebounds, blocks, 3-point percentage, and more.</span> Give our engine a try with any stat.
                     </h6>
 
                 </div>
