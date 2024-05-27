@@ -143,11 +143,11 @@ const TeamPlayerLeaderCard = ({ teamId,
                                             width: "275px",
                                             marginTop: "0px",
                                             marginBottom: "20px",
-                                            height: "370px",
+                                            height: "360px",
                                             borderBottomRightRadius: "8px",
                                             borderBottomLeftRadius: "8px",
-                                            borderTopRightRadius: leader.category === "Assists"?"8px":"8px",
-                                            borderTopLeftRadius: leader.category === "Assists"?"8px":"8px",
+                                            borderTopRightRadius: leader.category === "Assists" ? "8px" : "8px",
+                                            borderTopLeftRadius: leader.category === "Assists" ? "8px" : "8px",
                                             padding: '20px',
                                         }
                                     }
@@ -158,12 +158,19 @@ const TeamPlayerLeaderCard = ({ teamId,
                                 </StyledTitle>
 
                                 <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
-                                    style={{ height: '190px', width: '260px', alignSelf: "center", border: "none", marginBottom: "35px" }}
+                                    style={{
+                                        height: '190px',
+                                        width: '260px',
+                                        alignSelf: "center",
+                                        border: "none",
+                                        marginBottom: "20px",
+                                        marginTop: "-15px",
+                                    }}
                                 />
 
                                 <StyledBody>
                                     <HeadingLevel >
-                                        <Heading style={{ fontSize: "25px", textAlign: "center", marginBottom: "-15px" }} styleLevel={6}>
+                                        <Heading style={{ fontSize: "25px", textAlign: "center", marginBottom: "-20px" }} styleLevel={6}>
                                             {leader.category === "Points" ? "PPG" : leader.category === "Assists" ? "APG" : "RPG"}
                                             <br />
                                             <span style={{ fontSize: "15px" }}>{leader.average}</span>
