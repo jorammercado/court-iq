@@ -91,6 +91,9 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
     const [fga, setFGA] = useState([])
     const [fta, setFTA] = useState([])
     const [last5Games, setLast5Games] = useState([])
+    const [last10GamesPlayerData, setLast10GamesPlayerData] = useState([])
+    const [last20GamesPlayerData, setLast20GamesPlayerData] = useState([])
+    const [last50GamesPlayerData, setLast50GamesPlayerData] = useState([])
     const [last5Ids, setLast5Ids] = useState([])
     const [tpm, setTPM] = useState([]);
 
@@ -169,6 +172,9 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                 response.data.response[response.data.response.length - 3].game.id,
                 response.data.response[response.data.response.length - 4].game.id,
                 response.data.response[response.data.response.length - 5].game.id])
+                setLast10GamesPlayerData([...response.data.response].reverse().slice(0,10));
+                setLast20GamesPlayerData([...response.data.response].reverse().slice(0,20));
+                setLast50GamesPlayerData([...response.data.response].reverse().slice(0,50));
                 setTPM(response.data.response.map((e) => e.tpm));
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
@@ -345,6 +351,14 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
     ];
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
 
+    const [gamesInView, setGamesInView] = useState('5')
+    const handleGamesChange = (params) => {
+        const { value } = params;
+        if (value.length > 0) {
+            setGamesInView(value[0].id);
+        }
+    };
+
 
     return (
         <div>
@@ -410,19 +424,20 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                 src={referenceData.team ? referenceData.team.logo : ""}
                             />
                         </Block>
-                        <Block className="selector" width="auto" display="flex" marginBottom="170px" marginLeft="25px" marginRight="10px"    >
+                        <Block className="selector" width="auto" display="flex" marginBottom="170px" marginLeft="25px" marginRight="10px"
+                            $style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "50px", gap: "10px" }}    >
                             <Select
                                 options={[
-                                    { id: '2020', label: '2020-2021' },
-                                    { id: '2021', label: '2021-2022' },
-                                    { id: '2022', label: '2022-2023' },
                                     { id: '2023', label: '2023-2024' },
+                                    { id: '2022', label: '2022-2023' },
+                                    { id: '2021', label: '2021-2022' },
+                                    { id: '2020', label: '2020-2021' }
                                 ]}
                                 labelKey="label"
                                 valueKey="id"
                                 onChange={handleSeasonChange}
                                 value={selectedValue}
-                                placeholder="Select..."
+                                placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
                                 clearable={false}
                                 overrides={{
                                     ControlContainer: {
@@ -443,6 +458,40 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                                     Input: { style: { cursor: 'default' } },
                                     Root: { style: { width: '122px' } }
                                 }}
+                            />
+                            <Select
+                                options={[
+                                    { id: '5', label: '5' },
+                                    { id: '10', label: '10' },
+                                    { id: '20', label: '20' },
+                                    { id: '50', label: '50' },
+                                ]}
+                                labelKey="label"
+                                valueKey="id"
+                                onChange={handleGamesChange}
+                                value={[{ id: '0', label: 'Games' }]}
+                                placeholder={<Block> &nbsp;&nbsp;Games&nbsp;&nbsp; </Block>}
+                                clearable={false}
+                                overrides={{
+                                    ControlContainer: {
+                                        style: {
+                                            minHeight: '35px', height: '35px', paddingLeft: '15px',
+                                            paddingRight: '5px',
+                                            borderRadius: "8px",
+                                            cursor: 'default'
+                                        }
+                                    },
+                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                                    Placeholder: { style: { lineHeight: '30px' } },
+                                    SingleValue: { style: { lineHeight: '30px' } },
+                                    OptionContent: { style: { cursor: 'default' }, },
+                                    DropdownContainer: { style: { cursor: 'default' } },
+                                    DropdownListItem: { style: { cursor: 'default' } },
+                                    InputContainer: { style: { cursor: 'default' } },
+                                    Input: { style: { cursor: 'default' } },
+                                    Root: { style: { width: '122px' } }
+                                }}
+
                             />
                         </Block>
                     </Block>
@@ -518,7 +567,7 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
                             marginBottom="80px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
-                                <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius:"8px", borderTopRightRadius:"8px"  }}>
+                                <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
                                     Last 5 Games
                                 </HeadingSmall>
                             </Block>
