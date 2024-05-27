@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from './H2HCard'; 
+import H2HCard from './H2HCard'; 
 import "./GameOdds.scss";
 
 const NBAGameOdds = ({ teamData }) => {
@@ -132,7 +132,7 @@ const NBAGameOdds = ({ teamData }) => {
       <div className='ContentGameOdds'>
         {draftKingsOdds && draftKingsOdds.length > 0 ? draftKingsOdds.map((game, index) => (
           <a href={urls['DraftKings']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
+            <H2HCard
               key={index}
               homeTeam={game.homeTeam}
               awayTeam={game.awayTeam}
@@ -146,7 +146,7 @@ const NBAGameOdds = ({ teamData }) => {
         )) : <></>}
         {fanduelOdds && fanduelOdds.length > 0 ? fanduelOdds.map((game, index) => (
           <a href={urls['FanDuel']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
+            <H2HCard
               key={index}
               homeTeam={game.homeTeam}
               awayTeam={game.awayTeam}
@@ -160,7 +160,7 @@ const NBAGameOdds = ({ teamData }) => {
         )) : <></>}
         {betMGMOdds && betMGMOdds.length > 0 ? betMGMOdds.map((game, index) => (
           <a href={urls['BetMGM']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
+            <H2HCard
               key={index}
               homeTeam={game.homeTeam}
               awayTeam={game.awayTeam}
@@ -174,7 +174,7 @@ const NBAGameOdds = ({ teamData }) => {
         )) : <></>}
         {bovadaOdds && bovadaOdds.length > 0 ? bovadaOdds.map((game, index) => (
           <a href={urls['Bovada']} target="_blank" rel="noopener noreferrer" key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card
+            <H2HCard
               key={index}
               homeTeam={game.homeTeam}
               awayTeam={game.awayTeam}

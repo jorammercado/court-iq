@@ -323,7 +323,7 @@ const TeamStandingsV2 = () => {
           maxWidth={isMobile ? "85%" : "850px"}
           style={{ width: isMobile ? '100%' : 'unset' }}
         >
-          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+          {data == null || data === undefined || data.length === 0 || !data ? <Spin ></Spin> :
             <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
               $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} >
               <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
@@ -484,19 +484,31 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading className="heading" styleLevel={4} color="white" style={{ display: "flex", paddingTop: "5px", marginTop: "15px", justifyContent: "center", alignItems: "center", marginBottom: "-15px", backgroundColor: "black", paddingBottom: "1px",
-        borderTopLeftRadius:"8px", borderTopRightRadius:"8px" }}>NBA h2h Ventures</Heading>
+          <Heading className="heading" styleLevel={4} color="white"
+            style={{
+              display: "flex",
+              paddingTop: "5px",
+              marginTop: "10px",
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: "-10px",
+              backgroundColor: "black",
+              paddingBottom: "5px",
+              // borderTopLeftRadius: "8px",
+              // borderTopRightRadius: "8px",
+              borderRadius: "8px"
+            }}>NBA h2h Ventures</Heading>
         </HeadingLevel>
       </Block>
       <Block className="oddsT" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
-        <Block className="odds__l2T" backgroundColor="black" style={{
+        <Block className="odds__l2T" backgroundColor="#faf7f2" style={{
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
           width: "100%",
           marginBottom: "100px",
-          borderBottomLeftRadius:"8px", borderBottomRightRadius:"8px" 
+          borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
         }}>
           <GameOdds teamData={teamData} />
         </Block>

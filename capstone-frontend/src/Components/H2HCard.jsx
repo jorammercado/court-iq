@@ -83,7 +83,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker })
               flexDirection: 'row',
               width: "398px",
               height: "180px",
-              borderRadius: "8px",
+              borderRadius: "5px",
               justifyContent: 'center',
               alignItems: 'center',
               background: findBackgroundColor(homeTeam, awayTeam),

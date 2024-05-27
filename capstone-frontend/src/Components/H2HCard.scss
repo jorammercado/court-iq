@@ -1,6 +1,21 @@
 .h2hcard {
     width: 398px;
 
+
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow:
+            rgba(0, 0, 0, 0.5) 0px 80px 80px -20px,
+            rgba(0, 0, 0, 0.3) 0px -20px 50px -10px,
+            rgba(0, 0, 0, 0.4) 0px 10px 20px -5px,
+            rgba(0, 0, 0, 0.35) 0px 30px 35px -5px,
+            rgba(0, 0, 0, 0.45) 0px -10px 25px -5px,
+            rgba(0, 0, 0, 0.5) 0px 100px 100px -30px,
+            rgba(0, 0, 0, 0.6) 0px 120px 120px -40px;
+    }
+
+
     @media (max-width: 470px) {
         max-width: 300px
     }
