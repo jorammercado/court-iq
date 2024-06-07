@@ -7,7 +7,7 @@ import { AppNavBar } from "baseui/app-nav-bar";
 import logo3 from "../assets/logo3.png";
 import ball from "../assets/BALL.svg";
 import ChatApp from "./ChatApp";
-import TeamStatsGlossary from "../Components/TeamStatsGlossary";
+import Glossary from "../Components/Glossary";
 
 
 export default function NavBar({
@@ -203,15 +203,15 @@ export default function NavBar({
                     <div
                         onClick={(e) => e.stopPropagation()}
                         style={{
-                            maxHeight: "80%",
+                            maxHeight: "89%",
                             overflowY: "auto",
-                            width: "60%",
+                            width: "55%",
                             backgroundColor: "#faf7f2",
                             padding: "25px",
                             borderRadius: "3px",
                         }}
                     >
-                        <TeamStatsGlossary />
+                        <Glossary />
                     </div>
                 </div>
             )}
