@@ -324,6 +324,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             sendDataToParent={handleDataFromChild}
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
+                            games5={games5}
+                            games10={games10}
+                            games20={games20}
+                            games50={games50}
+                            gamesAll={gamesAll}
                         />
                     </Block>
                     <Block className="teamsItems" >
@@ -350,6 +355,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
                             teamName={selectedTeamName}
+                            games5={games5}
+                            games10={games10}
+                            games20={games20}
+                            games50={games50}
+                            gamesAll={gamesAll}
                         />
                     </Block>
                 </Block>

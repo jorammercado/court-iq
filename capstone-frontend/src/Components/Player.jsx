@@ -24,13 +24,7 @@ const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
 const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) {
-
-    useEffect(() => {
-        if (isSearchVisible) {
-            setIsSearchVisible(false);
-        }
-    }, [isSearchVisible]);
+function PlayerExample({ data, playerid }) {
 
     let navigate = useNavigate()
     const [isScreenLargeEnough, setIsScreenLargeEnough] = useState(window.innerWidth > 768);
@@ -91,10 +85,19 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
     const [fga, setFGA] = useState([])
     const [fta, setFTA] = useState([])
     const [last5Games, setLast5Games] = useState([])
+    const [last10Games, setLast10Games] = useState([])
+    const [last20Games, setLast20Games] = useState([])
+    const [last50Games, setLast50Games] = useState([])
+    const [lastAllGames, setLastAllGames] = useState([])
     const [last10GamesPlayerData, setLast10GamesPlayerData] = useState([])
     const [last20GamesPlayerData, setLast20GamesPlayerData] = useState([])
     const [last50GamesPlayerData, setLast50GamesPlayerData] = useState([])
+    const [lastAllGamesPlayerData, setLastAllGamesPlayerData] = useState([])
     const [last5Ids, setLast5Ids] = useState([])
+    const [last10Ids, setLast10Ids] = useState([])
+    const [last20Ids, setLast20Ids] = useState([])
+    const [last50Ids, setLast50Ids] = useState([])
+    const [lastAllIds, setLastAllIds] = useState([])
     const [tpm, setTPM] = useState([]);
 
     const [isHighlighted, setIsHighlighted] = useState(false);
@@ -132,6 +135,14 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
         fetchPlayerStats();
     }, [team, selectedSeason]);
 
+    const setIds = (data, setFunc, count) => {
+        setFunc(data.slice(-count).map(item => item.game.id));
+    };
+
+    const filterGames = (allGames, ids) => {
+        return allGames.filter(game => ids.includes(game.id));
+    };
+
     useEffect(() => {
         const fetchPlayerStats = async () => {
             const requestOptions = {
@@ -167,14 +178,15 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
                 setFGP(response.data.response.map((e) => e.fgp));
                 setTPP(response.data.response.map((e) => e.tpp));
                 setFTP(response.data.response.map((e) => e.ftp));
-                setLast5Ids([response.data.response[response.data.response.length - 1].game.id,
-                response.data.response[response.data.response.length - 2].game.id,
-                response.data.response[response.data.response.length - 3].game.id,
-                response.data.response[response.data.response.length - 4].game.id,
-                response.data.response[response.data.response.length - 5].game.id])
-                setLast10GamesPlayerData([...response.data.response].reverse().slice(0,10));
-                setLast20GamesPlayerData([...response.data.response].reverse().slice(0,20));
-                setLast50GamesPlayerData([...response.data.response].reverse().slice(0,50));
+                setIds(response.data.response, setLast5Ids, 5);
+                setIds(response.data.response, setLast10Ids, 10);
+                setIds(response.data.response, setLast20Ids, 20);
+                setIds(response.data.response, setLast50Ids, 50);
+                setIds(response.data.response, setLastAllIds, response.data.response.length);
+                setLast10GamesPlayerData([...response.data.response].reverse().slice(0, 10));
+                setLast20GamesPlayerData([...response.data.response].reverse().slice(0, 20));
+                setLast50GamesPlayerData([...response.data.response].reverse().slice(0, 50));
+                setLastAllGamesPlayerData([...response.data.response].reverse().slice(0));
                 setTPM(response.data.response.map((e) => e.tpm));
             } catch (error) {
                 console.error("Error fetching player statistics:", error);
@@ -183,32 +195,24 @@ function PlayerExample({ data, playerid, isSearchVisible, setIsSearchVisible }) 
         fetchPlayerStats();
     }, [playerid, selectedSeason]);
 
-
     useEffect(() => {
-        const fetchLast5Games = async () => {
-            const data = []
-            for (let i = 0; i < last5Ids.length; i++) {
-                try {
-                    const response = await axios.request({
-                        method: 'GET',
-                        url: `https://${VITE_X_RAPIDAPI_HOST2}/games`,
-                        params: {
-                            id: last5Ids[i]
-                        },
-                        headers: {
-                            'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
-                            'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
-                        }
-                    });
-                    data.push(response.data.response[0]);
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-            setLast5Games(data);
-        };
-        fetchLast5Games();
-    }, [last5Ids]);
+        if (data.gamesAll && last5Ids.length) {
+            setLast5Games(filterGames(data.gamesAll, last5Ids).reverse());
+        }
+        if (data.gamesAll && last10Ids.length) {
+            setLast10Games(filterGames(data.gamesAll, last10Ids).reverse());
+        }
+        if (data.gamesAll && last20Ids.length) {
+            setLast20Games(filterGames(data.gamesAll, last20Ids).reverse());
+        }
+        if (data.gamesAll && last50Ids.length) {
+            setLast50Games(filterGames(data.gamesAll, last50Ids).reverse());
+        }
+        if (data.gamesAll && lastAllIds.length) {
+            setLastAllGames(filterGames(data.gamesAll, lastAllIds).reverse());
+        }
+    }, [data.gamesAll, last5Ids, last10Ids, last20Ids, last50Ids, lastAllIds]);
+ 
 
     useEffect(() => {
         setPrimaryColor(selectPrimaryColor(referenceData))

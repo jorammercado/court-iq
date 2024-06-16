@@ -16,7 +16,12 @@ const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const TeamPlayerLeaderCard = ({ teamId,
     season,
-    sendDataToParent
+    sendDataToParent,
+    games5,
+    games10,
+    games20,
+    games50,
+    gamesAll
 }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
@@ -129,6 +134,7 @@ const TeamPlayerLeaderCard = ({ teamId,
                             key={index}
                             style={{ cursor: 'pointer', alignItems: "flex-start" }}
                             onClick={() => {
+                                leader = { ...leader, games5, games10, games20, games50, gamesAll }
                                 navigate(`/player/${leader.id}`, { state: { ...leader } })
                             }}
                         >
