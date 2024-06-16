@@ -59,6 +59,18 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
         { id: '41', label: 'Washington Wizards' },
     ];
 
+    const [games5, setGames5] = useState([]);
+    const [games10, setGames10] = useState([]);
+    const [games20, setGames20] = useState([]);
+    const [games50, setGames50] = useState([]);
+    const [gamesAll, setGamesAll] = useState([]);
+
+    const handleGames5Change = (newGames5) => setGames5(newGames5);
+    const handleGames10Change = (newGames10) => setGames10(newGames10);
+    const handleGames20Change = (newGames20) => setGames20(newGames20);
+    const handleGames50Change = (newGames50) => setGames50(newGames50);
+    const handleGamesAllChange = (newGamesAll) => setGamesAll(newGamesAll);
+
     function getRandomTeamId() {
         const randomIndex = Math.floor(Math.random() * teamOptions.length);
         return [teamOptions[randomIndex].id, teamOptions[randomIndex].label]
@@ -296,10 +308,10 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                         backgroundColor: isHighlightedLeaders ? "#EA6607" : "black",
                                         transition: 'background-color .85s ease-in-out',
                                         marginLeft: "512px",
-                                        borderTopLeftRadius:"8px",
-                                        borderTopRightRadius:"8px",
-                                        borderBottomLeftRadius:"8px",
-                                        borderBottomRightRadius:"8px"
+                                        borderTopLeftRadius: "8px",
+                                        borderTopRightRadius: "8px",
+                                        borderBottomLeftRadius: "8px",
+                                        borderBottomRightRadius: "8px"
                                     }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
@@ -324,6 +336,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             season={season}
                             gamesInView={gamesInView}
                             isHighlighted={isHighlighted}
+                            onGames5Change={handleGames5Change}
+                            onGames10Change={handleGames10Change}
+                            onGames20Change={handleGames20Change}
+                            onGames50Change={handleGames50Change}
+                            onGamesAllChange={handleGamesAllChange}
                         />
                         <PlayerCardWrap
                             team={teamId}
@@ -426,6 +443,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                 { id: '10', label: '10' },
                                 { id: '20', label: '20' },
                                 { id: '50', label: '50' },
+                                { id: 'season', label: 'season' },
                             ]}
                             labelKey="label"
                             valueKey="id"

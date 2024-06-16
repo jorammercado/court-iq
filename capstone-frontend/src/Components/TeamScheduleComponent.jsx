@@ -12,11 +12,17 @@ const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL_GAMES = import.meta.env.VITE_X_RAPIDAPI_URL_GAMES;
 
-const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) => {
+const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
+    onGames5Change,
+    onGames10Change,
+    onGames20Change,
+    onGames50Change,
+    onGamesAllChange }) => {
     const [games, setGames] = useState([]);
     const [games10, setGames10] = useState([]);
     const [games20, setGames20] = useState([]);
     const [games50, setGames50] = useState([]);
+    const [gamesAll, setGamesAll] = useState([]);
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -33,20 +39,24 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
             try {
                 const response = await axios.request(options);
                 const gamesData = response.data.response;
-                const futureGames = gamesData.filter(game => {
-                    const gameYear = new Date(game.date.start).getFullYear();
-                    return gameYear > Number(season);
-                });
-
-                const lastFiveGames = futureGames.slice(-5);
-                const last10Games = futureGames.slice(-10);
-                const last20Games = futureGames.slice(-20);
-                const last50Games = futureGames.slice(-50);
+                gamesData.sort((a, b) => new Date(a.date.start) - new Date(b.date.start));
+                const lastFiveGames = gamesData.slice(-5);
+                const last10Games = gamesData.slice(-10);
+                const last20Games = gamesData.slice(-20);
+                const last50Games = gamesData.slice(-50);
+                const lastAllGames = [...gamesData]
 
                 setGames(lastFiveGames);
                 setGames10(last10Games);
                 setGames20(last20Games);
                 setGames50(last50Games);
+                setGamesAll(lastAllGames)
+
+                onGames5Change(lastFiveGames);
+                onGames10Change(last10Games);
+                onGames20Change(last20Games);
+                onGames50Change(last50Games);
+                onGamesAllChange(lastAllGames);
             } catch (error) {
                 console.error('Failed to fetch games:', error);
             }
@@ -125,17 +135,18 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted }) =
                                 Number(season >= 2023 && gamesInView === '10') ? `Last 10 Games Schedule of Season` :
                                     Number(season >= 2023 && gamesInView === '20') ? `Last 20 Games Schedule of Season` :
                                         Number(season >= 2023 && gamesInView === '50') ? `Last 50 Games Schedule of Season` :
-                                            gamesInView === '10' ? `Last 10 Games of Season` :
-                                                gamesInView === '20' ? `Last 20 Games of Season` :
-                                                    gamesInView === '50' ? `Last 50 Games of Season` :
-                                                        `Last 5 Games of Season`}
+                                            gamesInView === 'season' ? `Entire ${gamesAll.length} Games of Season` :
+                                                gamesInView === '10' ? `Last 10 Games of Season` :
+                                                    gamesInView === '20' ? `Last 20 Games of Season` :
+                                                        gamesInView === '50' ? `Last 50 Games of Season` :
+                                                            `Last 5 Games of Season`}
                         </Heading>
                     </HeadingLevel>
                 </Block>
             </Block>
             <Block className="scheduleTable">
-                <TableBuilder data={gamesInView === '5' ? games : gamesInView === '10' ? games10 : gamesInView === '20' ? games20 : games50}
-                    overrides={{ Root: { style: { maxHeight: "500px", borderBottomLeftRadius:"8px", borderBottomRightRadius:"8px" } } }}>
+                <TableBuilder data={gamesInView === '5' ? games : gamesInView === '10' ? games10 : gamesInView === '20' ? games20 : gamesInView === '50' ? games50 : gamesAll}
+                    overrides={{ Root: { style: { maxHeight: "500px", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" } } }}>
                     <TableBuilderColumn header="Date">
                         {row => <div>{row && row.date && row.date.start ? new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] : ""}</div>}
                     </TableBuilderColumn>
