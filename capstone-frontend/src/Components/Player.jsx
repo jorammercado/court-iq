@@ -99,8 +99,10 @@ function PlayerExample({ data, playerid }) {
     const [last50Ids, setLast50Ids] = useState([])
     const [lastAllIds, setLastAllIds] = useState([])
     const [tpm, setTPM] = useState([]);
+    const [gamesInView, setGamesInView] = useState('5')
 
     const [isHighlighted, setIsHighlighted] = useState(false);
+    const [isHighlightedGames, setIsHighlightedGames] = useState(false);
     useEffect(() => {
         if (selectedSeason) {
             setIsHighlighted(true);
@@ -111,6 +113,16 @@ function PlayerExample({ data, playerid }) {
             return () => clearTimeout(timer);
         }
     }, [selectedSeason]);
+    useEffect(() => {
+        if (gamesInView) {
+            setIsHighlightedGames(true);
+            const timer = setTimeout(() => {
+                setIsHighlightedGames(false);
+            }, 500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [gamesInView]);
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -196,6 +208,62 @@ function PlayerExample({ data, playerid }) {
     }, [playerid, selectedSeason]);
 
     useEffect(() => {
+        const fetchGames = async () => {
+            let allGamesData = [];
+            let newLast5Games = [];
+            let newLast10Games = [];
+            let newLast20Games = [];
+            let newLast50Games = [];
+
+            if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2023) {
+                let dataIds = lastAllIds; 
+                for (let i = 0; i < dataIds.length; i++) {
+                    try {
+                        const response = await axios.request({
+                            method: 'GET',
+                            url: `https://${VITE_X_RAPIDAPI_HOST2}/games`,
+                            params: {
+                                id: dataIds[i]
+                            },
+                            headers: {
+                                'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY2,
+                                'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST2
+                            }
+                        });
+                        const game = response.data.response[0];
+                        allGamesData.push(game);
+
+                        if (i < 5) newLast5Games.push(game);
+                        if (i < 10) newLast10Games.push(game);
+                        if (i < 20) newLast20Games.push(game);
+                        if (i < 50) newLast50Games.push(game);
+
+                        if (i === 4) setLast5Games(newLast5Games);
+                        if (i === 9) setLast10Games(newLast10Games);
+                        if (i === 19) setLast20Games(newLast20Games);
+                        if (i === 49) setLast50Games(newLast50Games);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            } else {
+                allGamesData = [...data.gamesAll];
+                setLast5Games(allGamesData.slice(0, 5));
+                setLast10Games(allGamesData.slice(0, 10));
+                setLast20Games(allGamesData.slice(0, 20));
+                setLast50Games(allGamesData.slice(0, 50));
+            }
+            setLastAllGames(allGamesData);
+        };
+
+        if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2023) {
+            fetchGames();
+        }
+    }, [data.gamesAll, lastAllIds]);
+
+
+
+    useEffect(() => {
         if (data.gamesAll && last5Ids.length) {
             setLast5Games(filterGames(data.gamesAll, last5Ids).reverse());
         }
@@ -212,7 +280,7 @@ function PlayerExample({ data, playerid }) {
             setLastAllGames(filterGames(data.gamesAll, lastAllIds).reverse());
         }
     }, [data.gamesAll, last5Ids, last10Ids, last20Ids, last50Ids, lastAllIds]);
- 
+
 
     useEffect(() => {
         setPrimaryColor(selectPrimaryColor(referenceData))
@@ -355,7 +423,7 @@ function PlayerExample({ data, playerid }) {
     ];
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
 
-    const [gamesInView, setGamesInView] = useState('5')
+
     const handleGamesChange = (params) => {
         const { value } = params;
         if (value.length > 0) {
@@ -429,46 +497,14 @@ function PlayerExample({ data, playerid }) {
                             />
                         </Block>
                         <Block className="selector" width="auto" display="flex" marginBottom="170px" marginLeft="25px" marginRight="10px"
-                            $style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "50px", gap: "10px" }}    >
-                            <Select
-                                options={[
-                                    { id: '2023', label: '2023-2024' },
-                                    { id: '2022', label: '2022-2023' },
-                                    { id: '2021', label: '2021-2022' },
-                                    { id: '2020', label: '2020-2021' }
-                                ]}
-                                labelKey="label"
-                                valueKey="id"
-                                onChange={handleSeasonChange}
-                                value={selectedValue}
-                                placeholder={<Block> &nbsp;&nbsp;Season&nbsp;&nbsp; </Block>}
-                                clearable={false}
-                                overrides={{
-                                    ControlContainer: {
-                                        style: {
-                                            minHeight: '35px', height: '35px', paddingLeft: '15px',
-                                            paddingRight: '5px',
-                                            borderRadius: "8px",
-                                            cursor: 'default',
-                                        }
-                                    },
-                                    ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
-                                    Placeholder: { style: { lineHeight: '30px' } },
-                                    SingleValue: { style: { lineHeight: '30px' } },
-                                    OptionContent: { style: { cursor: 'default' }, },
-                                    DropdownContainer: { style: { cursor: 'default' } },
-                                    DropdownListItem: { style: { cursor: 'default' } },
-                                    InputContainer: { style: { cursor: 'default' } },
-                                    Input: { style: { cursor: 'default' } },
-                                    Root: { style: { width: '122px' } }
-                                }}
-                            />
+                            $style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "0px", gap: "10px" }}    >
                             <Select
                                 options={[
                                     { id: '5', label: '5' },
                                     { id: '10', label: '10' },
                                     { id: '20', label: '20' },
                                     { id: '50', label: '50' },
+                                    { id: 'season', label: 'season' },
                                 ]}
                                 labelKey="label"
                                 valueKey="id"
@@ -512,7 +548,7 @@ function PlayerExample({ data, playerid }) {
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center" marginTop="5px">
                             <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
                                 $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
-                                Season Stats
+                                Current Season Stats
                             </HeadingMedium>
                             {points.length > 0 ? (
                                 <Block className="graph"
@@ -571,8 +607,8 @@ function PlayerExample({ data, playerid }) {
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
                             marginBottom="80px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
-                                <HeadingSmall $style={{ color: "white", backgroundColor: "black", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
-                                    Last 5 Games
+                                <HeadingSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{ color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
+                                    {gamesInView === '5' ? `Last 5 Games Played` : gamesInView === '10' ? `Last 10 Games Played` : gamesInView === '20' ? `Last 20 Games Played` : gamesInView === '50' ? `Last 50 Games Played` : `Season Played Games`}
                                 </HeadingSmall>
                             </Block>
                             {playerStats ? (
@@ -580,7 +616,7 @@ function PlayerExample({ data, playerid }) {
                                     overrides={{
                                         TableBodyCell: {
                                             style: ({ $theme }) => ({
-                                                // whiteSpace: 'nowrap',
+
                                             }),
                                         },
                                     }}
