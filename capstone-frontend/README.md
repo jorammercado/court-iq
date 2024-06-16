@@ -14,13 +14,13 @@ Contents
 Deployed app: [Deployed App](https://court-iq.netlify.app)
 
 
-Deployed server: [Server](https://insightwager.onrender.com)
+Deployed server: [Server](https://courtiq.onrender.com)
 
 ### GitHub Repositories
 
-[FrontEnd](https://github.com/jorammercado/court-iq-frontend)
+[FrontEnd](https://github.com/jorammercado/courtIQ-app)
 
-[BackEnd](https://github.com/jorammercado/court-iq-backend)
+[BackEnd](https://github.com/jorammercado/courtIQ-server)
 
 
 
