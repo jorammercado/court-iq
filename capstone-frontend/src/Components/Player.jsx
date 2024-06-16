@@ -216,7 +216,7 @@ function PlayerExample({ data, playerid }) {
             let newLast50Games = [];
 
             if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2023) {
-                let dataIds = lastAllIds; 
+                let dataIds = lastAllIds;
                 for (let i = 0; i < dataIds.length; i++) {
                     try {
                         const response = await axios.request({
@@ -400,11 +400,19 @@ function PlayerExample({ data, playerid }) {
         return ts.toFixed(2);
     };
 
-    const getLastFiveGames = () => {
+    const getLastGames = () => {
         if (!playerStats) return [];
         const copyStats = [...playerStats].reverse()
-
-        return copyStats.slice(0, 5);
+        if (gamesInView === "5")
+            return copyStats.slice(0, 5);
+        else if (gamesInView === "10")
+            return copyStats.slice(0, 10);
+        else if (gamesInView === "20")
+            return copyStats.slice(0, 20);
+        else if (gamesInView === "50")
+            return copyStats.slice(0, 50);
+        else if (gamesInView === "season")
+            return copyStats.slice(0);
     };
 
     const overrides = {};
@@ -436,7 +444,7 @@ function PlayerExample({ data, playerid }) {
         <div>
             <Block className="topplayer" display="flex" flexDirection="column" alignItems="center">
                 {/* <Block className="filler"></Block> */}
-                <Block className="sub__heading" display="flex" justifyContent="center" alignItems="center" width="100%" flexDirection="row" backgroundColor={primaryColor} padding="20px" >
+                <Block className="sub__heading" display="flex" justifyContent="center" alignItems="center" width="100%" flexDirection="row" backgroundColor={primaryColor} padding="20px" marginBottom="-10px" >
                     <Block className="wraper" display="flex" justifyContent="center" alignItems="center" flexDirection="row"  >
                         <Block className="head__shot" $style={{ marginBottom: "-6px" }}>
                             <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "240px" }} />
@@ -605,7 +613,7 @@ function PlayerExample({ data, playerid }) {
                             )}
                         </Block>
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
-                            marginBottom="80px">
+                            marginBottom="80px" maxHeight="465px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
                                 <HeadingSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{ color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
                                     {gamesInView === '5' ? `Last 5 Games Played` : gamesInView === '10' ? `Last 10 Games Played` : gamesInView === '20' ? `Last 20 Games Played` : gamesInView === '50' ? `Last 50 Games Played` : `Season Played Games`}
@@ -620,24 +628,25 @@ function PlayerExample({ data, playerid }) {
                                             }),
                                         },
                                     }}
-                                    columns={["Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
+                                    columns={["Game #", "Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
                                         "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}
-                                    data={getLastFiveGames().map((game, index) => {
-                                        if (last5Games.length > 0 && last5Games && last5Games[index] && last5Games[index].date) {
-                                            return [last5Games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
+                                    data={getLastGames().map((game, index) => {
+                                        const games = gamesInView === '5' ? last5Games : gamesInView === '10' ? last10Games : gamesInView === '20' ? last20Games : gamesInView === '50' ? last50Games : lastAllGames
+                                        if (games.length > 0 && games && games[index] && games[index].date) {
+                                            return [lastAllGames.length - index, games[index].date.start.split("T")[0].replace(/[-]/g, "/"),
                                             `${referenceData.team ? referenceData.team.nickname.replace(/[\s]/g, "") + " " + referenceData.team.code : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             `${referenceData.team
-                                                ? last5Games[index].teams.home
-                                                    ? referenceData.team.name === last5Games[index].teams.home.name
-                                                        ? last5Games[index].teams.visitors.nickname.replace(/[\s]/g, "") + " " + last5Games[index].teams.visitors.code
-                                                        : last5Games[index].teams.home.nickname.replace(/[\s]/g, "") + " " + last5Games[index].teams.home.code
+                                                ? games[index].teams.home
+                                                    ? referenceData.team.name === games[index].teams.home.name
+                                                        ? games[index].teams.visitors.nickname.replace(/[\s]/g, "") + " " + games[index].teams.visitors.code
+                                                        : games[index].teams.home.nickname.replace(/[\s]/g, "") + " " + games[index].teams.home.code
                                                     : <Spinner $color="#EA6607" $size={SIZE.small} />
                                                 : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             `${referenceData.team
-                                                ? last5Games[index].teams.home
-                                                    ? referenceData.team.name === last5Games[index].teams.home.name
-                                                        ? last5Games[index].scores.home.points + "-" + last5Games[index].scores.visitors.points
-                                                        : last5Games[index].scores.visitors.points + "-" + last5Games[index].scores.home.points
+                                                ? games[index].teams.home
+                                                    ? referenceData.team.name === games[index].teams.home.name
+                                                        ? games[index].scores.home.points + "-" + games[index].scores.visitors.points
+                                                        : games[index].scores.visitors.points + "-" + games[index].scores.home.points
                                                     : <Spinner $color="#EA6607" $size={SIZE.small} />
                                                 : <Spinner $color="#EA6607" $size={SIZE.small} />}`,
                                             game.min, game.fgm, game.fga, game.fgp, game.tpm, game.tpa,
@@ -649,7 +658,7 @@ function PlayerExample({ data, playerid }) {
                                             game.tpp, game.ftm, game.fta, game.ftp, game.offReb, game.defReb, game.totReb, game.assists,
                                             game.steals, game.blocks, game.turnovers, game.pFouls, game.points, game.plusMinus]
                                         }
-                                    }, last5Games
+                                    }
                                     )}
                                 />
                             ) : (
