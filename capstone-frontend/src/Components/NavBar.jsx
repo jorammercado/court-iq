@@ -21,7 +21,8 @@ export default function NavBar({
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const [mainItems, setMainItems] = useState([
-        { icon: null, label: "Rosters" },
+        { icon: null, label: "NBA" },
+        { icon: null, label: "WNBA" },
         { icon: null, label: "Standings" },
         { icon: null, label: "Headlines" },
         { icon: null, label: "Glossary" },
@@ -42,7 +43,8 @@ export default function NavBar({
 
     const updateMainItems = (width) => {
         const items = [
-            { icon: null, label: "Rosters" },
+            { icon: null, label: "NBA" },
+            { icon: null, label: "WNBA" },
             { icon: null, label: "Standings" },
             { icon: null, label: "Headlines" },
             { icon: null, label: "Glossary" },
@@ -63,9 +65,13 @@ export default function NavBar({
 
     function handleMainItemSelect(item) {
         switch (item.label) {
-            case "Rosters":
+            case "NBA":
                 setIsGlossaryVisible(false);
-                navigate("/rosters");
+                navigate("/rostersNBA");
+                break;
+            case "WNBA":
+                setIsGlossaryVisible(false);
+                navigate("/rostersWNBA");
                 break;
             case "Standings":
                 setIsGlossaryVisible(false);

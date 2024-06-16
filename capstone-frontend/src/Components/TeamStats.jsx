@@ -3,7 +3,7 @@ import axios from 'axios';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
-import "./TeamStatsComponent.scss"
+import "./TeamStats.scss"
 import Spin from './SpinLoad';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;

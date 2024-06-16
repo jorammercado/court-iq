@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import TeamStatsComponent from '../Components/TeamStatsComponent';
+import TeamStatsComponent from '../Components/TeamStats';
 import PlayerCardWrap from '../Components/PlayerCardWrap'
-import TeamScheduleComponent from '../Components/TeamScheduleComponent';
+import TeamScheduleComponent from '../Components/TeamSchedule';
 import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
-import "./TeamsPage.scss"
+import "./NBATeams.scss"
 import axios from 'axios';
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
 import "../App.scss"
-import GameOddsStandings from '../Components/GameOddsRosters';
+import GameOddsRosters from '../Components/GameOddsRosters';
 
 const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
 
@@ -300,6 +300,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             <HeadingLevel >
                                 <Heading styleLevel={4} color="white"
                                     style={{
+                                        color: teamId === "31" ? "black" : "white",
                                         marginTop: "20px",
                                         paddingLeft: "85px",
                                         paddingRight: "86px",
@@ -364,7 +365,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                 {eventIds ?
                     <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
                         <Block className="oddsl2" >
-                            <GameOddsStandings eventId={eventIds[0]} teamName={selectedTeamName} />
+                            <GameOddsRosters eventId={eventIds[0]} teamName={selectedTeamName} />
                         </Block>
                     </Block>
 

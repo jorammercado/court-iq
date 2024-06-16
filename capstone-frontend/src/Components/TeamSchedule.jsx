@@ -3,7 +3,7 @@ import axios from 'axios';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
-import "./TeamScheduleComponent.scss"
+import "./TeamSchedule.scss"
 import { useStyletron } from 'baseui';
 import { Avatar } from 'baseui/avatar';
 import Spin from './SpinLoad';

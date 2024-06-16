@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, StyledBody, StyledThumbnail, StyledTitle } from "baseui/card";
-import "./TeamLeaderPlayerCard.scss"
+import "./TeamPlayerLeaderCard.scss"
 import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
@@ -162,7 +162,7 @@ const TeamPlayerLeaderCard = ({ teamId,
                                     }
                                 }}
                             >
-                                <StyledTitle style={{ fontSize: '25px', marginRight: '0', padding: '0', textAlign: "center", marginBottom: "20px" }}>
+                                <StyledTitle style={{ fontSize: '25px', marginRight: '0', padding: '0', textAlign: "center", marginBottom: "20px", color: teamId === "31" ? "black" : "white", }}>
                                     {leader.firstname} {leader.lastname}
                                 </StyledTitle>
 
@@ -179,7 +179,7 @@ const TeamPlayerLeaderCard = ({ teamId,
 
                                 <StyledBody>
                                     <HeadingLevel >
-                                        <Heading style={{ fontSize: "25px", textAlign: "center", marginBottom: "-20px" }} styleLevel={6}>
+                                        <Heading style={{ fontSize: "25px", textAlign: "center", marginBottom: "-20px", color: teamId === "31" ? "black" : "white" }} styleLevel={6}>
                                             {leader.category === "Points" ? "PPG" : leader.category === "Assists" ? "APG" : "RPG"}
                                             <br />
                                             <span style={{ fontSize: "15px" }}>{leader.average}</span>

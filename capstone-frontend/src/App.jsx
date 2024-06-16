@@ -27,7 +27,8 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import NavBar from "./Components/NavBar";
 import Home from "./Pages/Home.jsx";
-import TeamsPage from "./Pages/TeamsPage.jsx";
+import NBATeams from "./Pages/NBATeams.jsx";
+import WNBATeams from "./Pages/WNBATeams.jsx";
 import PlayerPage from "./Pages/PlayerPage.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
 import FourOFour from "./Pages/FourOFour";
@@ -68,7 +69,7 @@ function App() {
                       setCurrentUser={setCurrentUser}
                       photoURL={photoURL}
                       setPhotoURL={setPhotoURL}
-                      
+
                     />
                   }
                 />
@@ -99,7 +100,7 @@ function App() {
                     />
                   }
                 />
-                
+
                 {/* <Route
                   path="/maps"
                   element={
@@ -110,17 +111,29 @@ function App() {
                     />
                   }
                 /> */}
-                
+
                 <Route
-                  path="/rosters"
+                  path="/rostersWNBA"
                   element={
-                    <TeamsPage
+                    <WNBATeams
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                       key={0}
                     />
                   }
                 />
+
+                <Route
+                  path="/rostersNBA"
+                  element={
+                    <NBATeams
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                      key={0}
+                    />
+                  }
+                />
+
                 <Route
                   path="/player/:playerid"
                   element={
