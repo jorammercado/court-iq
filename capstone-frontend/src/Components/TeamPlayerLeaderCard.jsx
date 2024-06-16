@@ -21,7 +21,8 @@ const TeamPlayerLeaderCard = ({ teamId,
     games10,
     games20,
     games50,
-    gamesAll
+    gamesAll,
+    primaryColor
 }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
@@ -142,6 +143,8 @@ const TeamPlayerLeaderCard = ({ teamId,
                                 overrides={{
                                     Root: {
                                         style: {
+                                            backgroundColor: primaryColor,
+                                            border: "none",
                                             display: "flex",
                                             flexDirection: "column",
                                             justifyContent: "center",

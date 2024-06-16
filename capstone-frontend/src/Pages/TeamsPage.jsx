@@ -305,7 +305,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                         paddingRight: "86px",
                                         justifyContent: "flex-start",
                                         marginBottom: "-5px",
-                                        backgroundColor: isHighlightedLeaders ? "#EA6607" : "black",
+                                        backgroundColor: isHighlightedLeaders ? "#EA6607" : primaryColor,
                                         transition: 'background-color .85s ease-in-out',
                                         marginLeft: "512px",
                                         borderTopLeftRadius: "8px",
@@ -319,8 +319,6 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                             teamId={teamId}
                             season={season}
                             category="points"
-                            isSearchVisible={isSearchVisible}
-                            setIsSearchVisible={setIsSearchVisible}
                             sendDataToParent={handleDataFromChild}
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
