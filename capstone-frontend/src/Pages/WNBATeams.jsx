@@ -41,7 +41,6 @@ const WNBATeams = ({ }) => {
         fetchTeams();
     }, []);
 
-    // console.log(teams)
     const teamOptions = [
         { id: '20', label: 'Atlanta Dream' },
         { id: '19', label: 'Chicago Sky' },
@@ -91,7 +90,9 @@ const WNBATeams = ({ }) => {
 
     useEffect(() => {
         setPrimaryColor(selectPrimaryColor(selectedTeamName))
-    }, [selectedTeamName]);
+        setSecondaryColor(selectSecondaryColor(selectedTeamName))
+        updateTeam(selectedTeamName);
+    }, [selectedTeamName, teams]);
 
     function selectPrimaryColor(selectedTeamName) {
         for (let i = 0; i < teamOptions.length; i++) {
@@ -101,10 +102,6 @@ const WNBATeams = ({ }) => {
         return '#EA6607'
     }
 
-    useEffect(() => {
-        setSecondaryColor(selectSecondaryColor(selectedTeamName))
-    }, [selectedTeamName]);
-
     function selectSecondaryColor(selectedTeamName) {
         for (let i = 0; i < teamOptions.length; i++) {
             if (teamOptions[i].label === selectedTeamName)
@@ -113,6 +110,14 @@ const WNBATeams = ({ }) => {
         return '#000000'
     }
 
+    function updateTeam(selectedTeamName) {
+        if (teams && teams.teams && teams.teams.length>0) {
+            const team = teams.teams.find(t => t.team.displayName === selectedTeamName);
+            if (team) {
+                setTeam(team.team);
+            }
+        }
+    }
 
     return (
         <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
@@ -144,9 +149,9 @@ const WNBATeams = ({ }) => {
                                 }),
                             },
                         }}
-                        name={team && team.name ? team.name : ""}
+                        name={team && team.displayName ? team.displayName : ""}
                         size="100px"
-                        src={team && team.logo ? team.logo : ""}
+                        src={team && team.logos && team.logos[0] ? team.logos[0].href : ""}
                     />
                 </Block>
             </Block>
