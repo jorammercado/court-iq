@@ -14,23 +14,47 @@ const WNBATeams = ({ }) => {
     const [fontFamily, setFontFamily] = useState('UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif')
     const [primaryColor, setPrimaryColor] = useState("#EA6607")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
-    const primaryColors = []
-    const secondaryColors = []
+    const primaryColors = ["#C8102E", "#FFCD00", "#a6192e", "#0c2340", "#C8102E", "#BA0C2F", "#FFC72C", "#0C2340", "#6ECEB2", "#201747", "#FBE122", "#0c2340"]
+    const secondaryColors = ["#418FDE", "#418FDE", "#041e42", "#c4d600", "#041E42", "#000000", "#702F8A", "#236192", "#000000", "#CB6015", "#2C5234", "#c8102e"]
     const fontsfamilies = []
+    const [team, setTeam] = useState({})
+    const [teams, setTeams] = useState([])
 
+    useEffect(() => {
+        const fetchTeams = async () => {
+            const options = {
+                method: 'GET',
+                url: `https://${VITE_X_RAPIDAPI_HOST_WNBA}/wnbateamlist`,
+                headers: {
+                    'x-rapidapi-key': VITE_X_RAPIDAPI_KEY,
+                    'x-rapidapi-host': VITE_X_RAPIDAPI_HOST_WNBA
+                }
+            };
+
+            try {
+                const response = await axios.request(options);
+                setTeams(response.data.sports[0].leagues[0]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchTeams();
+    }, []);
+
+    // console.log(teams)
     const teamOptions = [
         { id: '20', label: 'Atlanta Dream' },
         { id: '19', label: 'Chicago Sky' },
         { id: '18', label: 'Connecticut Sun' },
-        { id: '5', label: 'Indiana Fever' },
-        { id: '9', label: 'New York Liberty' },
-        { id: '16', label: 'Washington Mystics' },
         { id: '3', label: 'Dallas Wings' },
+        { id: '5', label: 'Indiana Fever' },
         { id: '17', label: 'Las Vegas Aces' },
         { id: '6', label: 'Los Angeles Sparks' },
         { id: '8', label: 'Minnesota Lynx' },
+        { id: '9', label: 'New York Liberty' },
         { id: '11', label: 'Phoenix Mercury' },
-        { id: '14', label: 'Seattle Storm' }
+        { id: '14', label: 'Seattle Storm' },
+        { id: '16', label: 'Washington Mystics' }
     ];
 
     function getRandomTeamId() {
@@ -41,7 +65,6 @@ const WNBATeams = ({ }) => {
     }
     const init = getRandomTeamId();
     const [teamId, setTeamId] = useState(init[0]);
-    const [team, setTeam] = useState({})
     const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
     const calculateMarginLeft = () => {
         const screenWidth = window.innerWidth;
@@ -65,6 +88,30 @@ const WNBATeams = ({ }) => {
             setSelectedTeamName(value[0].label)
         }
     };
+
+    useEffect(() => {
+        setPrimaryColor(selectPrimaryColor(selectedTeamName))
+    }, [selectedTeamName]);
+
+    function selectPrimaryColor(selectedTeamName) {
+        for (let i = 0; i < teamOptions.length; i++) {
+            if (teamOptions[i].label === selectedTeamName)
+                return primaryColors[i]
+        }
+        return '#EA6607'
+    }
+
+    useEffect(() => {
+        setSecondaryColor(selectSecondaryColor(selectedTeamName))
+    }, [selectedTeamName]);
+
+    function selectSecondaryColor(selectedTeamName) {
+        for (let i = 0; i < teamOptions.length; i++) {
+            if (teamOptions[i].label === selectedTeamName)
+                return secondaryColors[i]
+        }
+        return '#000000'
+    }
 
 
     return (
