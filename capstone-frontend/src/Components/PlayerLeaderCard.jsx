@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, StyledBody, StyledThumbnail, StyledTitle } from "baseui/card";
-import "./TeamPlayerLeaderCard.scss"
+import "./PlayerLeaderCard.scss"
 import { useNavigate } from "react-router-dom";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';

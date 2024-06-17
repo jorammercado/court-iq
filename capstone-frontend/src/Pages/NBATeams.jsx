@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import TeamStatsComponent from '../Components/TeamStats';
+import TeamStats from '../Components/TeamStats';
 import PlayerCardWrap from '../Components/PlayerCardWrap'
-import TeamScheduleComponent from '../Components/TeamSchedule';
-import TeamPlayerLeaderCard from '../Components/TeamPlayerLeaderCard';
+import TeamSchedule from '../Components/TeamSchedule';
+import PlayerLeaderCard from '../Components/PlayerLeaderCard';
 import "./NBATeams.scss"
 import axios from 'axios';
 import { Block } from "baseui/block";
@@ -12,7 +12,7 @@ import { Avatar } from "baseui/avatar";
 import "../App.scss"
 import GameOddsRosters from '../Components/GameOddsRosters';
 
-const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
+const NBATeams = ({ }) => {
 
     const [fontFamily, setFontFamily] = useState('UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif')
     const [primaryColor, setPrimaryColor] = useState("#EA6607")
@@ -72,7 +72,9 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     const handleGamesAllChange = (newGamesAll) => setGamesAll(newGamesAll);
 
     function getRandomTeamId() {
-        const randomIndex = Math.floor(Math.random() * teamOptions.length);
+        const randomArray = new Uint32Array(1);
+        window.crypto.getRandomValues(randomArray);
+        const randomIndex = randomArray[0] % teamOptions.length;
         return [teamOptions[randomIndex].id, teamOptions[randomIndex].label]
     }
     const init = getRandomTeamId();
@@ -316,7 +318,7 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                                     }}>Leaders</Heading>
                             </HeadingLevel>
                         </Block>
-                        <TeamPlayerLeaderCard
+                        <PlayerLeaderCard
                             teamId={teamId}
                             season={season}
                             category="points"
@@ -331,11 +333,11 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         />
                     </Block>
                     <Block className="teamsItems" >
-                        <TeamStatsComponent
+                        <TeamStats
                             teamId={teamId}
                             season={season}
                             isHighlightedSeason={isHighlightedSeason} />
-                        <TeamScheduleComponent
+                        <TeamSchedule
                             teamId={teamId}
                             season={season}
                             gamesInView={gamesInView}
@@ -349,8 +351,6 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
                         <PlayerCardWrap
                             team={teamId}
                             season={season}
-                            isSearchVisible={isSearchVisible}
-                            setIsSearchVisible={setIsSearchVisible}
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
                             teamName={selectedTeamName}
@@ -488,4 +488,4 @@ const TeamsPage = ({ isSearchVisible, setIsSearchVisible }) => {
     );
 }
 
-export default TeamsPage;
+export default NBATeams;
