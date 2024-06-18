@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TeamStats from '../Components/TeamStats';
-import PlayerCardWrap from '../Components/PlayerCardWrap'
+import PlayerCardWrap from '../Components/PlayerCardWrap';
 import TeamSchedule from '../Components/TeamSchedule';
 import PlayerLeaderCard from '../Components/PlayerLeaderCard';
 import "./NBATeams.scss"
@@ -9,7 +9,7 @@ import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
-import "../App.scss"
+import "../App.scss";
 import GameOddsRosters from '../Components/GameOddsRosters';
 
 const NBATeams = ({ }) => {

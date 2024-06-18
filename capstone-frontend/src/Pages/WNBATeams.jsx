@@ -9,6 +9,7 @@ import "../App.scss"
 import primaryColors from '../constants/primaryTeamColorsWNBA';
 import secondaryColors from '../constants/secondaryTeamColorsWNBA';
 import teamOptions from '../constants/teamOptionsWNBA';
+import TeamPlayerCardsWNBA from '../Components/TeamPlayerCardsWNBA';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST_WNBA = import.meta.env.VITE_X_RAPIDAPI_HOST_WNBA;
@@ -27,7 +28,6 @@ const WNBATeams = ({ }) => {
     const [teamId, setTeamId] = useState(init[0]);
     const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
 
-    // console.log("team= ", team)
     useEffect(() => {
         const fetchTeams = async () => {
             const options = {
@@ -63,7 +63,7 @@ const WNBATeams = ({ }) => {
 
             try {
                 const response = await axios.request(options);
-                // console.log("RESPONSE= ",response)
+                // console.log(response)
                 setPlayers(response.data.team.athletes);
                 setTeamRecord(response.data.team.record.items);
                 setTeamNextEvent(response.data.team.nextEvent[0]);
@@ -74,11 +74,7 @@ const WNBATeams = ({ }) => {
         };
         fetchTeamData();
     }, [teamId]);
-    // console.log("Players= ", players)
-    // console.log("Team Record= ", teamRecord)
-    // console.log("Next Event= ", teamNextEvent)
-    // console.log("Standing= ", teamStanding)
-
+    // console.log(players)
 
     function getRandomTeamId() {
         const randomArray = new Uint32Array(1);
@@ -141,8 +137,6 @@ const WNBATeams = ({ }) => {
         }
     }
 
-    // console.log(team, teamId)
-
     return (
         <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
             <Block className="left">
@@ -185,6 +179,15 @@ const WNBATeams = ({ }) => {
                         <HeadingLevel>
                             <Heading styleLevel={1} marginTop="10px" color={secondaryColor} style={{ fontFamily: 'inherit' }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
                         </HeadingLevel>
+                    </Block>
+                    <Block className="teamsItems" >
+                        <TeamPlayerCardsWNBA
+                            team={teamId}
+                            primaryColor={primaryColor}
+                            secondaryColor={secondaryColor}
+                            teamName={selectedTeamName}
+                            players={players}
+                        />
                     </Block>
                 </Block>
             </Block>

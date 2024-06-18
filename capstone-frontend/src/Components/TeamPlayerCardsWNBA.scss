@@ -1,0 +1,35 @@
+.playerCardsContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 85px;
+    margin-bottom: 100px;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+
+    @media (max-width: 1300px) {
+        max-width: 1000px;
+    }
+
+    @media (max-width: 870px) {
+        max-width: 600px;
+    }
+
+    @media (max-width: 750px) {
+        max-width: 750px;
+    }
+
+    @media (max-width: 670px) {
+        max-width: 600px;
+    }
+
+    @media (max-width: 560px) {
+        max-width: 300px;
+    }
+
+}
+
+
