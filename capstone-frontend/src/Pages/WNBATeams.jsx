@@ -6,20 +6,28 @@ import { Heading, HeadingLevel } from 'baseui/heading';
 import { Select } from 'baseui/select';
 import { Avatar } from "baseui/avatar";
 import "../App.scss"
+import primaryColors from '../constants/primaryTeamColorsWNBA';
+import secondaryColors from '../constants/secondaryTeamColorsWNBA';
+import teamOptions from '../constants/teamOptionsWNBA';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST_WNBA = import.meta.env.VITE_X_RAPIDAPI_HOST_WNBA;
 
 const WNBATeams = ({ }) => {
-    const [fontFamily, setFontFamily] = useState('UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif')
     const [primaryColor, setPrimaryColor] = useState("#EA6607")
     const [secondaryColor, setSecondaryColor] = useState("#000000")
-    const primaryColors = ["#C8102E", "#FFCD00", "#a6192e", "#0c2340", "#C8102E", "#BA0C2F", "#FFC72C", "#0C2340", "#6ECEB2", "#201747", "#FBE122", "#0c2340"]
-    const secondaryColors = ["#418FDE", "#418FDE", "#041e42", "#c4d600", "#041E42", "#000000", "#702F8A", "#236192", "#000000", "#CB6015", "#2C5234", "#c8102e"]
     const fontsfamilies = []
     const [team, setTeam] = useState({})
     const [teams, setTeams] = useState([])
+    const [players, setPlayers] = useState([])
+    const [teamRecord, setTeamRecord] = useState([])
+    const [teamNextEvent, setTeamNextEvent] = useState({})
+    const [teamStanding, setTeamStanding] = useState("")
+    const init = getRandomTeamId();
+    const [teamId, setTeamId] = useState(init[0]);
+    const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
 
+    // console.log("team= ", team)
     useEffect(() => {
         const fetchTeams = async () => {
             const options = {
@@ -41,20 +49,36 @@ const WNBATeams = ({ }) => {
         fetchTeams();
     }, []);
 
-    const teamOptions = [
-        { id: '20', label: 'Atlanta Dream' },
-        { id: '19', label: 'Chicago Sky' },
-        { id: '18', label: 'Connecticut Sun' },
-        { id: '3', label: 'Dallas Wings' },
-        { id: '5', label: 'Indiana Fever' },
-        { id: '17', label: 'Las Vegas Aces' },
-        { id: '6', label: 'Los Angeles Sparks' },
-        { id: '8', label: 'Minnesota Lynx' },
-        { id: '9', label: 'New York Liberty' },
-        { id: '11', label: 'Phoenix Mercury' },
-        { id: '14', label: 'Seattle Storm' },
-        { id: '16', label: 'Washington Mystics' }
-    ];
+    useEffect(() => {
+        const fetchTeamData = async () => {
+            const options = {
+                method: 'GET',
+                url: `https://${VITE_X_RAPIDAPI_HOST_WNBA}/wnbateamplayers`,
+                params: { teamid: `${teamId}` },
+                headers: {
+                    'x-rapidapi-key': VITE_X_RAPIDAPI_KEY,
+                    'x-rapidapi-host': VITE_X_RAPIDAPI_HOST_WNBA
+                }
+            };
+
+            try {
+                const response = await axios.request(options);
+                // console.log("RESPONSE= ",response)
+                setPlayers(response.data.team.athletes);
+                setTeamRecord(response.data.team.record.items);
+                setTeamNextEvent(response.data.team.nextEvent[0]);
+                setTeamStanding(response.data.team.standingSummary);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchTeamData();
+    }, [teamId]);
+    // console.log("Players= ", players)
+    // console.log("Team Record= ", teamRecord)
+    // console.log("Next Event= ", teamNextEvent)
+    // console.log("Standing= ", teamStanding)
+
 
     function getRandomTeamId() {
         const randomArray = new Uint32Array(1);
@@ -62,9 +86,7 @@ const WNBATeams = ({ }) => {
         const randomIndex = randomArray[0] % teamOptions.length;
         return [teamOptions[randomIndex].id, teamOptions[randomIndex].label]
     }
-    const init = getRandomTeamId();
-    const [teamId, setTeamId] = useState(init[0]);
-    const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
+
     const calculateMarginLeft = () => {
         const screenWidth = window.innerWidth;
         return screenWidth > 1425 ? ((screenWidth - 1425) / 2) + 65 : 50;
@@ -111,13 +133,15 @@ const WNBATeams = ({ }) => {
     }
 
     function updateTeam(selectedTeamName) {
-        if (teams && teams.teams && teams.teams.length>0) {
+        if (teams && teams.teams && teams.teams.length > 0) {
             const team = teams.teams.find(t => t.team.displayName === selectedTeamName);
             if (team) {
                 setTeam(team.team);
             }
         }
     }
+
+    // console.log(team, teamId)
 
     return (
         <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
@@ -159,7 +183,7 @@ const WNBATeams = ({ }) => {
                 <Block className="middle">
                     <Block className="team">
                         <HeadingLevel>
-                            <Heading styleLevel={1} marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading styleLevel={1} marginTop="10px" color={secondaryColor} style={{ fontFamily: 'inherit' }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
                         </HeadingLevel>
                     </Block>
                 </Block>
