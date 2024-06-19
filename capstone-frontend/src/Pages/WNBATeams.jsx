@@ -10,6 +10,7 @@ import primaryColors from '../constants/primaryTeamColorsWNBA';
 import secondaryColors from '../constants/secondaryTeamColorsWNBA';
 import teamOptions from '../constants/teamOptionsWNBA';
 import TeamPlayerCardsWNBA from '../Components/TeamPlayerCardsWNBA';
+import TeamRecordWNBA from '../Components/TeamRecordWNBA';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST_WNBA = import.meta.env.VITE_X_RAPIDAPI_HOST_WNBA;
@@ -74,7 +75,7 @@ const WNBATeams = ({ }) => {
         };
         fetchTeamData();
     }, [teamId]);
-    // console.log(players)
+    // console.log(teamRecord)
 
     function getRandomTeamId() {
         const randomArray = new Uint32Array(1);
@@ -181,6 +182,9 @@ const WNBATeams = ({ }) => {
                         </HeadingLevel>
                     </Block>
                     <Block className="teamsItems" >
+                        <TeamRecordWNBA
+                            teamRecord={teamRecord}
+                        />
                         <TeamPlayerCardsWNBA
                             team={teamId}
                             primaryColor={primaryColor}

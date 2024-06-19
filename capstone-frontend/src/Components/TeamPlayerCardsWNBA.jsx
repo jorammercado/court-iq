@@ -7,11 +7,6 @@ import Spin from './SpinLoad';
 import { Block } from 'baseui/block';
 
 
-const VITE_X_RAPIDAPI_KEY2 = import.meta.env.VITE_X_RAPIDAPI_KEY2;
-const VITE_X_RAPIDAPI_HOST2 = import.meta.env.VITE_X_RAPIDAPI_HOST2;
-const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
-const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
-
 const TeamPlayerCardsWNBA = ({ team,
     primaryColor,
     secondaryColor,
