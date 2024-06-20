@@ -15,7 +15,6 @@ const TeamPlayerCardsWNBA = ({ team,
 }) => {
     const navigate = useNavigate();
     const [playerStats, setPlayerStats] = useState([]);
-
     const handleCardClick = (playerId, playerData) => {
         // playerData = { ...playerData, games5, games10, games20, games50, gamesAll }
         // navigate(`/player/${playerId}`, { state: { ...playerData } });
@@ -24,7 +23,8 @@ const TeamPlayerCardsWNBA = ({ team,
     return (
         <Block maxWidth="1200px" marginLeft="60px" marginRight="60px" >
             <Block className="playerCardsContainer">
-                {players && players.map((player, index) => {
+
+                {players ? (players && players.map((player, index) => {
                     return (
                         <Block
                             className="playerCardWrapper"
@@ -39,7 +39,8 @@ const TeamPlayerCardsWNBA = ({ team,
                             />
                         </Block>
                     )
-                })}
+                })) : <Spin></Spin>}
+
             </Block>
         </Block>
     );

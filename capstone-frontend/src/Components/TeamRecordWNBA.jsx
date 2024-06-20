@@ -25,13 +25,10 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
         }
     }, [teamRecord]);
 
-    if (!teamRecord) {
-        return <Spin />;
-    }
 
     return (
         <Block className="TeamStatsTable" style={{
-            justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%"
+             width: "91%"
         }}>
             <Block className="heading" width="100%"
                 style={{
@@ -55,7 +52,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                     </HeadingLevel>
                 </Block>
             </Block>
-            <Block className="tableContainer" style={{ justifyContent: "left" }}>
+            {values.length !== 0 ? <Block className="tableContainer" style={{ justifyContent: "left" }}>
                 <TableBuilder data={[values]}>
                     {headers.map((header, index) => (
                         <TableBuilderColumn key={index} header={header}>
@@ -63,7 +60,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                         </TableBuilderColumn>
                     ))}
                 </TableBuilder>
-            </Block>
+            </Block> : <Block  ><Spin ></Spin></Block>}
             <Block className="HomeAwayContainer" >
                 <Block className="homeRecord" >
                     <Block className="heading" width="100%"
@@ -81,12 +78,12 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                                     backgroundColor={isHighlightedSeason ? "#EA6607" : "none"}
                                     marginBottom="0px"
                                     marginLeft="5px">
-                                    Home Record
+                                    Home
                                 </Heading>
                             </HeadingLevel>
                         </Block>
                     </Block>
-                    <Block className="tableContainer_half" style={{
+                    {valuesHome.length!==0?<Block className="tableContainer_half" style={{
                         borderBottomLeftRadius: "8px"
                     }}>
                         <TableBuilder data={[valuesHome]}>
@@ -96,7 +93,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                                 </TableBuilderColumn>
                             ))}
                         </TableBuilder>
-                    </Block>
+                    </Block>:<Block ><Spin ></Spin></Block>}
                 </Block>
                 <Block className="awayRecord" style={{ marginLeft: '0px', margin: "0px", padding: "0px", width: "100%" }}>
                     <Block className="heading" width="100%"
@@ -114,12 +111,12 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                                     backgroundColor={isHighlightedSeason ? "#EA6607" : "none"}
                                     marginBottom="0px"
                                     marginLeft="5px">
-                                    Away Record
+                                    Away
                                 </Heading>
                             </HeadingLevel>
                         </Block>
                     </Block>
-                    <Block className="tableContainer_half" style={{
+                    {valuesAway.length!==0?<Block className="tableContainer_half" style={{
                         borderBottomRightRadius: "8px"
                     }}>
                         <TableBuilder data={[valuesAway]}>
@@ -129,7 +126,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                                 </TableBuilderColumn>
                             ))}
                         </TableBuilder>
-                    </Block>
+                    </Block>:<Block ><Spin ></Spin></Block>}
                 </Block>
             </Block>
         </Block>
