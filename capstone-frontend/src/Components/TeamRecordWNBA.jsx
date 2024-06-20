@@ -7,13 +7,21 @@ import "./TeamRecordWNBA.scss"
 
 const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
     const [headers, setHeaders] = useState([]);
+    const [headersHomeAway, setHeadersHomeAway] = useState([]);
     const [values, setValues] = useState([]);
+    const [valuesHome, setValuesHome] = useState([]);
+    const [valuesAway, setValuesAway] = useState([]);
 
     useEffect(() => {
         if (teamRecord && teamRecord.length > 0 && teamRecord[0].stats) {
             const stats = teamRecord[0].stats;
+            const statsHome = teamRecord[1].stats;
+            const statsAway = teamRecord[2].stats;
             setHeaders(stats.map(stat => stat.name));
+            setHeadersHomeAway(statsHome.map(stat => stat.name));
             setValues(stats.map(stat => stat.value));
+            setValuesHome(statsHome.map(stat => stat.value));
+            setValuesAway(statsAway.map(stat => stat.value));
         }
     }, [teamRecord]);
 
@@ -55,6 +63,74 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                         </TableBuilderColumn>
                     ))}
                 </TableBuilder>
+            </Block>
+            <Block className="HomeAwayContainer" >
+                <Block className="homeRecord" >
+                    <Block className="heading" width="100%"
+                        style={{
+                            backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%),
+                        url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                            backgroundSize: 'auto',
+                            backgroundPosition: 'left calc(1% + 0px)',
+                            backgroundRepeat: 'no-repeat',
+                        }}>
+                        <Block className="heading" backgroundColor={isHighlightedSeason ? "#EA6607" : "transparent"} width="100%">
+                            <HeadingLevel >
+                                <Heading className="titleHighlight" styleLevel={4}
+                                    color="white"
+                                    backgroundColor={isHighlightedSeason ? "#EA6607" : "none"}
+                                    marginBottom="0px"
+                                    marginLeft="5px">
+                                    Home Record
+                                </Heading>
+                            </HeadingLevel>
+                        </Block>
+                    </Block>
+                    <Block className="tableContainer_half" style={{
+                        borderBottomLeftRadius: "8px"
+                    }}>
+                        <TableBuilder data={[valuesHome]}>
+                            {headersHomeAway.map((header, index) => (
+                                <TableBuilderColumn key={index} header={header}>
+                                    {row => Number.isInteger(row[index]) ? row[index] : row[index].toFixed(4)}
+                                </TableBuilderColumn>
+                            ))}
+                        </TableBuilder>
+                    </Block>
+                </Block>
+                <Block className="awayRecord" style={{ marginLeft: '0px', margin: "0px", padding: "0px", width: "100%" }}>
+                    <Block className="heading" width="100%"
+                        style={{
+                            backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%),
+                            url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                            backgroundSize: 'auto',
+                            backgroundPosition: 'right calc(30% + 0px)',
+                            backgroundRepeat: 'no-repeat'
+                        }}>
+                        <Block className="heading" backgroundColor={isHighlightedSeason ? "#EA6607" : "transparent"} width="100%">
+                            <HeadingLevel >
+                                <Heading className="titleHighlight" styleLevel={4}
+                                    color="white"
+                                    backgroundColor={isHighlightedSeason ? "#EA6607" : "none"}
+                                    marginBottom="0px"
+                                    marginLeft="5px">
+                                    Away Record
+                                </Heading>
+                            </HeadingLevel>
+                        </Block>
+                    </Block>
+                    <Block className="tableContainer_half" style={{
+                        borderBottomRightRadius: "8px"
+                    }}>
+                        <TableBuilder data={[valuesAway]}>
+                            {headersHomeAway.map((header, index) => (
+                                <TableBuilderColumn key={index} header={header}>
+                                    {row => Number.isInteger(row[index]) ? row[index] : row[index].toFixed(4)}
+                                </TableBuilderColumn>
+                            ))}
+                        </TableBuilder>
+                    </Block>
+                </Block>
             </Block>
         </Block>
     );
