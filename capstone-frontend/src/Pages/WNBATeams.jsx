@@ -11,6 +11,7 @@ import secondaryColors from '../constants/secondaryTeamColorsWNBA';
 import teamOptions from '../constants/teamOptionsWNBA';
 import TeamPlayerCardsWNBA from '../Components/TeamPlayerCardsWNBA';
 import TeamRecordWNBA from '../Components/TeamRecordWNBA';
+import GameOddsRostersWNBA from '../Components/GameOddsRostersWNBA';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST_WNBA = import.meta.env.VITE_X_RAPIDAPI_HOST_WNBA;
@@ -28,6 +29,31 @@ const WNBATeams = ({ }) => {
     const init = getRandomTeamId();
     const [teamId, setTeamId] = useState(init[0]);
     const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
+    const [eventIds, setEventIds] = useState([]);
+
+    useEffect(() => {
+        const fetchEventsForTeam = async () => {
+            const apiKey = import.meta.env.VITE_ODDS_API_KEY;
+            const sport = 'basketball_wnba';
+            try {
+                const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/events`, {
+                    params: { apiKey, regions: 'us' },
+                });
+                // console.log(response)
+                const events = response.data.filter(event =>
+                    event.home_team === selectedTeamName || event.away_team === selectedTeamName
+                );
+                const eventIds = events.map(event => event.id);
+                setEventIds(eventIds);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        if (selectedTeamName) {
+            fetchEventsForTeam();
+        }
+    }, [selectedTeamName]);
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -137,7 +163,7 @@ const WNBATeams = ({ }) => {
             }
         }
     }
-
+    // console.log("TEST",eventIds)
     return (
         <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
             <Block className="left">
@@ -194,6 +220,16 @@ const WNBATeams = ({ }) => {
                         />
                     </Block>
                 </Block>
+                {eventIds ? 
+                    <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="-70px">
+                        <Block className="oddsl2" >
+                            <GameOddsRostersWNBA eventId={eventIds[0]} teamName={selectedTeamName} />
+                        </Block>
+                    </Block>
+
+                    :
+                    <></>
+                }
             </Block>
             <Block className="right">
                 <Block className="Selector"
