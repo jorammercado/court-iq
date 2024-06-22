@@ -20,6 +20,7 @@ import {
 } from "baseui/typography";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
+import { Select } from 'baseui/select';
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;
@@ -264,6 +265,33 @@ const TeamStandingsV2 = () => {
     );
   }
 
+  const calculateMarginLeft = () => {
+    const screenWidth = window.innerWidth;
+    return screenWidth > 1425 ? ((screenWidth - 1425) / 2) + 65 : 50;
+  };
+
+  const [marginLeft, setMarginLeft] = useState(calculateMarginLeft());
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+      setMarginLeft(calculateMarginLeft());
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const [league, setLeague] = useState("NBA")
+  const handleLeagueChange = (params) => {
+    const { value } = params;
+    console.log(value)
+    setLeague(value[0].label)
+  };
+  const leagueOptions = [
+    { id: '1', label: 'NBA' },
+    { id: '2', label: 'WNBA' },
+  ];
+
   return (
     <Block display="flex" justifyContent="center" alignItems="center" height="100%" flexDirection="column" className="standings">
       <Block className="subb__heading" display="flex"
@@ -282,6 +310,45 @@ const TeamStandingsV2 = () => {
           <HeadingLevel>
             <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading>
           </HeadingLevel>
+        </Block>
+
+        <Block className="Selector"
+          display="flex"
+          justifyContent="center"
+          marginBottom="15px"
+          $style={{ marginLeft: `-${130}px`, marginRight: screenWidth < 1400 ? `${50}px` : `${-5}px` }}
+        >
+          <Block marginRight="10px" paddingTop="10px">
+            <Select
+              options={leagueOptions}
+              labelKey="label"
+              valueKey="id"
+              onChange={handleLeagueChange}
+              value={[{ id: '0', label: 'League' }]}
+              placeholder={<Block> &nbsp;&nbsp;&nbsp;League&nbsp;&nbsp; </Block>}
+              clearable={false}
+              overrides={{
+                ControlContainer: {
+                  style: {
+                    minHeight: '35px', height: '35px', paddingLeft: '15px',
+                    paddingRight: '5px',
+                    borderRadius: "8px",
+                    cursor: 'default',
+                  }
+                },
+                ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
+                Placeholder: { style: { lineHeight: '30px' } },
+                SingleValue: { style: { lineHeight: '30px' } },
+                OptionContent: { style: { cursor: 'default' }, },
+                DropdownContainer: { style: { cursor: 'default' } },
+                DropdownListItem: { style: { cursor: 'default' } },
+                InputContainer: { style: { cursor: 'default' } },
+                Input: { style: { cursor: 'default' } },
+                Root: { style: { width: '122px' } }
+              }}
+
+            />
+          </Block>
         </Block>
       </Block>
       <Block display="flex" justifyContent="center" alignItems="center" flexDirection="row">
