@@ -25,7 +25,7 @@ import { Select } from 'baseui/select';
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST;
 const VITE_X_RAPIDAPI_URL = import.meta.env.VITE_X_RAPIDAPI_URL;
-
+const VITE_X_RAPIDAPI_HOST_WNBA = import.meta.env.VITE_X_RAPIDAPI_HOST_WNBA;
 
 const options = {
   method: 'GET',
@@ -96,7 +96,30 @@ const TeamStandingsV2 = () => {
     getData();
   }, []);
 
+  const [WNBAStandings, setWNBAStandings] = useState([])
+  useEffect(() => {
+    const fetchTeams = async () => {
+      const options = {
+        method: 'GET',
+        url: `https://${VITE_X_RAPIDAPI_HOST_WNBA}/wnbastandings`,
+        params: { year: `2024` },
+        headers: {
+          'x-rapidapi-key': VITE_X_RAPIDAPI_KEY,
+          'x-rapidapi-host': VITE_X_RAPIDAPI_HOST_WNBA
+        }
+      };
 
+      try {
+        const response = await axios.request(options);
+        // console.log("WNBA standings response = ", response.data)
+        setWNBAStandings(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchTeams();
+  }, []);
+  console.log("WNBA standings= ", WNBAStandings)
 
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -284,7 +307,7 @@ const TeamStandingsV2 = () => {
   const [league, setLeague] = useState("NBA")
   const handleLeagueChange = (params) => {
     const { value } = params;
-    console.log(value)
+    // console.log(value)
     setLeague(value[0].label)
   };
   const leagueOptions = [
@@ -305,10 +328,12 @@ const TeamStandingsV2 = () => {
         marginBottom="10px" >
         <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding + "px"}>
           <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
-            <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} />
+            {league === "NBA" ? <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} /> :
+              <img src={`https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg`} alt="NBA Logo" style={{ height: "20px", backgroundColor: "black", cursor: "pointer", marginBottom: "7px" }} />}
           </Link>
           <HeadingLevel>
-            <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading>
+            {league === "NBA" ? <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading> :
+              <Heading styleLevel={!isMobile ? 5 : 6} color="black" >WNBA 2024 Season</Heading>}
           </HeadingLevel>
         </Block>
 
@@ -352,7 +377,7 @@ const TeamStandingsV2 = () => {
         </Block>
       </Block>
       <Block display="flex" justifyContent="center" alignItems="center" flexDirection="row">
-        {!isMobile ?
+        {!isMobile && league === "NBA" ?
           <Block
             flexDirection="column"
             justifyContent="space-between"
@@ -382,145 +407,162 @@ const TeamStandingsV2 = () => {
         }
 
         {/* Main content block */}
-        <Block display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-          className="table__contain"
-          height="100%"
-          maxWidth={isMobile ? "85%" : "850px"}
-          style={{ width: isMobile ? '100%' : 'unset' }}
-        >
-          {data == null || data === undefined || data.length === 0 || !data ? <Spin ></Spin> :
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
-              $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} >
-              <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
+        {league === "NBA" ?
+          <Block display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            className="table__contain"
+            height="100%"
+            maxWidth={isMobile ? "85%" : "850px"}
+            style={{ width: isMobile ? '100%' : 'unset' }}
+          >
+            {data == null || data === undefined || data.length === 0 || !data ? <Spin ></Spin> :
+              <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
+                $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} >
+                <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
+              </Block>
+            }
+            {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+              <TableBuilder className="table1"
+                overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "10px" } } }}
+                data={DATA}
+              >
+                <TableBuilderColumn header="Team">
+                  {(row) => (
+                    <AvatarCell
+                      src={row.avatarSrc}
+                      title={row.name}
+                      subtitle={row.title}
+                    />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Position">
+                  {(row) => (
+                    <NumberCell value={row.position} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Lost">
+                  {(row) => (
+                    <NumberCell value={row.gamesLost} delta={-0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Lost %">
+                  {(row) => (
+                    <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won">
+                  {(row) => (
+                    <NumberCell value={row.gamesWon} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won %">
+                  {(row) => (
+                    <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Points Against">
+                  {(row) => (
+                    <NumberCell value={row.pointsAgainst} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Points For">
+                  {(row) => (
+                    <NumberCell value={row.pointsFor} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+              </TableBuilder>
+            }
+            {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+              <Block display="flex" justifyContent="left" backgroundColor="black" width="100%"
+                $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
+                <HeadingMedium marginLeft="5px" color="white" >Eastern Conference</HeadingMedium>
+              </Block>
+            }
+            {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
+              <TableBuilder className="table2"
+                overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "-16px" } } }}
+                data={DATA2}
+              >
+                <TableBuilderColumn header="Team">
+                  {(row) => (
+                    <AvatarCell
+                      src={row.avatarSrc}
+                      title={row.name}
+                      subtitle={row.title}
+                    />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Position">
+                  {(row) => (
+                    <NumberCell value={row.position} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Lost">
+                  {(row) => (
+                    <NumberCell value={row.gamesLost} delta={-0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Lost %">
+                  {(row) => (
+                    <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won">
+                  {(row) => (
+                    <NumberCell value={row.gamesWon} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won %">
+                  {(row) => (
+                    <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Points Against">
+                  {(row) => (
+                    <NumberCell value={row.pointsAgainst} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Points For">
+                  {(row) => (
+                    <NumberCell value={row.pointsFor} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+              </TableBuilder>
+            }
+          </Block>
+          : <Block display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            className="table__contain"
+            height="100%"
+            maxWidth={isMobile ? "85%" : "850px"}
+            style={{ width: isMobile ? '100%' : 'unset' }}
+          >
+            <Block display="flex" justifyContent="center" backgroundColor="black" width="100%" marginTop="5px"
+              $style={{
+                borderRadius: "8px",
+                minWidth: !isMobile ? "300px" : "85%"
+              }} >
+              <HeadingMedium marginLeft="5px" color="white" >Overall Standings</HeadingMedium>
             </Block>
-          }
-          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-            <TableBuilder className="table1"
-              overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "10px" } } }}
-              data={DATA}
-            >
-              <TableBuilderColumn header="Team">
-                {(row) => (
-                  <AvatarCell
-                    src={row.avatarSrc}
-                    title={row.name}
-                    subtitle={row.title}
-                  />
-                )}
-              </TableBuilderColumn>
+          </Block>}
 
-              <TableBuilderColumn header="Position">
-                {(row) => (
-                  <NumberCell value={row.position} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Lost">
-                {(row) => (
-                  <NumberCell value={row.gamesLost} delta={-0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Lost %">
-                {(row) => (
-                  <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Won">
-                {(row) => (
-                  <NumberCell value={row.gamesWon} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Won %">
-                {(row) => (
-                  <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Points Against">
-                {(row) => (
-                  <NumberCell value={row.pointsAgainst} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Points For">
-                {(row) => (
-                  <NumberCell value={row.pointsFor} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-            </TableBuilder>
-          }
-          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%"
-              $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
-              <HeadingMedium marginLeft="5px" color="white" >Eastern Conference</HeadingMedium>
-            </Block>
-          }
-          {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
-            <TableBuilder className="table2"
-              overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "-16px" } } }}
-              data={DATA2}
-            >
-              <TableBuilderColumn header="Team">
-                {(row) => (
-                  <AvatarCell
-                    src={row.avatarSrc}
-                    title={row.name}
-                    subtitle={row.title}
-                  />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Position">
-                {(row) => (
-                  <NumberCell value={row.position} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Lost">
-                {(row) => (
-                  <NumberCell value={row.gamesLost} delta={-0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Lost %">
-                {(row) => (
-                  <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Won">
-                {(row) => (
-                  <NumberCell value={row.gamesWon} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Games Won %">
-                {(row) => (
-                  <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Points Against">
-                {(row) => (
-                  <NumberCell value={row.pointsAgainst} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-
-              <TableBuilderColumn header="Points For">
-                {(row) => (
-                  <NumberCell value={row.pointsFor} delta={0.51} />
-                )}
-              </TableBuilderColumn>
-            </TableBuilder>
-          }
-        </Block>
-
-        {!isMobile ?
+        {!isMobile && league === "NBA" ?
           <Block
             flexDirection="column"
             justifyContent="space-between"
@@ -564,7 +606,7 @@ const TeamStandingsV2 = () => {
               // borderTopLeftRadius: "8px",
               // borderTopRightRadius: "8px",
               borderRadius: "8px"
-            }}>NBA h2h Ventures</Heading>
+            }}>{league === "NBA" ? `NBA h2h Ventures` : `WNBA h2h Ventures`}</Heading>
         </HeadingLevel>
       </Block>
       <Block className="oddsT" justifyContent="center" alignItems="center" display="flex" marginTop="10px">
