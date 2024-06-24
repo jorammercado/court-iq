@@ -214,6 +214,15 @@ const TeamStandingsV2 = () => {
     };
   });
 
+  // console.log(WNBADATA)
+  const WNBATeamData =
+    WNBADATA.map(team => {
+      return {
+        name: team.name,
+        logo: team.avatarSrc
+      }
+    })
+
   const teamData = {
     eastern: easternConference.map(team => ({
       name: team.team.name,
@@ -224,6 +233,8 @@ const TeamStandingsV2 = () => {
       logo: team.team.logo
     }))
   };
+
+  // console.log(teamData)
 
   function AvatarCell({
     src,
@@ -696,7 +707,8 @@ const TeamStandingsV2 = () => {
           marginBottom: "100px",
           borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
         }}>
-          <GameOdds teamData={teamData} />
+          <GameOdds teamData={league === "NBA" ? teamData : WNBATeamData}
+            sportInput={league === "NBA" ? 'basketball_nba' : 'basketball_wnba'} />
         </Block>
       </Block>
     </Block>

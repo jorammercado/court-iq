@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import H2HCard from './H2HCard'; 
+import H2HCard from './H2HCard';
 import "./GameOdds.scss";
 
-const NBAGameOdds = ({ teamData }) => {
+const NBAGameOdds = ({ teamData, sportInput }) => {
   const [draftKingsOdds, setDraftKingsOdds] = useState([]);
   const [fanduelOdds, setFanduelOdds] = useState([]);
   const [betMGMOdds, setBetMGMOdds] = useState([]);
@@ -13,7 +13,7 @@ const NBAGameOdds = ({ teamData }) => {
   useEffect(() => {
     const fetchOdds = async () => {
       const apiKey = import.meta.env.VITE_ODDS_API_KEY;
-      const sport = 'basketball_nba';
+      const sport = sportInput;
       const regions = 'us';
       const markets = 'h2h';
       const oddsFormat = 'american';
@@ -22,7 +22,7 @@ const NBAGameOdds = ({ teamData }) => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
-        // console.log(response.data)
+        console.log(response.data)
         const enrichedOdds = response.data.map(game => {
           const bookmaker = game.bookmakers.find(b => b.key === 'draftkings');
           const market = bookmaker?.markets.find(m => m.key === 'h2h');
@@ -35,8 +35,10 @@ const NBAGameOdds = ({ teamData }) => {
                 price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
               })),
               additionalData: game.commence_time,
-              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
-              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+              homeLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo :
+                teamData.find(t => t.name === game.home_team)?.logo || teamData.find(t => t.name === game.home_team)?.logo,
+              awayLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo :
+                teamData.find(t => t.name === game.away_team)?.logo || teamData.find(t => t.name === game.away_team)?.logo
             };
           }
           return null;
@@ -54,8 +56,10 @@ const NBAGameOdds = ({ teamData }) => {
                 price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
               })),
               additionalData: game.commence_time,
-              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
-              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+              homeLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo :
+                teamData.find(t => t.name === game.home_team)?.logo || teamData.find(t => t.name === game.home_team)?.logo,
+              awayLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo :
+                teamData.find(t => t.name === game.away_team)?.logo || teamData.find(t => t.name === game.away_team)?.logo
             };
           }
           return null;
@@ -73,8 +77,10 @@ const NBAGameOdds = ({ teamData }) => {
                 price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
               })),
               additionalData: game.commence_time,
-              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
-              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+              homeLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo :
+                teamData.find(t => t.name === game.home_team)?.logo || teamData.find(t => t.name === game.home_team)?.logo,
+              awayLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo :
+                teamData.find(t => t.name === game.away_team)?.logo || teamData.find(t => t.name === game.away_team)?.logo
             };
           }
           return null;
@@ -92,8 +98,10 @@ const NBAGameOdds = ({ teamData }) => {
                 price: outcome.price > 0 ? `+${outcome.price}` : outcome.price.toString(),
               })),
               additionalData: game.commence_time,
-              homeLogo: teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo,
-              awayLogo: teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo
+              homeLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.home_team)?.logo || teamData.western.find(t => t.name === game.home_team)?.logo :
+                teamData.find(t => t.name === game.home_team)?.logo || teamData.find(t => t.name === game.home_team)?.logo,
+              awayLogo: sportInput === "basketball_nba" ? teamData.eastern.find(t => t.name === game.away_team)?.logo || teamData.western.find(t => t.name === game.away_team)?.logo :
+                teamData.find(t => t.name === game.away_team)?.logo || teamData.find(t => t.name === game.away_team)?.logo
             };
           }
           return null;
@@ -141,6 +149,7 @@ const NBAGameOdds = ({ teamData }) => {
               homeLogo={game.homeLogo}
               awayLogo={game.awayLogo}
               bookmaker="DraftKings"
+              sport={sportInput === "basketball_nba" ? "NBA" : "WNBA"}
             />
           </a>
         )) : <></>}
@@ -155,6 +164,7 @@ const NBAGameOdds = ({ teamData }) => {
               homeLogo={game.homeLogo}
               awayLogo={game.awayLogo}
               bookmaker="FanDuel"
+              sport={sportInput === "basketball_nba" ? "NBA" : "WNBA"}
             />
           </a>
         )) : <></>}
@@ -169,6 +179,7 @@ const NBAGameOdds = ({ teamData }) => {
               homeLogo={game.homeLogo}
               awayLogo={game.awayLogo}
               bookmaker="BetMGM"
+              sport={sportInput === "basketball_nba" ? "NBA" : "WNBA"}
             />
           </a>
         )) : <></>}
@@ -183,6 +194,7 @@ const NBAGameOdds = ({ teamData }) => {
               homeLogo={game.homeLogo}
               awayLogo={game.awayLogo}
               bookmaker="Bovada"
+              sport={sportInput === "basketball_nba" ? "NBA" : "WNBA"}
             />
           </a>
         )) : <></>}
