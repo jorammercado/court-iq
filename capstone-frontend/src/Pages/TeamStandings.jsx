@@ -112,14 +112,14 @@ const TeamStandingsV2 = () => {
       try {
         const response = await axios.request(options);
         // console.log("WNBA standings response = ", response.data)
-        setWNBAStandings(response.data);
+        setWNBAStandings(response.data.standings.entries);
       } catch (error) {
         console.error(error);
       }
     };
     fetchTeams();
   }, []);
-  console.log("WNBA standings= ", WNBAStandings)
+  // console.log("WNBA standings= ", WNBAStandings)
 
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -198,6 +198,22 @@ const TeamStandingsV2 = () => {
     };
   });
 
+  const WNBADATA = WNBAStandings.map((team, index) => {
+    return {
+      id: team.team.id,
+      position: index + 1,
+      avatarSrc: team.team.logos[0].href,
+      name: team.team.displayName,
+      title: team.team.abbreviation,
+      gamesLost: team.stats[6].value,
+      gamesLostPercentage: Math.abs(1 - team.stats[10].value).toFixed(3),
+      gamesWon: team.stats[11].value,
+      gamesWonPercentage: team.stats[10].value.toFixed(3),
+      pointsAgainst: team.stats[0].value.toFixed(3),
+      pointsFor: team.stats[1].value.toFixed(3),
+    };
+  });
+
   const teamData = {
     eastern: easternConference.map(team => ({
       name: team.team.name,
@@ -259,7 +275,7 @@ const TeamStandingsV2 = () => {
       const positive = delta > 0;
       const arrowColor = positive ? 'green' : 'red';
       textColor = delta === 0 ? 'inherit' : arrowColor;
-      arrowIcon = delta === 0.5 ? null : positive ? <ArrowUp /> : <ArrowDown />;
+      // arrowIcon = delta === 0.5 ? null : positive ? <ArrowUp /> : <ArrowDown />;
     }
 
     return (
@@ -325,9 +341,9 @@ const TeamStandingsV2 = () => {
         backgroundColor="#EA6607"
         padding="0px"
         height="60px"
-        marginBottom="10px" >
+        marginBottom={data == null || data === undefined || data.length === 0 || !data ? "35px" : "0px"} >
         <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding + "px"}>
-          <Link href="https://www.nba.com/" target="_blank" rel="noopener noreferrer">
+          <Link href={league === "NBA" ? "https://www.nba.com/" : "https://www.wnba.com/"} target="_blank" rel="noopener noreferrer">
             {league === "NBA" ? <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} /> :
               <img src={`https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg`} alt="NBA Logo" style={{ height: "20px", backgroundColor: "black", cursor: "pointer", marginBottom: "7px" }} />}
           </Link>
@@ -553,14 +569,75 @@ const TeamStandingsV2 = () => {
             maxWidth={isMobile ? "85%" : "850px"}
             style={{ width: isMobile ? '100%' : 'unset' }}
           >
-            <Block display="flex" justifyContent="center" backgroundColor="black" width="100%" marginTop="5px"
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
               $style={{
-                borderRadius: "8px",
+                borderTopLeftRadius: "8px",
+                borderTopRightRadius: "8px",
                 minWidth: !isMobile ? "300px" : "85%"
               }} >
               <HeadingMedium marginLeft="5px" color="white" >Overall Standings</HeadingMedium>
             </Block>
-          </Block>}
+
+            {WNBAStandings == null || WNBAStandings === undefined || WNBAStandings.length === 0 || !WNBAStandings ? <Spin></Spin> :
+              <TableBuilder className="table2"
+                overrides={{ Root: { style: { maxHeight: '525px', marginBottom: "-16px" } } }}
+                data={WNBADATA}
+              >
+                <TableBuilderColumn header="Team">
+                  {(row) => (
+                    <AvatarCell
+                      src={row.avatarSrc}
+                      title={row.name}
+                      subtitle={row.title}
+                    />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Position">
+                  {(row) => (
+                    <NumberCell value={row.position} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Lost">
+                  {(row) => (
+                    <NumberCell value={row.gamesLost} delta={-0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Lost %">
+                  {(row) => (
+                    <NumberCell value={row.gamesLostPercentage} delta={row.gamesLostPercentage - 0.5} isPercentage />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won">
+                  {(row) => (
+                    <NumberCell value={row.gamesWon} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Games Won %">
+                  {(row) => (
+                    <NumberCell value={row.gamesWonPercentage} delta={row.gamesWonPercentage - 0.5} isPercentage />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Average Points Against">
+                  {(row) => (
+                    <NumberCell value={row.pointsAgainst} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+
+                <TableBuilderColumn header="Average Points For">
+                  {(row) => (
+                    <NumberCell value={row.pointsFor} delta={0.51} />
+                  )}
+                </TableBuilderColumn>
+              </TableBuilder>
+            }
+          </Block>
+        }
 
         {!isMobile && league === "NBA" ?
           <Block
