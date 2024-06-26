@@ -460,16 +460,16 @@ const TeamStandingsV2 = () => {
           >
             <Block>
               <TopScoringTeamCard
-                logo={league === "NBA" ? westernTopScoringTeam.logo : WNBAWesternTopScoringTeam.logos[0].href}
-                name={league === "NBA" ? westernTopScoringTeam.name : WNBAWesternTopScoringTeam.displayName}
+                logo={league === "NBA" ? westernTopScoringTeam?.logo : WNBAWesternTopScoringTeam?.logos?.[0]?.href}
+                name={league === "NBA" ? westernTopScoringTeam?.name : WNBAWesternTopScoringTeam?.displayName}
                 conference="Western"
                 league={league}
               />
             </Block>
             <Block>
               <TopDefensiveTeamCard
-                logo={league === "NBA" ? westernTopDefensiveTeam.logo : WNBAWesternTopDefensiveTeam.logos[0].href}
-                name={league === "NBA" ? westernTopDefensiveTeam.name : WNBAWesternTopDefensiveTeam.displayName}
+                logo={league === "NBA" ? westernTopDefensiveTeam?.logo : WNBAWesternTopDefensiveTeam?.logos?.[0]?.href}
+                name={league === "NBA" ? westernTopDefensiveTeam?.name : WNBAWesternTopDefensiveTeam?.displayName}
                 conference="Western"
                 league={league}
               />
@@ -624,9 +624,10 @@ const TeamStandingsV2 = () => {
             className="table__contain"
             height="100%"
             maxWidth={isMobile ? "85%" : "850px"}
-            style={{ width: isMobile ? '100%' : 'unset' }}
+            style={{ width: isMobile ? '100%' : 'unset', marginBottom: window.innerWidth >= 1300 ? "inherit" : "200px" }}
+
           >
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="-190px"
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop={window.innerWidth >= 1300 ? "-190px" : "5px"}
               $style={{
                 borderTopLeftRadius: "8px",
                 borderTopRightRadius: "8px",
@@ -707,16 +708,16 @@ const TeamStandingsV2 = () => {
           >
             <Block>
               <TopScoringTeamCard
-                logo={league === "NBA" ? easternTopScoringTeam.logo : WNBAEasternTopScoringTeam.logos[0].href}
-                name={league === "NBA" ? easternTopScoringTeam.name : WNBAEasternTopScoringTeam.displayName}
+                logo={league === "NBA" ? easternTopScoringTeam?.logo : WNBAEasternTopScoringTeam?.logos?.[0]?.href}
+                name={league === "NBA" ? easternTopScoringTeam?.name : WNBAEasternTopScoringTeam?.displayName}
                 conference="Eastern"
               />
             </Block>
             <Block>
               {/* Replace this block with the TopDefensiveTeamCard for Eastern Conference */}
               <TopDefensiveTeamCard
-                logo={league === "NBA" ? easternTopDefensiveTeam.logo : WNBAEasternTopDefensiveTeam.logos[0].href}
-                name={league === "NBA" ? easternTopDefensiveTeam.name : WNBAEasternTopDefensiveTeam.displayName}
+                logo={league === "NBA" ? easternTopDefensiveTeam?.logo : WNBAEasternTopDefensiveTeam?.logos?.[0]?.href}
+                name={league === "NBA" ? easternTopDefensiveTeam?.name : WNBAEasternTopDefensiveTeam?.displayName}
                 conference="Eastern"
               />
             </Block>
@@ -751,7 +752,7 @@ const TeamStandingsV2 = () => {
           flexDirection: "row",
           width: "100%",
           marginBottom: "100px",
-          marginTop: league === "NBA" ? "inherit" : "-155px", 
+          marginTop: league === "NBA" ? "inherit" : "-155px",
           borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
         }}>
           <GameOdds teamData={league === "NBA" ? teamData : WNBATeamData}
