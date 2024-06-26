@@ -54,6 +54,29 @@ const TeamStandingsV2 = () => {
   const [westernTopDefensiveTeam, setWesternTopDefensiveTeam] = useState({});
   const [padding, setPadding] = useState(window.innerWidth / 100);
 
+  const WNBAEasternConference = [
+    'Atlanta Dream',
+    'Chicago Sky',
+    'Connecticut Sun',
+    'Indiana Fever',
+    'New York Liberty',
+    'Washington Mystics'
+  ]
+
+  const WNBAWesternConference = [
+    'Dallas Wings',
+    'Las Vegas Aces',
+    'Los Angeles Sparks',
+    'Minnesota Lynx',
+    'Phoenix Mercury',
+    'Seattle Storm'
+  ]
+
+  const [WNBAEasternTopScoringTeam, setWNBAEasternTopScoringTeam] = useState({});
+  const [WNBAWesternTopScoringTeam, setWNBAWesternTopScoringTeam] = useState({});
+  const [WNBAEasternTopDefensiveTeam, setWNBAEasternTopDefensiveTeam] = useState({});
+  const [WNBAWesternTopDefensiveTeam, setWNBAWesternTopDefensiveTeam] = useState({});
+
   useEffect(() => {
     const handleResize = () => {
       setPadding(window.innerWidth > 1400 ? ((window.innerWidth - 1300) / 400) - 10 : 65);
@@ -73,6 +96,8 @@ const TeamStandingsV2 = () => {
         setData(responseData);
         const easternTeams = responseData.filter(e => e.group.name === "Eastern Conference");
         const westernTeams = responseData.filter(e => e.group.name === "Western Conference");
+        // console.log("EASTERN", easternTeams)
+        // console.log("WESTERN", westernTeams)
         setEasternConference(easternTeams);
         setWesternConference(westernTeams);
         setSeason(responseData[0].league.season);
@@ -113,6 +138,21 @@ const TeamStandingsV2 = () => {
         const response = await axios.request(options);
         // console.log("WNBA standings response = ", response.data)
         setWNBAStandings(response.data.standings.entries);
+
+        const easternTeams = response.data.standings.entries.filter(e => WNBAEasternConference.includes(e.team.displayName));
+        const westernTeams = response.data.standings.entries.filter(e => WNBAWesternConference.includes(e.team.displayName));
+
+        // Top scoring teams logic, for now - may need update
+        setWNBAEasternTopScoringTeam(easternTeams[0]?.team);
+        setWNBAWesternTopScoringTeam(westernTeams[0]?.team);
+
+        // Top defensive teams logic, for now - may need update
+        const easternDefensiveTeam = easternTeams.reduce((prev, current) => (prev.stats[0].value < current.stats[0].value) ? prev : current, easternTeams[0]).team;
+        const westernDefensiveTeam = westernTeams.reduce((prev, current) => (prev.stats[0].value < current.stats[0].value) ? prev : current, westernTeams[0]).team;
+
+        setWNBAEasternTopDefensiveTeam(easternDefensiveTeam);
+        setWNBAWesternTopDefensiveTeam(westernDefensiveTeam);
+
       } catch (error) {
         console.error(error);
       }
@@ -120,6 +160,11 @@ const TeamStandingsV2 = () => {
     fetchTeams();
   }, []);
   // console.log("WNBA standings= ", WNBAStandings)
+  console.log(WNBAEasternTopScoringTeam,
+    WNBAWesternTopScoringTeam,
+    WNBAEasternTopDefensiveTeam,
+    WNBAWesternTopDefensiveTeam)
+
 
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -331,7 +376,7 @@ const TeamStandingsV2 = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  const [league, setLeague] = useState("NBA")
+  const [league, setLeague] = useState("WNBA")
   const handleLeagueChange = (params) => {
     const { value } = params;
     // console.log(value)
@@ -404,28 +449,29 @@ const TeamStandingsV2 = () => {
         </Block>
       </Block>
       <Block display="flex" justifyContent="center" alignItems="center" flexDirection="row">
-        {!isMobile && league === "NBA" ?
+        {!isMobile ?
           <Block
             flexDirection="column"
             justifyContent="space-between"
             className="west-leaders"
-            marginTop="-28px"
+            marginTop={league === "NBA" ? "-28px" : "5px"}
             paddingLeft="10px"
             paddingRight="10px"
           >
             <Block>
               <TopScoringTeamCard
-                logo={westernTopScoringTeam.logo}
-                name={westernTopScoringTeam.name}
+                logo={league === "NBA" ? westernTopScoringTeam.logo : WNBAWesternTopScoringTeam.logos[0].href}
+                name={league === "NBA" ? westernTopScoringTeam.name : WNBAWesternTopScoringTeam.displayName}
                 conference="Western"
+                league={league}
               />
             </Block>
             <Block>
-              {/* Replace this block with the TopDefensiveTeamCard for Western Conference */}
               <TopDefensiveTeamCard
-                logo={westernTopDefensiveTeam.logo}
-                name={westernTopDefensiveTeam.name}
+                logo={league === "NBA" ? westernTopDefensiveTeam.logo : WNBAWesternTopDefensiveTeam.logos[0].href}
+                name={league === "NBA" ? westernTopDefensiveTeam.name : WNBAWesternTopDefensiveTeam.displayName}
                 conference="Western"
+                league={league}
               />
             </Block>
 
@@ -580,7 +626,7 @@ const TeamStandingsV2 = () => {
             maxWidth={isMobile ? "85%" : "850px"}
             style={{ width: isMobile ? '100%' : 'unset' }}
           >
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="-190px"
               $style={{
                 borderTopLeftRadius: "8px",
                 borderTopRightRadius: "8px",
@@ -591,7 +637,7 @@ const TeamStandingsV2 = () => {
 
             {WNBAStandings == null || WNBAStandings === undefined || WNBAStandings.length === 0 || !WNBAStandings ? <Spin></Spin> :
               <TableBuilder className="table2"
-                overrides={{ Root: { style: { maxHeight: '525px', marginBottom: "-16px" } } }}
+                overrides={{ Root: { style: { maxHeight: '425px', marginBottom: "-16px" } } }}
                 data={WNBADATA}
               >
                 <TableBuilderColumn header="Team">
@@ -650,27 +696,27 @@ const TeamStandingsV2 = () => {
           </Block>
         }
 
-        {!isMobile && league === "NBA" ?
+        {!isMobile ?
           <Block
             flexDirection="column"
             justifyContent="space-between"
             className="east-leaders"
-            marginTop="-28px"
+            marginTop={league === "NBA" ? "-28px" : "5px"}
             paddingLeft="10px"
             paddingRight="10px"
           >
             <Block>
               <TopScoringTeamCard
-                logo={easternTopScoringTeam.logo}
-                name={easternTopScoringTeam.name}
+                logo={league === "NBA" ? easternTopScoringTeam.logo : WNBAEasternTopScoringTeam.logos[0].href}
+                name={league === "NBA" ? easternTopScoringTeam.name : WNBAEasternTopScoringTeam.displayName}
                 conference="Eastern"
               />
             </Block>
             <Block>
               {/* Replace this block with the TopDefensiveTeamCard for Eastern Conference */}
               <TopDefensiveTeamCard
-                logo={easternTopDefensiveTeam.logo}
-                name={easternTopDefensiveTeam.name}
+                logo={league === "NBA" ? easternTopDefensiveTeam.logo : WNBAEasternTopDefensiveTeam.logos[0].href}
+                name={league === "NBA" ? easternTopDefensiveTeam.name : WNBAEasternTopDefensiveTeam.displayName}
                 conference="Eastern"
               />
             </Block>
@@ -685,7 +731,7 @@ const TeamStandingsV2 = () => {
             style={{
               display: "flex",
               paddingTop: "5px",
-              marginTop: "10px",
+              marginTop: league === "NBA" ? "10px" : "-350px",
               justifyContent: "center",
               alignItems: "center",
               marginBottom: "-10px",
@@ -705,6 +751,7 @@ const TeamStandingsV2 = () => {
           flexDirection: "row",
           width: "100%",
           marginBottom: "100px",
+          marginTop: league === "NBA" ? "inherit" : "-155px", 
           borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
         }}>
           <GameOdds teamData={league === "NBA" ? teamData : WNBATeamData}

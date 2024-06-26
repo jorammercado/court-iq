@@ -22,7 +22,7 @@ const NBAGameOdds = ({ teamData, sportInput }) => {
         const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`, {
           params: { apiKey, regions, markets, oddsFormat },
         });
-        console.log(response.data)
+        // console.log(response.data)
         const enrichedOdds = response.data.map(game => {
           const bookmaker = game.bookmakers.find(b => b.key === 'draftkings');
           const market = bookmaker?.markets.find(m => m.key === 'h2h');

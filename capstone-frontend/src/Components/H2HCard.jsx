@@ -70,7 +70,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
   const textStyle = {
     fontSize: "16px",
     fontWeight: "700",
-    color: sport === "NBA" ? "white" : "black",
+    color: sport === "NBA" ? "white" : "white",
     margin: "5px 0",
     textAlign: "center",
     textShadow: "0 0 18px Black",
@@ -121,7 +121,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
                 {outcome.team}: {outcome.price}
               </div>
             ))}
-            <span style={{ color: sport === "NBA" ? "white" : "black" }}>Bookmaker:</span> &nbsp; <span style={{ color: sport === "NBA" ? "white" : "black",
+            <span style={{ color: sport === "NBA" ? "white" : "white" }}>Bookmaker:</span> &nbsp; <span style={{ color: sport === "NBA" ? "white" : "white",
               // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
               fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
               fontSize: bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",

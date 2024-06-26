@@ -3,7 +3,7 @@ import { Card, StyledBody } from "baseui/card";
 import { Avatar } from "baseui/avatar";
 import { useStyletron } from "baseui";
 
-const TopScoringTeamCard = ({ logo, name, conference }) => {
+const TopScoringTeamCard = ({ logo, name, conference, league }) => {
   const [css] = useStyletron();
   return (
     <Card
