@@ -30,6 +30,7 @@ import Home from "./Pages/Home.jsx";
 import NBATeams from "./Pages/NBATeams.jsx";
 import WNBATeams from "./Pages/WNBATeams.jsx";
 import PlayerPage from "./Pages/PlayerPage.jsx";
+import PlayerPageWNBA from "./Pages/PlayerPageWNBA.jsx";
 import TeamStandings from "./Pages/TeamStandings.jsx";
 import FourOFour from "./Pages/FourOFour";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -138,6 +139,16 @@ function App() {
                   path="/player/:playerid"
                   element={
                     <PlayerPage
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
+                />
+
+                <Route
+                  path="/playerWNBA/:playerid"
+                  element={
+                    <PlayerPageWNBA
                       currentUser={currentUser}
                       setCurrentUser={setCurrentUser}
                     />

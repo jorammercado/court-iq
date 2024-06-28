@@ -14,10 +14,10 @@ const TeamPlayerCardsWNBA = ({ team,
     players
 }) => {
     const navigate = useNavigate();
-    const [playerStats, setPlayerStats] = useState([]);
+    // console.log(players)
     const handleCardClick = (playerId, playerData) => {
         // playerData = { ...playerData, games5, games10, games20, games50, gamesAll }
-        // navigate(`/player/${playerId}`, { state: { ...playerData } });
+        navigate(`/playerWNBA/${playerId}`, { state: { ...playerData } });
     };
 
     return (
@@ -29,7 +29,7 @@ const TeamPlayerCardsWNBA = ({ team,
                         <Block
                             className="playerCardWrapper"
                             key={index}
-                            onClick={() => handleCardClick()}
+                            onClick={() => handleCardClick(player.id, player)}
                             style={{ cursor: 'pointer' }}>
                             <PlayerCardWNBA
                                 player={player}
