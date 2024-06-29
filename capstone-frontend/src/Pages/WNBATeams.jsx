@@ -212,7 +212,7 @@ const WNBATeams = ({ }) => {
                             teamRecord={teamRecord}
                         />
                         <TeamPlayerCardsWNBA
-                            team={teamId}
+                            team={team}
                             primaryColor={primaryColor}
                             secondaryColor={secondaryColor}
                             teamName={selectedTeamName}

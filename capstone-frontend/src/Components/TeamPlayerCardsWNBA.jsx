@@ -16,7 +16,7 @@ const TeamPlayerCardsWNBA = ({ team,
     const navigate = useNavigate();
     // console.log(players)
     const handleCardClick = (playerId, playerData) => {
-        // playerData = { ...playerData, games5, games10, games20, games50, gamesAll }
+        playerData = { ...playerData, team: { ...team } }
         navigate(`/playerWNBA/${playerId}`, { state: { ...playerData } });
     };
 
