@@ -25,6 +25,63 @@ function PlayerWNBA({ data, playerid }) {
     // console.log(data)
     let navigate = useNavigate()
     const [isScreenLargeEnough, setIsScreenLargeEnough] = useState(window.innerWidth > 768);
+    const [playerStats, setPlayerStats] = useState([]);
+    const [playerStatsAdv, setPlayerStatsAdv] = useState([]);
+    const [playerStatsAdvNames, setPlayerStatsAdvNames] = useState([]);
+    const [playerStatsAdvLabels, setPlayerStatsAdvLabels] = useState([]);
+    const [playerStatsAdvValues, setPlayerStatsAdvValues] = useState([]);
+
+    useEffect(() => {
+        const fetchPlayerStats = async () => {
+            const options = {
+                method: 'GET',
+                url: `https://${VITE_X_RAPIDAPI_HOST_WNBA}/player-statistic`,
+                params: { playerId: `${playerid}` },
+                headers: {
+                    'x-rapidapi-key': VITE_X_RAPIDAPI_KEY,
+                    'x-rapidapi-host': VITE_X_RAPIDAPI_HOST_WNBA
+                }
+            };
+
+            try {
+                const response = await axios.request(options);
+                setPlayerStats(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        // fetchPlayerStats();
+    }, [playerid]);
+    // console.log("STATS", playerStats)
+
+    useEffect(() => {
+        const fetchPlayerStatsAdv = async () => {
+            const options = {
+                method: 'GET',
+                url: `https://${VITE_X_RAPIDAPI_HOST_WNBA}/player-advanced-stats`,
+                params: { playerId: `${playerid}` },
+                headers: {
+                    'x-rapidapi-key': VITE_X_RAPIDAPI_KEY,
+                    'x-rapidapi-host': VITE_X_RAPIDAPI_HOST_WNBA
+                }
+            };
+
+            try {
+                const response = await axios.request(options);
+                setPlayerStatsAdv(response.data.player_stats);
+                setPlayerStatsAdvNames(response.data.player_stats.categories[0].displayNames);
+                setPlayerStatsAdvLabels(response.data.player_stats.categories[0].labels);
+                setPlayerStatsAdvValues(response.data.player_stats.categories[0].statistics[0].stats);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchPlayerStatsAdv();
+    }, [playerid]);
+    // console.log("STATSADV", playerStatsAdv)
+    // console.log(playerStatsAdvNames)
+    // console.log(playerStatsAdvLabels)
+    // console.log(playerStatsAdvValues)
 
     useEffect(() => {
         function handleResize() {
@@ -127,13 +184,13 @@ function PlayerWNBA({ data, playerid }) {
                                 <LabelMedium color={secondaryColor}>PPG</LabelMedium>
                                 <LabelMedium color={secondaryColor}>RPG</LabelMedium>
                                 <LabelMedium color={secondaryColor}>APG</LabelMedium>
-                                <LabelMedium color={secondaryColor}>TS%</LabelMedium>
+                                <LabelMedium color={secondaryColor}>FG%</LabelMedium>
                             </Block>
                             <Block display="flex" justifyContent="space-around" width="60%">
-                                <LabelLarge color={secondaryColor}>{"val"}</LabelLarge>
-                                <LabelLarge color={secondaryColor}>{"val"}</LabelLarge>
-                                <LabelLarge color={secondaryColor}>{"val"}</LabelLarge>
-                                <LabelLarge color={secondaryColor}>{"val"}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{playerStatsAdvValues?.[3]}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{playerStatsAdvValues?.[6]}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{playerStatsAdvValues?.[7]}</LabelLarge>
+                                <LabelLarge color={secondaryColor}>{playerStatsAdvValues?.[12]}</LabelLarge>
                             </Block>
                         </Block>
                         <Block className="team__logo" >
