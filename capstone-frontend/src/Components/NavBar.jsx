@@ -21,18 +21,18 @@ export default function NavBar({
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const [mainItems, setMainItems] = useState([
-        { icon: null, label: "NBA" },
+        { icon: null, label: "NBA Rosters" },
         { icon: null, label: "Standings" },
         { icon: null, label: "Headlines" },
         { icon: null, label: "Glossary" },
         {
             icon: null, label: (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ display: 'flex', alignItems: 'center', marginBottom: "-200px" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cone-striped" viewBox="0 0 16 16">
                         <path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z" />
                     </svg>
-                    <span style={{ }}>WNBA</span>
-                </div>
+                    <span style={{}}>WNBA</span>
+                </span>
             )
         },
     ]);
@@ -41,9 +41,11 @@ export default function NavBar({
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
             updateMainItems(window.innerWidth);
+            updateUserItems(window.innerWidth);
         };
 
         updateMainItems(window.innerWidth);
+        updateUserItems(window.innerWidth);
 
         window.addEventListener('resize', handleResize);
 
@@ -58,12 +60,12 @@ export default function NavBar({
             { icon: null, label: "Glossary" },
             {
                 icon: null, label: (
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ display: 'flex', alignItems: 'center' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cone-striped" viewBox="0 0 16 16">
                             <path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z" />
                         </svg>
-                        <span style={{ }}>WNBA</span>
-                    </div>
+                        <span style={{}}>WNBA</span>
+                    </span>
                 )
             },
         ];
@@ -75,14 +77,66 @@ export default function NavBar({
         setMainItems(items);
     };
 
-    const userItems = [
+    const updateUserItems = (width) => {
+        if (width <= 1135) {
+            const items = [
+                { icon: null, label: "Home" },
+                { icon: null, label: "User" },
+                { icon: null, label: "NBA Rosters" },
+                { icon: null, label: "Standings" },
+                { icon: null, label: "Headlines" },
+                { icon: null, label: "Glossary" },
+                {
+                    icon: null, label: (
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cone-striped" viewBox="0 0 16 16">
+                                <path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z" />
+                            </svg>
+                            <span style={{}}>WNBA</span>
+                        </span>
+                    )
+                },
+            ];
+            setUserItems(items);
+        } else {
+            const items = [
+                { icon: null, label: "Home" },
+                { icon: null, label: "User" },
+            ];
+            setUserItems(items);
+        }
+    };
+
+    const [userItems, setUserItems] = useState([
         { icon: null, label: "Home" },
         { icon: null, label: "User" },
-    ]
+        { icon: null, label: "NBA Rosters" },
+        { icon: null, label: "Standings" },
+        { icon: null, label: "Headlines" },
+        { icon: null, label: "Glossary" },
+        {
+            icon: null, label: (
+                <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cone-striped" viewBox="0 0 16 16">
+                        <path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z" />
+                    </svg>
+                    <span style={{}}>WNBA</span>
+                </span>
+            )
+        },
+    ])
 
 
-    function handleMainItemSelect(item) {
+    function handleItemSelect(item) {
         switch (typeof item.label === 'string' ? item.label : item.label.props.children[1].props.children) {
+            case "User":
+                setIsGlossaryVisible(false);
+                navigate("/loggedInPage");
+                break;
+            case "Home":
+                setIsGlossaryVisible(false);
+                navigate("/");
+                break;
             case "NBA Rosters":
                 setIsGlossaryVisible(false);
                 navigate("/rostersNBA");
@@ -95,20 +149,9 @@ export default function NavBar({
                 setIsGlossaryVisible(false);
                 navigate("/teamstandings");
                 break;
-            case "Schedule":
-                setIsGlossaryVisible(false);
-                navigate("/GamesSchedule");
-                break;
-            case "Compare":
-                setIsGlossaryVisible(false);
-                navigate("/playerComparison");
-                break;
             case "Headlines":
                 setIsGlossaryVisible(false);
                 navigate("/Headlines");
-                break;
-            case "Search":
-                setIsGlossaryVisible(false);
                 break;
             case "Glossary":
                 setIsGlossaryVisible(!isGlossaryVisible);
@@ -119,24 +162,6 @@ export default function NavBar({
         }
     }
 
-    function handleUserItemSelect(item) {
-        switch (item.label) {
-            case "User":
-                setIsGlossaryVisible(false);
-                navigate("/loggedInPage");
-                break;
-            case "Home":
-                setIsGlossaryVisible(false);
-                navigate("/");
-                break;
-            case "Glossary":
-                setIsGlossaryVisible(!isGlossaryVisible);
-                break;
-            default:
-                setIsGlossaryVisible(false);
-                break;
-        }
-    }
 
     const handleLogoClick = () => {
         setIsGlossaryVisible(false);
@@ -170,8 +195,8 @@ export default function NavBar({
                     else if (item.id === "search") return ""
                     return item.label;
                 }}
-                onMainItemSelect={handleMainItemSelect}
-                onUserItemSelect={handleUserItemSelect}
+                onMainItemSelect={handleItemSelect}
+                onUserItemSelect={handleItemSelect}
                 overrides={{
                     Root: {
                         style: ({ $theme }) => ({
@@ -183,10 +208,15 @@ export default function NavBar({
                             outline: `none`
                         })
                     },
+                    UserMenuProfileListItem: {
+                        style: ({ $theme }) => ({
+                            marginTop: window.innerWidth > 1135 ? "5px" : window.innerWidth > 600 ? "78px" : "57px",
+                        }),
+                    }
                 }}
                 username={currentUser ? currentUser.displayName : "User"}
                 usernameSubtitle={
-                    <Link
+                    <span
                         to="/loggedInPage"
                         onClick={handleLogoUserClick}
                         style={{
@@ -204,7 +234,7 @@ export default function NavBar({
                         >
                             Invisible Link
                         </span>
-                    </Link>
+                    </span>
                 }
                 userImgUrl={!/[<>]/.test(photoURL) && currentUser ? photoURL : ball}
             />

@@ -160,10 +160,10 @@ const TeamStandingsV2 = () => {
     fetchTeams();
   }, []);
   // console.log("WNBA standings= ", WNBAStandings)
-  console.log(WNBAEasternTopScoringTeam,
-    WNBAWesternTopScoringTeam,
-    WNBAEasternTopDefensiveTeam,
-    WNBAWesternTopDefensiveTeam)
+  // console.log(WNBAEasternTopScoringTeam,
+  //   WNBAWesternTopScoringTeam,
+  //   WNBAEasternTopDefensiveTeam,
+  //   WNBAWesternTopDefensiveTeam)
 
 
 
