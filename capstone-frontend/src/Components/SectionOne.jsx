@@ -43,7 +43,7 @@ const SectionOne = () => {
             x: screenWidth - divWidth,
         },
         offscreen: {
-            x: screenWidth - 100,
+            x: screenWidth - 20,
         },
     };
 
@@ -68,7 +68,7 @@ const SectionOne = () => {
 
             <MoveInWhenVisible>
 
-                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2", borderRadius:"8px" }}>
+                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2", borderRadius: "8px" }}>
                     <header>
                         <h2>What We Do</h2>
                     </header>

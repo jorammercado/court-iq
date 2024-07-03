@@ -723,6 +723,18 @@ q {
 	overflow: hidden;
 }
 
+@media (max-width: 736px) {
+
+	.home input[type="button"].down,
+	.home input[type="submit"].down,
+	.home input[type="reset"].down,
+	.home .button.down,
+	.home button.down {
+		width: 4em;
+		height: 4em;
+	}
+}
+
 .home input[type="button"].down.anchored,
 .home input[type="submit"].down.anchored,
 .home input[type="reset"].down.anchored,
@@ -733,6 +745,17 @@ q {
 	border-radius: 3em 3em 0 0;
 	height: 4.5em;
 	margin-left: -2.5em;
+}
+
+@media (max-width: 736px) {
+
+	.home input[type="button"].down.anchored,
+	.home input[type="submit"].down.anchored,
+	.home input[type="reset"].down.anchored,
+	.home .button.down.anchored,
+	.home button.down.anchored {
+		height: 3.75em;
+	}
 }
 
 .home input[type="button"].anchored,
@@ -794,83 +817,6 @@ q {
 	background-image: url("./images/arrow.svg");
 }
 
-/* Form */
-
-.home form {
-	margin: 0 0 2em 0;
-}
-
-.home form> :last-child {
-	margin-bottom: 0;
-}
-
-.home form>.fields {
-	display: -moz-flex;
-	display: -webkit-flex;
-	display: -ms-flex;
-	display: flex;
-	-moz-flex-wrap: wrap;
-	-webkit-flex-wrap: wrap;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	width: calc(100% + 3em);
-	margin: -1.5em 0 2em -1.5em;
-}
-
-.home form>.fields>.field {
-	-moz-flex-grow: 0;
-	-webkit-flex-grow: 0;
-	-ms-flex-grow: 0;
-	flex-grow: 0;
-	-moz-flex-shrink: 0;
-	-webkit-flex-shrink: 0;
-	-ms-flex-shrink: 0;
-	flex-shrink: 0;
-	padding: 1.5em 0 0 1.5em;
-	width: calc(100% - 1.5em);
-}
-
-.home form>.fields>.field.half {
-	width: calc(50% - 0.75em);
-}
-
-.home form>.fields>.field.third {
-	width: calc(100%/3 - 0.5em);
-}
-
-.home form>.fields>.field.quarter {
-	width: calc(25% - 0.375em);
-}
-
-@media screen and (max-width: 480px) {
-
-	.home form>.fields>.field.quarter {
-		width: calc(25% - 0.375em);
-	}
-
-	.home form>.fields {
-		width: calc(100% + 2em);
-		margin: -1em 0 2em -1em;
-	}
-
-	.home form>.fields>.field {
-		padding: 1em 0 0 1em;
-		width: calc(100% - 1em);
-	}
-
-	.home form>.fields>.field.half {
-		width: calc(100% - 1em);
-	}
-
-	.home form>.fields>.field.third {
-		width: calc(100% - 1em);
-	}
-
-	.home form>.fields>.field.quarter {
-		width: calc(100% - 1em);
-	}
-
-}
 
 .home label {
 	display: block;
@@ -1319,88 +1265,6 @@ q {
 
 }
 
-/* Header */
-
-.home #header {
-	position: relative;
-	z-index: 0;
-	left: 0;
-	top: 0;
-	width: 100%;
-	background: rgba(255, 255, 255, 0.95);
-	height: 3em;
-	line-height: 3em;
-	box-shadow: 0 0 0.15em 0 rgba(0, 0, 0, 0.1);
-	margin-bottom: 0px;
-}
-
-.home #header h1 {
-	position: absolute;
-	left: 2em;
-	top: 0;
-	height: 3em;
-	line-height: 2.5em;
-	font-size: 20px;
-	cursor: default;
-}
-
-.home #header h1 a {
-	font-size: 1.25em;
-}
-
-.home #header nav {
-	position: absolute;
-	right: 0.5em;
-	top: 0;
-	height: 3em;
-	line-height: 3em;
-}
-
-.home #header nav ul {
-	margin: 0;
-}
-
-.home #header nav ul li {
-	display: inline-block;
-	margin-left: 0.5em;
-	font-size: 0.9em;
-}
-
-.home #header nav ul li a {
-	display: block;
-	color: inherit;
-	text-decoration: none;
-	height: 3em;
-	line-height: 3em;
-	padding: 0 0.5em 0 0.5em;
-	outline: 0;
-}
-
-@media screen and (max-width: 736px) {
-
-	.home #header {
-		height: 2.5em;
-		line-height: 2.5em;
-	}
-
-	.home #header h1 {
-		text-align: center;
-		position: relative;
-		left: 0;
-		top: 0;
-		height: 2.5em;
-		line-height: 2.5em;
-	}
-
-	.home #header h1 a {
-		font-size: 1em;
-	}
-
-	.home #header nav {
-		display: none;
-	}
-
-}
 
 .home {
 	padding-top: 0em;
@@ -1617,7 +1481,7 @@ q {
 	}
 
 	.home .main.style1 h2 {
-		font-size: 3em;
+		font-size: 2.75em;
 	}
 
 	.home .main.style2 {
@@ -1629,9 +1493,9 @@ q {
 		display: none !important;
 	}
 
-	.home .main.style2 .button.anchored {
+	/* .home .main.style2 .button.anchored {
 		display: none;
-	}
+	} */
 
 	.home .main.style2 .content {
 		width: 100%;
@@ -1774,47 +1638,6 @@ q {
 	/* background-size: cover; */
 }
 
-/* Contact */
-
-.home #contact {
-	overflow: hidden;
-	padding-bottom: 0;
-}
-
-.home #contact .box {
-	-moz-transition: -moz-transform 1s ease;
-	-webkit-transition: -webkit-transform 1s ease;
-	-ms-transition: -ms-transform 1s ease;
-	transition: transform 1s ease;
-	-moz-transform: translateY(0);
-	-webkit-transform: translateY(0);
-	-ms-transform: translateY(0);
-	transform: translateY(0);
-	position: relative;
-}
-
-.home #contact.inactive .box {
-	-moz-transform: translateY(100%);
-	-webkit-transform: translateY(100%);
-	-ms-transform: translateY(100%);
-	transform: translateY(100%);
-}
-
-@media screen and (max-width: 736px) {
-
-	.home #contact .box {
-		padding: 1.5em 1.5em 2em 1.5em;
-	}
-
-}
-
-@media screen and (max-width: 480px) {
-
-	.home #contact .box {
-		padding: 1em 1em 2em 1em;
-	}
-
-}
 
 div.element {
 	height: 50vh;

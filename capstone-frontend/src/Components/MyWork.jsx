@@ -15,6 +15,7 @@ const MyWork = () => {
 
     const ref = useRef(null);
     const [divWidth, setDivWidth] = useState(0);
+    // console.log(divWidth)
     useEffect(() => {
         if (ref.current) {
             setDivWidth(ref.current.getBoundingClientRect().width);
@@ -50,7 +51,7 @@ const MyWork = () => {
             x: 0,
         },
         offscreen: {
-            x: 0 - 600,
+            x: screenWidth >= 1252 ? - 2 * divWidth : -divWidth,
         },
     };
 
@@ -108,46 +109,69 @@ const MyWork = () => {
                 </header>
                 <div className="gallery" >
                     <article className="from-left">
-                        <MoveInWhenVisible>
+                        {screenWidth >= 480 ?
+                            <MoveInWhenVisible>
+                                <div className="image fit">
+                                    <img src={image06} ref={ref} title="The Anonymous Red" alt="" />
+                                </div>
+                            </MoveInWhenVisible> :
                             <div className="image fit">
                                 <img src={image06} ref={ref} title="The Anonymous Red" alt="" />
-                            </div>
-                        </MoveInWhenVisible>
+                            </div>}
                     </article>
                     <article className="from-right">
-                        <MoveInWhenVisibleRight>
+                        {screenWidth >= 480 ?
+                            <MoveInWhenVisibleRight>
+                                <div className="image fit">
+                                    <img src={image02} title="Airchitecture II" alt="" />
+                                </div>
+                            </MoveInWhenVisibleRight> :
                             <div className="image fit">
                                 <img src={image02} title="Airchitecture II" alt="" />
-                            </div>
-                        </MoveInWhenVisibleRight>
+                            </div>}
                     </article>
                     <article className="from-left">
-                        <MoveInWhenVisible>
+                        {screenWidth >= 480 ?
+                            <MoveInWhenVisible>
+                                <div className="image fit">
+                                    <img src={image03} title="Air Lounge" alt="" />
+                                </div>
+                            </MoveInWhenVisible> :
                             <div className="image fit">
                                 <img src={image03} title="Air Lounge" alt="" />
-                            </div>
-                        </MoveInWhenVisible>
+                            </div>}
                     </article>
                     <article className="from-right">
-                        <MoveInWhenVisibleRight>
+                        {screenWidth >= 480 ? <MoveInWhenVisibleRight>
                             <div className="image fit">
                                 <img src={image04} title="Carry on" alt="" />
                             </div>
-                        </MoveInWhenVisibleRight>
+                        </MoveInWhenVisibleRight> :
+                            <div className="image fit">
+                                <img src={image04} title="Carry on" alt="" />
+                            </div>}
                     </article>
                     <article className="from-left">
-                        <MoveInWhenVisible>
+                        {screenWidth >= 480 ?
+                            <MoveInWhenVisible>
+                                <div className="image fit">
+                                    <img src={image05} title="The sparkling shell" alt="" />
+                                </div>
+                            </MoveInWhenVisible> :
                             <div className="image fit">
                                 <img src={image05} title="The sparkling shell" alt="" />
-                            </div>
-                        </MoveInWhenVisible>
+                            </div>}
                     </article>
                     <article className="from-right">
-                        <MoveInWhenVisibleRight>
+                        {screenWidth >= 480 ?
+                            <MoveInWhenVisibleRight>
+                                <div className="image fit">
+                                    <img src={image01} title="Bent IX" alt="" />
+                                </div>
+                            </MoveInWhenVisibleRight> :
                             <div className="image fit">
                                 <img src={image01} title="Bent IX" alt="" />
-                            </div>
-                        </MoveInWhenVisibleRight>
+                            </div>}
                     </article>
                 </div>
             </div>

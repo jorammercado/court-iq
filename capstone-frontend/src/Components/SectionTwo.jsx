@@ -1670,7 +1670,7 @@ const SectionTwo = () => {
                         backgroundSize: 'contain',
                         backgroundPosition: 'center',
                         backgroundRepeat: "no-repeat",
-                        borderRadius:"8px",
+                        borderRadius: "8px",
                         opacity: visibleImages[index] ? 1 : 0.15
                     }}></div>
                 ))}
@@ -1683,7 +1683,10 @@ const SectionTwo = () => {
             <BackgroundGrid />
             {/* <MoveInWhenVisible> */}
             <div style={{ marginRight: 0, padding: 0, width: "100%" }}>
-                <div className="content box style2" style={{ position: 'relative', backgroundColor: "black", zIndex: 4 }}>
+                <div className="content box style2" style={{
+                    position: 'relative', backgroundColor: "black", zIndex: 4,
+                    marginLeft: screenWidth < 900 ? "-20px" : "inherit"
+                }}>
                     <h4 style={{
                         color: "white",
                         backgroundColor: "black",
@@ -1693,10 +1696,11 @@ const SectionTwo = () => {
                         marginTop: "-20px"
                     }}>Ask single stat questions from player's latest game (more to come).</h4>
                     <div style={giphyContainerStyle}>
-                        <iframe src="https://giphy.com/embed/ftFYPUVo7oPlmrXqM4" style={{ border: 'none', marginLeft: "-40px", marginBottom: "50px", width: "480px", height: "270px" }} allowFullScreen></iframe>
+                        {screenWidth > 900 ? <iframe src="https://giphy.com/embed/ftFYPUVo7oPlmrXqM4" style={{ border: 'none', marginLeft: "-40px", marginBottom: "50px", width: "480px", height: "270px" }} allowFullScreen></iframe>
+                            : <></>}
                     </div>
                     <div style={contentOverlayStyle}>
-                        <header style={{ paddingBottom: "120px", marginTop: "-52px" }}>
+                        <header style={{ paddingBottom: screenWidth > 900 ? "120px" : "0px", marginTop: "-52px" }}>
                         </header>
                     </div>
                     <h6 style={{
