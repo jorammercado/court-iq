@@ -51,7 +51,9 @@ const MyWork = () => {
             x: 0,
         },
         offscreen: {
-            x: screenWidth >= 1252 ? - 2 * divWidth : -divWidth,
+            x: screenWidth >= 1252 && screenWidth < 1350 ?
+                -divWidth  : screenWidth >= 1252 ?
+                    - 2 * divWidth : -divWidth,
         },
     };
 

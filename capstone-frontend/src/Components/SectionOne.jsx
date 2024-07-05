@@ -43,7 +43,7 @@ const SectionOne = () => {
             x: screenWidth - divWidth,
         },
         offscreen: {
-            x: screenWidth - 20,
+            x: screenWidth - 30,
         },
     };
 
