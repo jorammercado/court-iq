@@ -12,10 +12,26 @@ import "./MyWork.scss"
 const MyWork = () => {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
     const ref = useRef(null);
     const [divWidth, setDivWidth] = useState(0);
     // console.log(divWidth)
+
+    useEffect(() => {
+        const handleResizeHeight = () => {
+            setScreenHeight(window.innerHeight);
+        };
+
+        window.addEventListener('resize', handleResizeHeight);
+
+        return () => {
+            window.removeEventListener('resize', handleResizeHeight);
+        };
+    }, []);
+    
+    // console.log("height = ", screenHeight)
+
     useEffect(() => {
         if (ref.current) {
             setDivWidth(ref.current.getBoundingClientRect().width);
@@ -52,7 +68,7 @@ const MyWork = () => {
         },
         offscreen: {
             x: screenWidth >= 1252 && screenWidth < 1350 ?
-                -divWidth  : screenWidth >= 1252 ?
+                -divWidth : screenWidth >= 1252 ?
                     - 2 * divWidth : -divWidth,
         },
     };
@@ -97,11 +113,28 @@ const MyWork = () => {
             </motion.div>
         );
     }
-
+    // console.log("width = ",screenWidth)
 
 
     return (
-        <section id="work" className="main style3 primary" style={{ backgroundColor: "#faf7f2" }}>
+        <section id="work" className="main style3 primary" style={{
+            backgroundColor: "#faf7f2",
+            paddingBottom:
+                screenWidth >= 1024 ? "430px" :
+                    screenWidth >= 912 ? "435px" :
+                        screenWidth >= 853 ? "350px" :
+                            screenWidth >= 820 ? "250px" :
+                                screenWidth >= 810 ? "150px" :
+                                    screenWidth >= 800 ? "265px" :
+                                        screenWidth >= 768 ? "110px" :
+                                            screenWidth >= 540 ? "150px" :
+                                                screenWidth >= 430 ? "535px" :
+                                                    screenWidth >= 428 ? "527px" :
+                                                        screenWidth >= 390 ? "517px" :
+                                                            screenWidth >= 360 ? "500px" :
+                                                                screenWidth >= 344 ? "490px" :
+                                                                    "340px"
+        }}>
             <div className="content" style={{ backgroundColor: "#faf7f2", boxShadow: "none", borderStyle: "none" }}>
                 <header>
                     <h2>Comparison of Propositional and Head-to-Head Bets Across Different Bookmakers</h2>

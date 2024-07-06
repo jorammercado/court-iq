@@ -53,8 +53,8 @@ function Home() {
             <Element name="sectionTwo" className="element" style={{ height: "100vh" }}>
                 <SectionTwo />
             </Element>
-            <Element name="myWork" className="element" style={{ height: "70vh" }}>
-                <MyWork/>
+            <Element name="myWork" className="element" style={{ height: "100vh", backgroundColor: "#faf7f2" }}>
+                <MyWork />
             </Element>
         </div>
     );

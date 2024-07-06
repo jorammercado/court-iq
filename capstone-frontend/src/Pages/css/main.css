@@ -1257,6 +1257,7 @@ q {
 		-webkit-flex-direction: column;
 		-ms-flex-direction: column;
 		flex-direction: column;
+		padding-bottom: 150px;
 	}
 
 	.home .gallery article {
@@ -1657,6 +1658,6 @@ q {
 
 
 div.element {
-	height: 50vh;
+	height: 100vh;
 	background-color: black;
 }
