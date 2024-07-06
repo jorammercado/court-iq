@@ -1,4 +1,4 @@
-.TeamStatsTable {
+.TeamStatsTable1 {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -21,12 +21,16 @@
         align-items: flex-start;
         transition: background-color .5s ease-in-out;
 
+        @media (max-width: 1300px) {
+            width: 80%;
+        }
+
         @media (max-width: 870px) {
             max-width: 40%;
         }
 
-        @media (max-width: 1300px) {
-            width: 80%;
+        @media (max-width: 375px) {
+            width: 30%;
         }
 
         .titleHighlight {
@@ -34,16 +38,30 @@
         }
     }
 
-    .tableContainer {
+    .tableContainer1 {
         width: 100%;
         overflow-x: auto;
 
-        @media (max-width: 870px) {
-            max-width: 40%;
-        }
+
 
         @media (max-width: 1300px) {
             width: 80%;
+        }
+
+        @media (max-width: 1015px) {
+            width: 74%;
+        }
+
+        @media (max-width: 915px) {
+            width: 64.9%;
+        }
+
+        @media (max-width: 870px) {
+            width: 40%;
+        }
+
+        @media (max-width: 375px) {
+            width: 30%;
         }
     }
 }

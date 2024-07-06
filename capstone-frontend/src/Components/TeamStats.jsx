@@ -75,7 +75,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
         }));
 
     return (
-        <Block className="TeamStatsTable" style={{
+        <Block className="TeamStatsTable1" style={{
             justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%",
             marginBottom: "-19px", marginTop: "0px"
         }}>
@@ -101,7 +101,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
                     </HeadingLevel>
                 </Block>
             </Block>
-            <Block className="tableContainer" style={{ justifyContent: "left" }}>
+            <Block className="tableContainer1" style={{ justifyContent: "left" }}>
                 <TableBuilder data={teamStats} >
                     {statColumns.map(column => (
                         <TableBuilderColumn key={column.id} header={column.header}>

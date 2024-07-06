@@ -74,14 +74,21 @@
         justify-content: center;
 
         @media (max-width: 1305px) {
-            .Selector {
+            .Selector1 {
                 flex-direction: column;
             }
         }
 
-        @media (max-width: 650px) {
-            .Selector {
-                display: none;
+        @media (max-width: 600px) {
+            .Selector1 {
+                flex-direction: row;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .Selector1 {
+                flex-direction: column;
+                // margin-right: 100px;
             }
         }
 
@@ -126,6 +133,10 @@
             justify-content: center;
             align-items: center;
             margin-top: 5px;
+
+            @media (max-width: 600px) {
+                display: none !important;
+            }
 
         }
 

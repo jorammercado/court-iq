@@ -291,10 +291,10 @@ const NBATeams = ({ }) => {
             <Block className="backgroundWrapper" backgroundColor={primaryColor}>
                 <Block className="middle">
 
-                    <Block className="team">
-                        <HeadingLevel>
-                            <Heading styleLevel={1} marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
-                            <Heading marginTop="-5px" styleLevel={3} color={secondaryColor} style={{ fontFamily: fontFamily }}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
+                    <Block className="team" $style={{ marginBottom: screenWidth >= 750 ? "inherit" : "25px" }} >
+                        <HeadingLevel >
+                            <Heading styleLevel={screenWidth >= 750 ? 1 : 4} marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading marginTop="-5px" styleLevel={screenWidth >= 750 ? 3 : 6} color={secondaryColor} style={{ fontFamily: fontFamily }}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
                         </HeadingLevel>
                     </Block>
                     <Block className="teamLeaders">
@@ -303,7 +303,7 @@ const NBATeams = ({ }) => {
                                 <Heading styleLevel={4} color="white"
                                     style={{
                                         color: teamId === "31" ? "black" : "white",
-                                        marginTop: "20px",
+                                        marginTop: screenWidth > 600 ? "20px" : "135px",
                                         paddingLeft: "85px",
                                         paddingRight: "86px",
                                         justifyContent: "flex-start",
@@ -374,11 +374,11 @@ const NBATeams = ({ }) => {
                 }
             </Block>
             <Block className="right">
-                <Block className="Selector"
+                <Block className="Selector1"
                     display="flex"
                     justifyContent="center"
                     marginBottom="70px"
-                    $style={{ marginRight: `${marginLeft - 12}px` }}>
+                    $style={{ marginRight: screenWidth <= 500 ? `${marginLeft*3/2}px` : `${marginLeft - 12}px` }}>
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={teamOptions}
