@@ -251,7 +251,7 @@ const NBATeams = ({ }) => {
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
 
-
+    console.log(screenWidth)
     return (
         <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
             <Block className="left">
@@ -378,7 +378,7 @@ const NBATeams = ({ }) => {
                     display="flex"
                     justifyContent="center"
                     marginBottom="70px"
-                    $style={{ marginRight: screenWidth <= 500 ? `${marginLeft*3/2}px` : `${marginLeft - 12}px` }}>
+                    $style={{ marginRight: screenWidth <= 500 ? `${marginLeft*0.7}px` : `${marginLeft - 12}px` }}>
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={teamOptions}

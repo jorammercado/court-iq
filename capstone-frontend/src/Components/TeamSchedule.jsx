@@ -108,7 +108,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
     }
 
     return (
-        <Block className="TeamGamesTable" style={{
+        <Block className="TeamGamesTableNBA" style={{
             justifyContent: "left",
             alignItems: "flex-left",
             display: "flex",

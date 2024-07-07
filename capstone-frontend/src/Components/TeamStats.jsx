@@ -76,7 +76,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
 
     return (
         <Block className="TeamStatsTable1" style={{
-            justifyContent: "left", alignItems: "flex-left", display: "flex", width: "91%",
+            justifyContent: "left", alignItems: "flex-left", display: "flex",
             marginBottom: "-19px", marginTop: "0px"
         }}>
             <Block className="heading" width="100%"

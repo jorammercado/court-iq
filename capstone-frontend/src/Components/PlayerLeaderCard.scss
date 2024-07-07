@@ -1,4 +1,4 @@
-.teamleaderdisplaycards {
+.teamleaderdisplaycards1 {
     display: flex;
     gap: 15;
     width: 1300px;
@@ -7,6 +7,11 @@
     align-items: flex-start;
     margin-top: 0px;
     padding-top: 0px;
+
+    @media (max-width:1315px) {
+        width: 100%;
+    }
+
 
     .responsiveCard {
         transition: box-shadow 0.3s ease-in-out;

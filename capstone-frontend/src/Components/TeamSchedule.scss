@@ -1,4 +1,4 @@
-.TeamGamesTable {
+.TeamGamesTableNBA {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -14,14 +14,14 @@
         max-width: 1300px;
     }
 
-    @media (max-width: 870px) {
-        max-width: 45%;
+    @media (max-width: 1300px) {
+        width: 80%;
         justify-content: center;
         align-items: center;
     }
 
-    @media (max-width: 1300px) {
-        width: 80%;
+    @media (max-width: 870px) {
+        max-width: 45%;
         justify-content: center;
         align-items: center;
     }

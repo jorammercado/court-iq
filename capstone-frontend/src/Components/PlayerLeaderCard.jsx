@@ -129,7 +129,7 @@ const TeamPlayerLeaderCard = ({ teamId,
     return (
         <div >
             {personalData.length > 0 ?
-                <div className="teamleaderdisplaycards">
+                <div className="teamleaderdisplaycards1">
                     {leaders.map((leader, index) => (
                         <div
                             key={index}
