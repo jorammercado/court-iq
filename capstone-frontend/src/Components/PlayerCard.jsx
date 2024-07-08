@@ -7,6 +7,15 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
     const navigate = useNavigate();
     const [playerImage, setPlayerImage] = useState("https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png");
     const [textColor, setTextColor] = useState("white")
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         switch (team) {
@@ -45,8 +54,22 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                     style: {
                         display: "flex",
                         justifyContent: "center",
-                        width: "232px",
-                        height: "179px",
+                        width:
+                            screenWidth > 1300 ? "232px" :
+                                screenWidth > 1155 ? "210px" :
+                                    screenWidth > 870 ? "200px" :
+                                        screenWidth > 750 ? "170px" :
+                                            screenWidth > 494 ? "140px" :
+                                                screenWidth > 400 ? "120px" :
+                                                    screenWidth > 360 ? "110px" :
+                                                        "90px",
+                        height:
+                            screenWidth > 870 ? "179px" :
+                                screenWidth > 750 ? "161px" :
+                                    screenWidth > 494 ? "155px" :
+                                        screenWidth > 400 ? "149px" :
+                                            screenWidth > 360 ? "140px" :
+                                                "138px",
                         marginBottom: "5px",
                         backgroundColor: primaryColor,
                         borderRadius: "8px",
@@ -65,9 +88,10 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                 },
                 Title: {
                     style: {
-
-
-                        fontSize: '19px',
+                        fontSize:
+                            screenWidth > 1155 ? "19px" :
+                                screenWidth > 494 ? "15px" :
+                                    '12px',
                         textAlign: 'center',
                         marginTop: "-6px",
                         marginBottom: "18px",
@@ -76,12 +100,36 @@ const PlayerCard = ({ player, personalData, primaryColor, secondaryColor, team }
                     },
                 }
             }}
-            title={`${player.player.firstname} ${player.player.lastname}`}
+            title={`${player.player.firstname} ${player.player.lastname}`.length < 15 && screenWidth > 360 ?
+                `${player.player.firstname} ${player.player.lastname}` :
+                screenWidth <= 360 ? `${player.player.lastname}` :
+                    `${player.player.firstname?.[0]}. ${player.player.lastname}`}
         >
-            <Block marginBottom="26px" marginTop="-16px">
+            <Block marginBottom="26px" marginTop="-16px" >
                 <StyledThumbnail
                     src={playerImage}
-                    style={{ width: '240px', height: '180px', border: "none", marginTop: "-10px" }}
+                    style={{
+                        width:
+                            screenWidth > 1155 ? '240px' :
+                                screenWidth > 870 ? '190px' :
+                                    screenWidth > 750 ? '160px' :
+                                        screenWidth > 494 ? '140px' :
+                                            screenWidth > 400 ? '120px' :
+                                                screenWidth > 360 ? '115px' :
+                                                    "85px",
+                        height:
+                            screenWidth > 1155 ? '180px' :
+                                screenWidth > 870 ? '150px' :
+                                    screenWidth > 750 ? '130px' :
+                                        screenWidth > 494 ? '125px' :
+                                            screenWidth > 400 ? '118px' :
+                                                screenWidth > 360 ? '114px' :
+                                                    "112px",
+                        border: "none",
+                        marginTop: "-10px",
+                        marginLeft: "1px",
+                        marginRight: "1px",
+                    }}
                 />
                 <StyledBody style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.1", marginTop: "23px", color: textColor }}>
 

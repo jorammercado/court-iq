@@ -22,7 +22,7 @@ const TeamPlayerCardsWNBA = ({ team,
 
     return (
         <Block maxWidth="1200px" marginLeft="60px" marginRight="60px" >
-            <Block className="playerCardsContainer">
+            <Block className="playerCardsContainerWNBA">
 
                 {players ? (players && players.map((player, index) => {
                     return (

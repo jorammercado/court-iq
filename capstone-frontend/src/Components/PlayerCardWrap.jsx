@@ -88,7 +88,7 @@ const PlayerStatsComponent = ({ team,
     };
 
     return (
-        <Block maxWidth="1300px" >
+        <Block maxWidth="1300px" marginTop="-55px" >
             <Block className="playerCardsContainer">
                 {playerStats && playerStats.slice(0, 15).map((player, index) => {
                     let personalDataPassed = null

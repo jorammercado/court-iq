@@ -102,8 +102,14 @@
                 // margin-left: 509px;
                 padding-bottom: 5.5px;
 
+                
+
                 @media (max-width: 1315px) {
                     margin-left: -237px;
+                }
+
+                @media (max-width: 1315px) and (min-width: 1301px) {
+                    margin-left: -222px;
                 }
 
                 @media (max-width: 1300px) {
