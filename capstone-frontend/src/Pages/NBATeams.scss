@@ -10,11 +10,6 @@
         align-items: flex-start;
         margin-top: 6px;
 
-        @media (max-width: 650px) {
-            .team__logo {
-                display: none;
-            }
-        }
     }
 
     .backgroundWrapper {
@@ -79,16 +74,9 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .Selector1 {
-                flex-direction: row;
-            }
-        }
-
         @media (max-width: 500px) {
             .Selector1 {
                 flex-direction: column;
-                // margin-right: 100px;
             }
         }
 
@@ -114,6 +102,10 @@
                 // margin-left: 509px;
                 padding-bottom: 5.5px;
 
+                @media (max-width: 1315px) {
+                    margin-left: -237px;
+                }
+
                 @media (max-width: 1300px) {
                     margin-left: -508px;
                 }
@@ -134,7 +126,7 @@
             align-items: center;
             margin-top: 5px;
 
-            @media (max-width: 600px) {
+            @media (max-width: 685px) {
                 display: none !important;
             }
 

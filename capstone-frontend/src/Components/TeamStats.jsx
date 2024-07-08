@@ -12,6 +12,15 @@ const VITE_X_RAPIDAPI_URL = import.meta.env.VITE_X_RAPIDAPI_URL4;
 
 const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
     const [teamStats, setTeamStats] = useState(null);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const fetchTeamStats = async () => {
@@ -79,7 +88,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
             justifyContent: "left", alignItems: "flex-left", display: "flex",
             marginBottom: "-19px", marginTop: "0px"
         }}>
-            <Block className="heading" width="100%"
+            <Block className="heading"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
                     url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
@@ -91,7 +100,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
                 }}>
                 <Block className="heading" backgroundColor={isHighlightedSeason ? "#EA6607" : "transparent"} width="100%">
                     <HeadingLevel >
-                        <Heading className="titleHighlight" styleLevel={4}
+                        <Heading className="titleHighlight" styleLevel={screenWidth > 870 ? 4 : screenWidth > 620 ? 5 : 6}
                             color="white"
                             backgroundColor={isHighlightedSeason ? "#EA6607" : "none"}
                             marginBottom="0px"
@@ -102,7 +111,16 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
                 </Block>
             </Block>
             <Block className="tableContainer1" style={{ justifyContent: "left" }}>
-                <TableBuilder data={teamStats} >
+                <TableBuilder data={teamStats}
+                    overrides={{
+                        TableBodyCell: {
+                            style: ({ $theme }) => (
+                                screenWidth <= 400 ? {
+                                    fontSize: "11px"
+                                } : {}
+                            )
+                        }
+                    }}>
                     {statColumns.map(column => (
                         <TableBuilderColumn key={column.id} header={column.header}>
                             {row => <div>{row[column.id]}</div>}

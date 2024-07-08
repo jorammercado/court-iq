@@ -28,6 +28,15 @@ const TeamPlayerLeaderCard = ({ teamId,
     const [leaders, setLeaders] = useState([]);
     const [playerImages, setPlayerImages] = useState([])
     const [personalData, setPersonalData] = useState([]);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const fetchPlayerStats = async () => {
@@ -149,10 +158,22 @@ const TeamPlayerLeaderCard = ({ teamId,
                                             flexDirection: "column",
                                             justifyContent: "center",
                                             alignItems: "center",
-                                            width: "275px",
+                                            width:
+                                                screenWidth > 870 ? "275px" :
+                                                    screenWidth > 750 ? "230px" :
+                                                        screenWidth > 620 ? "190px" :
+                                                            screenWidth > 494 ? "150px" :
+                                                                screenWidth > 440 ? "140px" :
+                                                                    screenWidth > 365 ? "115px" : "95px",
                                             marginTop: "0px",
                                             marginBottom: "20px",
-                                            height: "360px",
+                                            height:
+                                                screenWidth > 870 ? "360px" :
+                                                    screenWidth > 750 ? "340px" :
+                                                        screenWidth > 620 ? "320px" :
+                                                            screenWidth > 494 ? "300px" :
+                                                                screenWidth > 440 ? "225px" :
+                                                                    screenWidth > 365 ? "210px" : "200px",
                                             borderBottomRightRadius: "8px",
                                             borderBottomLeftRadius: "8px",
                                             borderTopRightRadius: leader.category === "Assists" ? "8px" : "8px",
@@ -162,27 +183,33 @@ const TeamPlayerLeaderCard = ({ teamId,
                                     }
                                 }}
                             >
-                                <StyledTitle style={{ fontSize: '25px', marginRight: '0', padding: '0', textAlign: "center", marginBottom: "20px", color: teamId === "31" ? "black" : "white", }}>
-                                    {leader.firstname} {leader.lastname}
+                                <StyledTitle style={{
+                                    fontSize: screenWidth > 870 ? '25px' : screenWidth > 750 ? '22px' : screenWidth > 620 ? '21px' : screenWidth > 494 ? '18px' : "15px",
+                                    marginRight: '0', padding: '0', textAlign: "center", marginBottom: "20px", color: teamId === "31" ? "black" : "white",
+                                }}>
+                                    {`${leader.firstname} ${leader.lastname}`.length < 14 && screenWidth > 365 ? `${leader.firstname} ${leader.lastname}` : `${leader.lastname}`}
                                 </StyledTitle>
 
                                 <StyledThumbnail src={playerImages[index] || 'https://via.placeholder.com/150'}
                                     style={{
-                                        height: '190px',
-                                        width: '260px',
+                                        height: screenWidth > 870 ? '190px' : screenWidth > 750 ? '180px' : screenWidth > 620 ? '170px' : screenWidth > 494 ? '160px' : screenWidth > 440 ? '130px' : screenWidth > 365 ? '105px' : "90px",
+                                        width: screenWidth > 870 ? '260px' : screenWidth > 750 ? '220px' : screenWidth > 620 ? '180px' : screenWidth > 494 ? '130px' : screenWidth > 440 ? '110px' : screenWidth > 365 ? '100px' : '90px',
                                         alignSelf: "center",
                                         border: "none",
-                                        marginBottom: "20px",
+                                        marginBottom: screenWidth > 494 ? "20px" : "0px",
                                         marginTop: "-15px",
+                                        marginRight: "5px"
                                     }}
                                 />
 
                                 <StyledBody>
                                     <HeadingLevel >
-                                        <Heading style={{ fontSize: "25px", textAlign: "center", marginBottom: "-20px", color: teamId === "31" ? "black" : "white" }} styleLevel={6}>
+                                        <Heading style={{
+                                            fontSize: screenWidth > 870 ? "25px" : screenWidth > 750 ? "22px" : screenWidth > 620 ? "21px" : screenWidth > 494 ? "18px" : "13.5px", textAlign: "center", marginBottom: "-20px", color: teamId === "31" ? "black" : "white"
+                                        }} styleLevel={6}>
                                             {leader.category === "Points" ? "PPG" : leader.category === "Assists" ? "APG" : "RPG"}
                                             <br />
-                                            <span style={{ fontSize: "15px" }}>{leader.average}</span>
+                                            <span style={{ fontSize: screenWidth > 870 ? "15px" : screenWidth > 494 ? "14px" : "13px" }}>{leader.average}</span>
                                         </Heading>
                                     </HeadingLevel>
                                 </StyledBody>

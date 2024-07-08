@@ -728,7 +728,7 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading className="heading" styleLevel={4} color="white"
+          <Heading className="headingStandings" styleLevel={4} color="white"
             style={{
               display: "flex",
               paddingTop: "5px",

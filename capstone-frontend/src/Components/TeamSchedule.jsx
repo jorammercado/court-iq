@@ -23,6 +23,15 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
     const [games20, setGames20] = useState([]);
     const [games50, setGames50] = useState([]);
     const [gamesAll, setGamesAll] = useState([]);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -78,35 +87,37 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
         const [css, theme] = useStyletron();
         return (
             <div className={css({ display: 'flex', alignItems: 'center' })}>
-                <Avatar name={title} size="48px" src={src} />
+                <Avatar name={title} size={screenWidth > 400 ? "48px" : "28px"} src={src} />
                 <div
                     className={css({
                         paddingLeft: theme.sizing.scale550,
                         whiteSpace: 'nowrap',
                     })}
                 >
-                    <p
+                    <div
                         className={css({
                             ...theme.typography.LabelSmall,
-                            margin: 0,
+                            margin: 0, fontSize: "inherit"
                         })}
                     >
                         {title}
-                    </p>
-                    <p
+                    </div>
+                    <div
                         className={css({
                             ...theme.typography.ParagraphSmall,
                             marginBottom: 0,
                             marginTop: '4px',
+                            fontSize: "inherit"
                         })}
                     >
                         {subtitle}
-                    </p>
+                    </div>
                 </div>
             </div>
         );
     }
 
+    // console.log(screenWidth)
     return (
         <Block className="TeamGamesTableNBA" style={{
             justifyContent: "left",
@@ -126,7 +137,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
                 <Block className="head" width="100%">
                     <HeadingLevel >
                         <Heading className="headingTransition"
-                            styleLevel={4}
+                            styleLevel={screenWidth > 870 ? 4 : screenWidth > 620 ? 5 : 6}
                             color="white"
                             marginBottom="0px"
                             marginLeft="5px"
@@ -146,14 +157,30 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
             </Block>
             <Block className="scheduleTable">
                 <TableBuilder data={gamesInView === '5' ? games : gamesInView === '10' ? games10 : gamesInView === '20' ? games20 : gamesInView === '50' ? games50 : gamesAll}
-                    overrides={{ Root: { style: { maxHeight: "500px", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" } } }}>
+                    overrides={{
+                        Root: {
+                            style: {
+                                maxHeight: "500px", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
+                            }
+                        },
+                        TableBodyCell: {
+                            style: ({ $theme }) => (
+                                screenWidth <= 400 ? {
+                                    fontSize: "11px"
+                                } : {}
+                            )
+                        }
+                    }}>
                     <TableBuilderColumn header="Date">
                         {row => <div>{row && row.date && row.date.start ? new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] : ""}</div>}
                     </TableBuilderColumn>
                     <TableBuilderColumn header="Time">
-                        {row => <div>{row && row.date && row.date.start && row.date.start.split("T")[1] ?
+                        {row => <div>{row && row.date && row.date.start && row.date.start.split("T")[1] && screenWidth > 870 ?
                             new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '') + " EST," +
-                            new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '') + " PST" : ""} </div>}
+                            new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '') + " PST" :
+                            row && row.date && row.date.start && row.date.start.split("T")[1] ?
+                                new Date(row.date.start).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[1].replace(/:00(?=\s?(AM|PM)$)/, '').replace(/\s+(AM|PM)$/, '$1') + " ET" :
+                                ""} </div>}
                     </TableBuilderColumn>
                     <TableBuilderColumn header="Opponent">
                         {row => {
@@ -166,7 +193,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
                         }}
                     </TableBuilderColumn>
                     <TableBuilderColumn header="Location">
-                        {row => <div>{`${row.arena.name ? row.arena.name + "," : "n/a"} ${row.arena.city ? row.arena.city : ""} ${row.arena.state ? row.arena.state : ""}`}</div>}
+                        {row => <div>{`${row.arena.name ? row.arena.name + "," : "n/a"} ${row.arena.city && screenWidth > 750 ? row.arena.city : ""} ${row.arena.state ? row.arena.state : ""}`}</div>}
                     </TableBuilderColumn>
                     <TableBuilderColumn header="Score (h-v)">
                         {row => <div>{`${row && row.scores && row.scores.home && row.scores.home.points ? `${row.scores.home.points} - ${row.scores.visitors.points}` : "n/a"}`}</div>}

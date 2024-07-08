@@ -251,11 +251,11 @@ const NBATeams = ({ }) => {
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
 
-    console.log(screenWidth)
+    // console.log(screenWidth)
     return (
         <Block className="parent" style={{ position: 'relative', zIndex: 0 }}>
             <Block className="left">
-                <Block className="team__logo" $style={{ flexGrow: 1, marginLeft: `${marginLeft + 15}px` }}>
+                <Block className="team__logoNBA" $style={{ flexGrow: 1, marginLeft: `${marginLeft + 15}px` }}>
                     <Avatar
                         overrides={{
                             Avatar: {
@@ -277,8 +277,9 @@ const NBATeams = ({ }) => {
                                     justifyContent: 'center',
                                     overflow: 'visible',
                                     width: '120px',
-                                    height: '120px',
+                                    height: screenWidth > 400 ? '120px' : '100px',
                                     backgroundColor: avatarBackgroundColor,
+                                    marginTop: screenWidth > 400 ? 'inherit' : '10px'
                                 }),
                             },
                         }}
@@ -291,21 +292,21 @@ const NBATeams = ({ }) => {
             <Block className="backgroundWrapper" backgroundColor={primaryColor}>
                 <Block className="middle">
 
-                    <Block className="team" $style={{ marginBottom: screenWidth >= 750 ? "inherit" : "25px" }} >
+                    <Block className="team" $style={{ marginBottom: screenWidth >= 820 ? "inherit" : "25px" }} >
                         <HeadingLevel >
-                            <Heading styleLevel={screenWidth >= 750 ? 1 : 4} marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
-                            <Heading marginTop="-5px" styleLevel={screenWidth >= 750 ? 3 : 6} color={secondaryColor} style={{ fontFamily: fontFamily }}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
+                            <Heading styleLevel={screenWidth >= 820 ? 1 : 4} marginTop="10px" color={secondaryColor} style={{ fontFamily: fontFamily }} >{selectedTeamName ? selectedTeamName : ""}</Heading>
+                            <Heading marginTop="-5px" styleLevel={screenWidth >= 820 ? 3 : 6} color={secondaryColor} style={{ fontFamily: fontFamily }}>{season ? season + `-${(Number(season) + 1).toString()}` : ""}</Heading>
                         </HeadingLevel>
                     </Block>
                     <Block className="teamLeaders">
                         <Block className="leadersHeading" style={{ justifyContent: "flex-start", alignItems: "flex-start", display: "flex", flexDirection: "row" }}>
                             <HeadingLevel >
-                                <Heading styleLevel={4} color="white"
+                                <Heading styleLevel={screenWidth > 870 ? 4 : screenWidth > 620 ? 5 : 6} color="white"
                                     style={{
                                         color: teamId === "31" ? "black" : "white",
-                                        marginTop: screenWidth > 600 ? "20px" : "135px",
-                                        paddingLeft: "85px",
-                                        paddingRight: "86px",
+                                        marginTop: screenWidth > 685 ? "20px" : "135px",
+                                        paddingLeft: screenWidth > 870 ? "85px" : screenWidth > 750 ? "70px" : screenWidth > 620 ? "50px" : screenWidth > 440 ? "30px" : screenWidth > 365 ? "20px" : "10px",
+                                        paddingRight: screenWidth > 870 ? "86px" : screenWidth > 750 ? "70px" : screenWidth > 620 ? "50px" : screenWidth > 440 ? "30px" : screenWidth > 365 ? "20px" : "9px",
                                         justifyContent: "flex-start",
                                         marginBottom: "-5px",
                                         backgroundColor: isHighlightedLeaders ? "#EA6607" : primaryColor,
@@ -378,7 +379,7 @@ const NBATeams = ({ }) => {
                     display="flex"
                     justifyContent="center"
                     marginBottom="70px"
-                    $style={{ marginRight: screenWidth <= 500 ? `${marginLeft*0.7}px` : `${marginLeft - 12}px` }}>
+                    $style={{ marginRight: screenWidth < 500 ? `${marginLeft * 0.03}px` : `${marginLeft - 12}px` }}>
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={teamOptions}
@@ -399,13 +400,13 @@ const NBATeams = ({ }) => {
                                 },
                                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                 Placeholder: { style: { lineHeight: '30px' } },
-                                SingleValue: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px', fontSize: screenWidth > 400 ? "inherit" : "14px" } },
                                 OptionContent: { style: { cursor: 'default' }, },
                                 DropdownContainer: { style: { cursor: 'default' } },
                                 DropdownListItem: { style: { cursor: 'default' } },
                                 InputContainer: { style: { cursor: 'default' } },
                                 Input: { style: { cursor: 'default' } },
-                                Root: { style: { width: '122px' } }
+                                Root: { style: { width: screenWidth > 400 ? '122px' : '110px' } }
                             }}
 
                         />
@@ -435,13 +436,13 @@ const NBATeams = ({ }) => {
                                 },
                                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                 Placeholder: { style: { lineHeight: '30px' } },
-                                SingleValue: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px', fontSize: screenWidth > 400 ? "inherit" : "14px" } },
                                 OptionContent: { style: { cursor: 'default' }, },
                                 DropdownContainer: { style: { cursor: 'default' } },
                                 DropdownListItem: { style: { cursor: 'default' } },
                                 InputContainer: { style: { cursor: 'default' } },
                                 Input: { style: { cursor: 'default' } },
-                                Root: { style: { width: '122px' } }
+                                Root: { style: { width: screenWidth > 400 ? '122px' : '110px' } }
                             }}
                         />
                     </Block>
@@ -471,13 +472,13 @@ const NBATeams = ({ }) => {
                                 },
                                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                                 Placeholder: { style: { lineHeight: '30px' } },
-                                SingleValue: { style: { lineHeight: '30px' } },
+                                SingleValue: { style: { lineHeight: '30px', fontSize: screenWidth > 400 ? "inherit" : "14px" } },
                                 OptionContent: { style: { cursor: 'default' }, },
                                 DropdownContainer: { style: { cursor: 'default' } },
                                 DropdownListItem: { style: { cursor: 'default' } },
                                 InputContainer: { style: { cursor: 'default' } },
                                 Input: { style: { cursor: 'default' } },
-                                Root: { style: { width: '122px' } }
+                                Root: { style: { width: screenWidth > 400 ? '122px' : '110px' } }
                             }}
 
                         />
