@@ -1628,10 +1628,11 @@ q {
 /* Intro */
 
 .home #intro {
-	background: url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg") no-repeat center center fixed;
-	background-size: cover;
-	height: 100vh; 
-    width: 100vw;
+	background-image: url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg");
+	background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+	background-attachment: fixed; 
 }
 
 /* One */
@@ -1639,15 +1640,11 @@ q {
 .home #one {
 	background: url("../images/luca.png") no-repeat center center fixed;
 	background-size: cover;
-	height: 100vh; 
-    width: 100vw;
 }
 
 .home #three {
 	background: url("../images/luca2.png") no-repeat center center fixed;
 	background-size: cover;
-	height: 100vh; 
-    width: 100vw;
 }
 
 /* Two */

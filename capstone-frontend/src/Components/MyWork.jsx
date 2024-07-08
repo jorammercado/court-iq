@@ -8,6 +8,7 @@ import image06 from "../Pages/images/thumbs/6.png"
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import "./MyWork.scss"
+import "../Pages/css/main.css"
 
 const MyWork = () => {
 

@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import "./SectionThree.scss"
+import "../Pages/css/main.css"
 
 const SectionThree = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);

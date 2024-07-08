@@ -3,6 +3,7 @@ import { Element } from 'react-scroll';
 import { useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import "./SectionTwo.scss"
+import "../Pages/css/main.css"
 
 const SectionTwo = () => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
