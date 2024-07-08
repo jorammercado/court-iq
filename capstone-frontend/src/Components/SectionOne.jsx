@@ -44,7 +44,7 @@ const SectionOne = () => {
             x: screenWidth - divWidth,
         },
         offscreen: {
-            x: screenWidth - 30,
+            x: screenWidth > 830 ? screenWidth - 30 : screenWidth - 40,
         },
     };
 
@@ -57,7 +57,12 @@ const SectionOne = () => {
                 viewport={{ once: false }}
                 transition={{ duration: 1.25 }}
                 variants={variants}
-                style={{ marginRight: 0, padding: 0, width: "100%" }}
+                style={{
+                    marginRight: screenWidth > 830 ? "0px" : "-25px",
+                    padding: 0, width: "100%",
+                    position: screenWidth <= 830 ? "absolute" : "initial",
+                    top: screenWidth <= 830 ? 70 : "initial",
+                }}
             >
                 {children}
             </motion.div>

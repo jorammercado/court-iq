@@ -58,7 +58,11 @@ const SectionThree = () => {
         viewport={{ once: false }}
         transition={{ duration: 1.25 }}
         variants={variants}
-        style={{ marginRight: 0, padding: 0, width: "100%" }}
+        style={{
+          marginRight: 0, padding: 0, width: "100%",
+          position: screenWidth <= 830 ? "absolute" : "initial",
+          bottom: screenWidth <= 830 ? 155 : "initial",
+        }}
       >
         {children}
       </motion.div>
@@ -66,7 +70,7 @@ const SectionThree = () => {
   }
 
   return (
-    <section id="three" className="main style2 left dark fullscreen">
+    <section id="three" className="main style2 left dark fullscreen" >
 
       <MoveInWhenVisible>
         <div className="content box style2" style={{ backgroundColor: "#faf7f2", borderTopRightRadius: "8px", borderBottomRightRadius: "8px" }}>
