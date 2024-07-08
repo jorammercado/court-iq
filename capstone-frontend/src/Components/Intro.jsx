@@ -12,10 +12,23 @@ const Intro = () => {
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    console.log(screenWidth)
+    // console.log(screenWidth)
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    console.log("is mobile = ", isMobile)
+
+    const backgroundImageStyle = {
+        backgroundImage: `url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg")`,
+        backgroundSize: !isMobile ? 'cover' : 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: !isMobile ? 'no-repeat' : 'no-repeat',
+        backgroundAttachment: 'fixed',
+        height: !isMobile ? 'auto' : '100vh',
+        width: !isMobile ? 'auto' : '100vw',
+    };
 
     return (
-        <section id="intro" className="main style1 dark fullscreen" >
+        <section id="intro" className="main style1 dark fullscreen" style={backgroundImageStyle} >
             <div className="content" style={{ backgroundColor: "#faf7f2", borderRadius: "8px", zIndex: 0 }}>
                 <header>
                     <h2>Beyond the Arc Analytics Unleashed</h2>
