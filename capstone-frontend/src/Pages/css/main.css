@@ -1640,11 +1640,25 @@ q {
 .home #one {
 	background: url("../images/luca.png") no-repeat center center fixed;
 	background-size: cover;
+	background-color: #faf7f2;
+}
+
+@media (max-width: 830px) {
+	.home #one{
+		background-size: contain;
+	}
 }
 
 .home #three {
 	background: url("../images/luca2.png") no-repeat center center fixed;
 	background-size: cover;
+	background-color: #faf7f2;
+}
+
+@media (max-width: 830px) {
+	.home #three{
+		background-size: contain;
+	}
 }
 
 /* Two */

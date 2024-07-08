@@ -4,9 +4,11 @@ import "../Pages/css/main.css"
 
 const Intro = () => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
     useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
+            setScreenHeight(window.innerHeight);
         };
         window.addEventListener('resize', handleResize);
 
@@ -15,16 +17,14 @@ const Intro = () => {
     // console.log(screenWidth)
 
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    console.log("is mobile = ", isMobile)
+    // console.log("is mobile = ", isMobile)
 
     const backgroundImageStyle = {
         backgroundImage: `url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg")`,
-        backgroundSize: !isMobile ? 'cover' : 'cover',
+        backgroundSize: !isMobile && screenWidth > 830 ? 'cover' : 'contain',
         backgroundPosition: 'center',
-        backgroundRepeat: !isMobile ? 'no-repeat' : 'no-repeat',
+        backgroundRepeat: !isMobile && screenWidth > 830 ? 'no-repeat' : 'repeat',
         backgroundAttachment: 'fixed',
-        height: !isMobile ? 'auto' : '100vh',
-        width: !isMobile ? 'auto' : '100vw',
     };
 
     return (
