@@ -577,13 +577,6 @@ q {
 	letter-spacing: -0.05em;
 }
 
-@media screen and (max-width: 736px) {
-
-	.home h2 {
-		font-size: 1.5em;
-	}
-
-}
 
 .home strong,
 .home b {
@@ -1246,7 +1239,7 @@ q {
 	opacity: 0;
 }
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
 
 	.home .gallery {
 		-moz-flex-wrap: nowrap;
@@ -1264,7 +1257,7 @@ q {
 		width: 100%;
 	}
 
-}
+} */
 
 
 .home {
@@ -1651,6 +1644,26 @@ q {
 	}
 }
 
+
+
+@media (max-width: 430px) {
+	.home #one{
+		background-size: 146% 45%;
+	}
+}
+
+@media (max-width: 375px) {
+	.home #one{
+		background-size: contain;
+	}
+}
+
+@media (max-width: 360px) {
+	.home #one{
+		background-size: 146% 45%;
+	}
+}
+
 .home #three {
 	background: url("../images/luca2.png") no-repeat center center fixed;
 	background-size: cover;
@@ -1662,6 +1675,24 @@ q {
 		background-size: contain;
 		background-position: top center;
 		background-attachment:scroll;
+	}
+}
+
+@media (max-width: 430px) {
+	.home #three{
+		background-size: 140% 39%;
+	}
+}
+
+@media (max-width: 375px) {
+	.home #three{
+		background-size: contain;
+	}
+}
+
+@media (max-width: 360px) {
+	.home #three{
+		background-size: 140% 39%;
 	}
 }
 

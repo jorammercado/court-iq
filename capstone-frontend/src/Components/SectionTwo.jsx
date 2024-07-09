@@ -1683,7 +1683,8 @@ const SectionTwo = () => {
         <section id="two" className="main style2 left dark fullscreen" style={{ position: 'relative', height: '100vh' }}>
             <BackgroundGrid />
             {/* <MoveInWhenVisible> */}
-            <div style={{ marginRight: 0, padding: 0, width: "100%" }}>
+            <div style={{ marginRight: 0, padding: 0, width: "100%", 
+                ...(screenWidth <= 375 ? { marginTop: "-100px" } : {}),  }}>
                 <div className="content box style2" style={{
                     position: 'relative', backgroundColor: "black", zIndex: 4,
                     marginLeft: screenWidth < 900 ? "-20px" : "inherit"
@@ -1694,7 +1695,8 @@ const SectionTwo = () => {
                         zIndex: 5,
                         position: "relative",
                         marginBottom: "90px",
-                        marginTop: "-20px"
+                        marginTop: "-20px",
+                        ...(screenWidth <= 375 ? { fontSize: "18px" } : {}), 
                     }}>Ask single stat questions from player's latest game (more to come).</h4>
                     <div style={giphyContainerStyle}>
                         {screenWidth > 900 ? <iframe src="https://giphy.com/embed/ftFYPUVo7oPlmrXqM4" style={{ border: 'none', marginLeft: "-40px", marginBottom: "50px", width: "480px", height: "270px" }} allowFullScreen></iframe>
@@ -1711,7 +1713,8 @@ const SectionTwo = () => {
                         position: "relative",
                         marginBottom: "-20px",
                         marginTop: "-30px",
-                        textAlign: "left"
+                        textAlign: "left",
+                        ...(screenWidth <= 375 ? { fontSize: "12px" } : {})
                     }}>
                         Quick answers with our custom search engine, find data not Googleable for quick answers.<br />
                         <span style={{ color: "#EA6607" }}>Points, assists, rebounds, blocks, 3-point percentage, and more.</span> Give our engine a try with any stat.

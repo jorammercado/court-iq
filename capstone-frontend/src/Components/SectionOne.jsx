@@ -6,17 +6,23 @@ import "../Pages/css/main.css"
 
 const SectionOne = () => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
     const ref = useRef(null);
     const [divWidth, setDivWidth] = useState(0);
+    const [divHeight, setDivHeight] = useState(0);
+    // console.log(divWidth,divHeight, screenHeight)
+
     useEffect(() => {
         if (ref.current) {
             setDivWidth(ref.current.getBoundingClientRect().width);
+            setDivHeight(ref.current.getBoundingClientRect().height);
         }
 
         const handleResize = () => {
             if (ref.current) {
                 setDivWidth(ref.current.getBoundingClientRect().width);
+                setDivHeight(ref.current.getBoundingClientRect().height);
             }
         };
 
@@ -30,6 +36,7 @@ const SectionOne = () => {
     useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
+            setScreenHeight(window.innerHeight);
         };
 
         window.addEventListener('resize', handleResize);
@@ -61,7 +68,7 @@ const SectionOne = () => {
                     marginRight: screenWidth > 830 ? "0px" : "-25px",
                     padding: 0, width: "100%",
                     position: screenWidth <= 830 ? "absolute" : "initial",
-                    top: screenWidth <= 830 ? 70 : "initial",
+                    top: screenWidth <= 830 ? "10vh" : "initial",
                 }}
             >
                 {children}
@@ -74,7 +81,9 @@ const SectionOne = () => {
 
             <MoveInWhenVisible>
 
-                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2", borderRadius: "8px" }}>
+                <div className="content box style2" ref={ref} style={{ backgroundColor: "#faf7f2", borderRadius: "8px",
+                    ...(screenWidth <= 830 ? { width: "100%" } : {}),
+                 }}>
                     <header>
                         <h2>What We Do</h2>
                     </header>

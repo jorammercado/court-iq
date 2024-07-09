@@ -1,4 +1,3 @@
-
 .image {
     box-shadow:
         rgba(0, 0, 0, 0.5) 0px 80px 80px,
@@ -24,6 +23,11 @@
                 rgba(0, 0, 0, 0.45) 0px -10px 25px -5px,
                 rgba(0, 0, 0, 0.5) 0px 100px 100px -30px,
                 rgba(0, 0, 0, 0.6) 0px 120px 120px -40px !important;
+
+            @media (max-width: 430px) {
+                box-shadow: none !important;
+                padding: 0px !important;
+            }
         }
 
         .gallery .from-right {
@@ -38,6 +42,11 @@
                 rgba(0, 0, 0, 0.45) 0px -10px 25px -5px,
                 rgba(0, 0, 0, 0.5) 0px 100px 100px -30px,
                 rgba(0, 0, 0, 0.6) 0px 120px 120px -40px !important;
+
+            @media (max-width: 430px) {
+                box-shadow: none !important;
+                padding: 0px !important;
+            }
         }
     }
 }

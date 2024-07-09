@@ -16,15 +16,13 @@ const Intro = () => {
     }, []);
     // console.log(screenWidth)
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
     // console.log("is mobile = ", isMobile)
 
     const backgroundImageStyle = {
-        backgroundImage: `url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg")`,
-        backgroundSize: !isMobile && screenWidth > 830 ? 'cover' : 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: !isMobile && screenWidth > 830 ? 'no-repeat' : 'repeat',
-        backgroundAttachment: 'fixed',
+        backgroundSize: !isMobile && screenWidth > 830 ? 'cover' : 'cover',
+        backgroundRepeat: !isMobile && screenWidth > 830 ? 'no-repeat' : 'no-repeat',
+        backgroundAttachment: !isMobile ? 'fixed' : 'scroll',
     };
 
     return (

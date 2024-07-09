@@ -6,18 +6,26 @@ import "../Pages/css/main.css"
 
 const SectionThree = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
   const ref = useRef(null);
   const [divWidth, setDivWidth] = useState(0);
+  const [divHeight, setDivHeight] = useState(0);
+  // console.log(screenWidth, screenHeight);
+
   // console.log(screenWidth)
+  // console.log(divWidth)
+
   useEffect(() => {
     if (ref.current) {
       setDivWidth(ref.current.getBoundingClientRect().width);
+      setDivHeight(ref.current.getBoundingClientRect().height);
     }
 
     const handleResize = () => {
       if (ref.current) {
         setDivWidth(ref.current.getBoundingClientRect().width);
+        setDivHeight(ref.current.getBoundingClientRect().height);
       }
     };
 
@@ -31,6 +39,7 @@ const SectionThree = () => {
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
+      setScreenHeight(window.innerHeight);
     };
 
     window.addEventListener('resize', handleResize);
@@ -61,7 +70,12 @@ const SectionThree = () => {
         style={{
           marginRight: 0, padding: 0, width: "100%",
           position: screenWidth <= 830 ? "absolute" : "initial",
-          bottom: screenWidth <= 830 ? 155 : "initial",
+          bottom: screenWidth <= 830 ? 0 : "initial",
+          ...(
+            screenWidth <= 360 ? { height: "55vh" } :
+              screenWidth <= 375 ? { height: "62vh" } :
+                screenWidth <= 830 ? { height: "46vh" } :
+                    {})
         }}
       >
         {children}
@@ -70,10 +84,15 @@ const SectionThree = () => {
   }
 
   return (
-    <section id="three" className="main style2 left dark fullscreen" >
+    <section id="three" ref={ref} className="main style2 left dark fullscreen" >
 
       <MoveInWhenVisible>
-        <div className="content box style2" style={{ backgroundColor: "#faf7f2", borderTopRightRadius: "8px", borderBottomRightRadius: "8px" }}>
+        <div className="content box style2" style={{
+          backgroundColor: "#faf7f2", borderTopRightRadius: "8px", borderBottomRightRadius: "8px",
+          ...(screenWidth <= 830 ? { width: "100%" } : {}),
+          // width: screenWidth <= 830 ? "100%" : "45em",
+          // maxWidth: screenWidth <= 830 ? "100%" : "calc(100% - 4em)",
+        }}>
           <header>
             <h2>What We Do</h2>
           </header>
