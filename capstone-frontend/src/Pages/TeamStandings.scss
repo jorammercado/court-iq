@@ -13,7 +13,7 @@
   margin: 0 auto;
   margin-top: 0px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1305px) {
     max-width: 1100px !important;
   }
 
@@ -42,15 +42,27 @@
   }
 
   @media (max-width: 715px) {
-    max-width: 500px !important;
+    max-width: 575px !important;
   }
 
   @media (max-width: 605px) {
-    max-width: 400px !important;
+    max-width: 540px !important;
   }
 
-  @media (max-width: 470px) {
-    max-width: 300px !important;
+  @media (max-width: 565px) {
+    max-width: 505px !important;
+  }
+
+  @media (max-width: 530px) {
+    max-width: 470px !important;
+  }
+
+  @media (max-width: 485px) {
+    max-width: 440px !important;
+  }
+
+  @media (max-width: 460px) {
+    max-width: 400px !important;
   }
 
   @media (max-width: 370px) {
@@ -110,7 +122,7 @@
 .east-leaders {
   display: "flex";
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1305px) {
     display: none;
   }
 }
@@ -118,12 +130,13 @@
 .west-leaders {
   display: "flex";
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1305px) {
     display: none;
   }
 }
 
 .standings {
+
   // .subb__heading {
   //   max-width: 1278px;
   // }
@@ -134,44 +147,56 @@
   .oddsT {
     width: 1278px;
 
-    @media (max-width: 1265px) {
-      max-width: 1050px
+    @media (max-width: 1305px) {
+      max-width: 1050px;
     }
 
     @media (max-width: 1215px) {
-      max-width: 975px
+      max-width: 975px;
     }
 
     @media (max-width: 1080px) {
-      max-width: 900px
+      max-width: 900px;
     }
 
     @media (max-width: 1015px) {
-      max-width: 800px
+      max-width: 800px;
     }
 
     @media (max-width: 915px) {
-      max-width: 700px
+      max-width: 700px;
     }
 
     @media (max-width: 815px) {
-      max-width: 600px
+      max-width: 600px;
     }
 
     @media (max-width: 715px) {
-      max-width: 500px
+      max-width: 575px;
     }
 
     @media (max-width: 605px) {
-      max-width: 400px
+      max-width: 540px;
     }
 
-    @media (max-width: 470px) {
-      max-width: 300px
+    @media (max-width: 565px) {
+      max-width: 505px;
+    }
+
+    @media (max-width: 530px) {
+      max-width: 470px;
+    }
+
+    @media (max-width: 485px) {
+      max-width: 440px;
+    }
+
+    @media (max-width: 460px) {
+      max-width: 400px;
     }
 
     @media (max-width: 370px) {
-      max-width: 200px
+      max-width: 200px;
     }
   }
 }
@@ -179,43 +204,55 @@
 .headingStandings {
   width: 1265px;
 
-  @media (max-width: 1265px) {
-    max-width: 1050px
+  @media (max-width: 1305px) {
+    max-width: 1050px;
   }
 
   @media (max-width: 1215px) {
-    max-width: 975px
+    max-width: 975px;
   }
 
   @media (max-width: 1080px) {
-    max-width: 900px
+    max-width: 900px;
   }
 
   @media (max-width: 1015px) {
-    max-width: 800px
+    max-width: 800px;
   }
 
   @media (max-width: 915px) {
-    max-width: 700px
+    max-width: 700px;
   }
 
   @media (max-width: 815px) {
-    max-width: 600px
+    max-width: 600px;
   }
 
   @media (max-width: 715px) {
-    max-width: 500px
+    max-width: 575px;
   }
 
   @media (max-width: 605px) {
-    max-width: 400px
+    max-width: 540px;
   }
 
-  @media (max-width: 470px) {
-    max-width: 300px
+  @media (max-width: 565px) {
+    max-width: 505px;
+  }
+
+  @media (max-width: 530px) {
+    max-width: 470px;
+  }
+
+  @media (max-width: 485px) {
+    max-width: 440px;
+  }
+
+  @media (max-width: 460px) {
+    max-width: 400px;
   }
 
   @media (max-width: 370px) {
-    max-width: 200px
+    max-width: 200px;
   }
 }

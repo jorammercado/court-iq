@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from 'react';
 import { Card as BaseCard, StyledBody } from "baseui/card";
 import "./H2HCard.scss"
 const draftFamily = 'draftkings'
@@ -12,6 +13,16 @@ const bovadaColors = ["#cc0000"]
 
 const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, sport }) => {
   // console.log("DATA ", data)
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const primaryColors = ["#C8102E", "#007A33", "#000000", "#1D1160", "#CE1141", "#860038", "#00538C", "#0E2240", "#C8102E", "#1D428A", "#CE1141", "#002D62", "#C8102E", "#552583", "#5D76A9", "#98002E", "#00471B", "#0C2340", "#0C2340", "#006BB6", "#007AC1", "#0077C0", "#006BB6", "#1D1160", "#E03A3E", "#5A2D81", "#C4CED4", "#CE1141", "#002B5C", "#002B5C"];
   const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'LA Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards'];
@@ -68,13 +79,13 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
   };
 
   const textStyle = {
-    fontSize: "16px",
+    fontSize: screenWidth > 1015 ? "16px" : screenWidth > 815 ? "13px" : "10px",
     fontWeight: "700",
     color: sport === "NBA" ? "white" : "white",
     margin: "5px 0",
     textAlign: "center",
     textShadow: "0 0 18px Black",
-    lineHeight: "20px"
+    lineHeight: screenWidth > 1015 ? "20px" : screenWidth > 815 ? "15px" : "11px"
   };
 
   const imageStyle = {
@@ -97,7 +108,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
               display: 'flex',
               flexDirection: 'row',
               width: "398px",
-              height: "180px",
+              height: screenWidth > 1015 ? "180px" : screenWidth > 605 ? "160px" : screenWidth > 530 ? "170px" : screenWidth > 485 ? "180px" : screenWidth > 460 ? "185px" : "215px",
               borderRadius: "5px",
               justifyContent: 'center',
               alignItems: 'center',
@@ -110,9 +121,14 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
         }}
       >
         <StyledBody style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <img src={homeLogo} alt={homeTeam} style={imageStyle} />
+          <img src={homeLogo} alt={homeTeam} style={{
+            ...(screenWidth <= 530 ? { marginLeft: "-14px" } : screenWidth <= 565 ? { marginLeft: "-10px" } : {}),
+            ...imageStyle,
+            ...(screenWidth <= 565 ? { height: "40px" } : screenWidth <= 815 ? { height: "45px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
+            ...(screenWidth <= 565 ? { width: "40px" } : screenWidth <= 815 ? { width: "45px" } : screenWidth <= 1015 ? { width: "55px" } : {})
+          }} />
           <div style={{ flex: '1' }}>
-            <div style={{ ...textStyle, fontSize: "18px" }}>{"@" + homeTeam}</div>
+            <div style={{ ...textStyle, fontSize: screenWidth > 1015 ? "18px" : screenWidth > 815 ? "15px" : screenWidth > 605 ? "14px" : "13px" }}>{"@" + homeTeam}</div>
             <div style={textStyle}>{"Game Time: " +
               data ? new Date(data).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] + `, ${gameDateTime}` : ""
             }</div>
@@ -121,10 +137,11 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
                 {outcome.team}: {outcome.price}
               </div>
             ))}
-            <span style={{ color: sport === "NBA" ? "white" : "white" }}>Bookmaker:</span> &nbsp; <span style={{ color: sport === "NBA" ? "white" : "white",
+            <span style={{ color: sport === "NBA" ? "white" : "white", ...(screenWidth <= 815 ? { fontSize: "12px" } : screenWidth <= 1015 ? { fontSize: "14px" } : {}) }}>Bookmaker:</span> &nbsp; <span style={{
+              color: sport === "NBA" ? "white" : "white",
               // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
               fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
-              fontSize: bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
+              fontSize: screenWidth <= 460 ? "8px" : screenWidth <= 485 ? "9px" : bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
               // backgroundColor: bookmaker === "FanDuel" ? "#202020" : bookmaker === "Bovada" ? "#202020" : bookmaker === "BetMGM" ? "#202020" : "inherit",
               borderRadius: bookmaker === "FanDuel" ? "1px" : bookmaker === "Bovada" ? "1px" : bookmaker === "BetMGM" ? "1px" : "inherit",
               textDecoration: bookmaker === "DraftKings" ? "underline" : bookmaker === "FanDuel" ? "underline" : bookmaker === "Bovada" ? "underline" : bookmaker === "BetMGM" ? "underline" : "inherit",
@@ -134,7 +151,12 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
               {bookmaker === "DraftKings" ? "Draft Kings" : bookmaker === "FanDuel" ? "FanDuel" : bookmaker === "Bovada" ? "Bovada" : bookmaker === "BetMGM" ? "BetMGM" : "unknown"}
             </span>
           </div>
-          <img src={awayLogo} alt={awayTeam} style={imageStyle} />
+          <img src={awayLogo} alt={awayTeam} style={{
+            ...(screenWidth <= 530 ? { marginRight: "-14px" } : screenWidth <= 565 ? { marginRight: "-10px" } : {}),
+            ...imageStyle,
+            ...(screenWidth <= 565 ? { height: "40px" } : screenWidth <= 815 ? { height: "45px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
+            ...(screenWidth <= 565 ? { width: "40px" } : screenWidth <= 815 ? { width: "45px" } : screenWidth <= 1015 ? { width: "55px" } : {})
+          }} />
         </StyledBody>
       </BaseCard>
     </div>

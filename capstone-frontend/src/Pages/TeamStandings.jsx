@@ -17,6 +17,8 @@ import GameOdds from '../Components/GameOdds';
 import "animate.css";
 import {
   HeadingMedium,
+  HeadingSmall,
+  HeadingXSmall
 } from "baseui/typography";
 import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
@@ -289,7 +291,7 @@ const TeamStandingsV2 = () => {
     const [css, theme] = useStyletron();
     return (
       <div className={css({ display: 'flex', alignItems: 'center' })}>
-        <Avatar name={title} size="48px" src={src} />
+        <Avatar name={title} size={screenWidth > 715 ? "48px" : "40px"} src={src} />
         <div
           className={css({
             paddingLeft: theme.sizing.scale550,
@@ -300,6 +302,11 @@ const TeamStandingsV2 = () => {
             className={css({
               ...theme.typography.LabelSmall,
               margin: 0,
+              ...(
+                screenWidth <= 715 ? {
+                  fontSize: "12px"
+                } : {}
+              )
             })}
           >
             {title}
@@ -309,6 +316,11 @@ const TeamStandingsV2 = () => {
               ...theme.typography.ParagraphSmall,
               marginBottom: 0,
               marginTop: '4px',
+              ...(
+                screenWidth <= 715 ? {
+                  fontSize: "12px"
+                } : {}
+              )
             })}
           >
             {subtitle}
@@ -340,6 +352,14 @@ const TeamStandingsV2 = () => {
           className={css({
             ...theme.typography.MonoParagraphSmall,
             color: textColor,
+            ...(
+              screenWidth <= 715 ? {
+                fontSize: "11px"
+              } :
+                screenWidth <= 1015 ? {
+                  fontSize: "12px"
+                } : {}
+            )
           })}
         >
           {value}
@@ -398,22 +418,27 @@ const TeamStandingsV2 = () => {
         padding="0px"
         height="60px"
         marginBottom={data == null || data === undefined || data.length === 0 || !data ? "35px" : "0px"} >
-        <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={padding + "px"}>
+        <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={screenWidth > 700 ? padding + "px" : screenWidth > 600 ? "40px" : screenWidth > 530 ? "30px" : "20px"}>
           <Link href={league === "NBA" ? "https://www.nba.com/" : "https://www.wnba.com/"} target="_blank" rel="noopener noreferrer">
             {league === "NBA" ? <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} /> :
-              <img src={`https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg`} alt="NBA Logo" style={{ height: "20px", backgroundColor: "black", cursor: "pointer", marginBottom: "7px" }} />}
+              <img src={`https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg`} alt="NBA Logo" style={{ height: screenWidth > 530 ? "20px" : "25px", backgroundColor: "black", cursor: "pointer", marginBottom: "7px" }} />}
           </Link>
-          <HeadingLevel>
-            {league === "NBA" ? <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading> :
-              <Heading styleLevel={!isMobile ? 5 : 6} color="black" >WNBA 2024 Season</Heading>}
-          </HeadingLevel>
+
+          {screenWidth > 530 ?
+            <HeadingLevel>
+              {league === "NBA" ? <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading> :
+                <Heading styleLevel={screenWidth > 815 ? 5 : 6} color="black" > WNBA 2024 Season </Heading>}
+            </HeadingLevel>
+            : <HeadingXSmall marginLeft="5px" color="black" >WNBA 2024</HeadingXSmall>}
+
+
         </Block>
 
         <Block className="Selector"
           display="flex"
           justifyContent="center"
           marginBottom="15px"
-          $style={{ marginLeft: `-${130}px`, marginRight: screenWidth < 1400 ? `${50}px` : `${-5}px` }}
+          $style={{ marginLeft: `-${130}px`, marginRight: screenWidth <= 530 ? `${15}px` : screenWidth < 1400 ? `${50}px` : `${-5}px` }}
         >
           <Block marginRight="10px" paddingTop="10px">
             <Select
@@ -435,13 +460,13 @@ const TeamStandingsV2 = () => {
                 },
                 ValueContainer: { style: { minHeight: '30px', height: '30px', padding: '0px' } },
                 Placeholder: { style: { lineHeight: '30px' } },
-                SingleValue: { style: { lineHeight: '30px' } },
+                SingleValue: { style: { lineHeight: '30px', fontSize: screenWidth > 530 ? "inherit" : "14px" } },
                 OptionContent: { style: { cursor: 'default' }, },
                 DropdownContainer: { style: { cursor: 'default' } },
                 DropdownListItem: { style: { cursor: 'default' } },
                 InputContainer: { style: { cursor: 'default' } },
                 Input: { style: { cursor: 'default' } },
-                Root: { style: { width: '122px' } }
+                Root: { style: { width: screenWidth > 530 ? '122px' : '110px' } }
               }}
 
             />
@@ -624,21 +649,31 @@ const TeamStandingsV2 = () => {
             className="table__contain"
             height="100%"
             maxWidth={isMobile ? "85%" : "850px"}
-            style={{ width: isMobile ? '100%' : 'unset', marginBottom: window.innerWidth >= 1300 ? "inherit" : "200px" }}
+            style={{ width: isMobile ? '100%' : 'unset', marginBottom: window.innerWidth > 1305 ? "inherit" : "200px" }}
 
           >
-            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop={window.innerWidth >= 1300 ? "-190px" : "5px"}
+            <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop={window.innerWidth > 1305 ? "-190px" : "5px"}
               $style={{
                 borderTopLeftRadius: "8px",
                 borderTopRightRadius: "8px",
                 minWidth: !isMobile ? "300px" : "85%"
               }} >
-              <HeadingMedium marginLeft="5px" color="white" >Overall Standings</HeadingMedium>
+              {screenWidth > 815 ? <HeadingMedium marginLeft="5px" color="white" >Overall Standings</HeadingMedium> :
+                <HeadingSmall marginLeft="5px" color="white" >Overall Standings</HeadingSmall>}
             </Block>
 
             {WNBAStandings == null || WNBAStandings === undefined || WNBAStandings.length === 0 || !WNBAStandings ? <Spin></Spin> :
               <TableBuilder className="table2"
-                overrides={{ Root: { style: { maxHeight: '425px', marginBottom: "-16px" } } }}
+                overrides={{
+                  Root: { style: { maxHeight: '425px', marginBottom: "-16px" } },
+                  TableHeadCell: {
+                    style: ({ $theme }) => ({
+                      ...(
+                        screenWidth <= 715 ? { fontSize: "12px" } : {}
+                      )
+                    })
+                  }
+                }}
                 data={WNBADATA}
               >
                 <TableBuilderColumn header="Team">
@@ -728,7 +763,7 @@ const TeamStandingsV2 = () => {
       </Block>
       <Block className="leadersHeading" style={{ justifyContent: "center", alignItems: "center", display: "flex", marginTop: "25px" }}>
         <HeadingLevel >
-          <Heading className="headingStandings" styleLevel={4} color="white"
+          <Heading className="headingStandings" styleLevel={screenWidth > 1015 ? 4 : screenWidth > 815 ? 5 : 6} color="white"
             style={{
               display: "flex",
               paddingTop: "5px",

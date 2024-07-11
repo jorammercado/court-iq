@@ -728,6 +728,19 @@ q {
 	}
 }
 
+@media (max-width: 500px) {
+
+	.home input[type="button"].down,
+	.home input[type="submit"].down,
+	.home input[type="reset"].down,
+	.home .button.down,
+	.home button.down {
+		width: 3.15em ;
+		height: 3.15em !important;
+		background-size: 28px;
+	}
+}
+
 .home input[type="button"].down.anchored,
 .home input[type="submit"].down.anchored,
 .home input[type="reset"].down.anchored,
@@ -1516,7 +1529,11 @@ q {
 	}
 
 	.home .main .content h2{
-		font-size: 2.3em;
+		font-size: 2.0em;
+	}
+
+	.home .main .content h4{
+		font-size: 1.1em;
 	}
 
 	.home .main .content h5{

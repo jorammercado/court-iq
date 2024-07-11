@@ -68,7 +68,7 @@ const SectionOne = () => {
                     marginRight: screenWidth > 830 ? "0px" : "-25px",
                     padding: 0, width: "100%",
                     position: screenWidth <= 830 ? "absolute" : "initial",
-                    top: screenWidth <= 830 ? "10vh" : "initial",
+                    top: screenWidth <= 830 ? "5vh" : "initial",
                 }}
             >
                 {children}
