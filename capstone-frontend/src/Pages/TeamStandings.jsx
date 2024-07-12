@@ -421,7 +421,7 @@ const TeamStandingsV2 = () => {
         <Block className="subHeading_contain" display="flex" justifyContent="left" alignItems="center" width="1270px" paddingLeft={screenWidth > 700 ? padding + "px" : screenWidth > 600 ? "40px" : screenWidth > 530 ? "30px" : "20px"}>
           <Link href={league === "NBA" ? "https://www.nba.com/" : "https://www.wnba.com/"} target="_blank" rel="noopener noreferrer">
             {league === "NBA" ? <img src={logo} alt="NBA Logo" style={{ height: "20px", backgroundColor: "#faf7f2", cursor: "pointer", marginBottom: "7px" }} /> :
-              <img src={`https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg`} alt="NBA Logo" style={{ height: screenWidth > 530 ? "20px" : "25px", backgroundColor: "black", cursor: "pointer", marginBottom: "7px" }} />}
+              <img src={`https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg`} alt="WNBA Logo" style={{ height: screenWidth > 530 ? "20px" : "25px", backgroundColor: "black", cursor: "pointer", marginBottom: "7px" }} />}
           </Link>
 
           {screenWidth > 530 ?
@@ -790,8 +790,8 @@ const TeamStandingsV2 = () => {
           marginTop: league === "NBA" ? "inherit" : "-155px",
           borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
         }}>
-          <GameOdds teamData={league === "NBA" ? teamData : WNBATeamData}
-            sportInput={league === "NBA" ? 'basketball_nba' : 'basketball_wnba'} />
+          {(teamData?.eastern?.length > 0 && league === "NBA") || (WNBATeamData.length > 0 && league === "WNBA") ? <GameOdds teamData={league === "NBA" ? teamData : WNBATeamData}
+            sportInput={league === "NBA" ? 'basketball_nba' : 'basketball_wnba'} /> : <></>}
         </Block>
       </Block>
     </Block>

@@ -122,6 +122,7 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
       >
         <StyledBody style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <img src={homeLogo} alt={homeTeam} style={{
+            ...(homeTeam === "no games at this time" ? { marginRight: "8px" } : {}),
             ...(screenWidth <= 530 ? { marginLeft: "-14px" } : screenWidth <= 565 ? { marginLeft: "-10px" } : {}),
             ...imageStyle,
             ...(screenWidth <= 565 ? { height: "40px" } : screenWidth <= 815 ? { height: "45px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
@@ -129,29 +130,36 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
           }} />
           <div style={{ flex: '1' }}>
             <div style={{ ...textStyle, fontSize: screenWidth > 1015 ? "18px" : screenWidth > 815 ? "15px" : screenWidth > 605 ? "14px" : "13px" }}>{"@" + homeTeam}</div>
-            <div style={textStyle}>{"Game Time: " +
-              data ? new Date(data).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] + `, ${gameDateTime}` : ""
-            }</div>
-            {odds.map((outcome, index) => (
-              <div key={index} style={textStyle}>
-                {outcome.team}: {outcome.price}
-              </div>
-            ))}
-            <span style={{ color: sport === "NBA" ? "white" : "white", ...(screenWidth <= 815 ? { fontSize: "12px" } : screenWidth <= 1015 ? { fontSize: "14px" } : {}) }}>Bookmaker:</span> &nbsp; <span style={{
-              color: sport === "NBA" ? "white" : "white",
-              // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
-              fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
-              fontSize: screenWidth <= 460 ? "8px" : screenWidth <= 485 ? "9px" : bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
-              // backgroundColor: bookmaker === "FanDuel" ? "#202020" : bookmaker === "Bovada" ? "#202020" : bookmaker === "BetMGM" ? "#202020" : "inherit",
-              borderRadius: bookmaker === "FanDuel" ? "1px" : bookmaker === "Bovada" ? "1px" : bookmaker === "BetMGM" ? "1px" : "inherit",
-              textDecoration: bookmaker === "DraftKings" ? "underline" : bookmaker === "FanDuel" ? "underline" : bookmaker === "Bovada" ? "underline" : bookmaker === "BetMGM" ? "underline" : "inherit",
-              textDecorationColor: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
-              textDecorationThickness: bookmaker === "DraftKings" || bookmaker === "FanDuel" || bookmaker === "Bovada" || bookmaker === "BetMGM" ? "3px" : "inherit"
-            }} >
-              {bookmaker === "DraftKings" ? "Draft Kings" : bookmaker === "FanDuel" ? "FanDuel" : bookmaker === "Bovada" ? "Bovada" : bookmaker === "BetMGM" ? "BetMGM" : "unknown"}
-            </span>
+            {
+              homeTeam !== "no games at this time" &&
+              (<>
+                <div style={textStyle}>{"Game Time: " +
+                  data ? new Date(data).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(",")[0] + `, ${gameDateTime}` : ""
+                }</div>
+                {odds.map((outcome, index) => (
+                  <div key={index} style={textStyle}>
+                    {outcome.team}: {outcome.price}
+                  </div>
+                ))}
+
+                <span style={{ color: sport === "NBA" ? "white" : "white", ...(screenWidth <= 815 ? { fontSize: "12px" } : screenWidth <= 1015 ? { fontSize: "14px" } : {}) }}>Bookmaker:</span> &nbsp; <span style={{
+                  color: sport === "NBA" ? "white" : "white",
+                  // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+                  fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
+                  fontSize: screenWidth <= 460 ? "8px" : screenWidth <= 485 ? "9px" : bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
+                  // backgroundColor: bookmaker === "FanDuel" ? "#202020" : bookmaker === "Bovada" ? "#202020" : bookmaker === "BetMGM" ? "#202020" : "inherit",
+                  borderRadius: bookmaker === "FanDuel" ? "1px" : bookmaker === "Bovada" ? "1px" : bookmaker === "BetMGM" ? "1px" : "inherit",
+                  textDecoration: bookmaker === "DraftKings" ? "underline" : bookmaker === "FanDuel" ? "underline" : bookmaker === "Bovada" ? "underline" : bookmaker === "BetMGM" ? "underline" : "inherit",
+                  textDecorationColor: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+                  textDecorationThickness: bookmaker === "DraftKings" || bookmaker === "FanDuel" || bookmaker === "Bovada" || bookmaker === "BetMGM" ? "3px" : "inherit"
+                }} >
+                  {bookmaker === "DraftKings" ? "Draft Kings" : bookmaker === "FanDuel" ? "FanDuel" : bookmaker === "Bovada" ? "Bovada" : bookmaker === "BetMGM" ? "BetMGM" : "unknown"}
+                </span>
+              </>)
+            }
           </div>
           <img src={awayLogo} alt={awayTeam} style={{
+            ...(homeTeam === "no games at this time" ? { marginLeft: "8px" } : {}),
             ...(screenWidth <= 530 ? { marginRight: "-14px" } : screenWidth <= 565 ? { marginRight: "-10px" } : {}),
             ...imageStyle,
             ...(screenWidth <= 565 ? { height: "40px" } : screenWidth <= 815 ? { height: "45px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
