@@ -1,15 +1,21 @@
 .ContentGameOdds {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: auto;
-    column-gap: 12px;
-    align-items: flex-start;
-    padding: 0px;
-    margin: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: auto;
+  column-gap: 12px;
+  align-items: flex-start;
+  padding: 0px;
+  margin: 0px;
 
-    @media (max-width: 1305px) {
-        align-items: center;
-        justify-content: space-evenly;
-      }
+  @media (max-width: 1305px) {
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 825px) {
+    column-gap: 0px;
+    justify-content: center;
+  }
+
 }

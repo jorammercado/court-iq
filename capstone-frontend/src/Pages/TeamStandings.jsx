@@ -428,8 +428,10 @@ const TeamStandingsV2 = () => {
             <HeadingLevel>
               {league === "NBA" ? <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading> :
                 <Heading styleLevel={screenWidth > 815 ? 5 : 6} color="black" > WNBA 2024 Season </Heading>}
-            </HeadingLevel>
-            : <HeadingXSmall marginLeft="5px" color="black" >WNBA 2024</HeadingXSmall>}
+            </HeadingLevel> :
+            screenWidth <= 345 ? <></> :
+              <HeadingXSmall marginLeft="5px" color="black" >WNBA 2024</HeadingXSmall>
+          }
 
 
         </Block>
@@ -511,7 +513,7 @@ const TeamStandingsV2 = () => {
             justifyContent="space-between"
             className="table__contain"
             height="100%"
-            maxWidth={isMobile ? "85%" : "850px"}
+            // maxWidth={isMobile ? "85%" : "850px"}
             style={{ width: isMobile ? '100%' : 'unset' }}
           >
             {data == null || data === undefined || data.length === 0 || !data ? <Spin ></Spin> :
@@ -659,13 +661,16 @@ const TeamStandingsV2 = () => {
                 minWidth: !isMobile ? "300px" : "85%"
               }} >
               {screenWidth > 815 ? <HeadingMedium marginLeft="5px" color="white" >Overall Standings</HeadingMedium> :
-                <HeadingSmall marginLeft="5px" color="white" >Overall Standings</HeadingSmall>}
+                screenWidth <= 460 ? <HeadingXSmall marginLeft="5px" color="white" >Overall Standings</HeadingXSmall> :
+                  <HeadingSmall marginLeft="5px" color="white" >Overall Standings</HeadingSmall>
+
+              }
             </Block>
 
             {WNBAStandings == null || WNBAStandings === undefined || WNBAStandings.length === 0 || !WNBAStandings ? <Spin></Spin> :
               <TableBuilder className="table2"
                 overrides={{
-                  Root: { style: { maxHeight: '425px', marginBottom: "-16px" } },
+                  Root: { style: { maxHeight: '425px', marginBottom: "-16px", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" } },
                   TableHeadCell: {
                     style: ({ $theme }) => ({
                       ...(

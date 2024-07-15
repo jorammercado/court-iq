@@ -79,13 +79,13 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
   };
 
   const textStyle = {
-    fontSize: screenWidth > 1015 ? "16px" : screenWidth > 815 ? "13px" : "10px",
+    fontSize: screenWidth <= 1080 && screenWidth > 1015 ? "14px" : screenWidth > 915 ? "14px" : screenWidth > 715 ? "13px" : "11px",
     fontWeight: "700",
     color: sport === "NBA" ? "white" : "white",
     margin: "5px 0",
     textAlign: "center",
     textShadow: "0 0 18px Black",
-    lineHeight: screenWidth > 1015 ? "20px" : screenWidth > 815 ? "15px" : "11px"
+    lineHeight: screenWidth > 1015 ? "20px" : screenWidth > 915 ? "13px" : screenWidth >= 815 ? "11px" : "11px"
   };
 
   const imageStyle = {
@@ -100,15 +100,21 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
 
   const gameDateTime = data ? formatDate(data) : 'Time Not Available';
   return (
-    <div className="h2hcard" style={{ display: 'flex', flexDirection: 'row', margin: "10px", border: 'solid #EA6607 3px', textAlign: 'center', borderRadius: "8px" }}>
+    <div className="h2hcard" style={{ display: 'flex', flexDirection: 'row', margin: screenWidth > 425 ? "10px" : "5px", border: 'solid #EA6607 3px', textAlign: 'center', borderRadius: "8px" }}>
       <BaseCard
         overrides={{
           Root: {
             style: {
               display: 'flex',
               flexDirection: 'row',
-              width: "398px",
-              height: screenWidth > 1015 ? "180px" : screenWidth > 605 ? "160px" : screenWidth > 530 ? "170px" : screenWidth > 485 ? "180px" : screenWidth > 460 ? "185px" : "215px",
+              width: screenWidth > 1305 ? "389px" :
+                screenWidth >= 1290 ? "520px" :
+                  screenWidth >= 1240 ? "510px" :
+                    screenWidth >= 1230 ? "500px" :
+                      screenWidth >= 1080 ? "490px" :
+                        screenWidth >= 915 ? "440px" :
+                          "398px",
+              height: screenWidth > 1015 ? "180px" : screenWidth > 825 ? "170px" : screenWidth > 755 ? "180px" : screenWidth > 715 && screenWidth <= 755 ? "255px" : screenWidth > 605 ? "210px" : screenWidth > 565 ? "280px" : screenWidth > 485 ? "210px" : screenWidth > 460 ? "185px" : screenWidth <= 315 ? "220px" : "215px",
               borderRadius: "5px",
               justifyContent: 'center',
               alignItems: 'center',
@@ -123,13 +129,13 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
         <StyledBody style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <img src={homeLogo} alt={homeTeam} style={{
             ...(homeTeam === "no games at this time" ? { marginRight: "8px" } : {}),
-            ...(screenWidth <= 530 ? { marginLeft: "-14px" } : screenWidth <= 565 ? { marginLeft: "-10px" } : {}),
+            ...(screenWidth <= 1305 && screenWidth > 715 ? { marginRight: "25px" } : screenWidth <= 530 ? { marginLeft: "-14px" } : screenWidth <= 565 ? { marginLeft: "-10px" } : {}),
             ...imageStyle,
-            ...(screenWidth <= 565 ? { height: "40px" } : screenWidth <= 815 ? { height: "45px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
-            ...(screenWidth <= 565 ? { width: "40px" } : screenWidth <= 815 ? { width: "45px" } : screenWidth <= 1015 ? { width: "55px" } : {})
+            ...(screenWidth <= 315 ? { height: "20px" } : screenWidth <= 344 ? { height: "25px" } : screenWidth <= 375 ? { height: "30px" } : screenWidth <= 400 ? { height: "35px" } : screenWidth <= 565 ? { height: "40px" } : screenWidth <= 755 ? { height: "70px" } : screenWidth <= 815 ? { height: "60px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
+            ...(screenWidth <= 315 ? { width: "20px" } : screenWidth <= 344 ? { width: "25px" } : screenWidth <= 375 ? { width: "30px" } : screenWidth <= 400 ? { width: "35px" } : screenWidth <= 565 ? { width: "40px" } : screenWidth <= 755 ? { width: "70px" } : screenWidth <= 815 ? { width: "60px" } : screenWidth <= 1015 ? { width: "55px" } : {})
           }} />
           <div style={{ flex: '1' }}>
-            <div style={{ ...textStyle, fontSize: screenWidth > 1015 ? "18px" : screenWidth > 815 ? "15px" : screenWidth > 605 ? "14px" : "13px" }}>{"@" + homeTeam}</div>
+            <div style={{ ...textStyle, fontSize: screenWidth <= 1080 && screenWidth >= 915 ? "17px" : screenWidth > 1015 ? "18px" : screenWidth > 815 ? "15px" : screenWidth > 605 ? "14px" : "13px" }}>{"@" + homeTeam}</div>
             {
               homeTeam !== "no games at this time" &&
               (<>
@@ -142,12 +148,11 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
                   </div>
                 ))}
 
-                <span style={{ color: sport === "NBA" ? "white" : "white", ...(screenWidth <= 815 ? { fontSize: "12px" } : screenWidth <= 1015 ? { fontSize: "14px" } : {}) }}>Bookmaker:</span> &nbsp; <span style={{
+                <span style={{ lineHeight: "0px", color: sport === "NBA" ? "white" : "white", ...(screenWidth <= 825 ? { fontSize: "12px" } : screenWidth <= 1015 ? { fontSize: "14px" } : {}) }}>Bookmaker:</span> &nbsp; <span style={{
                   color: sport === "NBA" ? "white" : "white",
-                  // color: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
+                  lineHeight: "0px",
                   fontFamily: bookmaker === "DraftKings" ? draftFamily : bookmaker === "FanDuel" ? fanDuelFamily : bookmaker === "Bovada" ? bovadaFamily : bookmaker === "BetMGM" ? betmgmFamily : "inherit",
-                  fontSize: screenWidth <= 460 ? "8px" : screenWidth <= 485 ? "9px" : bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
-                  // backgroundColor: bookmaker === "FanDuel" ? "#202020" : bookmaker === "Bovada" ? "#202020" : bookmaker === "BetMGM" ? "#202020" : "inherit",
+                  fontSize: screenWidth <= 460 ? "9px" : screenWidth <= 485 ? "9px" : screenWidth <= 825 ? "13px" : bookmaker === "DraftKings" ? "11px" : bookmaker === "FanDuel" ? "17px" : bookmaker === "Bovada" ? "17px" : bookmaker === "BetMGM" ? "17px" : "inherit",
                   borderRadius: bookmaker === "FanDuel" ? "1px" : bookmaker === "Bovada" ? "1px" : bookmaker === "BetMGM" ? "1px" : "inherit",
                   textDecoration: bookmaker === "DraftKings" ? "underline" : bookmaker === "FanDuel" ? "underline" : bookmaker === "Bovada" ? "underline" : bookmaker === "BetMGM" ? "underline" : "inherit",
                   textDecorationColor: bookmaker === "DraftKings" ? drafKingsColors[0] : bookmaker === "FanDuel" ? fanDuelColors[0] : bookmaker === "Bovada" ? bovadaColors[0] : bookmaker === "BetMGM" ? betmgmColors[0] : "inherit",
@@ -160,10 +165,10 @@ const Card = ({ homeTeam, awayTeam, odds, data, homeLogo, awayLogo, bookmaker, s
           </div>
           <img src={awayLogo} alt={awayTeam} style={{
             ...(homeTeam === "no games at this time" ? { marginLeft: "8px" } : {}),
-            ...(screenWidth <= 530 ? { marginRight: "-14px" } : screenWidth <= 565 ? { marginRight: "-10px" } : {}),
+            ...(screenWidth <= 1305 && screenWidth > 715 ? { marginLeft: "25px" } : screenWidth <= 530 ? { marginRight: "-14px" } : screenWidth <= 565 ? { marginRight: "-10px" } : {}),
             ...imageStyle,
-            ...(screenWidth <= 565 ? { height: "40px" } : screenWidth <= 815 ? { height: "45px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
-            ...(screenWidth <= 565 ? { width: "40px" } : screenWidth <= 815 ? { width: "45px" } : screenWidth <= 1015 ? { width: "55px" } : {})
+            ...(screenWidth <= 315 ? { height: "20px" } : screenWidth <= 344 ? { height: "25px" } : screenWidth <= 375 ? { height: "30px" } : screenWidth <= 400 ? { height: "35px" } : screenWidth <= 565 ? { height: "40px" } : screenWidth <= 755 ? { height: "70px" } : screenWidth <= 815 ? { height: "60px" } : screenWidth <= 1015 ? { height: "55px" } : {}),
+            ...(screenWidth <= 315 ? { width: "20px" } : screenWidth <= 344 ? { width: "25px" } : screenWidth <= 375 ? { width: "30px" } : screenWidth <= 400 ? { width: "35px" } : screenWidth <= 565 ? { width: "40px" } : screenWidth <= 755 ? { width: "70px" } : screenWidth <= 815 ? { width: "60px" } : screenWidth <= 1015 ? { width: "55px" } : {})
           }} />
         </StyledBody>
       </BaseCard>
