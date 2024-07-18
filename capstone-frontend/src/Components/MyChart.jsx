@@ -1,14 +1,31 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
 const MyGraph = ({ playerStats, points, assists,
     rebounds, threePoints, plusMinus, minutes, blocks }) => {
+
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const graphRef = useRef(null);
 
     useEffect(() => {
         d3.select("#my_dataviz svg").remove();
         var margin = { top: 60, right: 115, bottom: 50, left: 50 },
-            width = 770 - margin.left - margin.right,
+            width = ((screenWidth > 1360 ? 770
+                : screenWidth <= 1360 && screenWidth > 1280 ? 1250
+                    : screenWidth <= 1280 && screenWidth > 1215 ? 1150
+                        : screenWidth <= 1215 && screenWidth > 1165 ? 1100
+                            : screenWidth <= 1165 && screenWidth > 1100 ? 1065
+                                : screenWidth <= 1100 && screenWidth > 1024 ? 1000
+                                    : 930) - margin.left - margin.right),
             height = 275 - margin.top - margin.bottom;
 
         var svg = d3.select("#my_dataviz")
@@ -194,8 +211,8 @@ const MyGraph = ({ playerStats, points, assists,
             .attr("y", function (d, i) { return i * 20; })
             .attr("width", 10)
             .attr("height", 10)
-            .attr("rx", 3)  
-            .attr("ry", 3)  
+            .attr("rx", 3)
+            .attr("ry", 3)
             .style("fill", color)
             .style("stroke", color)
             .style("stroke-width", 2)
@@ -286,7 +303,7 @@ const MyGraph = ({ playerStats, points, assists,
         // Set the graphRef to true so it won't render again
         graphRef.current = true;
         // }
-    }, [playerStats, points, assists, rebounds, threePoints, plusMinus, minutes, blocks]);
+    }, [playerStats, points, assists, rebounds, threePoints, plusMinus, minutes, blocks, screenWidth]);
 
     return (
         <div style={{ backgroundColor: "black", paddingBottom: "15px", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} id="my_dataviz"></div>

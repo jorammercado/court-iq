@@ -415,7 +415,14 @@ function PlayerExample({ data, playerid }) {
             return copyStats.slice(0);
     };
 
-    const overrides = {};
+    const overrides = {
+        Root: {
+            style: ({ $theme }) => ({
+                borderBottomLeftRadius: "8px",
+                borderBottomRightRadius: "8px"
+            })
+        },
+    };
 
     const handleSeasonChange = (params) => {
         const { value } = params;
@@ -439,6 +446,16 @@ function PlayerExample({ data, playerid }) {
         }
     };
 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     return (
         <div>
@@ -451,13 +468,13 @@ function PlayerExample({ data, playerid }) {
                         </Block>
                         <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
                             <HeadingLevel>
-                                <Heading styleLevel={2} color={secondaryColor}>{data.firstname} {data.lastname} </Heading>
-                                <Heading styleLevel={5} color={secondaryColor}>
+                                <Heading styleLevel={screenWidth > 1024 ? 2 : 3} color={secondaryColor}>{data.firstname} {data.lastname} </Heading>
+                                <Heading styleLevel={screenWidth > 1140 ? 5 : 6} color={secondaryColor}>
                                     {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
                                     {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
                                     {referenceData.team ? referenceData.team.name : ""} &nbsp;
-                                    {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
-                                    {referenceData ? referenceData.pos : ""}
+                                    {personalData && personalData.leagues && personalData.leagues.standard && (screenWidth > 955 || screenWidth < 900) ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                    {referenceData && (screenWidth > 955 || screenWidth < 900) ? referenceData.pos : ""}
                                 </Heading>
                             </HeadingLevel>
 
@@ -494,8 +511,14 @@ function PlayerExample({ data, playerid }) {
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                             overflow: 'visible',
-                                            width: '170px',
+                                            width: screenWidth > 1075 ? '170px' :
+                                                screenWidth > 1050 ? '145px' :
+                                                    screenWidth > 1040 ? '135px' :
+                                                        screenWidth > 1030 ? '125px' :
+                                                            '120px',
                                             height: '170px',
+                                            marginLeft: '25px',
+                                            marginRight: screenWidth > 900 ? '-20px' : "30px"
                                         }),
                                     },
                                 }}
@@ -614,8 +637,8 @@ function PlayerExample({ data, playerid }) {
                         </Block>
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
                             marginBottom="80px" maxHeight="465px">
-                            <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="770px" marginBottom="-8px" >
-                                <HeadingSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{ color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '770px', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
+                            <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="100%" marginBottom="-8px" >
+                                <HeadingSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{ color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '100%', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
                                     {gamesInView === '5' ? `Last 5 Games Played` : gamesInView === '10' ? `Last 10 Games Played` : gamesInView === '20' ? `Last 20 Games Played` : gamesInView === '50' ? `Last 50 Games Played` : `Season Played Games`}
                                 </HeadingSmall>
                             </Block>
