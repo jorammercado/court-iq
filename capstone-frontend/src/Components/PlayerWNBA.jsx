@@ -163,7 +163,7 @@ function PlayerWNBA({ data, playerid }) {
     return (
         <div>
             <Block className="topplayer" display="flex" flexDirection="column" alignItems="center">
-                <Block className="sub__heading" display="flex" justifyContent="center" alignItems="center" width="100%" flexDirection="row" backgroundColor={primaryColor} padding="20px" marginBottom="-10px" >
+                <Block className="sub__headingWNBA" display="flex" justifyContent="center" alignItems="center" width="100%" flexDirection="row" backgroundColor={primaryColor} padding="20px" marginBottom="-10px" >
                     <Block className="wraper" display="flex" justifyContent="center" alignItems="center" flexDirection="row"  >
                         <Block className="head__shot" $style={{ marginBottom: "-6px" }}>
                             <img src={playerImage || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "240px" }} />

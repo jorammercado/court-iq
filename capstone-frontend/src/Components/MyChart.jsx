@@ -25,7 +25,14 @@ const MyGraph = ({ playerStats, points, assists,
                         : screenWidth <= 1215 && screenWidth > 1165 ? 1100
                             : screenWidth <= 1165 && screenWidth > 1100 ? 1065
                                 : screenWidth <= 1100 && screenWidth > 1024 ? 1000
-                                    : 930) - margin.left - margin.right),
+                                    : screenWidth <= 1024 && screenWidth > 950 ? 930
+                                        : screenWidth <= 950 && screenWidth > 890 ? 870
+                                            : screenWidth <= 890 && screenWidth > 840 ? 820
+                                                : screenWidth <= 840 && screenWidth > 790 ? 770
+                                                    : screenWidth <= 790 && screenWidth > 740 ? 720
+                                                        : screenWidth <= 740 && screenWidth > 700 ? 680
+                                                            : screenWidth <= 700 && screenWidth > 650 ? 630
+                                                                : 590) - margin.left - margin.right),
             height = 275 - margin.top - margin.bottom;
 
         var svg = d3.select("#my_dataviz")

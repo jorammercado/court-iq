@@ -12,6 +12,7 @@ import { Select } from 'baseui/select';
 import {
     LabelLarge,
     LabelMedium,
+    LabelSmall,
     HeadingMedium,
     HeadingSmall
 } from "baseui/typography";
@@ -25,19 +26,7 @@ const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PlayerExample({ data, playerid }) {
-
     let navigate = useNavigate()
-    const [isScreenLargeEnough, setIsScreenLargeEnough] = useState(window.innerWidth > 768);
-
-    useEffect(() => {
-        function handleResize() {
-            setIsScreenLargeEnough(window.innerWidth > 768);
-        }
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     const [playerImage, setPlayerImage] = useState({
         player_id: 0,
         player: "",
@@ -63,6 +52,7 @@ function PlayerExample({ data, playerid }) {
         'New Orleans Pelicans', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings',
         'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [referenceData, setReferenceData] = useState({})
     const [playerStats, setPlayerStats] = useState([]);
     const [points, setPoints] = useState([]);
@@ -99,7 +89,7 @@ function PlayerExample({ data, playerid }) {
     const [last50Ids, setLast50Ids] = useState([])
     const [lastAllIds, setLastAllIds] = useState([])
     const [tpm, setTPM] = useState([]);
-    const [gamesInView, setGamesInView] = useState('5')
+    const [gamesInView, setGamesInView] = useState(screenWidth > 901 ? '5' : 'season')
 
     const [isHighlighted, setIsHighlighted] = useState(false);
     const [isHighlightedGames, setIsHighlightedGames] = useState(false);
@@ -446,10 +436,12 @@ function PlayerExample({ data, playerid }) {
         }
     };
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
     useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
+            if (window.innerWidth <= 900)
+                handleGamesChange({ value: [{ id: 'season', label: 'season' }] })
         };
         window.addEventListener('resize', handleResize);
 
@@ -468,27 +460,85 @@ function PlayerExample({ data, playerid }) {
                         </Block>
                         <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
                             <HeadingLevel>
-                                <Heading styleLevel={screenWidth > 1024 ? 2 : 3} color={secondaryColor}>{data.firstname} {data.lastname} </Heading>
-                                <Heading styleLevel={screenWidth > 1140 ? 5 : 6} color={secondaryColor}>
-                                    {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
-                                    {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
-                                    {referenceData.team ? referenceData.team.name : ""} &nbsp;
-                                    {personalData && personalData.leagues && personalData.leagues.standard && (screenWidth > 955 || screenWidth < 900) ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
-                                    {referenceData && (screenWidth > 955 || screenWidth < 900) ? referenceData.pos : ""}
+                                <Heading styleLevel={screenWidth > 1120 ? 2 : 3} color={secondaryColor}> <span style={{
+                                    ...(
+                                        screenWidth < 1110 && screenWidth > 945 ? { fontSize: "31px" } :
+                                            screenWidth <= 945 && screenWidth > 935 ? { fontSize: "30px" } :
+                                                screenWidth <= 935 && screenWidth > 925 ? { fontSize: "29px" } :
+                                                    screenWidth <= 925 && screenWidth > 915 ? { fontSize: "28px" } :
+                                                        screenWidth <= 915 && screenWidth > 795 ? { fontSize: "27px" } :
+                                                            screenWidth <= 795 && screenWidth > 785 ? { fontSize: "26px" } :
+                                                                screenWidth <= 785 && screenWidth > 775 ? { fontSize: "25px" } :
+                                                                    screenWidth <= 775 && screenWidth > 720 ? { fontSize: "24px" } :
+                                                                        screenWidth <= 720 && screenWidth > 710 ? { fontSize: "23px" } :
+                                                                            screenWidth <= 710 && screenWidth > 670 ? { fontSize: "22px" } :
+                                                                                screenWidth <= 670 && screenWidth > 635 ? { fontSize: "21px" } :
+                                                                                    screenWidth <= 635 && screenWidth > 625 ? { fontSize: "20px" } :
+                                                                                        screenWidth <= 625 && screenWidth > 610 ? { fontSize: "19px" } :
+                                                                                            screenWidth <= 610 && screenWidth > 0 ? { fontSize: "18px" } :
+                                                                                                {}
+                                    )
+                                }}>{data.firstname} {data.lastname} </span></Heading>
+                                <Heading styleLevel={screenWidth > 1155 ? 5 : 6} color={secondaryColor}>
+                                    <span style={{
+                                        ...(
+                                            screenWidth <= 1085 && screenWidth > 955 ? { fontSize: "19px" } :
+                                                screenWidth <= 955 && screenWidth > 935 ? { fontSize: "18px" } :
+                                                    screenWidth <= 935 && screenWidth > 920 ? { fontSize: "17px" } :
+                                                        screenWidth <= 920 && screenWidth > 790 ? { fontSize: "16px" } :
+                                                            screenWidth <= 790 && screenWidth > 710 ? { fontSize: "15px" } :
+                                                                screenWidth <= 710 && screenWidth > 640 ? { fontSize: "14px" } :
+                                                                    screenWidth <= 640 && screenWidth > 0 ? { fontSize: "13px" } :
+                                                                        {}
+                                        )
+                                    }}>
+                                        {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
+                                        {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
+                                        {referenceData.team && screenWidth > 630 ? referenceData.team.name : ""} &nbsp;
+                                        {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                        {referenceData ? referenceData.pos : ""}
+                                    </span>
                                 </Heading>
                             </HeadingLevel>
 
                             <Block display="flex" justifyContent="space-around" width="60%">
-                                <LabelMedium color={secondaryColor}>PPG</LabelMedium>
-                                <LabelMedium color={secondaryColor}>RPG</LabelMedium>
-                                <LabelMedium color={secondaryColor}>APG</LabelMedium>
-                                <LabelMedium color={secondaryColor}>TS%</LabelMedium>
+                                {screenWidth > 825 ?
+                                    <>
+                                        <LabelMedium color={secondaryColor}>PPG</LabelMedium>
+                                        <LabelMedium color={secondaryColor}>RPG</LabelMedium>
+                                        <LabelMedium color={secondaryColor}>APG</LabelMedium>
+                                        <LabelMedium color={secondaryColor}>TS%</LabelMedium>
+                                    </>
+                                    :
+                                    <>
+                                        <LabelSmall color={secondaryColor}>PPG</LabelSmall>
+                                        <LabelSmall color={secondaryColor}>RPG</LabelSmall>
+                                        <LabelSmall color={secondaryColor}>APG</LabelSmall>
+                                        <LabelSmall color={secondaryColor}>TS%</LabelSmall>
+                                    </>
+                                }
                             </Block>
                             <Block display="flex" justifyContent="space-around" width="60%">
-                                <LabelLarge color={secondaryColor}>{calculateAveragePointsPerGame()}</LabelLarge>
-                                <LabelLarge color={secondaryColor}>{calculateAverageReboundsPerGame()}</LabelLarge>
-                                <LabelLarge color={secondaryColor}>{calculateAverageAssistsPerGame()}</LabelLarge>
-                                <LabelLarge color={secondaryColor}>{calculateTS()}</LabelLarge>
+                                {screenWidth > 825 ?
+                                    <>
+                                        <LabelLarge color={secondaryColor}>{calculateAveragePointsPerGame()}</LabelLarge> &nbsp; &nbsp;
+                                        <LabelLarge color={secondaryColor}>{calculateAverageReboundsPerGame()}</LabelLarge> &nbsp; &nbsp;
+                                        <LabelLarge color={secondaryColor}>{calculateAverageAssistsPerGame()}</LabelLarge> &nbsp; &nbsp;
+                                        <LabelLarge color={secondaryColor}>{calculateTS()}</LabelLarge>
+                                    </> : screenWidth > 780 ?
+                                        <>
+                                            <LabelMedium color={secondaryColor}>{calculateAveragePointsPerGame()}</LabelMedium>&nbsp; &nbsp;
+                                            <LabelMedium color={secondaryColor}>{calculateAverageReboundsPerGame()}</LabelMedium>&nbsp; &nbsp;
+                                            <LabelMedium color={secondaryColor}>{calculateAverageAssistsPerGame()}</LabelMedium>&nbsp; &nbsp;
+                                            <LabelMedium color={secondaryColor}>{calculateTS()}</LabelMedium>
+                                        </> :
+                                        <>
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateAveragePointsPerGame()}</span></LabelSmall> &nbsp; &nbsp;
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateAverageReboundsPerGame()}</span></LabelSmall>&nbsp; &nbsp;
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateAverageAssistsPerGame()}</span></LabelSmall>&nbsp; &nbsp;
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateTS()}</span></LabelSmall>
+                                        </>
+                                }
                             </Block>
                         </Block>
                         <Block className="team__logo" >
@@ -515,10 +565,15 @@ function PlayerExample({ data, playerid }) {
                                                 screenWidth > 1050 ? '145px' :
                                                     screenWidth > 1040 ? '135px' :
                                                         screenWidth > 1030 ? '125px' :
-                                                            '120px',
+                                                            screenWidth > 665 ? '120px' :
+                                                                '110px',
                                             height: '170px',
                                             marginLeft: '25px',
-                                            marginRight: screenWidth > 900 ? '-20px' : "30px"
+                                            marginRight: screenWidth > 901 ? '-20px' : "30px",
+                                            marginTop: screenWidth <= 901 && screenWidth > 780 ? '25px' :
+                                                screenWidth <= 780 && screenWidth > 700 ? '45px' :
+                                                    screenWidth <= 700 ? '65px' :
+                                                        "0px"
                                         }),
                                     },
                                 }}
@@ -577,10 +632,15 @@ function PlayerExample({ data, playerid }) {
                     </Block>
                     <Block className="middle" marginLeft="-10px" marginRight="-10px">
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center" marginTop="5px">
-                            <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
-                                $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
-                                Current Season Stats
-                            </HeadingMedium>
+                            {screenWidth > 800 ?
+                                <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
+                                    $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
+                                    Current Season Stats
+                                </HeadingMedium> :
+                                <HeadingSmall className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
+                                    $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
+                                    Current Season Stats
+                                </HeadingSmall>}
                             {points.length > 0 ? (
                                 <Block className="graph"
                                     display="flex"
@@ -588,18 +648,16 @@ function PlayerExample({ data, playerid }) {
                                     alignItems="center"
                                     marginTop="-60px"
                                     marginBottom="-40px">
-                                    {isScreenLargeEnough ?
-                                        <MyGraph
-                                            playerStats={playerStats}
-                                            points={points}
-                                            assists={assists}
-                                            rebounds={rebounds}
-                                            threePoints={threePoints}
-                                            plusMinus={plusMinus}
-                                            minutes={minutes}
-                                            blocks={blocks}
-                                        /> : <div></div>
-                                    }
+                                    <MyGraph
+                                        playerStats={playerStats}
+                                        points={points}
+                                        assists={assists}
+                                        rebounds={rebounds}
+                                        threePoints={threePoints}
+                                        plusMinus={plusMinus}
+                                        minutes={minutes}
+                                        blocks={blocks}
+                                    />
                                 </Block>
                             ) : (
                                 <Spin />
