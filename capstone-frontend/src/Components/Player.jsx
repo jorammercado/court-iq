@@ -13,8 +13,10 @@ import {
     LabelLarge,
     LabelMedium,
     LabelSmall,
+    LabelXSmall,
     HeadingMedium,
-    HeadingSmall
+    HeadingSmall,
+    HeadingXSmall
 } from "baseui/typography";
 import { HistogramWithAxis } from "./HistogramWithAxis";
 import { Spinner, SIZE } from "baseui/spinner";
@@ -412,6 +414,28 @@ function PlayerExample({ data, playerid }) {
                 borderBottomRightRadius: "8px"
             })
         },
+        TableBodyCell: {
+            style: ({ $theme }) => (
+                screenWidth <= 570 && screenWidth > 460 ? {
+                    fontSize: "11px"
+                } :
+                    screenWidth <= 460 ? {
+                        fontSize: "10px"
+                    } :
+                        {}
+            ),
+        },
+        TableHeadCell: {
+            style: ({ $theme }) => (
+                screenWidth <= 570 && screenWidth > 460 ? {
+                    fontSize: "14px"
+                } :
+                    screenWidth <= 460 ? {
+                        fontSize: "13px"
+                    } :
+                        {}
+            ),
+        }
     };
 
     const handleSeasonChange = (params) => {
@@ -458,49 +482,63 @@ function PlayerExample({ data, playerid }) {
                         <Block className="head__shot" $style={{ marginBottom: "-6px" }}>
                             <img src={playerImage.image_url || 'https://cdn.nba.com/headshots/nba/latest/1040x760/fallback.png'} alt="Head Shot" style={{ height: "240px" }} />
                         </Block>
-                        <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3 }}>
-                            <HeadingLevel>
-                                <Heading styleLevel={screenWidth > 1120 ? 2 : 3} color={secondaryColor}> <span style={{
-                                    ...(
-                                        screenWidth < 1110 && screenWidth > 945 ? { fontSize: "31px" } :
-                                            screenWidth <= 945 && screenWidth > 935 ? { fontSize: "30px" } :
-                                                screenWidth <= 935 && screenWidth > 925 ? { fontSize: "29px" } :
-                                                    screenWidth <= 925 && screenWidth > 915 ? { fontSize: "28px" } :
-                                                        screenWidth <= 915 && screenWidth > 795 ? { fontSize: "27px" } :
-                                                            screenWidth <= 795 && screenWidth > 785 ? { fontSize: "26px" } :
-                                                                screenWidth <= 785 && screenWidth > 775 ? { fontSize: "25px" } :
-                                                                    screenWidth <= 775 && screenWidth > 720 ? { fontSize: "24px" } :
-                                                                        screenWidth <= 720 && screenWidth > 710 ? { fontSize: "23px" } :
-                                                                            screenWidth <= 710 && screenWidth > 670 ? { fontSize: "22px" } :
-                                                                                screenWidth <= 670 && screenWidth > 635 ? { fontSize: "21px" } :
-                                                                                    screenWidth <= 635 && screenWidth > 625 ? { fontSize: "20px" } :
-                                                                                        screenWidth <= 625 && screenWidth > 610 ? { fontSize: "19px" } :
-                                                                                            screenWidth <= 610 && screenWidth > 0 ? { fontSize: "18px" } :
-                                                                                                {}
-                                    )
-                                }}>{data.firstname} {data.lastname} </span></Heading>
-                                <Heading styleLevel={screenWidth > 1155 ? 5 : 6} color={secondaryColor}>
-                                    <span style={{
-                                        ...(
-                                            screenWidth <= 1085 && screenWidth > 955 ? { fontSize: "19px" } :
-                                                screenWidth <= 955 && screenWidth > 935 ? { fontSize: "18px" } :
-                                                    screenWidth <= 935 && screenWidth > 920 ? { fontSize: "17px" } :
-                                                        screenWidth <= 920 && screenWidth > 790 ? { fontSize: "16px" } :
-                                                            screenWidth <= 790 && screenWidth > 710 ? { fontSize: "15px" } :
-                                                                screenWidth <= 710 && screenWidth > 640 ? { fontSize: "14px" } :
-                                                                    screenWidth <= 640 && screenWidth > 0 ? { fontSize: "13px" } :
-                                                                        {}
-                                        )
-                                    }}>
-                                        {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
-                                        {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
-                                        {referenceData.team && screenWidth > 630 ? referenceData.team.name : ""} &nbsp;
-                                        {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
-                                        {referenceData ? referenceData.pos : ""}
-                                    </span>
-                                </Heading>
-                            </HeadingLevel>
-
+                        <Block className="info" display="flex" flexDirection="column" alignItems="center" $style={{ flexGrow: 3, ...(screenWidth <= 445 && screenWidth > 420 ? { lineHeight: "1", paddingBottom: "15px" } : screenWidth <= 420 ? { lineHeight: "0.5", paddingBottom: "30px" } : {}) }}>
+                            {
+                                screenWidth > 420 ?
+                                    <HeadingLevel>
+                                        <Heading styleLevel={screenWidth > 1120 ? 2 : 3} color={secondaryColor}> <span style={{
+                                            ...(
+                                                screenWidth < 1110 && screenWidth > 945 ? { fontSize: "31px" } :
+                                                    screenWidth <= 945 && screenWidth > 935 ? { fontSize: "30px" } :
+                                                        screenWidth <= 935 && screenWidth > 925 ? { fontSize: "29px" } :
+                                                            screenWidth <= 925 && screenWidth > 915 ? { fontSize: "28px" } :
+                                                                screenWidth <= 915 && screenWidth > 795 ? { fontSize: "27px" } :
+                                                                    screenWidth <= 795 && screenWidth > 785 ? { fontSize: "26px" } :
+                                                                        screenWidth <= 785 && screenWidth > 775 ? { fontSize: "25px" } :
+                                                                            screenWidth <= 775 && screenWidth > 720 ? { fontSize: "24px" } :
+                                                                                screenWidth <= 720 && screenWidth > 710 ? { fontSize: "23px" } :
+                                                                                    screenWidth <= 710 && screenWidth > 670 ? { fontSize: "22px" } :
+                                                                                        screenWidth <= 670 && screenWidth > 635 ? { fontSize: "21px" } :
+                                                                                            screenWidth <= 635 && screenWidth > 625 ? { fontSize: "20px" } :
+                                                                                                screenWidth <= 625 && screenWidth > 614 ? { fontSize: "19px" } :
+                                                                                                    screenWidth <= 614 && screenWidth > 545 ? { fontSize: "18px" } :
+                                                                                                        screenWidth <= 545 && screenWidth > 535 ? { fontSize: "17px" } :
+                                                                                                            screenWidth <= 535 && screenWidth > 525 ? { fontSize: "16px" } :
+                                                                                                                screenWidth <= 525 && screenWidth > 505 ? { fontSize: "15px" } :
+                                                                                                                    screenWidth <= 505 && screenWidth > 445 ? { fontSize: "14px" } :
+                                                                                                                        screenWidth <= 445 && screenWidth > 0 ? { fontSize: "13px" } :
+                                                                                                                            {}
+                                            ),
+                                            ...(screenWidth <= 480 ? { lineHeight: "1" } : {})
+                                        }}>{data.firstname} {data.lastname} </span></Heading>
+                                        <Heading styleLevel={screenWidth > 1155 ? 5 : 6} color={secondaryColor}>
+                                            <span style={{
+                                                ...(
+                                                    screenWidth <= 1085 && screenWidth > 955 ? { fontSize: "19px" } :
+                                                        screenWidth <= 955 && screenWidth > 935 ? { fontSize: "18px" } :
+                                                            screenWidth <= 935 && screenWidth > 920 ? { fontSize: "17px" } :
+                                                                screenWidth <= 920 && screenWidth > 790 ? { fontSize: "16px" } :
+                                                                    screenWidth <= 790 && screenWidth > 710 ? { fontSize: "15px" } :
+                                                                        screenWidth <= 710 && screenWidth > 640 ? { fontSize: "14px" } :
+                                                                            screenWidth <= 640 && screenWidth > 480 ? { fontSize: "13px" } :
+                                                                                screenWidth <= 480 && screenWidth > 445 ? { fontSize: "12px" } :
+                                                                                    screenWidth <= 445 && screenWidth > 0 ? { fontSize: "11px" } :
+                                                                                        {}
+                                                ),
+                                                ...(screenWidth <= 480 ? { lineHeight: "1" } : {})
+                                            }}>
+                                                {personalData && personalData.height ? personalData.height.feets + "'" + personalData.height.inches + "," : ""} &nbsp;
+                                                {personalData && personalData.weight ? personalData.weight.pounds + "lbs" : ""} &nbsp;
+                                                {referenceData.team && screenWidth > 736 ? referenceData.team.name : ""} &nbsp;
+                                                {personalData && personalData.leagues && personalData.leagues.standard ? "#" + personalData.leagues.standard.jersey : ""} &nbsp;
+                                                {referenceData ? referenceData.pos : ""}
+                                            </span>
+                                        </Heading>
+                                    </HeadingLevel> :
+                                    <Block $style={{ marginBottom: "5px" }}>
+                                        <LabelXSmall color={secondaryColor} >  {data.firstname} {data.lastname} </LabelXSmall>
+                                    </Block>
+                            }
                             <Block display="flex" justifyContent="space-around" width="60%">
                                 {screenWidth > 825 ?
                                     <>
@@ -509,13 +547,19 @@ function PlayerExample({ data, playerid }) {
                                         <LabelMedium color={secondaryColor}>APG</LabelMedium>
                                         <LabelMedium color={secondaryColor}>TS%</LabelMedium>
                                     </>
-                                    :
-                                    <>
-                                        <LabelSmall color={secondaryColor}>PPG</LabelSmall>
-                                        <LabelSmall color={secondaryColor}>RPG</LabelSmall>
-                                        <LabelSmall color={secondaryColor}>APG</LabelSmall>
-                                        <LabelSmall color={secondaryColor}>TS%</LabelSmall>
-                                    </>
+                                    : screenWidth > 645 ?
+                                        <>
+                                            <LabelSmall color={secondaryColor}>PPG</LabelSmall>
+                                            <LabelSmall color={secondaryColor}>RPG</LabelSmall>
+                                            <LabelSmall color={secondaryColor}>APG</LabelSmall>
+                                            <LabelSmall color={secondaryColor}>TS%</LabelSmall>
+                                        </> :
+                                        <>
+                                            <LabelXSmall color={secondaryColor}> <span style={{ ...(screenWidth <= 490 ? { fontSize: "10px" } : {}) }}> PPG </span></LabelXSmall> &nbsp;
+                                            <LabelXSmall color={secondaryColor}><span style={{ ...(screenWidth <= 490 ? { fontSize: "10px" } : {}) }}> RPG </span></LabelXSmall> &nbsp;
+                                            <LabelXSmall color={secondaryColor}><span style={{ ...(screenWidth <= 490 ? { fontSize: "10px" } : {}) }}> APG </span></LabelXSmall> &nbsp;
+                                            <LabelXSmall color={secondaryColor}><span style={{ ...(screenWidth <= 490 ? { fontSize: "10px" } : {}) }}> TS% </span></LabelXSmall>
+                                        </>
                                 }
                             </Block>
                             <Block display="flex" justifyContent="space-around" width="60%">
@@ -533,10 +577,10 @@ function PlayerExample({ data, playerid }) {
                                             <LabelMedium color={secondaryColor}>{calculateTS()}</LabelMedium>
                                         </> :
                                         <>
-                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateAveragePointsPerGame()}</span></LabelSmall> &nbsp; &nbsp;
-                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateAverageReboundsPerGame()}</span></LabelSmall>&nbsp; &nbsp;
-                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateAverageAssistsPerGame()}</span></LabelSmall>&nbsp; &nbsp;
-                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth < 720 ? { fontSize: "13px" } : screenWidth < 645 ? { fontSize: "11px" } : {}) }} >{calculateTS()}</span></LabelSmall>
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth <= 720 && screenWidth > 645 ? { fontSize: "12px" } : screenWidth <= 645 && screenWidth > 600 ? { fontSize: "11px" } : screenWidth <= 600 && screenWidth > 490 ? { fontSize: "10px" } : screenWidth <= 490 ? { fontSize: "9px" } : {}) }} >{calculateAveragePointsPerGame()}</span></LabelSmall> &nbsp; &nbsp;
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth <= 720 && screenWidth > 645 ? { fontSize: "12px" } : screenWidth <= 645 && screenWidth > 600 ? { fontSize: "11px" } : screenWidth <= 600 && screenWidth > 490 ? { fontSize: "10px" } : screenWidth <= 490 ? { fontSize: "9px" } : {}) }} >{calculateAverageReboundsPerGame()}</span></LabelSmall>&nbsp; &nbsp;
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth <= 720 && screenWidth > 645 ? { fontSize: "12px" } : screenWidth <= 645 && screenWidth > 600 ? { fontSize: "11px" } : screenWidth <= 600 && screenWidth > 490 ? { fontSize: "10px" } : screenWidth <= 490 ? { fontSize: "9px" } : {}) }} >{calculateAverageAssistsPerGame()}</span></LabelSmall>&nbsp; &nbsp;
+                                            <LabelSmall color={secondaryColor}><span style={{ ...(screenWidth <= 720 && screenWidth > 645 ? { fontSize: "12px" } : screenWidth <= 645 && screenWidth > 600 ? { fontSize: "11px" } : screenWidth <= 600 && screenWidth > 490 ? { fontSize: "10px" } : screenWidth <= 490 ? { fontSize: "9px" } : {}) }} >{calculateTS()}</span></LabelSmall>
                                         </>
                                 }
                             </Block>
@@ -566,14 +610,25 @@ function PlayerExample({ data, playerid }) {
                                                     screenWidth > 1040 ? '135px' :
                                                         screenWidth > 1030 ? '125px' :
                                                             screenWidth > 665 ? '120px' :
-                                                                '110px',
+                                                                screenWidth > 615 ? '110px' :
+                                                                    screenWidth > 570 ? '90px' :
+                                                                        screenWidth > 525 ? '80px' :
+                                                                            screenWidth > 505 ? '70px' :
+                                                                                screenWidth > 445 ? '60px' :
+                                                                                    screenWidth > 440 ? '50px' :
+                                                                                        '45px',
                                             height: '170px',
-                                            marginLeft: '25px',
+                                            marginLeft: screenWidth > 440 ? '25px' : '0px',
                                             marginRight: screenWidth > 901 ? '-20px' : "30px",
                                             marginTop: screenWidth <= 901 && screenWidth > 780 ? '25px' :
                                                 screenWidth <= 780 && screenWidth > 700 ? '45px' :
-                                                    screenWidth <= 700 ? '65px' :
-                                                        "0px"
+                                                    screenWidth <= 700 && screenWidth > 615 ? '65px' :
+                                                        screenWidth <= 615 && screenWidth > 505 ? '90px' :
+                                                            screenWidth <= 505 && screenWidth > 445 ? '110px' :
+                                                                screenWidth <= 445 && screenWidth > 420 ? '130px' :
+                                                                    screenWidth <= 420 && screenWidth > 370 ? '145px' :
+                                                                    screenWidth <= 370 && screenWidth > 0 ? '175px' :
+                                                                        "0px"
                                         }),
                                     },
                                 }}
@@ -636,11 +691,16 @@ function PlayerExample({ data, playerid }) {
                                 <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
                                     $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
                                     Current Season Stats
-                                </HeadingMedium> :
-                                <HeadingSmall className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
-                                    $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
-                                    Current Season Stats
-                                </HeadingSmall>}
+                                </HeadingMedium> : screenWidth > 570 ?
+                                    <HeadingSmall className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
+                                        $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
+                                        Current Season Stats
+                                    </HeadingSmall> :
+                                    <HeadingXSmall className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
+                                        $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out", ...(screenWidth <= 460 && screenWidth > 380 ? { fontSize: "15px" } : screenWidth <= 380 ? { fontSize: "14px" } : {}) }}>
+                                        Current Season Stats
+                                    </HeadingXSmall>
+                            }
                             {points.length > 0 ? (
                                 <Block className="graph"
                                     display="flex"
@@ -696,18 +756,49 @@ function PlayerExample({ data, playerid }) {
                         <Block width="100%" display="flex" justifyContent="center" flexDirection="column" marginTop={last5Games && last5Games[0] && last5Games[0].date && last5Games[0].date.start ? "15px" : "30px"}
                             marginBottom="80px" maxHeight="465px">
                             <Block display="flex" flexDirection="column" justifyContent="center" alignItems="center" width="100%" marginBottom="-8px" >
-                                <HeadingSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{ color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '100%', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
-                                    {gamesInView === '5' ? `Last 5 Games Played` : gamesInView === '10' ? `Last 10 Games Played` : gamesInView === '20' ? `Last 20 Games Played` : gamesInView === '50' ? `Last 50 Games Played` : `Season Played Games`}
-                                </HeadingSmall>
+                                {screenWidth > 570 ?
+                                    <HeadingSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{ color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '100%', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
+                                        {gamesInView === '5' ? `Last 5 Games Played` : gamesInView === '10' ? `Last 10 Games Played` : gamesInView === '20' ? `Last 20 Games Played` : gamesInView === '50' ? `Last 50 Games Played` : `Season Played Games`}
+                                    </HeadingSmall> :
+                                    <HeadingXSmall backgroundColor={isHighlightedGames ? "#EA6607" : "black"} $style={{
+                                        color: "white", backgroundColor: isHighlightedGames ? "#EA6607" : "black", transition: "background-color 0.5s ease-in-out", width: '100%', justifyContent: "center", alignItems: "center", display: "flex", borderTopLeftRadius: "8px", borderTopRightRadius: "8px",
+                                        ...(screenWidth <= 460 && screenWidth > 380 ? { fontSize: "15px" } : screenWidth <= 380 ? { fontSize: "14px" } : {})
+                                    }}>
+                                        {gamesInView === '5' ? `Last 5 Games Played` : gamesInView === '10' ? `Last 10 Games Played` : gamesInView === '20' ? `Last 20 Games Played` : gamesInView === '50' ? `Last 50 Games Played` : `Season Played Games`}
+                                    </HeadingXSmall>
+                                }
                             </Block>
                             {playerStats ? (
                                 <Table
                                     overrides={{
-                                        TableBodyCell: {
-                                            style: ({ $theme }) => ({
-
-                                            }),
+                                        Root: {
+                                            style: {
+                                                borderBottomLeftRadius: "8px",
+                                                borderBottomRightRadius: "8px"
+                                            }
                                         },
+                                        TableBodyCell: {
+                                            style: ({ $theme }) => (
+                                                screenWidth <= 570 && screenWidth > 460 ? {
+                                                    fontSize: "11px"
+                                                } :
+                                                    screenWidth <= 460 ? {
+                                                        fontSize: "10px"
+                                                    } :
+                                                        {}
+                                            ),
+                                        },
+                                        TableHeadCell: {
+                                            style: ({ $theme }) => (
+                                                screenWidth <= 570 && screenWidth > 460 ? {
+                                                    fontSize: "14px"
+                                                } :
+                                                    screenWidth <= 460 ? {
+                                                        fontSize: "13px"
+                                                    } :
+                                                        {}
+                                            ),
+                                        }
                                     }}
                                     columns={["Game #", "Date", "Team", "Opp", "Score", "Min", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%",
                                         "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "STLS", "BLK", "TO", "PF", "PTS", "+/-"]}

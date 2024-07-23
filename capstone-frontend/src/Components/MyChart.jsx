@@ -32,7 +32,19 @@ const MyGraph = ({ playerStats, points, assists,
                                                     : screenWidth <= 790 && screenWidth > 740 ? 720
                                                         : screenWidth <= 740 && screenWidth > 700 ? 680
                                                             : screenWidth <= 700 && screenWidth > 650 ? 630
-                                                                : 590) - margin.left - margin.right),
+                                                                : screenWidth <= 650 && screenWidth > 615 ? 590
+                                                                    : screenWidth <= 615 && screenWidth > 570 ? 550
+                                                                        : screenWidth <= 570 && screenWidth > 540 ? 520
+                                                                            : screenWidth <= 540 && screenWidth > 520 ? 500
+                                                                                : screenWidth <= 520 && screenWidth > 500 ? 480
+                                                                                    : screenWidth <= 500 && screenWidth > 480 ? 460
+                                                                                        : screenWidth <= 480 && screenWidth > 460 ? 440
+                                                                                            : screenWidth <= 460 && screenWidth > 440 ? 420
+                                                                                                : screenWidth <= 440 && screenWidth > 420 ? 400
+                                                                                                    : screenWidth <= 420 && screenWidth > 400 ? 380
+                                                                                                        : screenWidth <= 400 && screenWidth > 380 ? 360
+                                                                                                            : screenWidth <= 380 && screenWidth > 370 ? 355
+                                                                                                                : 330) - margin.left - margin.right),
             height = 275 - margin.top - margin.bottom;
 
         var svg = d3.select("#my_dataviz")
@@ -252,7 +264,15 @@ const MyGraph = ({ playerStats, points, assists,
             .attr("dy", ".35em")
             .style("text-anchor", "start")
             .style("fill", "white")
-            .text(function (d) { return d; });
+            .text(function (d) { return d; })
+            .each(function () {
+                if (screenWidth <= 440) {
+                    d3.select(this).style("font-size", "9px");
+                }
+                else if (screenWidth <= 520) {
+                    d3.select(this).style("font-size", "13px");
+                }
+            });
 
         //////////
         // BRUSHING AND CHART //
