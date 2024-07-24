@@ -257,9 +257,17 @@ export default function NavBar({
                     <div
                         onClick={(e) => e.stopPropagation()}
                         style={{
-                            maxHeight: "89%",
+                            maxHeight: screenWidth > 550 ? "89%" : "75%",
                             overflowY: "auto",
-                            width: "55%",
+                            width: screenWidth > 980 ? "55%" :
+                                screenWidth > 900 ? "69%" :
+                                    screenWidth > 825 ? "75%" :
+                                        screenWidth > 800 ? "82%" :
+                                            screenWidth > 750 ? "84%" :
+                                                screenWidth > 650 ? "90%" :
+                                                    screenWidth > 600 ? "95%" :
+                                                        screenWidth > 550 ? "97%" :
+                                                            "99%",
                             backgroundColor: "#faf7f2",
                             padding: "25px",
                             borderRadius: "3px",

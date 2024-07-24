@@ -689,15 +689,15 @@ function PlayerExample({ data, playerid }) {
                         <Block className="divider" width="100%" display="flex" flexDirection="column" alignItems="center" marginTop="5px">
                             {screenWidth > 800 ?
                                 <HeadingMedium className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
-                                    $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
+                                    $style={{ color: "white", zIndex: "0", transition: "background-color 0.5s ease-in-out" }}>
                                     Current Season Stats
                                 </HeadingMedium> : screenWidth > 570 ?
                                     <HeadingSmall className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
-                                        $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out" }}>
+                                        $style={{ color: "white", zIndex: "0", transition: "background-color 0.5s ease-in-out" }}>
                                         Current Season Stats
                                     </HeadingSmall> :
                                     <HeadingXSmall className="mainSubHeading" backgroundColor={isHighlighted ? "#EA6607" : "none"}
-                                        $style={{ color: "white", zIndex: "1", transition: "background-color 0.5s ease-in-out", ...(screenWidth <= 460 && screenWidth > 380 ? { fontSize: "15px" } : screenWidth <= 380 ? { fontSize: "14px" } : {}) }}>
+                                        $style={{ color: "white", zIndex: "0", transition: "background-color 0.5s ease-in-out", ...(screenWidth <= 460 && screenWidth > 380 ? { fontSize: "15px" } : screenWidth <= 380 ? { fontSize: "14px" } : {}) }}>
                                         Current Season Stats
                                     </HeadingXSmall>
                             }

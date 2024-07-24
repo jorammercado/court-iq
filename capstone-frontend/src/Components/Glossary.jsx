@@ -5,6 +5,7 @@ import {
     CategoricalColumn,
     StringColumn,
 } from "baseui/data-table";
+import { useState, useEffect } from "react";
 
 const glossaryItems = [
     { acronym: 'MPG', description: 'Minutes Per Game' },
@@ -75,8 +76,27 @@ const rows = glossaryItems.map((item, index) => ({
 
 const Glossary = () => {
     const [css] = useStyletron();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     return (
-        <div className={css({ height: '600px' })}>
+        <div className={css({
+            height: '600px',
+            ...(screenWidth <= 550 ? { margin: "-20px", marginTop: "-30px" } :
+                screenWidth <= 600 ? { margin: "-20px", marginTop: "-15px" } :
+                    screenWidth <= 650 ? { margin: "-15px", marginTop: "-15px" } :
+                        screenWidth <= 700 ? { margin: "-10px", marginTop: "-15px" } :
+                            screenWidth <= 750 ? { margin: "-5px", marginTop: "-15px" } :
+                                screenWidth <= 800 ? { margin: "0px", marginTop: "-15px" } :
+                                    screenWidth > 800 ? { margin: "0px", marginTop: "-15px" } :
+                                        {})
+        })}>
             <StatefulDataTable columns={columns} rows={rows}
                 resizableColumnWidths
                 searchable
