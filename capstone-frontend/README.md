@@ -1,36 +1,45 @@
-
 # Court-IQ
-One stop shop for basketball betting help.
+Court-IQ is a data-driven platform designed to provide real-time basketball analytics and comprehensive sports betting insights.
 
-Contents
-========
- - [Deployed App Access](#deployed-app-access)
- - [GitHub Repositories](#github-repositories)
- - [Contributors](#contributors)
+<a href="https://court-iq.netlify.app">
+    <img src="./src/assets/home-page.png" alt="Home Page" width="50%">
+</a>
 
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Deployed App Access](#deployed-app-access)
+- [APIs and Data Sources](#apis-and-data-sources)
+- [License](#license)
+- [Contact](#contact)
+
+## Project Overview
+Court-IQ integrates dynamic data visualization tools on player statistics to deliver in-depth analyses and current online betting odds, helping users make informed betting decisions across bookmakers such as DraftKings, FanDuel, Bovada, Caesars, and many more. Users can see live odds and stats change as games progress. Full functionality, including actual links to bets on bookmaker sites, is available when the NBA/WNBA season is in session and games are closely approaching.
+
+## Features
+- **Real-time Odds**: Access to live bookmaker odds and betting information.
+- **Statistical Analysis**: Interactive and detailed statistical analysis of basketball games.
+- **Data Visualization**: Advanced charts and graphs using D3.js and Chart.js.
+- **Responsive Design**: A user-friendly interface that works across many devices.
 
 ## Deployed App Access
-
-Deployed app: [Deployed App](https://court-iq.netlify.app)
-
-
-Deployed server: [Server](https://courtiq.onrender.com)
+- **Deployed App**: [Court-IQ App](https://court-iq.netlify.app)
+- **Deployed Server**: [Court-IQ Server](https://courtiq.onrender.com)
 
 ### GitHub Repositories
+- **Frontend Repository**: [courtIQ-app](https://github.com/jorammercado/courtIQ-app)
+- **Backend Repository**: [courtIQ-server](https://github.com/jorammercado/courtIQ-server)
 
-[FrontEnd](https://github.com/jorammercado/courtIQ-app)
+## APIs and Data Sources
+- **Odds API**: For real-time bookmaker odds and betting data. [The Odds API](https://the-odds-api.com/)
+- **NBA Sports Data API**: For live player and game data. [API-Basketball](https://rapidapi.com/api-sports/api/api-basketball), [API-NBA](https://rapidapi.com/api-sports/api/api-nba)
+- **Fantasy Stats API**: For player data and NBA news. [Tank01 Fantasy Stats](https://rapidapi.com/tank01/api/tank01-fantasy-stats)
+- **WNBA API**: For WNBA data. [WNBA API](https://rapidapi.com/belchiorarkad-FqvHs2EDOtP/api/wnba-api)
+- **Firebase Authentication**: For secure user authentication and personalized features. [Firebase Authentication](https://firebase.google.com/docs/auth)
+- **Render**: For our custom backend, currently used for player images. [Render](https://dashboard.render.com/login)
 
-[BackEnd](https://github.com/jorammercado/courtIQ-server)
+## License ##
+This project is licensed under the MIT License. See the [LICENSE](https://opensource.org/license/mit) file for details.
 
-
-
-## Contributors
-
-- Elisaul Batista
-[GitHub](https://github.com/Batista0523)
-
-* Joram Mercado
-[GitHub](https://github.com/jorammercado)
-
-* Erick Tolentino
-[GitHub](https://github.com/Ericktolentino94)
+## Contact ##
+- **Joram Mercado**: [GitHub](https://github.com/jorammercado), [LinkedIn](https://www.linkedin.com/in/jorammercado)
