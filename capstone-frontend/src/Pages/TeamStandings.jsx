@@ -518,13 +518,13 @@ const TeamStandingsV2 = () => {
           >
             {data == null || data === undefined || data.length === 0 || !data ? <Spin ></Spin> :
               <Block display="flex" justifyContent="left" backgroundColor="black" width="100%" marginTop="5px"
-                $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} >
+                $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px", ...(screenWidth > 1305 ? { maxWidth: "850px" } : {}) }} >
                 <HeadingMedium marginLeft="5px" color="white" >Western Conference</HeadingMedium>
               </Block>
             }
             {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
               <TableBuilder className="table1"
-                overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "10px" } } }}
+                overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "10px", ...(screenWidth > 1305 ? { maxWidth: "850px" } : {}) } } }}
                 data={DATA}
               >
                 <TableBuilderColumn header="Team">
@@ -582,13 +582,13 @@ const TeamStandingsV2 = () => {
             }
             {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
               <Block display="flex" justifyContent="left" backgroundColor="black" width="100%"
-                $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }}>
+                $style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px", ...(screenWidth > 1305 ? { maxWidth: "850px" } : {}) }}>
                 <HeadingMedium marginLeft="5px" color="white" >Eastern Conference</HeadingMedium>
               </Block>
             }
             {data == null || data === undefined || data.length === 0 || !data ? <Spin></Spin> :
               <TableBuilder className="table2"
-                overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "-16px" } } }}
+                overrides={{ Root: { style: { maxHeight: '300px', marginBottom: "-16px", ...(screenWidth > 1305 ? { maxWidth: "850px" } : {}) } } }}
                 data={DATA2}
               >
                 <TableBuilderColumn header="Team">
