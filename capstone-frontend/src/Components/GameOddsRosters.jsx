@@ -31,6 +31,15 @@ const GameOddsRosters = ({ eventId, teamName }) => {
   const [awayTeam, setAwayTeam] = useState('')
   const [homeTeam, setHomeTeam] = useState('')
   const [commenceTime, setCommenceTime] = useState('')
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth)
+        };
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
   useEffect(() => {
     const apiKey = import.meta.env.VITE_ODDS_API_KEY;
@@ -93,7 +102,7 @@ const GameOddsRosters = ({ eventId, teamName }) => {
           <Block className="oddsContain">
             <Block className="headl1" width="100%" marginBottom="0px" paddingBottom="0px">
               <HeadingLevel>
-                <Heading className="headingTransition" styleLevel={3} style={{
+                <Heading className="headingTransition" styleLevel={screenWidth > 870 ? 4 : screenWidth > 620 ? 5 : 6} style={{
                   width: '100%',
                   color: 'white',
                   textAlign: 'left',
