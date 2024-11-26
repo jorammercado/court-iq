@@ -102,7 +102,7 @@ const NBATeams = ({ }) => {
 
     const [team, setTeam] = useState({})
     const [teamId, setTeamId] = useState(init[0]);
-    const [season, setSeason] = useState('2023');
+    const [season, setSeason] = useState('2024');
     const [selectedSeason, setSelectedSeason] = useState(null);
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [selectedTeamName, setSelectedTeamName] = useState(init[1]);
@@ -246,7 +246,8 @@ const NBATeams = ({ }) => {
         { label: '2020', id: '2020' },
         { label: '2021', id: '2021' },
         { label: '2022', id: '2022' },
-        { label: 'Current', id: '2023' },
+        { label: '2023', id: '2023' },
+        { label: 'Current', id: '2024' },
     ];
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
     const selectedTeamValue = teamOptions.filter(option => option.id === selectedTeam);
@@ -364,7 +365,7 @@ const NBATeams = ({ }) => {
                     </Block>
                 </Block>
                 {eventIds ?
-                    <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="50px">
+                    <Block key={0} className="odds" justifyContent="center" alignItems="center" display="flex" marginTop="-80px">
                         <Block className="oddsl2" >
                             <GameOddsRosters eventId={eventIds[0]} teamName={selectedTeamName} />
                         </Block>
@@ -414,6 +415,7 @@ const NBATeams = ({ }) => {
                     <Block marginRight="10px" paddingTop="10px">
                         <Select
                             options={[
+                                { id: '2024', label: '2024-2025' },
                                 { id: '2023', label: '2023-2024' },
                                 { id: '2022', label: '2022-2023' },
                                 { id: '2021', label: '2021-2022' },

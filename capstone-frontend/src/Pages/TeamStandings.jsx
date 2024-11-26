@@ -34,7 +34,7 @@ const options = {
   url: VITE_X_RAPIDAPI_URL,
   params: {
     league: '12',
-    season: '2023-2024'
+    season: '2024-2025'
   },
   headers: {
     'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY,
@@ -396,7 +396,7 @@ const TeamStandingsV2 = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  const [league, setLeague] = useState("WNBA")
+  const [league, setLeague] = useState("NBA")
   const handleLeagueChange = (params) => {
     const { value } = params;
     // console.log(value)
