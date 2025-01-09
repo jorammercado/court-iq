@@ -7,6 +7,7 @@ import "./TeamSchedule.scss"
 import { useStyletron } from 'baseui';
 import { Avatar } from 'baseui/avatar';
 import Spin from './SpinLoad';
+import image from "../Pages/images/heropage.jpg"
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -129,7 +130,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
             <Block className="head" width="100%"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
-                    url(./src/Pages/images/heropage.jpg)`,
+                    url(${image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center calc(72% + 0px)',
                     backgroundRepeat: 'no-repeat',

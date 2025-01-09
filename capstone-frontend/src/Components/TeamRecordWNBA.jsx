@@ -4,6 +4,7 @@ import { Block } from 'baseui/block';
 import { Heading, HeadingLevel } from 'baseui/heading';
 import Spin from './SpinLoad';
 import "./TeamRecordWNBA.scss"
+import image from "../Pages/images/heropage.jpg"
 
 const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
     const [headers, setHeaders] = useState([]);
@@ -33,7 +34,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
             <Block className="heading" width="100%"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
-                    url(./src/Pages/images/heropage.jpg)`,
+                    url(${image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'right',
                     backgroundRepeat: 'no-repeat',
@@ -66,7 +67,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                     <Block className="heading" width="100%"
                         style={{
                             backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%),
-                        url(./src/Pages/images/heropage.jpg)`,
+                        url(${image})`,
                             backgroundSize: 'auto',
                             backgroundPosition: 'left calc(1% + 0px)',
                             backgroundRepeat: 'no-repeat',
@@ -99,7 +100,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                     <Block className="heading" width="100%"
                         style={{
                             backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%),
-                            url(./src/Pages/images/heropage.jpg)`,
+                            url(${image})`,
                             backgroundSize: 'auto',
                             backgroundPosition: 'right calc(30% + 0px)',
                             backgroundRepeat: 'no-repeat'

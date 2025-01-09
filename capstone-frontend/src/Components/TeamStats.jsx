@@ -5,6 +5,7 @@ import { Block } from "baseui/block";
 import { Heading, HeadingLevel } from 'baseui/heading';
 import "./TeamStats.scss"
 import Spin from './SpinLoad';
+import image from "../Pages/images/heropage.jpg"
 
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
@@ -91,7 +92,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
             <Block className="heading"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
-                    url(./src/Pages/images/heropage.jpg)`,
+                    url(${image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'right',
                     backgroundRepeat: 'no-repeat',
