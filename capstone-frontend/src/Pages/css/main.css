@@ -1638,7 +1638,7 @@ q {
 /* Intro */
 
 .home #intro {
-	background-image: url("https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg");
+	background-image: url("../images/heropage.jpg");
 	background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 

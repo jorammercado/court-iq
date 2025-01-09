@@ -129,7 +129,7 @@ const TeamScheduleComponent = ({ teamId, season, gamesInView, isHighlighted,
             <Block className="head" width="100%"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
-                    url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                    url(./src/Pages/images/heropage.jpg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center calc(72% + 0px)',
                     backgroundRepeat: 'no-repeat',

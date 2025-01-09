@@ -91,7 +91,7 @@ const TeamStatsComponent = ({ teamId, season, isHighlightedSeason }) => {
             <Block className="heading"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
-                    url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                    url(./src/Pages/images/heropage.jpg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'right',
                     backgroundRepeat: 'no-repeat',

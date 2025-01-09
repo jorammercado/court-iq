@@ -33,7 +33,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
             <Block className="heading" width="100%"
                 style={{
                     backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 0) 100%),
-                    url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                    url(./src/Pages/images/heropage.jpg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'right',
                     backgroundRepeat: 'no-repeat',
@@ -66,7 +66,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                     <Block className="heading" width="100%"
                         style={{
                             backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%),
-                        url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                        url(./src/Pages/images/heropage.jpg)`,
                             backgroundSize: 'auto',
                             backgroundPosition: 'left calc(1% + 0px)',
                             backgroundRepeat: 'no-repeat',
@@ -99,7 +99,7 @@ const TeamRecordWNBA = ({ teamRecord, isHighlightedSeason }) => {
                     <Block className="heading" width="100%"
                         style={{
                             backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%),
-                            url(https://theforeword.org/wp-content/uploads/2023/10/offseasonpower_getty_ringer.0.jpg)`,
+                            url(./src/Pages/images/heropage.jpg)`,
                             backgroundSize: 'auto',
                             backgroundPosition: 'right calc(30% + 0px)',
                             backgroundRepeat: 'no-repeat'
