@@ -11,7 +11,6 @@ import Spin from './SpinLoad';
 const VITE_X_RAPIDAPI_KEY = import.meta.env.VITE_X_RAPIDAPI_KEY2;
 const VITE_X_RAPIDAPI_HOST = import.meta.env.VITE_X_RAPIDAPI_HOST2;
 const VITE_X_RAPIDAPI_URL3 = import.meta.env.VITE_X_RAPIDAPI_URL3;
-const VITE_X_RAPIDAPI_URL2 = import.meta.env.VITE_X_RAPIDAPI_URL2;
 const VITE_PLAYER_IMAGE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const TeamPlayerLeaderCard = ({ teamId,
@@ -26,8 +25,7 @@ const TeamPlayerLeaderCard = ({ teamId,
 }) => {
     const navigate = useNavigate();
     const [leaders, setLeaders] = useState([]);
-    const [playerImages, setPlayerImages] = useState([])
-    const [personalData, setPersonalData] = useState([]);
+    const [playerImages, setPlayerImages] = useState([]);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     useEffect(() => {
         const handleResize = () => {
@@ -37,33 +35,6 @@ const TeamPlayerLeaderCard = ({ teamId,
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    useEffect(() => {
-        const fetchPlayerStats = async () => {
-            try {
-                const response = await axios.request({
-                    method: 'GET',
-                    url: VITE_X_RAPIDAPI_URL2,
-                    params: {
-                        team: teamId,
-                        season: season
-                    },
-                    headers: {
-                        'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY,
-                        'X-RapidAPI-Host': VITE_X_RAPIDAPI_HOST
-                    }
-                });
-                setPersonalData(response.data.response.filter(e => {
-                    return (leaders.map(e => e.id).includes(Number(e.id)))
-                }));
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        if (leaders.length > 0) {
-            fetchPlayerStats();
-        }
-    }, [teamId, season, leaders]);
 
     useEffect(() => {
         const fetchTeamLeaders = async () => {
@@ -137,7 +108,7 @@ const TeamPlayerLeaderCard = ({ teamId,
 
     return (
         <div >
-            {personalData.length > 0 ?
+            {leaders.length > 0 ?
                 <div className="teamleaderdisplaycards1">
                     {leaders.map((leader, index) => (
                         <div
