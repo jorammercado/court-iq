@@ -3,7 +3,7 @@
 Court-IQ is a basketball stats and sports betting companion that blends real-time NBA data, intuitive visualizations, and sportsbook odds into one interactive platform. Built for fans and bettors alike, it helps users track trends, explore team dashboards, and evaluate player prop bets with visual clarity.
 
 <a href="https://court-iq.netlify.app">
-    <img src="./src/assets/home-page.png" alt="Home Page" width="50%">
+    <img src="./capstone-frontend/src/assets/home-page.png" alt="Home Page" width="50%">
 </a>
 
 ## 📌 Table of Contents
