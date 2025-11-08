@@ -34,7 +34,7 @@ const options = {
   url: VITE_X_RAPIDAPI_URL,
   params: {
     league: '12',
-    season: '2024-2025'
+    season: '2025-2026'
   },
   headers: {
     'X-RapidAPI-Key': VITE_X_RAPIDAPI_KEY,
@@ -129,7 +129,7 @@ const TeamStandingsV2 = () => {
       const options = {
         method: 'GET',
         url: `https://${VITE_X_RAPIDAPI_HOST_WNBA}/wnbastandings`,
-        params: { year: `2024` },
+        params: { year: `2025` },
         headers: {
           'x-rapidapi-key': VITE_X_RAPIDAPI_KEY,
           'x-rapidapi-host': VITE_X_RAPIDAPI_HOST_WNBA
@@ -427,10 +427,10 @@ const TeamStandingsV2 = () => {
           {screenWidth > 530 ?
             <HeadingLevel>
               {league === "NBA" ? <Heading styleLevel={!isMobile ? 5 : 6} color="black" >{stage} {season}</Heading> :
-                <Heading styleLevel={screenWidth > 815 ? 5 : 6} color="black" > WNBA 2024 Season </Heading>}
+                <Heading styleLevel={screenWidth > 815 ? 5 : 6} color="black" > WNBA 2025 Season </Heading>}
             </HeadingLevel> :
             screenWidth <= 345 ? <></> :
-              <HeadingXSmall marginLeft="5px" color="black" >WNBA 2024</HeadingXSmall>
+              <HeadingXSmall marginLeft="5px" color="black" >WNBA 2025</HeadingXSmall>
           }
 
 

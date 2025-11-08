@@ -73,7 +73,7 @@ function PlayerExample({ data, playerid }) {
     const [td, setTD] = useState("n/a");
     const [team, setTeam] = useState([])
     const [personalData, setPersonalData] = useState({});
-    const [selectedSeason, setSelectedSeason] = useState("2024");
+    const [selectedSeason, setSelectedSeason] = useState("2025");
     const [fga, setFGA] = useState([])
     const [fta, setFTA] = useState([])
     const [last5Games, setLast5Games] = useState([])
@@ -207,7 +207,7 @@ function PlayerExample({ data, playerid }) {
             let newLast20Games = [];
             let newLast50Games = [];
 
-            if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2024) {
+            if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2025) {
                 let dataIds = lastAllIds;
                 for (let i = 0; i < dataIds.length; i++) {
                     try {
@@ -248,7 +248,7 @@ function PlayerExample({ data, playerid }) {
             setLastAllGames(allGamesData);
         };
 
-        if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2024) {
+        if (!data.gamesAll || data.gamesAll.length === 0 || data.gamesAll[0].season !== 2025) {
             fetchGames();
         }
     }, [data.gamesAll, lastAllIds]);
@@ -449,7 +449,8 @@ function PlayerExample({ data, playerid }) {
         { label: '2021', id: '2021' },
         { label: '2022', id: '2022' },
         { label: '2023', id: '2023' },
-        { label: 'Current', id: '2024' },
+        { label: '2024', id: '2024' },
+        { label: 'Current', id: '2025' },
     ];
     const selectedValue = seasonOptions.filter(option => option.id === selectedSeason);
 
