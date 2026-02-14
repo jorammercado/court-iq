@@ -1,8 +1,6 @@
 import "./NavBar.scss";
-import { useNavigate, Link } from "react-router-dom";
-import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useStyletron } from "baseui";
 import { AppNavBar } from "baseui/app-nav-bar";
 import logo3 from "../assets/logo3.png";
 import ball from "../assets/BALL.svg";
@@ -16,7 +14,6 @@ export default function NavBar({
     isGlossaryVisible,
     setIsGlossaryVisible,
 }) {
-    const [css] = useStyletron();
     const navigate = useNavigate();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -50,9 +47,10 @@ export default function NavBar({
             { icon: null, label: "Glossary" }
         ];
 
-        if (width >= 1136) {
+        // remove search bar until functional
+        /* if (width >= 1136) {
             items.unshift({ icon: null, label: "Search", id: "search" });
-        }
+        } */
 
         setMainItems(items);
     };
