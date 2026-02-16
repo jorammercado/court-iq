@@ -1,22 +1,22 @@
-import { useContext, useEffect } from "react";
-import { UserContext } from "../Providers/UserProvider";
-import { useNavigate } from "react-router-dom";
-import { styled } from 'baseui';
-import { styled as styled2 } from 'styled-components';
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
-import { Card, StyledBody } from "baseui/card";
-import { Block } from "baseui/block";
+import { useContext, useEffect } from "react"
+import { UserContext } from "../Providers/UserProvider"
+import { useNavigate } from "react-router-dom"
+import { styled } from 'baseui'
+import { styled as styled2 } from 'styled-components'
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons"
+import { Card, StyledBody } from "baseui/card"
+import { Block } from "baseui/block"
 import {
   HeadingXSmall
-} from "baseui/typography";
+} from "baseui/typography"
 
 import {
   signInWithGoogle,
   signInAnon,
   signInWithFacebook
-} from "../Services/FireBase";
-import "./Login.scss";
-import "animate.css";
+} from "../Services/FireBase"
+import "./Login.scss"
+import "animate.css"
 
 const Wrapper = styled2.div`
     @media only screen and (max-width : 399px) {
@@ -35,26 +35,26 @@ const StyledButtons = styled('div', {
   flexDirection: 'column',
 
   '@media (max-width: 400px)': {
-    width: '250px', 
-    padding: '0', 
+    width: '250px',
+    padding: '0',
   },
 
-});
+})
 
 export const Login = ({ currentUser,
   setCurrentUser,
   photoURL,
   setPhotoURL
 }) => {
-  const user = useContext(UserContext);
-  const navigate = useNavigate();
+  const user = useContext(UserContext)
+  const navigate = useNavigate()
   useEffect(() => {
     if (user) {
-      setPhotoURL(user.photoURL);
-      setCurrentUser(user);
-      navigate("/loggedInPage");
+      setPhotoURL(user.photoURL)
+      setCurrentUser(user)
+      navigate("/loggedInPage")
     }
-  }, [user, navigate]);
+  }, [user, navigate])
 
 
   return (
@@ -81,10 +81,11 @@ export const Login = ({ currentUser,
                           </GoogleLoginButton>
                         </div>
 
-                        <div className="login__button">
+                        {/* Facebook login disabled until fully implemented */}
+                        {/* <div className="login__button">
                           <FacebookLoginButton onClick={signInWithFacebook} className="animate__animated animate__fadeInUp">
                           </FacebookLoginButton>
-                        </div>
+                        </div> */}
 
                         <button onClick={signInAnon}
                           className="btn btn-light btn-lg login__button animate__animated animate__fadeInUp" style={{ borderRadius: '3px', margin: '4px' }}>
@@ -100,5 +101,5 @@ export const Login = ({ currentUser,
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
