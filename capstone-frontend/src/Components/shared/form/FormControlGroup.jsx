@@ -1,18 +1,22 @@
-import React from 'react';
-import "./Form.scss";
+import React from 'react'
+import './Form.scss'
 
 const FormControlGroup = ({ handleClick, buttonList }) => {
   return (
     <div>
       {buttonList.map((option, index) => (
-        <button className="btn btn-secondary btn-sm" key={index} value={option} onClick={(e) => handleClick(e)}>
-          {" "}
-          {option}
-          {" "}
+        <button
+          className="btn btn-secondary btn-sm"
+          key={index}
+          value={option}
+          onClick={(e) => handleClick(e)}
+        >
+          {' '}
+          {option}{' '}
         </button>
       ))}
     </div>
-  );
+  )
 }
 
-export default FormControlGroup;
+export default FormControlGroup

@@ -6,27 +6,27 @@
   margin-top: 10px;
   background-color: #faf7f2;
 
-  .comparison-instruction{
+  .comparison-instruction {
     @media (max-width: 1400px) {
       width: 1220px;
     }
-  
+
     @media (max-width: 1290px) {
       width: 1050px;
     }
-  
+
     @media (max-width: 1170px) {
       width: 1000px;
     }
-  
+
     @media (max-width: 1095px) {
       width: 950px;
     }
-  
+
     @media (max-width: 940px) {
       width: 640px;
     }
-  
+
     @media (max-width: 640px) {
       width: 440px;
     }
@@ -75,38 +75,36 @@
 
 .player-img {
   width: 300px;
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
   box-shadow: 0px 4px 6px rgba(2, 2, 2, 0.1);
   background-color: #faf7f2;
 }
 
-
 .player-input {
   height: 45px;
-  font-family: UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: UberMoveText, system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 4px;
-  color: white; 
+  color: white;
   background-color: black;
-  padding-left: 10px; 
+  padding-left: 10px;
   padding-right: 14px;
   border-radius: 0;
-  border: 2px solid #ccc; 
+  border: 2px solid #ccc;
 }
 
 .player-input::placeholder {
-  color: #999; 
+  color: #999;
   font-style: italic;
 }
 
-
 .player-input:focus {
-  outline: none; 
-  border-color: #ea6607; 
+  outline: none;
+  border-color: #ea6607;
 }
 .ayer-img {
   width: 300px;
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
   box-shadow: 0px 4px 6px rgba(2, 2, 2, 0.1);
   background-color: #faf7f2;
@@ -119,7 +117,7 @@
   margin-top: 35px;
   font-family: 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
   font-weight: bold;
- 
+
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   color: white;
 }
@@ -127,7 +125,6 @@
   height: fit-content;
   margin: 25px;
   width: 100%;
- 
 }
 
 .player-cards-container {
@@ -176,7 +173,6 @@
   }
 }
 
-
-.chart-container2{
+.chart-container2 {
   border-radius: 8px;
 }

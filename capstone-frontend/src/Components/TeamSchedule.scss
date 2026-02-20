@@ -1,106 +1,106 @@
 .TeamGamesTableNBA {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: flex-start;
+
+  .headingTransition {
+    transition: background-color 0.5s ease-in-out;
+  }
+
+  @media (min-width: 767px) {
+    max-width: 1300px;
+  }
+
+  @media (max-width: 1300px) {
+    width: 80%;
     justify-content: center;
     align-items: center;
-    align-items: flex-start;
+  }
 
-    .headingTransition {
-        transition: background-color .5s ease-in-out;
-    }
+  @media (max-width: 870px) {
+    max-width: 45%;
+    justify-content: center;
+    align-items: center;
+  }
 
-    @media (min-width: 767px) {
-        max-width: 1300px;
-    }
+  .scheduleTable {
+    width: 100%;
+    justify-content: left;
 
     @media (max-width: 1300px) {
-        width: 80%;
-        justify-content: center;
-        align-items: center;
+      width: 80%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 1155px) {
+      width: 830px;
     }
 
     @media (max-width: 870px) {
-        max-width: 45%;
-        justify-content: center;
-        align-items: center;
+      width: 700px;
     }
 
-    .scheduleTable {
-        width: 100%;
-        justify-content: left;
-
-
-        @media (max-width: 1300px) {
-            width: 80%;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media (max-width: 1155px) {
-            width: 830px;
-        }
-
-        @media (max-width: 870px) {
-            width: 700px;
-        }
-
-        @media (max-width: 750px) {
-            width: 580px;
-        }
-
-        @media (max-width: 620px) {
-            width: 460px;
-        }
-
-        @media (max-width: 494px) {
-            width: 370px;
-        }
-
-        @media (max-width: 400px) {
-            width: 341px;
-        }
-
-        @media (max-width: 360px) {
-            width: 290px;
-        }
+    @media (max-width: 750px) {
+      width: 580px;
     }
 
-    .head {
-        @media (max-width: 1300px) {
-            width: 80%;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media (max-width: 1155px) {
-            width: 830px;
-        }
-
-        @media (max-width: 870px) {
-            width: 700px;@media (max-width: 870px) {
-                width: 700px;
-            }
-        }
-
-        @media (max-width: 750px) {
-            width: 580px;
-        }
-
-        @media (max-width: 620px) {
-            width: 460px;
-        }
-
-        @media (max-width: 494px) {
-            width: 370px;
-        }
-
-        @media (max-width: 400px) {
-            width: 341px;
-        }
-
-        @media (max-width: 360px) {
-            width: 290px;
-        }
+    @media (max-width: 620px) {
+      width: 460px;
     }
+
+    @media (max-width: 494px) {
+      width: 370px;
+    }
+
+    @media (max-width: 400px) {
+      width: 341px;
+    }
+
+    @media (max-width: 360px) {
+      width: 290px;
+    }
+  }
+
+  .head {
+    @media (max-width: 1300px) {
+      width: 80%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 1155px) {
+      width: 830px;
+    }
+
+    @media (max-width: 870px) {
+      width: 700px;
+      @media (max-width: 870px) {
+        width: 700px;
+      }
+    }
+
+    @media (max-width: 750px) {
+      width: 580px;
+    }
+
+    @media (max-width: 620px) {
+      width: 460px;
+    }
+
+    @media (max-width: 494px) {
+      width: 370px;
+    }
+
+    @media (max-width: 400px) {
+      width: 341px;
+    }
+
+    @media (max-width: 360px) {
+      width: 290px;
+    }
+  }
 }

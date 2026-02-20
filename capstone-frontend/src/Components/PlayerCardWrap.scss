@@ -1,47 +1,46 @@
 .playerCardsContainer {
-   display: flex;
-   gap: 10px;
-   justify-content: center;
-   margin-top: 85px;
-   margin-bottom: 100px;
-   align-items: center;
-   flex-direction: row;
-   flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 85px;
+  margin-bottom: 100px;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-   .playerCardWrapper {
-      margin: -2px;
-   }
+  .playerCardWrapper {
+    margin: -2px;
+  }
 
-   @media (max-width: 1300px) {
-      max-width: 1000px;
-   }
+  @media (max-width: 1300px) {
+    max-width: 1000px;
+  }
 
-   @media (max-width: 1155px) {
-      width: 830px;
-   }
+  @media (max-width: 1155px) {
+    width: 830px;
+  }
 
-   @media (max-width: 870px) {
-      max-width: 700px;
-   }
+  @media (max-width: 870px) {
+    max-width: 700px;
+  }
 
-   @media (max-width: 750px) {
-      max-width: 580px !important;
-   }
+  @media (max-width: 750px) {
+    max-width: 580px !important;
+  }
 
-   @media (max-width: 620px) {
-      max-width: 460px !important;
-   }
+  @media (max-width: 620px) {
+    max-width: 460px !important;
+  }
 
-   @media (max-width: 494px) {
-      width: 370px;
-   }
+  @media (max-width: 494px) {
+    width: 370px;
+  }
 
-   @media (max-width: 400px) {
-      width: 341px;
-   }
+  @media (max-width: 400px) {
+    width: 341px;
+  }
 
-   @media (max-width: 360px) {
-      width: 290px;
-   }
-
+  @media (max-width: 360px) {
+    width: 290px;
+  }
 }

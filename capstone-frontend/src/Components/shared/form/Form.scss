@@ -1,27 +1,23 @@
-
-
 .top {
-    /* width:100%; */
+  /* width:100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .pagitation-bar {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+  }
 
-    .pagitation-bar {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+  .btn-secondary {
+    margin: 0.25rem;
+    padding: 0.25rem;
+  }
 
-    .btn-secondary {
-        margin: 0.25rem;
-        padding: 0.25rem;
-    }
-    
-    .input {
-        border-radius: 3px;
-    }
+  .input {
+    border-radius: 3px;
+  }
 }
-
-

@@ -1,22 +1,21 @@
 body {
-    background-color: #faf7f2;
+  background-color: #faf7f2;
 }
 
 // Define color variables
 $scrollbar-track-color: #383838;
-$scrollbar-thumb-color: #EA6607;
+$scrollbar-thumb-color: #ea6607;
 $scrollbar-thumb-hover-color: #555;
 
-
 ::-webkit-scrollbar-track {
-    background: $scrollbar-track-color;
+  background: $scrollbar-track-color;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $scrollbar-thumb-color;
+  background: $scrollbar-thumb-color;
 }
 
 // Firefox
 * {
-    scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
 }

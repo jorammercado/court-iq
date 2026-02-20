@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Input } from 'baseui/input'
-import { Search } from "baseui/icon"
+import { Search } from 'baseui/icon'
 import './ChatInput.scss'
 
 const ChatInput = ({ onSubmit }) => {
@@ -26,21 +26,21 @@ const ChatInput = ({ onSubmit }) => {
   const inputOverrides = {
     Root: {
       style: {
-        borderRadius: "8px"
+        borderRadius: '8px',
       },
     },
     InputContainer: {
       style: {
         width: '100%',
         maxWidth: 'none',
-        height: "30px"
+        height: '30px',
       },
     },
     Input: {
       style: {
         width: '100%',
         '::placeholder': {
-          color: 'white', 
+          color: 'white',
         },
       },
     },
@@ -52,16 +52,28 @@ const ChatInput = ({ onSubmit }) => {
   }
 
   const endEnhancer = (
-    <button onClick={handleSubmit} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
+    <button
+      onClick={handleSubmit}
+      style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+    >
       <Search size="24px" color="white" />
     </button>
   )
 
   return (
-    <form onSubmit={handleSubmit} className="chatForm" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent:'center',
-                    height: "30px", 
-                    padding: "0",
-                    margin: "0"  }}>
+    <form
+      onSubmit={handleSubmit}
+      className="chatForm"
+      style={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '30px',
+        padding: '0',
+        margin: '0',
+      }}
+    >
       <Input
         value={message}
         onChange={handleChange}

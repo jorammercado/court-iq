@@ -1,24 +1,26 @@
+import { Navigate, Route } from 'react-router-dom'
 
-import {
-  Navigate,
-  Route
-} from 'react-router-dom'
-
-const PublicRoute = ({ element: Component, 
-  currentUser, 
+const PublicRoute = ({
+  element: Component,
+  currentUser,
   setCurrentUser,
   photoURL,
   setPhotoURL,
   currentUserPlaces,
-  setCurrentUserPlaces }) => {
-  return !currentUser ?
-    <Component setCurrentUser={setCurrentUser}
+  setCurrentUserPlaces,
+}) => {
+  return !currentUser ? (
+    <Component
+      setCurrentUser={setCurrentUser}
       currenUser={currentUser}
       photoURL={photoURL}
       setPhotoURL={setPhotoURL}
       currentUserPlaces={currentUserPlaces}
-      setCurrentUserPlaces={setCurrentUserPlaces} /> :
+      setCurrentUserPlaces={setCurrentUserPlaces}
+    />
+  ) : (
     <Navigate to={`/loggedInPage`} />
+  )
 }
 
 export default PublicRoute

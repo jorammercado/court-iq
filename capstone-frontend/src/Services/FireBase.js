@@ -1,7 +1,14 @@
 // Import the functions you need from the SDKs you need
-import { getApp, initializeApp, deleteApp, } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, FacebookAuthProvider, signInAnonymously } from "firebase/auth";
+import { getApp, initializeApp, deleteApp } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  getAuth,
+  signOut,
+  FacebookAuthProvider,
+  signInAnonymously,
+} from 'firebase/auth'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,38 +21,39 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID
-};
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
+}
 
-export const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig)
 
-export const auth = getAuth(app);
+export const auth = getAuth(app)
 
-auth.useDeviceLanguage();
+auth.useDeviceLanguage()
 
-const googleAuth = new GoogleAuthProvider();
-const facebookAuth = new FacebookAuthProvider();
+const googleAuth = new GoogleAuthProvider()
+const facebookAuth = new FacebookAuthProvider()
 
 export const signInWithFacebook = () => {
   try {
-    signInWithPopup(auth, facebookAuth).then((res) => {
-      // Signed in.
-
-      // const credential = FacebookAuthProvider.credentialFromResult(res);
-      // const accessToken = credential.accessToken;
-      // fetch(`https://graph.facebook.com/${res.user.providerData[0].uid}/picture?type=large&access_token=${accessToken}`)
-      //   .then((response) => response.blob())
-      //   .then((blob) => {
-      //     console.log(URL.createObjectURL(blob))
-      //     setPhotoURL(URL.createObjectURL(blob));
-      //   })
-    }).catch((err) => {
-      console.error(err);
-    })
+    signInWithPopup(auth, facebookAuth)
+      .then((res) => {
+        // Signed in.
+        // const credential = FacebookAuthProvider.credentialFromResult(res);
+        // const accessToken = credential.accessToken;
+        // fetch(`https://graph.facebook.com/${res.user.providerData[0].uid}/picture?type=large&access_token=${accessToken}`)
+        //   .then((response) => response.blob())
+        //   .then((blob) => {
+        //     console.log(URL.createObjectURL(blob))
+        //     setPhotoURL(URL.createObjectURL(blob));
+        //   })
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
-};
+}
 
 export const signInAnon = () => {
   signInAnonymously(auth)
@@ -54,26 +62,25 @@ export const signInAnon = () => {
     })
     .catch((error) => {
       console.error(error)
-    });
+    })
 }
 
 export const signInWithGoogle = () => {
   try {
     signInWithPopup(auth, googleAuth).then((res) => {
       // Signed in.
-    });
+    })
   } catch (err) {
-    console.error(err);
-  }
-};
-
-export const logOut = async () => {
-  try {
-    await signOut(auth);
-  } catch (err) {
-    console.log(err);
+    console.error(err)
   }
 }
 
+export const logOut = async () => {
+  try {
+    await signOut(auth)
+  } catch (err) {
+    console.log(err)
+  }
+}
 
-const analytics = getAnalytics(app);
+const analytics = getAnalytics(app)

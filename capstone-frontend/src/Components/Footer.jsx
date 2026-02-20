@@ -1,8 +1,9 @@
-import { Block } from 'baseui/block';
+import { Block } from 'baseui/block'
 
 const Footer = () => {
-    return (
-      <div style={{
+  return (
+    <div
+      style={{
         width: '100%',
         padding: '20px 0',
         textAlign: 'center',
@@ -10,10 +11,11 @@ const Footer = () => {
         color: '#fff',
         borderTop: '1px solid #444',
         marginTop: 'auto',
-      }}>
-        © {new Date().getFullYear()} My Company
-      </div>
-    );
-  };
-  
-  export default Footer;
+      }}
+    >
+      © {new Date().getFullYear()} My Company
+    </div>
+  )
+}
+
+export default Footer

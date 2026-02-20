@@ -1,87 +1,86 @@
 .TeamStatsTable {
-    margin-top: 90px;
-    display: flex;
-    flex-direction: column;
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -60px;
+
+  @media (min-width: 767px) {
+    max-width: 1300px;
+  }
+
+  @media (max-width: 1300px) {
     justify-content: center;
     align-items: center;
-    margin-bottom: -60px;
+  }
 
-    @media (min-width: 767px) {
-        max-width: 1300px;
+  .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    transition: background-color 0.5s ease-in-out;
+
+    @media (max-width: 870px) {
+      max-width: 40%;
     }
 
     @media (max-width: 1300px) {
-        justify-content: center;
-        align-items: center;
+      width: 80%;
     }
 
-    .heading {
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: flex-start;
-        transition: background-color .5s ease-in-out;
+    .titleHighlight {
+      transition: background-color 0.5s ease-in-out;
+    }
+  }
 
-        @media (max-width: 870px) {
-            max-width: 40%;
-        }
+  .tableContainer {
+    width: 100%;
+    overflow-x: auto;
 
-        @media (max-width: 1300px) {
-            width: 80%;
-        }
-
-        .titleHighlight {
-            transition: background-color .5s ease-in-out;
-        }
+    @media (max-width: 870px) {
+      max-width: 40%;
     }
 
-    .tableContainer {
+    @media (max-width: 1300px) {
+      width: 80%;
+    }
+  }
+
+  .HomeAwayContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+
+    .homeRecord {
+      width: 100%;
+
+      @media (max-width: 1300px) {
+        margin-right: -118px;
+        margin-left: 119px;
+      }
+
+      @media (max-width: 870px) {
         width: 100%;
-        overflow-x: auto;
-
-        @media (max-width: 870px) {
-            max-width: 40%;
-        }
-
-        @media (max-width: 1300px) {
-            width: 80%;
-        }
+        margin-right: -354px;
+        margin-left: 355px;
+      }
     }
 
-    .HomeAwayContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        max-width: 1300px;
+    .tableContainer_half {
+      width: 100%;
+      overflow-x: auto;
 
-        .homeRecord {
-            width: 100%;
+      @media (max-width: 870px) {
+        max-width: 40%;
+      }
 
-            @media (max-width: 1300px) {
-                margin-right: -118px ;
-                margin-left: 119px ;
-            }
-
-            @media (max-width: 870px) {
-                
-                width: 100%;
-                margin-right: -354px ;
-                margin-left: 355px ;
-            }
-        }
-
-        .tableContainer_half {
-            width: 100%;
-            overflow-x: auto;
-
-            @media (max-width: 870px) {
-                max-width: 40%;
-            }
-
-            @media (max-width: 1300px) {
-                width: 80%;
-            }
-        }
+      @media (max-width: 1300px) {
+        width: 80%;
+      }
     }
+  }
 }

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import {useStyletron} from 'baseui';
-import {Spinner} from 'baseui/spinner';
+import * as React from 'react'
+import { useStyletron } from 'baseui'
+import { Spinner } from 'baseui/spinner'
 
 export default function Spin() {
-  const [css, theme] = useStyletron();
+  const [css, theme] = useStyletron()
   return (
     <div
       className={css({
@@ -27,5 +27,5 @@ export default function Spin() {
         Loading...
       </div>
     </div>
-  );
+  )
 }
