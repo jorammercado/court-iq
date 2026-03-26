@@ -555,7 +555,6 @@ function PlayerExample({ data, playerid }) {
     const { value } = params
     if (value.length > 0) {
       setGamesInView(value[0].id)
-      console.log(value)
       if (value[0].id === 'season') {
         setGraphPoints(points)
         setGraphAssists(assists)
@@ -715,11 +714,14 @@ function PlayerExample({ data, playerid }) {
                         ...(screenWidth <= 480 ? { lineHeight: '1' } : {}),
                       }}
                     >
-                      {personalData && personalData.height
-                        ? personalData.height.feets + "'" + personalData.height.inches + ','
+                      {personalData && personalData.height && personalData.height.feets !== null
+                        ? personalData.height.feets +
+                          "'" +
+                          (personalData.height.inches !== null ? personalData.height.inches : '') +
+                          ','
                         : ''}{' '}
                       &nbsp;
-                      {personalData && personalData.weight
+                      {personalData && personalData.weight && personalData.weight.pounds !== null
                         ? personalData.weight.pounds + 'lbs'
                         : ''}{' '}
                       &nbsp;
