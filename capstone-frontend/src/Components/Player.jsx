@@ -166,6 +166,7 @@ function PlayerExample({ data, playerid }) {
   const [turnovers, setTurnovers] = useState([])
   const [graphTurnovers, setGraphTurnovers] = useState([])
   const [fgp, setFGP] = useState([])
+  const [graphFgp, setGraphFGP] = useState([])
   const [tpp, setTPP] = useState([])
   const [ftp, setFTP] = useState([])
   const [dd, setDD] = useState('n/a')
@@ -174,6 +175,7 @@ function PlayerExample({ data, playerid }) {
   const [personalData, setPersonalData] = useState({})
   const [selectedSeason, setSelectedSeason] = useState('2025')
   const [fga, setFGA] = useState([])
+  const [graphFga, setGraphFGA] = useState([])
   const [fta, setFTA] = useState([])
   const [last5Games, setLast5Games] = useState([])
   const [last10Games, setLast10Games] = useState([])
@@ -284,10 +286,13 @@ function PlayerExample({ data, playerid }) {
         setBlocks(response.data.response.map((e) => e.blocks))
         setGraphBlocks([...response.data.response.map((e) => e.blocks)].slice(0, 5))
         setFGA(response.data.response.map((e) => e.fga))
+        setGraphFGA([...response.data.response.map((e) => e.fga)].slice(0, 5))
         setFTA(response.data.response.map((e) => e.fta))
         setSteals(response.data.response.map((e) => e.steals))
         setTurnovers(response.data.response.map((e) => e.turnovers))
+        setGraphTurnovers([...response.data.response.map((e) => e.turnovers)].slice(0, 5))
         setFGP(response.data.response.map((e) => e.fgp))
+        setGraphFGP([...response.data.response.map((e) => e.fgp)].slice(0, 5))
         setTPP(response.data.response.map((e) => e.tpp))
         setFTP(response.data.response.map((e) => e.ftp))
         setIds(response.data.response, setLast5Ids, 5)
@@ -559,6 +564,9 @@ function PlayerExample({ data, playerid }) {
         setGraphPlusMinus(plusMinus)
         setGraphMinutes(minutes)
         setGraphBlocks(blocks)
+        setGraphFGA(fga)
+        setGraphTurnovers(turnovers)
+        setGraphFGP(fgp)
       } else {
         setGraphPoints([...points].slice(0, Number(value[0].id)))
         setGraphAssists([...assists].slice(0, Number(value[0].id)))
@@ -567,6 +575,9 @@ function PlayerExample({ data, playerid }) {
         setGraphPlusMinus([...plusMinus].slice(0, Number(value[0].id)))
         setGraphMinutes([...minutes].slice(0, Number(value[0].id)))
         setGraphBlocks([...blocks].slice(0, Number(value[0].id)))
+        setGraphFGA([...fga].slice(0, Number(value[0].id)))
+        setGraphTurnovers([...turnovers].slice(0, Number(value[0].id)))
+        setGraphFGP([...fgp].slice(0, Number(value[0].id)))
       }
     }
   }
@@ -1025,23 +1036,23 @@ function PlayerExample({ data, playerid }) {
                 : '-1px'
             }
           >
-            {points && points.length > 0 ? (
-              <HistogramWithAxis title={`Points`} data={points}></HistogramWithAxis>
+            {graphPoints && graphPoints.length > 0 ? (
+              <HistogramWithAxis title={`Points`} data={graphPoints}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
-            {assists && assists.length > 0 ? (
-              <HistogramWithAxis title={`Assist`} data={assists}></HistogramWithAxis>
+            {graphAssists && graphAssists.length > 0 ? (
+              <HistogramWithAxis title={`Assist`} data={graphAssists}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
-            {rebounds && rebounds.length > 0 ? (
-              <HistogramWithAxis title={`Rebounds`} data={rebounds}></HistogramWithAxis>
+            {graphRebounds && graphRebounds.length > 0 ? (
+              <HistogramWithAxis title={`Rebounds`} data={graphRebounds}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
-            {fga && fga.length > 0 ? (
-              <HistogramWithAxis title={`fga`} data={fga}></HistogramWithAxis>
+            {graphFga && graphFga.length > 0 ? (
+              <HistogramWithAxis title={`fga`} data={graphFga}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
@@ -1470,23 +1481,26 @@ function PlayerExample({ data, playerid }) {
                 : '-1px'
             }
           >
-            {turnovers && turnovers.length > 0 ? (
-              <HistogramWithAxis title={`Turnovers`} data={turnovers}></HistogramWithAxis>
+            {graphTurnovers && graphTurnovers.length > 0 ? (
+              <HistogramWithAxis title={`Turnovers`} data={graphTurnovers}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
-            {tpm && tpm.length > 0 ? (
-              <HistogramWithAxis title={`Three Pointers`} data={tpm}></HistogramWithAxis>
+            {graphThreePoints && graphThreePoints.length > 0 ? (
+              <HistogramWithAxis
+                title={`Three Pointers`}
+                data={graphThreePoints}
+              ></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
-            {plusMinus && plusMinus.length > 0 ? (
-              <HistogramWithAxis title={`+/-`} data={plusMinus}></HistogramWithAxis>
+            {graphPlusMinus && graphPlusMinus.length > 0 ? (
+              <HistogramWithAxis title={`+/-`} data={graphPlusMinus}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
-            {fgp && fgp.length > 0 ? (
-              <HistogramWithAxis title={`fg%`} data={fgp}></HistogramWithAxis>
+            {graphFgp && graphFgp.length > 0 ? (
+              <HistogramWithAxis title={`fg%`} data={graphFgp}></HistogramWithAxis>
             ) : (
               <Spin></Spin>
             )}
