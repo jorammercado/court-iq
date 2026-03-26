@@ -64,7 +64,7 @@ export const LoggedInPage = ({ currentUser, setCurrentUser, setPhotoURL, photoUR
               )}
             </div>
             <h3 className="email">
-              {user.email !== 'guest@courtiq.com' ? `Email: ${user.email}` : 'Browse ad libitum'}
+              {user.email !== 'guest@courtiq.com' ? `Email: ${user.email}` : ''}
             </h3>
             <br></br>
             <button className="btn btn-dark btn-lg" onClick={handleLogout}>

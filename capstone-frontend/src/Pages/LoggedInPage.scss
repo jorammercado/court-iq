@@ -12,6 +12,13 @@
   align-items: center;
   text-align: center;
 
+  .image {
+    border-radius: 20px;
+    width: min-content;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
   .email {
     margin-top: 20px;
     font-size: 30px;
