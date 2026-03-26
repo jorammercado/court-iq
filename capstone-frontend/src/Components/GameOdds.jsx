@@ -197,8 +197,16 @@ const NBAGameOdds = React.memo(({ teamData: data, sportInput }) => {
             awayTeam={'n/a'}
             odds={[]}
             data={[]}
-            homeLogo={'https://media.api-sports.io/basketball/leagues/12.png'}
-            awayLogo={'https://media.api-sports.io/basketball/leagues/12.png'}
+            homeLogo={
+              sportInput === 'basketball_wnba'
+                ? 'https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg'
+                : 'https://media.api-sports.io/basketball/leagues/12.png'
+            }
+            awayLogo={
+              sportInput === 'basketball_wnba'
+                ? 'https://cdn.wnba.com/static/next/images/logos/wnba-secondary-logo.svg'
+                : 'https://media.api-sports.io/basketball/leagues/12.png'
+            }
             bookmaker="n/a"
             sport={'n/a'}
           />
