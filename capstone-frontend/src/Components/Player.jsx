@@ -148,14 +148,23 @@ function PlayerExample({ data, playerid }) {
   const [referenceData, setReferenceData] = useState({})
   const [playerStats, setPlayerStats] = useState([])
   const [points, setPoints] = useState([])
+  const [graphPoints, setGraphPoints] = useState([])
   const [assists, setAssists] = useState([])
+  const [graphAssists, setGraphAssists] = useState([])
   const [rebounds, setRebounds] = useState([])
+  const [graphRebounds, setGraphRebounds] = useState([])
   const [threePoints, setThreePoints] = useState([])
+  const [graphThreePoints, setGraphThreePoints] = useState([])
   const [plusMinus, setPlusMinus] = useState([])
+  const [graphPlusMinus, setGraphPlusMinus] = useState([])
   const [minutes, setMinutes] = useState([])
+  const [graphMinutes, setGraphMinutes] = useState([])
   const [blocks, setBlocks] = useState([])
+  const [graphBlocks, setGraphBlocks] = useState([])
   const [steals, setSteals] = useState([])
+  const [graphsteals, setGraphSteals] = useState([])
   const [turnovers, setTurnovers] = useState([])
+  const [graphTurnovers, setGraphTurnovers] = useState([])
   const [fgp, setFGP] = useState([])
   const [tpp, setTPP] = useState([])
   const [ftp, setFTP] = useState([])
@@ -198,8 +207,10 @@ function PlayerExample({ data, playerid }) {
   useEffect(() => {
     if (gamesInView) {
       setIsHighlightedGames(true)
+      setIsHighlighted(true)
       const timer = setTimeout(() => {
         setIsHighlightedGames(false)
+        setIsHighlighted(false)
       }, 500)
 
       return () => clearTimeout(timer)
@@ -259,12 +270,19 @@ function PlayerExample({ data, playerid }) {
         setTeam(response.data.response[0].team.id)
         setReferenceData(response.data.response[0])
         setPoints(response.data.response.map((e) => e.points))
+        setGraphPoints([...response.data.response.map((e) => e.points)].slice(0, 5))
         setAssists(response.data.response.map((e) => e.assists))
+        setGraphAssists([...response.data.response.map((e) => e.assists)].slice(0, 5))
         setRebounds(response.data.response.map((e) => e.defReb + e.offReb))
+        setGraphRebounds([...response.data.response.map((e) => e.defReb + e.offReb)].slice(0, 5))
         setThreePoints(response.data.response.map((e) => e.tpm))
+        setGraphThreePoints([...response.data.response.map((e) => e.tpm)].slice(0, 5))
         setPlusMinus(response.data.response.map((e) => e.plusMinus))
+        setGraphPlusMinus([...response.data.response.map((e) => e.plusMinus)].slice(0, 5))
         setMinutes(response.data.response.map((e) => e.min))
+        setGraphMinutes([...response.data.response.map((e) => e.min)].slice(0, 5))
         setBlocks(response.data.response.map((e) => e.blocks))
+        setGraphBlocks([...response.data.response.map((e) => e.blocks)].slice(0, 5))
         setFGA(response.data.response.map((e) => e.fga))
         setFTA(response.data.response.map((e) => e.fta))
         setSteals(response.data.response.map((e) => e.steals))
@@ -532,6 +550,24 @@ function PlayerExample({ data, playerid }) {
     const { value } = params
     if (value.length > 0) {
       setGamesInView(value[0].id)
+      console.log(value)
+      if (value[0].id === 'season') {
+        setGraphPoints(points)
+        setGraphAssists(assists)
+        setGraphRebounds(rebounds)
+        setGraphThreePoints(threePoints)
+        setGraphPlusMinus(plusMinus)
+        setGraphMinutes(minutes)
+        setGraphBlocks(blocks)
+      } else {
+        setGraphPoints([...points].slice(0, Number(value[0].id)))
+        setGraphAssists([...assists].slice(0, Number(value[0].id)))
+        setGraphRebounds([...rebounds].slice(0, Number(value[0].id)))
+        setGraphThreePoints([...threePoints].slice(0, Number(value[0].id)))
+        setGraphPlusMinus([...plusMinus].slice(0, Number(value[0].id)))
+        setGraphMinutes([...minutes].slice(0, Number(value[0].id)))
+        setGraphBlocks([...blocks].slice(0, Number(value[0].id)))
+      }
     }
   }
 
@@ -1029,7 +1065,15 @@ function PlayerExample({ data, playerid }) {
                     transition: 'background-color 0.5s ease-in-out',
                   }}
                 >
-                  Current Season Stats
+                  {gamesInView === '5'
+                    ? `Last 5 Games Played`
+                    : gamesInView === '10'
+                      ? `Last 10 Games Played`
+                      : gamesInView === '20'
+                        ? `Last 20 Games Played`
+                        : gamesInView === '50'
+                          ? `Last 50 Games Played`
+                          : `Season Played Games`}
                 </HeadingMedium>
               ) : screenWidth > 570 ? (
                 <HeadingSmall
@@ -1041,7 +1085,15 @@ function PlayerExample({ data, playerid }) {
                     transition: 'background-color 0.5s ease-in-out',
                   }}
                 >
-                  Current Season Stats
+                  {gamesInView === '5'
+                    ? `Last 5 Games Played`
+                    : gamesInView === '10'
+                      ? `Last 10 Games Played`
+                      : gamesInView === '20'
+                        ? `Last 20 Games Played`
+                        : gamesInView === '50'
+                          ? `Last 50 Games Played`
+                          : `Season Played Games`}
                 </HeadingSmall>
               ) : (
                 <HeadingXSmall
@@ -1058,7 +1110,15 @@ function PlayerExample({ data, playerid }) {
                         : {}),
                   }}
                 >
-                  Current Season Stats
+                  {gamesInView === '5'
+                    ? `Last 5 Games Played`
+                    : gamesInView === '10'
+                      ? `Last 10 Games Played`
+                      : gamesInView === '20'
+                        ? `Last 20 Games Played`
+                        : gamesInView === '50'
+                          ? `Last 50 Games Played`
+                          : `Season Played Games`}
                 </HeadingXSmall>
               )}
               {points.length > 0 ? (
@@ -1072,13 +1132,13 @@ function PlayerExample({ data, playerid }) {
                 >
                   <MyGraph
                     playerStats={playerStats}
-                    points={points}
-                    assists={assists}
-                    rebounds={rebounds}
-                    threePoints={threePoints}
-                    plusMinus={plusMinus}
-                    minutes={minutes}
-                    blocks={blocks}
+                    points={graphPoints}
+                    assists={graphAssists}
+                    rebounds={graphRebounds}
+                    threePoints={graphThreePoints}
+                    plusMinus={graphPlusMinus}
+                    minutes={graphMinutes}
+                    blocks={graphBlocks}
                   />
                 </Block>
               ) : (
