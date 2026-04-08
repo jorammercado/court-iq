@@ -1,6 +1,6 @@
 # 🏀 Court-IQ
 
-Court-IQ is a basketball stats and sports betting companion that blends real-time NBA data, intuitive visualizations, and sportsbook odds into one interactive platform. Built for fans and bettors alike, it helps users track trends, explore team dashboards, and evaluate player prop bets with visual clarity.
+Court-IQ is a basketball analytics and sports betting companion platform that combines real-time NBA data, interactive visualizations, and sportsbook odds into a single interface.
 
 <a href="https://court-iq.netlify.app">
     <img src="./capstone-frontend/src/assets/home-page.png" alt="Home Page" width="50%">
@@ -15,28 +15,30 @@ Court-IQ is a basketball stats and sports betting companion that blends real-tim
 - [APIs and Services](#apis-and-services)
 - [Getting Started](#getting-started)
 - [Betting Overview](#betting-overview)
+- [How to Use Court-IQ to Evaluate Prop Bets](#how-to-use-court-iq-to-evaluate-prop-bets)
+- [Head-to-Head Team Odds](#head-to-head-team-odds)
 - [License](#license)
 - [Contact](#contact)
 
 ## 📊 Project Overview
 
-Court-IQ provides basketball fans and sports bettors with a central hub to explore NBA team rosters, player stats, real-time odds, and in-depth performance visualizations. Users can track player performance trends game-to-game through interactive D3.js area + line graphs, selecting specific stats such as points, assists, rebounds, minutes, and more, with zoomable ranges for granular analysis. The player page also includes six histogram charts visualizing stat distributions across games.
+Court-IQ provides a centralized platform to explore NBA team rosters, player statistics, real-time betting odds, and performance visualizations. Users can analyze player performance trends across games using interactive D3.js charts, with selectable stat categories such as points, assists, rebounds, and more.
 
-Features include player prop bets tied to specific matchups across various bookmakers, NBA team dashboards featuring roster stats and game history going back 5 seasons, and NBA conference standings with head-to-head team odds. Users can access actual bets by clicking the venture card in the standings page or the bookmaker name on the player props table in the team rosters page.
+The platform includes player prop bets tied to real matchups across multiple sportsbooks, team dashboards with historical and current data (up to 5 seasons), and NBA conference standings with head-to-head betting odds.
 
-Additional features include a headlines page with real-time NBA news, a glossary of basketball terms, a player comparison tool, and WNBA standings with associated head-to-head odds.
+Additional features include a headlines page for real-time NBA news, a glossary of basketball terms, a player comparison tool, and WNBA standings with associated betting data.
 
 ## 🚀 Features
 
-- **Team Rosters**: View current and historical NBA rosters (5 seasons) with interactive player cards linking to player-specific stat pages
-- **Player Stat Visualizations**: D3.js-powered overlaid area graphs show player performance trends across games (PPG, APG, RPG, and more), with interactive zoom and histogram breakdowns
-- **Team Dashboards**: Includes team-level stats, upcoming and past games, and real-time player prop bets
-- **Player Prop Bets**: Integrated odds from sportsbooks (DraftKings, FanDuel, BetMGM, etc.) linked directly to betting platforms
-- **Standings Page**: View NBA (by conference) and WNBA (overall) standings with associated head-to-head team betting odds
-- **Headlines Page**: Aggregates real-time NBA news that may influence betting decisions
-- **Glossary Modal**: Defines all acronyms used across the site for quick reference (e.g., PPG, MPG, RPG)
-- **Player Comparison Tool**: Compare two players head-to-head by stats and visualizations
-- **Responsive Design**: Mobile-friendly layout with dropdown filtering, modular components, and clean UI
+- **Team Rosters**: View NBA rosters across multiple seasons with player cards linking to detailed player pages
+- **Player Stat Visualizations**: D3.js-powered multi-stat graphs with zoom and select functionality
+- **Team Dashboards**: Display team stats, recent games, and associated betting data
+- **Player Prop Bets**: Aggregated odds from multiple sportsbooks (DraftKings, FanDuel, BetMGM, etc.)
+- **Standings Page**: NBA (conference-based) and WNBA standings with head-to-head betting odds
+- **Headlines Page**: Real-time NBA news with links to original sources
+- **Glossary Modal**: Definitions for basketball stat acronyms (e.g., PPG, RPG, MPG)
+- **Player Comparison Tool**: Side-by-side stat comparison between players
+- **Responsive Design**: Mobile-friendly UI with dynamic layouts and filtering options
 
 ## 🧰 Tech Stack
 
@@ -57,24 +59,22 @@ Additional features include a headlines page with real-time NBA news, a glossary
 
 - **[The Odds API](https://the-odds-api.com/)** – Real-time sportsbook odds
 - **[API-Basketball](https://rapidapi.com/api-sports/api/api-basketball)** – NBA game and player stats
-- **[API-NBA](https://rapidapi.com/api-sports/api/api-nba)** – Alternate NBA stats and metadata
-- **[Tank01 Fantasy Stats](https://rapidapi.com/tank01/api/tank01-fantasy-stats)** – Fantasy data and player news
+- **[API-NBA](https://rapidapi.com/api-sports/api/api-nba)** – Supplemental NBA data
+- **[Tank01 Fantasy Stats](https://rapidapi.com/tank01/api/tank01-fantasy-stats)** – Player news and fantasy data
 - **[WNBA API](https://rapidapi.com/belchiorarkad-FqvHs2EDOtP/api/wnba-api)** – WNBA-specific data
-- **[Firebase Authentication](https://firebase.google.com/docs/auth)** – Secure user login
-- **[Render](https://render.com)** – Cloud hosting for backend services
+- **[Firebase Authentication](https://firebase.google.com/docs/auth)** – User authentication
+- **[Render](https://render.com)** – Backend hosting
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
-
-To run the project locally, ensure you have:
 
 - Node.js (v14 or higher)
 - npm or yarn
 
 ### Installation (Frontend)
 
-1. Fork the repository from [github.com/jorammercado/court-iq](https://github.com/jorammercado/court-iq)
+1. Fork the repository
 2. Clone the repository:
 
    ```bash
@@ -102,17 +102,17 @@ To run the project locally, ensure you have:
 
 ### Backend Setup
 
-To run the backend server locally, follow the instructions in the [court-iq-server README](https://github.com/jorammercado/court-iq-server).
+Follow instructions in the backend repository [README](https://github.com/jorammercado/court-iq-server).
 
 ## 💸 Betting Overview
 
-Court-IQ integrates real-time betting data from multiple sportsbooks into various areas of the platform, especially through **Player Prop Bets** and **Head-to-Head Team Odds**.
+Court-IQ integrates real-time betting data from multiple sportsbooks, including **Player Prop Bets** and **Head-to-Head Team Odds**.
 
 ### What is a Player Prop Bet?
 
-A "prop bet" (short for proposition bet) is a wager on a specific player’s in-game performance rather than the overall outcome of the match. For example, a bettor might wager on whether a player will score over or under a certain number of points in a game.
+A "prop bet" (proposition bet) is a wager on a specific player’s performance rather than the overall outcome of a game.
 
-**Example Row from Court-IQ’s Props Table:**
+**Example:**
 
 ```
 Bookmaker: FanDuel
@@ -123,25 +123,33 @@ Odds: 102
 Category: Points
 ```
 
-- **Bookmaker**: Online betting platform (clickable link to place bet)
-- **Type**: Whether the bet is on the player going **Over** or **Under** a stat threshold
-- **Value**: The threshold number (e.g., 9.5 points)
-- **Odds**: Payout odds from the sportsbook
-- **Category**: Stat being wagered on (e.g., Points, Assists, etc.)
+- **Bookmaker**: Platform offering the bet
+- **Type**: Over or Under the stat threshold
+- **Value**: Stat threshold (e.g., 9.5 points)
+- **Odds**: Payout odds
+- **Category**: Stat type (points, assists, etc.)
 
-### How to Use Court-IQ to Evaluate Prop Bets
+## How to Use Court-IQ to Evaluate Prop Bets
 
-Clicking on a player card takes you to their player page, where you can:
+From the **Team Rosters** page, users can:
 
-- View a **line graph** tracking the player’s performance in the stat category across recent games
-- Zoom into specific stretches (e.g., last 5 games)
-- Compare the prop **threshold** (e.g., 9.5 points) to actual game-by-game outputs
+- Select a team and season (2020–present)
+- View roster data and recent game history
+- Browse available player prop bets, including stat category, thresholds, and odds
+- Click on a sportsbook name in the prop bets table to open the corresponding bookmaker site
 
-This gives bettors **visual clarity** that traditional sites (like NBA.com or ESPN) often lack. Those sites may show averages, but Court-IQ shows **trends**, making it easier to spot hot/cold streaks or recent role changes.
+Clicking a player card navigates to the **Player Page**, where users can:
 
-### Why It Matters
+- Analyze performance trends using a multi-stat interactive graph
+- Toggle individual stats (e.g., points, rebounds, assists)
+- Zoom into specific game ranges
+- Review detailed stat tables and histogram-based distributions
 
-Even a player averaging 10 PPG could have a volatile trend: maybe 18 points one night, 2 the next. Averages don’t tell the full story—**trends do**. Court-IQ empowers bettors with the tools to spot patterns visually and make smarter, more confident wagers.
+This workflow enables direct comparison between sportsbook prop thresholds and a player’s recent performance data.
+
+## Head-to-Head Team Odds
+
+The standings page includes NBA and WNBA team standings along with head-to-head odds for upcoming matchups. Users can review standings context and open sportsbook links directly from the displayed betting cards.
 
 ## 📄 License
 
